@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0A1628">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pioneers">
+<meta name="description" content="Greater Springfield Pioneers U14 Basketball Training Guide">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Pioneers U14 Training</title>
+<style>
+/* GBSA PIONEERS U14 — v2 — iOS scroll fix, doubled fonts, checkbox drills */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap');
+:root {
+  --navy:#0A1628;--navy-mid:#122040;--navy-light:#1E4FA3;
+  --gold:#C9A84C;--gold-light:#E8C96B;
+  --white:#FFFFFF;
+  --text-primary:#FFFFFF;--text-secondary:rgba(255,255,255,0.65);--text-muted:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.12);--border-gold:rgba(201,168,76,0.45);
+  --card-bg:rgba(255,255,255,0.05);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --font-display:'Barlow Condensed',sans-serif;--font-body:'Barlow',sans-serif;
+  --bottom-nav:72px;--safe-bottom:env(safe-area-inset-bottom,0px);--safe-top:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+/* CRITICAL iOS scroll fix — DO NOT set overflow:hidden on html or body */
+html{height:100%}
+body{font-family:var(--font-body);background:var(--navy);color:var(--text-primary);
+  min-height:100%;font-size:16px;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+#app{display:flex;flex-direction:column;min-height:100vh;min-height:-webkit-fill-available;max-width:480px;margin:0 auto}
+.app-header{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-mid) 100%);
+  border-bottom:1px solid var(--border-gold);padding:14px 18px 12px;
+  padding-top:calc(14px + var(--safe-top));display:flex;align-items:center;gap:14px;
+  position:sticky;top:0;z-index:50}
+.header-logo{width:50px;height:50px;border-radius:50%;border:2px solid var(--gold);background:var(--navy-mid);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);
+  font-size:16px;font-weight:800;color:var(--gold);letter-spacing:.05em;flex-shrink:0}
+.header-text{flex:1}
+.header-title{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--white);
+  letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.header-sub{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.gold-star{color:var(--gold);font-size:24px}
+.pages-wrap{flex:1;position:relative}
+/* Pages scroll naturally — no overflow:hidden */
+.pg{display:none;padding:18px 18px calc(var(--bottom-nav) + var(--safe-bottom) + 24px)}
+.pg.on{display:block}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;
+  height:calc(var(--bottom-nav) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
+  background:var(--navy-mid);border-top:1px solid var(--border-gold);
+  display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px;z-index:100}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;
+  border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:color .15s}
+.nav-btn.active{color:var(--gold)}
+.nav-icon{font-size:24px;line-height:1}
+.nav-label{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.page-title{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--white);
+  text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.page-sub{font-size:15px;color:var(--text-secondary);margin-bottom:18px;line-height:1.5}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:14px}
+.card-hdr{background:linear-gradient(135deg,var(--navy-mid),var(--navy));border-bottom:1px solid var(--border-gold);
+  padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.card-hdr-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+.card-hdr-d1{border-bottom-color:var(--navy-light)}
+.card-hdr-d2{border-bottom-color:var(--gold)}
+.timer-row{background:var(--navy-mid);border:1px solid var(--border-gold);border-radius:var(--radius-md);
+  padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.timer-display{font-family:var(--font-display);font-size:34px;font-weight:800;color:var(--gold);min-width:80px;letter-spacing:.02em}
+.timer-info{flex:1}
+.timer-phase{font-size:14px;color:var(--text-secondary);margin-bottom:5px}
+.timer-bar-wrap{height:4px;background:rgba(255,255,255,0.1);border-radius:2px}
+.timer-bar{height:100%;border-radius:2px;transition:width .5s;background:var(--gold)}
+.btn{padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;font-weight:600;
+  cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all .15s;white-space:nowrap}
+.btn:active{transform:scale(.96)}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-navy{background:var(--navy-light);color:var(--white);border-color:var(--navy-light)}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-block{width:100%;margin-top:10px;padding:12px;font-size:16px}
+.btn-start{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+.blk{padding:12px 16px;border-top:1px solid var(--border)}
+.blk-label{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.blk-time{background:rgba(201,168,76,0.15);color:var(--gold);padding:2px 8px;border-radius:20px;font-size:12px}
+/* DRILL ITEMS — checkbox style, no strikethrough */
+.drill-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:16px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.drill-item:last-child{border-bottom:none}
+.drill-check{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,0.25);
+  background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;position:relative}
+.drill-item.bh-drill .drill-check{border-color:rgba(30,79,163,0.6)}
+.drill-item.sh-drill .drill-check{border-color:rgba(201,168,76,0.6)}
+.drill-item.of-drill .drill-check{border-color:rgba(123,97,255,0.6)}
+.drill-item.done .drill-check{border-color:transparent}
+.drill-item.bh-drill.done .drill-check{background:#1E4FA3}
+.drill-item.sh-drill.done .drill-check{background:var(--gold)}
+.drill-item.of-drill.done .drill-check{background:#7B61FF}
+.drill-item.done .drill-check::after{content:'';display:block;width:6px;height:11px;
+  border-right:2.5px solid var(--white);border-bottom:2.5px solid var(--white);
+  transform:rotate(45deg) translate(-1px,-2px)}
+.drill-item.done .drill-name{color:var(--text-muted)}
+/* No strikethrough on done items */
+.drill-name{flex:1;color:var(--text-primary);line-height:1.35;font-size:16px}
+.drill-time{font-size:13px;color:var(--text-muted);flex-shrink:0}
+.drill-del{width:22px;height:22px;border-radius:5px;border:1px solid rgba(255,255,255,0.15);
+  background:transparent;color:var(--text-muted);cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+.drill-del:active{background:rgba(255,80,80,0.2);color:#FF8080}
+.drill-empty{font-size:14px;color:var(--text-muted);padding:4px 0;font-style:italic}
+.drill-item.mandatory{background:rgba(201,168,76,0.08);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:4px;cursor:default}
+.mandatory-tag{font-size:12px;background:rgba(201,168,76,0.2);color:var(--gold);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.scrim-blk{background:rgba(30,79,163,0.12);border-top:1px solid rgba(30,79,163,0.3);padding:12px 16px}
+.scrim-title{font-size:13px;font-weight:700;color:var(--navy-light);text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:5px;display:flex;justify-content:space-between}
+.scrim-item{font-size:15px;color:var(--text-secondary);padding:2px 0}
+.menu-section{margin-bottom:20px}
+.menu-lbl{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sel-count{font-family:var(--font-body);font-size:12px;background:rgba(201,168,76,0.15);color:var(--gold);
+  padding:2px 10px;border-radius:20px;font-weight:600;letter-spacing:.04em}
+.day-row{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.day-btn{padding:7px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+  border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer}
+.day-btn.day-btn-on{background:var(--navy-light);color:var(--white);border-color:var(--navy-light)}
+.load-btn{margin-left:auto;padding:7px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+  border:1px solid var(--gold);background:rgba(201,168,76,0.1);color:var(--gold);cursor:pointer}
+.load-btn:active{background:rgba(201,168,76,0.25)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;
+  color:var(--text-secondary);font-size:14px;cursor:pointer;font-family:var(--font-body);transition:all .1s}
+.chip-sel-bh{background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7)}
+.chip-sel-sh{background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold)}
+.chip-sel-of{background:rgba(123,97,255,0.2);color:#B8AAFF;border-color:rgba(123,97,255,0.5)}
+.chip-sel-upper{background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7)}
+.chip-sel-lower{background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold)}
+.chip-sel-core{background:rgba(100,200,120,0.2);color:#80E090;border-color:rgba(100,200,120,0.5)}
+.chip-new{border-style:dashed;border-color:var(--gold)}
+.new-pill{display:inline-block;font-size:11px;background:rgba(201,168,76,0.2);color:var(--gold);
+  padding:0 6px;border-radius:10px;margin-left:4px;vertical-align:middle}
+.menu-hint{font-size:13px;color:var(--text-muted);margin-top:5px;font-style:italic}
+.menu-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.legend-box{border-radius:var(--radius-lg);overflow:hidden;margin-bottom:18px;border:1px solid var(--border-gold)}
+.legend-hdr{background:linear-gradient(135deg,#1a1a18,#2C2C2A);padding:10px 16px}
+.legend-hdr-text{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.06em}
+.legend-quote{display:flex;gap:12px;padding:12px 16px;border-top:1px solid var(--border);background:rgba(0,0,0,0.2)}
+.legend-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.av-kobe{background:#2C2C2A;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2)}
+.av-sga{background:#0C2A5C;color:#7AAEF5;border:1px solid rgba(30,79,163,0.5)}
+.av-steph{background:#3A2000;color:var(--gold);border:1px solid var(--border-gold)}
+.legend-body{flex:1}
+.legend-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+.legend-text{font-size:14px;color:var(--text-secondary);line-height:1.5;font-style:italic}
+.legend-text em{font-style:normal;font-weight:600;color:var(--white)}
+.phy-jog{background:rgba(201,168,76,0.08);border-top:1px solid var(--border-gold);padding:10px 16px}
+.phy-jog-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;
+  display:flex;justify-content:space-between;margin-bottom:3px}
+.phy-jog-text{font-size:15px;color:var(--text-secondary)}
+.ex-row{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border);font-size:16px}
+.ex-row:last-child{border-bottom:none}
+.ex-tag{font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+.upper-tag{background:rgba(30,79,163,0.25);color:#7AAEF5}
+.lower-tag{background:rgba(201,168,76,0.2);color:var(--gold)}
+.core-tag{background:rgba(100,200,120,0.2);color:#80E090}
+.amrap-note{font-size:13px;color:var(--text-muted);padding:8px 16px}
+.section-lbl{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.badge-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 8px;text-align:center}
+.badge-card.earned{background:rgba(201,168,76,0.1);border-color:var(--border-gold)}
+.badge-card.gold{background:rgba(201,168,76,0.2);border:2px solid var(--gold)}
+.badge-emoji{font-size:28px;display:block;margin-bottom:5px;filter:grayscale(1) opacity(0.3)}
+.badge-card.earned .badge-emoji,.badge-card.gold .badge-emoji{filter:none}
+.badge-name{font-size:13px;font-weight:600;color:var(--text-muted);line-height:1.3}
+.badge-card.earned .badge-name,.badge-card.gold .badge-name{color:var(--gold)}
+.badge-sub{font-size:11px;color:var(--text-muted);margin-top:3px}
+.shot-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:12px}
+.shot-title{font-size:16px;font-weight:600;color:var(--white);margin-bottom:3px;display:flex;justify-content:space-between}
+.shot-goal{font-size:14px;color:var(--text-secondary);margin-bottom:12px}
+.shot-dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.shot-dot{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-muted)}
+.shot-dot.make{background:rgba(100,200,100,0.2);border-color:#4CAF50;color:#80E090}
+.shot-dot.miss{background:rgba(200,80,80,0.2);border-color:#E57373;color:#FF8080}
+.shot-actions{display:flex;gap:8px;flex-wrap:wrap}
+.gold-announce{background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-sm);
+  padding:12px;text-align:center;margin-top:10px;display:none}
+.gold-announce.show{display:block}
+.gold-announce-icon{font-size:28px;margin-bottom:3px}
+.gold-announce-text{font-size:15px;font-weight:600;color:var(--gold)}
+.rep-row{padding:10px 0;border-bottom:1px solid var(--border)}
+.rep-row:last-child{border-bottom:none}
+.rep-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.rep-label{flex:1;font-size:15px;color:var(--text-primary)}
+.rep-controls{display:flex;align-items:center;gap:6px}
+.rep-btn{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);color:var(--text-secondary);cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;line-height:1}
+.rep-btn-plus{border-color:var(--border-gold);color:var(--gold)}
+.rep-num{min-width:30px;text-align:center;font-size:15px;font-weight:600;color:var(--white)}
+.rep-status{font-size:13px;color:var(--text-muted);white-space:nowrap}
+.rep-earned{color:var(--gold)!important}
+.pip-row{display:flex;gap:4px;flex-wrap:wrap}
+.pip{width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid var(--border)}
+.pip-done{background:var(--navy-light);border-color:var(--navy-light)}
+.pip-gold{background:var(--gold);border-color:var(--gold)}
+.dash-hero{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.dash-metric{background:var(--navy-mid);border:1px solid var(--border-gold);border-radius:var(--radius-md);padding:12px 6px;text-align:center}
+.dash-val{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold);line-height:1}
+.dash-lbl{font-size:12px;color:var(--text-muted);margin-top:4px}
+.dash-sec-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-gold);
+  padding-bottom:6px;margin-bottom:12px;margin-top:18px}
+.dash-row{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:11px 14px;margin-bottom:8px}
+.dash-row.dash-earned{background:rgba(201,168,76,0.07);border-color:var(--border-gold)}
+.dash-row.dash-gold{background:rgba(201,168,76,0.15);border-color:var(--gold)}
+.dash-icon{font-size:20px;flex-shrink:0}
+.dash-info{flex:1;min-width:0}
+.dash-name{font-size:14px;font-weight:600;color:var(--text-primary)}
+.dash-desc{font-size:12px;color:var(--text-muted);margin-top:2px}
+.dash-prog-wrap{min-width:80px;max-width:110px}
+.dash-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:4px}
+.dash-fill{height:100%;border-radius:3px;transition:width .4s}
+.dash-nums{font-size:12px;color:var(--text-muted);text-align:right}
+.dash-status{font-size:12px;font-weight:700;white-space:nowrap}
+.s-earned{color:var(--gold)}.s-gold{color:var(--gold-light)}.s-locked{color:var(--text-muted)}
+.acc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px;margin-bottom:12px}
+.acc-card.acc-gold{background:rgba(201,168,76,0.1);border-color:var(--gold)}
+.acc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.acc-title{font-size:16px;font-weight:600;color:var(--white)}
+.acc-goal{font-size:13px;color:var(--text-muted);margin-top:3px}
+.acc-pct-big{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--gold);line-height:1}
+.acc-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:10px}
+.acc-fill{height:100%;border-radius:3px;transition:width .4s}
+.acc-stats{display:flex;gap:14px;font-size:12px;color:var(--text-muted);margin-bottom:10px;flex-wrap:wrap}
+.acc-stats b{display:block;font-size:15px;font-weight:600;color:var(--white);margin-bottom:2px}
+.sess-hist{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;border-top:1px solid var(--border);padding-top:8px}
+.sess-dot{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;border:1px solid var(--border);color:var(--text-muted)}
+.sess-hit{background:rgba(100,200,100,0.15);border-color:#4CAF50;color:#80E090}
+.sess-miss{background:rgba(200,80,80,0.1);border-color:#E57373;color:#FF8080}
+.sess-gold{background:rgba(201,168,76,0.25);border-color:var(--gold);color:var(--gold)}
+.no-sessions{font-size:13px;color:var(--text-muted);font-style:italic;margin-top:4px}
+#toast{position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 14px);left:50%;
+  transform:translateX(-50%) translateY(10px);background:var(--navy-mid);color:var(--gold);
+  border:1px solid var(--border-gold);border-radius:24px;padding:10px 22px;font-size:15px;font-weight:600;
+  white-space:nowrap;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:999;
+  max-width:calc(100vw - 40px);text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#install-banner{display:none;opacity:0;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
+  left:16px;right:16px;background:var(--navy-mid);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:12px 16px;align-items:center;gap:12px;z-index:200;transition:opacity .3s}
+.install-text{flex:1;font-size:15px;color:var(--text-secondary)}
+.install-text strong{color:var(--gold)}
+#complete-banner{background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-md);
+  padding:12px 16px;font-size:16px;color:var(--gold);margin-bottom:14px;text-align:center;font-weight:600}
+@media(min-width:480px){
+  #app{border-left:1px solid var(--border-gold);border-right:1px solid var(--border-gold)}
+  .bottom-nav{max-width:480px}
+}
+/* ---- OFFENCE DAY PANEL ---- */
+.of-day-tabs{display:flex;gap:0;margin-bottom:10px;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border)}
+.of-tab{flex:1;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;
+  border:none;background:var(--card-bg);color:var(--text-secondary);cursor:pointer;transition:all .15s;gap:8px}
+.of-tab:first-child{border-right:1px solid var(--border)}
+.of-tab-on{background:rgba(123,97,255,0.2);color:#B8AAFF}
+.of-tab-label{font-size:14px;font-weight:600}
+.of-tab-count{font-size:12px;font-weight:700;background:rgba(123,97,255,0.3);color:#B8AAFF;
+  padding:2px 8px;border-radius:20px;min-width:30px;text-align:center}
+.of-tab-on .of-tab-count{background:rgba(123,97,255,0.5);color:#fff}
+.of-selected-preview{min-height:44px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.25);
+  border-radius:var(--radius-md);padding:8px 12px;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.of-preview-empty{font-size:13px;color:var(--text-muted);font-style:italic}
+.of-pill{display:flex;align-items:center;gap:6px;background:rgba(123,97,255,0.2);
+  border:1px solid rgba(123,97,255,0.4);border-radius:20px;padding:5px 10px;font-size:13px;color:#B8AAFF}
+.of-pill-remove{background:none;border:none;color:#B8AAFF;cursor:pointer;font-size:15px;
+  line-height:1;padding:0;opacity:.7;display:flex;align-items:center}
+.of-pill-remove:hover{opacity:1}
+.of-pill-num{font-size:10px;font-weight:700;background:rgba(123,97,255,0.4);
+  border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <div class="header-logo">GBSA</div>
+    <div class="header-text">
+      <div class="header-title">Pioneers</div>
+      <div class="header-sub">U14 Boys · Training Guide</div>
+    </div>
+    <span class="gold-star">★</span>
+  </header>
+  <div class="pages-wrap">
+
+    <!-- PAGE 1: WORKOUT -->
+    <div id="pg-workout" class="pg on">
+      <div class="page-title">Skills session</div>
+      <p class="page-sub">Build your session using the menu · tap drills to check them off · tap × to remove</p>
+      <div class="timer-row">
+        <div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.06em">Timer</div>
+          <div id="sess-timer" class="timer-display">30:00</div>
+        </div>
+        <div class="timer-info">
+          <div id="phase-label" class="timer-phase">Ready to start</div>
+          <div class="timer-bar-wrap"><div id="phase-bar" class="timer-bar" style="width:0%"></div></div>
+        </div>
+        <button id="start-btn" class="btn btn-start btn-sm" onclick="startTimer()">Start</button>
+        <button class="btn btn-sm" onclick="resetTimer()">Reset</button>
+      </div>
+      <div id="complete-banner" style="display:none" class="complete-banner"></div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d1">
+          <span class="card-hdr-title">Day 1 — Shooting consistency</span>
+          <button class="btn btn-sm" onclick="Workout.resetDay(1)">Reset</button>
+        </div>
+        <div class="blk"><div class="blk-label">Ball handling — 1 min each <span class="blk-time">5 min</span></div><div id="d1-bh"></div></div>
+        <div class="blk"><div class="blk-label">Shooting <span class="blk-time">5 min</span></div><div id="d1-sh-mandatory"></div><div id="d1-sh"></div></div>
+        <div class="blk"><div class="blk-label">Offence drills <span class="blk-time" id="d1-of-time">5 min</span></div><div id="d1-of"></div></div>
+        <div class="scrim-blk">
+          <div class="scrim-title">Scrimmage <span>10 min</span></div>
+          <div class="scrim-item">1-on-1 half court — use today's offence drills</div>
+          <div class="scrim-item">First to 5 baskets, swap sides each game</div>
+        </div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-gold btn-block" onclick="Workout.markDayComplete(1)">Mark Day 1 complete 🏆</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d2">
+          <span class="card-hdr-title">Day 2 — Defeating defence</span>
+          <button class="btn btn-sm" onclick="Workout.resetDay(2)">Reset</button>
+        </div>
+        <div class="blk"><div class="blk-label">Ball handling — 1 min each <span class="blk-time">5 min</span></div><div id="d2-bh"></div></div>
+        <div class="blk"><div class="blk-label">Shooting <span class="blk-time">5 min</span></div><div id="d2-sh-mandatory"></div><div id="d2-sh"></div></div>
+        <div class="blk"><div class="blk-label">Offence drills <span class="blk-time" id="d2-of-time">5 min</span></div><div id="d2-of"></div></div>
+        <div class="scrim-blk">
+          <div class="scrim-title">Scrimmage <span>10 min</span></div>
+          <div class="scrim-item">2-on-2 or 3-on-3 if friends available</div>
+          <div class="scrim-item">Apply the offence drills in live play</div>
+        </div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-navy btn-block" onclick="Workout.markDayComplete(2)">Mark Day 2 complete 🏆</button>
+        </div>
+      </div>
+      <div class="legend-box">
+        <div class="legend-hdr"><div class="legend-hdr-text">Why close form shooting comes first — every single session</div></div>
+        <div class="legend-quote"><div class="legend-avatar av-kobe">KB</div><div class="legend-body"><div class="legend-name">Kobe Bryant</div><div class="legend-text">Every single day I would start from <em>close range</em> — one hand, pure form. You cannot build a great shot on a weak foundation. <em>5 makes minimum</em> before you move back an inch.</div></div></div>
+        <div class="legend-quote"><div class="legend-avatar av-sga">SG</div><div class="legend-body"><div class="legend-name">Shai Gilgeous-Alexander</div><div class="legend-text">Close form shooting is the first thing I do every workout — no exceptions. <em>Feel the ball, feel your release.</em> Get 5 clean makes before anything else.</div></div></div>
+        <div class="legend-quote"><div class="legend-avatar av-steph">SC</div><div class="legend-body"><div class="legend-name">Stephen Curry</div><div class="legend-text">My range comes from <em>perfect repetition up close</em>. Lock in your mechanics first. <em>5 makes from close range</em> — then earn the right to step back.</div></div></div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Ball handling <span class="sel-count" id="bh-sel-count">0 selected</span></div>
+        <div class="day-row">
+          <button class="day-btn day-btn-on" id="bh-d1-btn" onclick="Workout.setTarget('bh',1)">Day 1</button>
+          <button class="day-btn" id="bh-d2-btn" onclick="Workout.setTarget('bh',2)">Day 2</button>
+          <button class="load-btn" onclick="Workout.loadBH()">Load ↑</button>
+        </div>
+        <div class="chips" id="bh-pool"></div>
+        <div class="menu-hint">Select up to 5 drills · tap Load to add them</div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Shooting — additional <span class="sel-count" id="sh-sel-count">0 selected</span></div>
+        <div class="day-row">
+          <button class="day-btn day-btn-on" id="sh-d1-btn" onclick="Workout.setTarget('sh',1)">Day 1</button>
+          <button class="day-btn" id="sh-d2-btn" onclick="Workout.setTarget('sh',2)">Day 2</button>
+          <button class="load-btn" onclick="Workout.loadSH()">Load ↑</button>
+        </div>
+        <div class="chips" id="sh-pool"></div>
+        <div class="menu-hint">Close form shooting is always first — pick 1–2 more per day</div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Offence drills <span class="sel-count" id="of-sel-count">Adding to Day 1</span></div>
+
+        <!-- Day selector tabs -->
+        <div class="of-day-tabs">
+          <button class="of-tab of-tab-on" id="of-d1-btn" onclick="Workout.setOFDay(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="of-d1-count">0/3</span>
+          </button>
+          <button class="of-tab" id="of-d2-btn" onclick="Workout.setOFDay(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="of-d2-count">0/3</span>
+          </button>
+        </div>
+
+        <!-- Selected drills preview for active day -->
+        <div class="of-selected-preview" id="of-preview">
+          <div class="of-preview-empty">Tap drills below to add them</div>
+        </div>
+
+        <!-- All 5 drill options -->
+        <div class="chips" id="of-pool"></div>
+        <div class="menu-hint">Select up to 3 drills per day · switching days saves your selection · 5 min splits evenly across chosen drills</div>
+
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="load-btn" onclick="Workout.loadOFToWorkout()">Load into session ↑</button>
+          <button class="btn btn-sm" onclick="Workout.clearOFDay()">Clear day</button>
+        </div>
+      </div>
+      <div class="menu-actions">
+        <button class="btn btn-gold" onclick="Workout.loadAll()">Load all → Day 1</button>
+        <button class="btn" onclick="Workout.clearSelections()">Clear</button>
+        <span id="skill-msg" style="font-size:13px;color:var(--gold);align-self:center"></span>
+      </div>
+    </div>
+
+    <!-- PAGE 2: PHYSICAL -->
+    <div id="pg-phys" class="pg">
+      <div class="page-title">Physical training</div>
+      <p class="page-sub">5 min jog warm-up · 5 min AMRAP circuit · 3×10 reps per exercise</p>
+      <div class="timer-row">
+        <div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.06em">Circuit Timer</div>
+          <div id="phys-timer" class="timer-display">5:00</div>
+        </div>
+        <div class="timer-info">
+          <div id="phys-label" class="timer-phase">Ready — jog first</div>
+          <div class="timer-bar-wrap"><div id="phys-bar" class="timer-bar" style="width:0%"></div></div>
+        </div>
+        <button id="phys-start-btn" class="btn btn-start btn-sm" onclick="startPhysTimer()">Start</button>
+        <button class="btn btn-sm" onclick="resetPhysTimer()">Reset</button>
+      </div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d1"><span class="card-hdr-title">Day 1 — Upper + Lower + Core</span></div>
+        <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · dynamic stretch at 3 min mark</div></div>
+        <div style="padding:4px 0">
+          <div class="blk-label" style="padding:6px 16px 4px;border:none">AMRAP — 3×10 <span class="blk-time">5 min</span></div>
+          <div class="ex-row"><span class="ex-tag upper-tag">Upper</span><span id="d1-upper-name">Push-up to T</span></div>
+          <div class="ex-row"><span class="ex-tag lower-tag">Lower</span><span id="d1-lower-name">Squats</span></div>
+          <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d1-core-name">Sit-ups</span></div>
+        </div>
+        <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+      </div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d2"><span class="card-hdr-title">Day 2 — Upper + Lower + Core</span></div>
+        <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · lateral shuffles at 3 min mark</div></div>
+        <div style="padding:4px 0">
+          <div class="blk-label" style="padding:6px 16px 4px;border:none">AMRAP — 3×10 <span class="blk-time">5 min</span></div>
+          <div class="ex-row"><span class="ex-tag upper-tag">Upper</span><span id="d2-upper-name">Pull-ups</span></div>
+          <div class="ex-row"><span class="ex-tag lower-tag">Lower</span><span id="d2-lower-name">Squat jumps</span></div>
+          <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d2-core-name">Plank hold — 30 sec</span></div>
+        </div>
+        <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Customise circuit</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Select one per category then tap Apply</div>
+        <div class="menu-lbl" style="font-size:14px">Upper body</div><div class="chips" id="upper-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Lower body</div><div class="chips" id="lower-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Core</div><div class="chips" id="core-pool"></div>
+        <div class="menu-actions">
+          <button class="btn btn-gold" onclick="Workout.applyPhys()">Apply to circuit</button>
+          <span id="phys-msg" style="font-size:13px;color:var(--gold);align-self:center"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: REWARDS -->
+    <div id="pg-rewards" class="pg">
+      <div class="page-title">Rewards</div>
+      <p class="page-sub">Track training days · earn badges · log shot accuracy each session</p>
+      <div class="section-lbl">Season badges</div>
+      <div class="badge-grid" id="season-badges"></div>
+      <div class="section-lbl">Workout badges</div>
+      <div class="badge-grid" id="workout-badges"></div>
+      <div class="section-lbl">Shot accuracy tests</div>
+      <div class="shot-card">
+        <div class="shot-title">Layup test <span id="layup-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 8/10 (80%) → 🥇 Gold Layup badge</div>
+        <div class="shot-dots" id="layup-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('layup','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('layup','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('layup')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('layup')">Reset</button>
+        </div>
+        <div class="gold-announce" id="layup-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Layup badge earned — 8+ out of 10!</div></div>
+      </div>
+      <div class="shot-card">
+        <div class="shot-title">Free throw test <span id="ft-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 6/10 (60%) → 🥇 Gold Free Throw badge</div>
+        <div class="shot-dots" id="ft-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('ft','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('ft','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('ft')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('ft')">Reset</button>
+        </div>
+        <div class="gold-announce" id="ft-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Free Throw badge earned — 6+ out of 10!</div></div>
+      </div>
+      <div class="shot-card">
+        <div class="shot-title">Three pointer test <span id="tp-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 4/10 (40%) → 🥇 Gold Three Pointer badge</div>
+        <div class="shot-dots" id="tp-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('tp','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('tp','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('tp')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('tp')">Reset</button>
+        </div>
+        <div class="gold-announce" id="tp-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Three Pointer badge earned — 4+ out of 10!</div></div>
+      </div>
+      <div class="section-lbl" style="margin-top:6px">Training day tracker</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Tap + each time you use a drill in a session. 10 session days = badge earned.</p>
+      <div class="card" style="padding:10px 16px">
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Ball handling</div>
+        <div id="rep-bh"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 10px">Shooting</div>
+        <div id="rep-sh"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 10px">Offence</div>
+        <div id="rep-of"></div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: DASHBOARD -->
+    <div id="pg-dashboard" class="pg">
+      <div class="page-title">Dashboard</div>
+      <p class="page-sub">Full season progress — badges, accuracy, drill days</p>
+      <div class="dash-hero" id="dash-hero"></div>
+      <div class="dash-sec-title">Season badges</div><div id="dash-season"></div>
+      <div class="dash-sec-title">Gold shooting badges</div><div id="dash-gold"></div>
+      <div class="dash-sec-title">Cumulative shooting accuracy</div><div id="dash-accuracy"></div>
+      <div class="dash-sec-title">Workout sessions</div><div id="dash-workouts"></div>
+      <div class="dash-sec-title">Ball handling — drill days</div><div id="dash-bh"></div>
+      <div class="dash-sec-title">Shooting — drill days</div><div id="dash-sh"></div>
+      <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="showTab('workout',this)"><span class="nav-icon">🏀</span><span class="nav-label">Skills</span></button>
+    <button class="nav-btn" onclick="showTab('phys',this)"><span class="nav-icon">💪</span><span class="nav-label">Physical</span></button>
+    <button class="nav-btn" onclick="showTab('rewards',this)"><span class="nav-icon">🏅</span><span class="nav-label">Rewards</span></button>
+    <button class="nav-btn" onclick="showTab('dashboard',this)"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button>
+  </nav>
+</div>
+
+<div id="install-banner">
+  <div class="install-text">Install: tap <strong>Share</strong> then <strong>Add to Home Screen</strong></div>
+  <button class="btn btn-sm" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
+</div>
+
+<script>
+// ============================================================
+// GBSA PIONEERS U14 — DATA & CONSTANTS
+// ============================================================
+
+const DATA = {
+  BH_SKILLS: [
+    "Right side pounds","Left side pounds","Tween (through legs)",
+    "Behind the back","Continuous cross","V dribble","Spider dribble",
+    "Figure 8 weave","Pound windmill","Split stance tween",
+    "Pound tween cross pound","Pound tween behind cross pound"
+  ],
+  BH_NEW: new Set(["Pound tween cross pound","Pound tween behind cross pound"]),
+
+  SH_OPTIONAL: [
+    "Right layup","Left layup","Free throw (20 attempts)",
+    "Left mid-range jump shot","Right mid-range jump shot",
+    "Floater","Reverse layup","Shooting off the dribble"
+  ],
+  MANDATORY_D1: "Close form shooting — one hand",
+  MANDATORY_D2: "Close form shooting — two hands",
+
+  OF_SKILLS: [
+    "Hesitation","In & Out","Crossover and behind the back (wrap)",
+    "Double crossover","Crossover and spin"
+  ],
+
+  UPPER_EX: ["Push-up to T","Pull-ups","Navy seal burpees","Military push-ups","Bear crawl 10 steps"],
+  LOWER_EX: ["Squats","Squat jumps","Lunges"],
+  CORE_EX: ["Sit-ups","Plank hold — 30 sec","Mountain climbers","Russian twists","Dead bug"],
+
+  D1_BH_DEF: ["Right side pounds","Left side pounds","Tween (through legs)","Behind the back","Continuous cross"],
+  D2_BH_DEF: ["V dribble","Spider dribble","Figure 8 weave","Pound windmill","Split stance tween"],
+
+  PHASES: [
+    {label:'Ball handling',dur:300,color:'#C9A84C'},
+    {label:'Shooting drills',dur:300,color:'#1E4FA3'},
+    {label:'Offence drills',dur:300,color:'#C9A84C'},
+    {label:'Scrimmage!',dur:600,color:'#1E4FA3'}
+  ],
+
+  SEASON_BADGE_DEFS: [
+    {icon:'🎯',name:'Ball handling master',sub:'All 12 drills — 10 days each',cat:'bh'},
+    {icon:'🏀',name:'Shooting master',sub:'All shooting drills — 10 days each',cat:'sh'},
+    {icon:'⚡',name:'Offence master',sub:'All 5 moves — 10 days each',cat:'of'},
+  ],
+  GOLD_BADGE_DEFS: [
+    {icon:'🥇',name:'Gold layup',sub:'8/10 in layup test',key:'layup',goal:8,goalPct:80},
+    {icon:'🥇',name:'Gold free throw',sub:'6/10 in free throw test',key:'ft',goal:6,goalPct:60},
+    {icon:'🥇',name:'Gold three pointer',sub:'4/10 in three pointer test',key:'tp',goal:4,goalPct:40},
+  ]
+};
+
+// ---- STATE ----
+const STATE = {
+  workout: {
+    d1: { bh: [...DATA.D1_BH_DEF], sh: ["Right layup","Free throw (20 attempts)"], of: ["Hesitation"] },
+    d2: { bh: [...DATA.D2_BH_DEF], sh: ["Left mid-range jump shot","Floater"], of: ["In & Out"] }
+  },
+  phys: {
+    d1: { upper: "Push-up to T", lower: "Squats", core: "Sit-ups" },
+    d2: { upper: "Pull-ups", lower: "Squat jumps", core: "Plank hold — 30 sec" }
+  },
+  sel: { bh: new Set(), sh: new Set(), of: new Set(), upper: new Set(), lower: new Set(), core: new Set() },
+  targets: { bh: 1, sh: 1, of: 1 },
+  ofD1: new Set(["Hesitation"]),
+  ofD2: new Set(["In & Out"]),
+  sessionDays: {},
+  dayCompletes: { d1: 0, d2: 0 },
+  shots: {
+    layup: { shots: [], goal: 8, goalPct: 80, badgeEarned: false, history: [] },
+    ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
+    tp:    { shots: [], goal: 4, goalPct: 40, badgeEarned: false, history: [] }
+  },
+  activeTab: 'workout'
+};
+
+// Initialise sessionDays
+[...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS].forEach(t => {
+  STATE.sessionDays[t] = 0;
+});
+
+// ---- PERSISTENCE ----
+function saveState() {
+  try {
+    const persist = {
+      workout: STATE.workout,
+      phys: STATE.phys,
+      sessionDays: STATE.sessionDays,
+      dayCompletes: STATE.dayCompletes,
+      shots: STATE.shots,
+      ofD1: [...STATE.ofD1],
+      ofD2: [...STATE.ofD2]
+    };
+    localStorage.setItem('pioneers_state', JSON.stringify(persist));
+  } catch(e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem('pioneers_state');
+    if (!raw) return;
+    const p = JSON.parse(raw);
+    if (p.workout) STATE.workout = p.workout;
+    if (p.phys) STATE.phys = p.phys;
+    if (p.sessionDays) STATE.sessionDays = { ...STATE.sessionDays, ...p.sessionDays };
+    if (p.dayCompletes) STATE.dayCompletes = p.dayCompletes;
+    if (p.shots) STATE.shots = p.shots;
+    if (p.ofD1) STATE.ofD1 = new Set(p.ofD1);
+    if (p.ofD2) STATE.ofD2 = new Set(p.ofD2);
+  } catch(e) {}
+}
+
+function keyOf(s) { return s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,''); }
+function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 100); }
+function ofTimeLabel(n) { return n===1?'5 min':n===2?'2.5 min each':'1m 40s each'; }
+</script>
+<script>
+// WORKOUT MODULE v2
+const Workout = (() => {
+  function renderMandatory(id, name) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    const d = document.createElement('div'); d.className = 'drill-item mandatory';
+    d.innerHTML = `<span class="drill-check sh-check" style="background:rgba(201,168,76,0.15);border-color:var(--gold)"></span><span class="drill-name">${name}</span><span class="mandatory-tag">5 makes min</span>`;
+    c.appendChild(d);
+  }
+
+  function renderEditableDrills(id, items, drillClass, showTime, onDelete) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    if (items.length === 0) { c.innerHTML = '<div class="drill-empty">No drills — use the menu below to add some</div>'; return; }
+    items.forEach((s, i) => {
+      const d = document.createElement('div'); d.className = `drill-item ${drillClass}`;
+      d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span>${showTime ? '<span class="drill-time">1 min</span>' : ''}<button class="drill-del" aria-label="Remove">×</button>`;
+      d.querySelector('.drill-check').onclick = () => d.classList.toggle('done');
+      d.querySelector('.drill-name').onclick  = () => d.classList.toggle('done');
+      d.querySelector('.drill-del').onclick   = (e) => { e.stopPropagation(); onDelete(i); };
+      c.appendChild(d);
+    });
+  }
+
+  function renderOFDrills(id, items, timeId, day) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    const n = items.length || 1; const tLabel = ofTimeLabel(n);
+    const tel = document.getElementById(timeId); if (tel) tel.textContent = n > 1 ? '5 min total' : '5 min';
+    if (items.length === 0) { c.innerHTML = '<div class="drill-empty">No offence drills selected</div>'; return; }
+    items.forEach((s, i) => {
+      const d = document.createElement('div'); d.className = 'drill-item of-drill';
+      d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span><span class="drill-time">${tLabel}</span><button class="drill-del" aria-label="Remove">×</button>`;
+      d.querySelector('.drill-check').onclick = () => d.classList.toggle('done');
+      d.querySelector('.drill-name').onclick  = () => d.classList.toggle('done');
+      d.querySelector('.drill-del').onclick   = (e) => {
+        e.stopPropagation();
+        const w = day === 1 ? STATE.workout.d1 : STATE.workout.d2;
+        w.of.splice(i, 1); buildWorkout(); saveState();
+      };
+      c.appendChild(d);
+    });
+  }
+
+  function buildWorkout() {
+    renderEditableDrills('d1-bh', STATE.workout.d1.bh, 'bh-drill', true, i => { STATE.workout.d1.bh.splice(i,1); buildWorkout(); saveState(); });
+    renderMandatory('d1-sh-mandatory', DATA.MANDATORY_D1);
+    renderEditableDrills('d1-sh', STATE.workout.d1.sh, 'sh-drill', false, i => { STATE.workout.d1.sh.splice(i,1); buildWorkout(); saveState(); });
+    renderOFDrills('d1-of', STATE.workout.d1.of, 'd1-of-time', 1);
+    renderEditableDrills('d2-bh', STATE.workout.d2.bh, 'bh-drill', true, i => { STATE.workout.d2.bh.splice(i,1); buildWorkout(); saveState(); });
+    renderMandatory('d2-sh-mandatory', DATA.MANDATORY_D2);
+    renderEditableDrills('d2-sh', STATE.workout.d2.sh, 'sh-drill', false, i => { STATE.workout.d2.sh.splice(i,1); buildWorkout(); saveState(); });
+    renderOFDrills('d2-of', STATE.workout.d2.of, 'd2-of-time', 2);
+  }
+
+  function resetDay(day) {
+    if (day === 1) STATE.workout.d1 = { bh: [...DATA.D1_BH_DEF], sh: ["Right layup","Free throw (20 attempts)"], of: ["Hesitation"] };
+    else STATE.workout.d2 = { bh: [...DATA.D2_BH_DEF], sh: ["Left mid-range jump shot","Floater"], of: ["In & Out"] };
+    buildWorkout(); saveState(); showToast('Day ' + day + ' reset to defaults');
+  }
+
+  function renderBHChips() {
+    const c = document.getElementById('bh-pool'); if (!c) return; c.innerHTML = '';
+    DATA.BH_SKILLS.forEach(s => {
+      const b = document.createElement('button');
+      const isNew = DATA.BH_NEW.has(s); const isSel = STATE.sel.bh.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-bh' : '') + (isNew ? ' chip-new' : '');
+      b.innerHTML = s + (isNew ? ' <span class="new-pill">new</span>' : '');
+      b.onclick = () => {
+        if (STATE.sel.bh.has(s)) { STATE.sel.bh.delete(s); b.className = 'chip'+(isNew?' chip-new':''); }
+        else { STATE.sel.bh.add(s); b.className = 'chip chip-sel-bh'+(isNew?' chip-new':''); }
+        updateSelCounts();
+      };
+      c.appendChild(b);
+    });
+    updateSelCounts();
+  }
+
+  function renderSHChips() {
+    const c = document.getElementById('sh-pool'); if (!c) return; c.innerHTML = '';
+    DATA.SH_OPTIONAL.forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (STATE.sel.sh.has(s) ? ' chip-sel-sh' : '');
+      b.textContent = s;
+      b.onclick = () => {
+        if (STATE.sel.sh.has(s)) { STATE.sel.sh.delete(s); b.className = 'chip'; }
+        else { STATE.sel.sh.add(s); b.className = 'chip chip-sel-sh'; }
+        updateSelCounts();
+      };
+      c.appendChild(b);
+    });
+  }
+
+  function renderOFChips() {
+    const c = document.getElementById('of-pool'); if (!c) return; c.innerHTML = '';
+    const activeDay = STATE.targets.of || 1;
+    const activeSet = activeDay === 1 ? STATE.ofD1 : STATE.ofD2;
+    DATA.OF_SKILLS.forEach(s => {
+      const b = document.createElement('button');
+      const isSel = activeSet.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-of' : '');
+      b.textContent = s;
+      b.onclick = () => {
+        if (activeSet.has(s)) {
+          activeSet.delete(s);
+          b.className = 'chip';
+        } else if (activeSet.size < 3) {
+          activeSet.add(s);
+          b.className = 'chip chip-sel-of';
+        } else {
+          showToast('Max 3 offence drills per day');
+          return;
+        }
+        updateOFPreview();
+        updateOFCounts();
+        // Also update the workout live
+        if (activeDay === 1) STATE.workout.d1.of = [...activeSet];
+        else STATE.workout.d2.of = [...activeSet];
+        buildWorkout(); saveState();
+      };
+      c.appendChild(b);
+    });
+    updateOFPreview();
+    updateOFCounts();
+  }
+
+  function updateOFPreview() {
+    const preview = document.getElementById('of-preview'); if (!preview) return;
+    const activeDay = STATE.targets.of || 1;
+    const activeSet = activeDay === 1 ? STATE.ofD1 : STATE.ofD2;
+    preview.innerHTML = '';
+    if (activeSet.size === 0) {
+      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
+      return;
+    }
+    [...activeSet].forEach((s, i) => {
+      const pill = document.createElement('div'); pill.className = 'of-pill';
+      pill.innerHTML = `<span class="of-pill-num">${i+1}</span><span>${s}</span><button class="of-pill-remove" aria-label="Remove">×</button>`;
+      pill.querySelector('.of-pill-remove').onclick = () => {
+        activeSet.delete(s);
+        if (activeDay === 1) STATE.workout.d1.of = [...activeSet];
+        else STATE.workout.d2.of = [...activeSet];
+        renderOFChips(); buildWorkout(); saveState();
+      };
+      preview.appendChild(pill);
+    });
+  }
+
+  function updateOFCounts() {
+    const c1 = document.getElementById('of-d1-count'); if (c1) c1.textContent = (STATE.ofD1 ? STATE.ofD1.size : 0) + '/3';
+    const c2 = document.getElementById('of-d2-count'); if (c2) c2.textContent = (STATE.ofD2 ? STATE.ofD2.size : 0) + '/3';
+    const sc = document.getElementById('of-sel-count');
+    if (sc) sc.textContent = 'Adding to Day ' + (STATE.targets.of || 1);
+  }
+
+  function renderPhysChips(cat) {
+    const map = { upper: DATA.UPPER_EX, lower: DATA.LOWER_EX, core: DATA.CORE_EX };
+    const cls = { upper: 'chip-sel-upper', lower: 'chip-sel-lower', core: 'chip-sel-core' };
+    const c = document.getElementById(cat + '-pool'); if (!c) return; c.innerHTML = '';
+    map[cat].forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (STATE.sel[cat].has(s) ? ' ' + cls[cat] : '');
+      b.textContent = s;
+      b.onclick = () => {
+        if (STATE.sel[cat].has(s)) { STATE.sel[cat].delete(s); b.className = 'chip'; }
+        else { STATE.sel[cat].add(s); b.className = 'chip ' + cls[cat]; }
+      };
+      c.appendChild(b);
+    });
+  }
+
+  function updateSelCounts() {
+    const bhc = document.getElementById('bh-sel-count'); if (bhc) bhc.textContent = STATE.sel.bh.size + ' selected';
+    const shc = document.getElementById('sh-sel-count'); if (shc) shc.textContent = STATE.sel.sh.size + ' selected';
+    const ofc = document.getElementById('of-sel-count'); if (ofc) ofc.textContent = STATE.sel.of.size + '/3 selected';
+  }
+
+  function setOFDay(day) {
+    STATE.targets.of = day;
+    document.getElementById('of-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('of-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    renderOFChips();
+  }
+
+  function loadOFToWorkout() {
+    const d1Empty = !STATE.ofD1 || STATE.ofD1.size === 0;
+    const d2Empty = !STATE.ofD2 || STATE.ofD2.size === 0;
+    if (d1Empty && d2Empty) { showToast('Select offence drills first'); return; }
+    if (!d1Empty) STATE.workout.d1.of = [...STATE.ofD1];
+    if (!d2Empty) STATE.workout.d2.of = [...STATE.ofD2];
+    buildWorkout(); saveState();
+    showToast('Offence drills loaded into session');
+  }
+
+  function clearOFDay() {
+    const day = STATE.targets.of || 1;
+    if (day === 1) { STATE.ofD1.clear(); STATE.workout.d1.of = []; }
+    else { STATE.ofD2.clear(); STATE.workout.d2.of = []; }
+    renderOFChips(); buildWorkout(); saveState();
+    showToast('Day ' + day + ' offence cleared');
+  }
+
+  function setTarget(cat, t) {
+    STATE.targets[cat] = t;
+    ['1','2'].forEach(n => {
+      const btn = document.getElementById(cat + '-d' + n + '-btn');
+      if (btn) btn.className = 'day-btn' + (parseInt(n) === t ? ' day-btn-on' : '');
+    });
+  }
+
+  function loadBH() {
+    if (STATE.sel.bh.size === 0) { showToast('Select ball handling drills first'); return; }
+    const arr = [...STATE.sel.bh].slice(0, 5);
+    if (STATE.targets.bh === 1) STATE.workout.d1.bh = arr; else STATE.workout.d2.bh = arr;
+    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.bh);
+  }
+  function loadSH() {
+    if (STATE.sel.sh.size === 0) { showToast('Select shooting drills first'); return; }
+    const arr = [...STATE.sel.sh].slice(0, 2);
+    if (STATE.targets.sh === 1) STATE.workout.d1.sh = arr; else STATE.workout.d2.sh = arr;
+    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.sh);
+  }
+  function loadOF() {
+    if (STATE.sel.of.size === 0) { showToast('Select offence drills first'); return; }
+    const arr = [...STATE.sel.of];
+    if (STATE.targets.of === 1) STATE.workout.d1.of = arr; else STATE.workout.d2.of = arr;
+    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.of);
+  }
+  function loadAll() {
+    if (STATE.sel.bh.size > 0) STATE.workout.d1.bh = [...STATE.sel.bh].slice(0,5);
+    if (STATE.sel.sh.size > 0) STATE.workout.d1.sh = [...STATE.sel.sh].slice(0,2);
+    if (STATE.sel.of.size > 0) { STATE.workout.d1.of = [...STATE.sel.of]; STATE.workout.d2.of = [...STATE.sel.of]; }
+    buildWorkout(); saveState(); showToast('All selections loaded into Day 1');
+  }
+  function clearSelections() {
+    ['bh','sh','of'].forEach(k => STATE.sel[k].clear());
+    renderBHChips(); renderSHChips(); renderOFChips(); updateSelCounts();
+  }
+  function applyPhys() {
+    const pu=[...STATE.sel.upper],lo=[...STATE.sel.lower],co=[...STATE.sel.core];
+    if (!pu.length && !lo.length && !co.length) { showToast('Select exercises first'); return; }
+    if (pu.length){STATE.phys.d1.upper=pu[0];STATE.phys.d2.upper=pu[1]||pu[0];}
+    if (lo.length){STATE.phys.d1.lower=lo[0];STATE.phys.d2.lower=lo[1]||lo[0];}
+    if (co.length){STATE.phys.d1.core=co[0];STATE.phys.d2.core=co[1]||co[0];}
+    buildPhys(); saveState(); showToast('Circuit updated');
+  }
+  function buildPhys() {
+    ['d1','d2'].forEach(d => {
+      ['upper','lower','core'].forEach(cat => {
+        const el = document.getElementById(`${d}-${cat}-name`);
+        if (el) el.textContent = STATE.phys[d][cat];
+      });
+    });
+  }
+  function markDayComplete(day) {
+    if (day === 1) STATE.dayCompletes.d1++; else STATE.dayCompletes.d2++;
+    saveState(); showToast('🏆 Day ' + day + ' complete! Badge earned.');
+    Rewards.renderAll(); Dashboard.render();
+  }
+  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setOFDay, loadBH, loadSH, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts };
+})();
+</script>
+<script>
+// ============================================================
+// REWARDS MODULE
+// ============================================================
+
+const Rewards = (() => {
+
+  function renderAll() {
+    renderSeasonBadges();
+    renderWorkoutBadges();
+    renderRepTracker();
+  }
+
+  function renderSeasonBadges() {
+    const c = document.getElementById('season-badges'); if (!c) return; c.innerHTML = '';
+    const allDefs = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS];
+    allDefs.forEach(b => {
+      const earned = checkBadge(b);
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned && b.key ? ' gold' : earned ? ' earned' : '');
+      card.innerHTML = `<span class="badge-emoji">${b.icon}</span><div class="badge-name">${b.name}</div><div class="badge-sub">${b.sub}</div>`;
+      c.appendChild(card);
+    });
+  }
+
+  function checkBadge(b) {
+    if (b.cat === 'bh') return DATA.BH_SKILLS.every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'sh') return [DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL].every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'of') return DATA.OF_SKILLS.every(s => STATE.sessionDays[s] >= 10);
+    if (b.key) return STATE.shots[b.key]?.badgeEarned || false;
+    return false;
+  }
+
+  function renderWorkoutBadges() {
+    const c = document.getElementById('workout-badges'); if (!c) return; c.innerHTML = '';
+    const total = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const shown = Math.max(6, total + 3);
+    for (let i = 0; i < shown; i++) {
+      const earned = i < total;
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned ? ' earned' : '');
+      card.innerHTML = `<span class="badge-emoji">${earned ? '✅' : '⬜'}</span><div class="badge-name">Session ${i+1}</div><div class="badge-sub">${earned ? 'Complete' : 'Not yet'}</div>`;
+      c.appendChild(card);
+    }
+  }
+
+  function renderRepTracker() {
+    const groups = [
+      {id:'rep-bh', items: DATA.BH_SKILLS},
+      {id:'rep-sh', items: [DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL]},
+      {id:'rep-of', items: DATA.OF_SKILLS}
+    ];
+    groups.forEach(g => {
+      const c = document.getElementById(g.id); if (!c) return; c.innerHTML = '';
+      g.items.forEach(s => {
+        const days = STATE.sessionDays[s] || 0; const earned = days >= 10;
+        const row = document.createElement('div'); row.className = 'rep-row';
+        const pips = Array.from({length:10}, (_,i) =>
+          `<span class="pip ${i<days?(days>=10?'pip-gold':'pip-done'):''}"></span>`
+        ).join('');
+        row.innerHTML = `
+          <div class="rep-top">
+            <span class="rep-label">${s}</span>
+            <div class="rep-controls">
+              <button class="rep-btn" onclick="Rewards.adjustDay('${s}',-1)">−</button>
+              <span class="rep-num" id="rn-${keyOf(s)}">${days}</span>
+              <button class="rep-btn rep-btn-plus" onclick="Rewards.adjustDay('${s}',1)">+</button>
+            </div>
+            <span class="rep-status ${earned?'rep-earned':''}" id="rs-${keyOf(s)}">${earned?'🏆 Badge':'${days}/10'}</span>
+          </div>
+          <div class="pip-row" id="pips-${keyOf(s)}">${pips}</div>`;
+        row.querySelector('.rep-status').textContent = earned ? '🏆 Badge' : days+'/10 days';
+        c.appendChild(row);
+      });
+    });
+  }
+
+  function adjustDay(s, delta) {
+    STATE.sessionDays[s] = Math.max(0, Math.min(99, (STATE.sessionDays[s] || 0) + delta));
+    const num = document.getElementById('rn-' + keyOf(s));
+    const status = document.getElementById('rs-' + keyOf(s));
+    const pipsEl = document.getElementById('pips-' + keyOf(s));
+    if (num) num.textContent = STATE.sessionDays[s];
+    if (status) {
+      const earned = STATE.sessionDays[s] >= 10;
+      status.textContent = earned ? '🏆 Badge' : STATE.sessionDays[s] + '/10 days';
+      status.className = 'rep-status' + (earned ? ' rep-earned' : '');
+    }
+    if (pipsEl) {
+      const days = STATE.sessionDays[s];
+      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
+        `<span class="pip ${i<days?(days>=10?'pip-gold':'pip-done'):''}"></span>`
+      ).join('');
+    }
+    saveState(); renderSeasonBadges(); Dashboard.render();
+  }
+
+  // Shot tracking
+  function buildShotDots(type) {
+    const c = document.getElementById(type + '-dots'); if (!c) return; c.innerHTML = '';
+    const st = STATE.shots[type];
+    for (let i = 0; i < 10; i++) {
+      const d = document.createElement('span'); d.className = 'shot-dot';
+      if (st.shots[i] === 'make') d.classList.add('make');
+      else if (st.shots[i] === 'miss') d.classList.add('miss');
+      d.textContent = i + 1;
+      c.appendChild(d);
+    }
+    const makes = st.shots.filter(s => s === 'make').length;
+    const pctEl = document.getElementById(type + '-pct');
+    if (pctEl) pctEl.textContent = makes + '/' + st.shots.length;
+  }
+
+  function logShot(type, result) {
+    const st = STATE.shots[type];
+    if (st.shots.length >= 10) return;
+    st.shots.push(result); buildShotDots(type);
+    const makes = st.shots.filter(s => s === 'make').length;
+    if (st.shots.length === 10 && makes >= st.goal && !st.badgeEarned) {
+      st.badgeEarned = true;
+      const ann = document.getElementById(type + '-announce');
+      if (ann) ann.classList.add('show');
+      saveState(); renderSeasonBadges(); Dashboard.render();
+    }
+  }
+
+  function saveSession(type) {
+    const st = STATE.shots[type];
+    if (st.shots.length === 0) { showToast('No shots logged yet'); return; }
+    const makes = st.shots.filter(s => s === 'make').length;
+    const total = st.shots.length;
+    const p = Math.round((makes / total) * 100);
+    const isGoldDay = makes >= st.goal && total >= 10;
+    st.history.push({ makes, total, pct: p, gold: isGoldDay, label: 'Session ' + (st.history.length + 1) });
+    st.shots = []; buildShotDots(type);
+    saveState(); Dashboard.render();
+    showToast(`Saved — ${makes}/${total} (${p}%)`);
+  }
+
+  function resetShots(type) {
+    STATE.shots[type].shots = [];
+    const ann = document.getElementById(type + '-announce');
+    if (ann) ann.classList.remove('show');
+    buildShotDots(type);
+  }
+
+  function initShotTrackers() {
+    ['layup','ft','tp'].forEach(t => buildShotDots(t));
+  }
+
+  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers };
+})();
+</script>
+<script>
+// ============================================================
+// DASHBOARD MODULE
+// ============================================================
+
+const Dashboard = (() => {
+
+  function render() {
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const earnedTech = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+    const earnedBadges = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS].filter(b => Rewards.checkBadge(b)).length;
+    const totalDays = Object.values(STATE.sessionDays).reduce((a, v) => a + v, 0);
+
+    // Hero metrics
+    const hero = document.getElementById('dash-hero'); if (!hero) return;
+    hero.innerHTML = `
+      <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Sessions</div></div>
+      <div class="dash-metric"><div class="dash-val">${earnedBadges}</div><div class="dash-lbl">Badges</div></div>
+      <div class="dash-metric"><div class="dash-val">${earnedTech}/${allDrills.length}</div><div class="dash-lbl">Drills 10+</div></div>
+      <div class="dash-metric"><div class="dash-val">${totalDays}</div><div class="dash-lbl">Drill days</div></div>`;
+
+    // Season badges
+    const ds = document.getElementById('dash-season'); if (ds) {
+      ds.innerHTML = '';
+      DATA.SEASON_BADGE_DEFS.forEach(b => {
+        const earned = Rewards.checkBadge(b);
+        let done = 0, total = 0;
+        if (b.cat === 'bh') { done = DATA.BH_SKILLS.filter(s => STATE.sessionDays[s]>=10).length; total = DATA.BH_SKILLS.length; }
+        else if (b.cat === 'sh') { const all=[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL]; done=all.filter(s=>STATE.sessionDays[s]>=10).length; total=all.length; }
+        else if (b.cat === 'of') { done=DATA.OF_SKILLS.filter(s=>STATE.sessionDays[s]>=10).length; total=DATA.OF_SKILLS.length; }
+        const p = pct(done, total);
+        ds.innerHTML += `<div class="dash-row ${earned?'dash-earned':''}">
+          <span class="dash-icon">${b.icon}</span>
+          <div class="dash-info"><div class="dash-name">${b.name}</div><div class="dash-desc">${b.sub}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${p}%;background:${earned?'#C9A84C':'#1E4FA3'}"></div></div>
+          <div class="dash-nums">${done}/${total} · ${p}%</div></div>
+          <div class="dash-status ${earned?'s-earned':'s-locked'}">${earned?'Earned':'Locked'}</div>
+        </div>`;
+      });
+    }
+
+    // Gold badges
+    const dg = document.getElementById('dash-gold'); if (dg) {
+      dg.innerHTML = '';
+      DATA.GOLD_BADGE_DEFS.forEach(b => {
+        const earned = Rewards.checkBadge(b); const st = STATE.shots[b.key];
+        const allM = st.history.reduce((a,h)=>a+h.makes,0);
+        const allT = st.history.reduce((a,h)=>a+h.total,0);
+        const p = allT > 0 ? pct(allM, allT) : 0;
+        dg.innerHTML += `<div class="dash-row ${earned?'dash-gold':''}">
+          <span class="dash-icon">${b.icon}</span>
+          <div class="dash-info"><div class="dash-name">${b.name}</div><div class="dash-desc">${b.sub} · ${allM}/${allT} cumulative</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${p}%;background:${earned?'#C9A84C':'#1E4FA3'}"></div></div>
+          <div class="dash-nums">${allT>0?allM+'/'+allT+' · '+p+'%':'No attempts yet'}</div></div>
+          <div class="dash-status ${earned?'s-gold':'s-locked'}">${earned?'🥇 Gold':'Locked'}</div>
+        </div>`;
+      });
+    }
+
+    // Cumulative accuracy
+    const da = document.getElementById('dash-accuracy'); if (da) {
+      da.innerHTML = '';
+      const accDefs = [
+        {key:'layup', label:'Layups', color:'#1E4FA3', goal:80},
+        {key:'ft',    label:'Free throws', color:'#1E4FA3', goal:60},
+        {key:'tp',    label:'Three pointers', color:'#1E4FA3', goal:40},
+      ];
+      accDefs.forEach(at => {
+        const st = STATE.shots[at.key];
+        const allM = st.history.reduce((a,h)=>a+h.makes,0);
+        const allT = st.history.reduce((a,h)=>a+h.total,0);
+        const cumP = allT > 0 ? Math.round((allM/allT)*100) : 0;
+        const best = st.history.length > 0 ? Math.max(...st.history.map(h=>h.pct)) : 0;
+        const isGold = st.badgeEarned;
+        let histHTML = '';
+        if (st.history.length > 0) {
+          histHTML = '<div class="sess-hist">' + st.history.map((h,i) => {
+            const cls = h.gold ? 'sess-gold' : h.pct >= at.goal ? 'sess-hit' : 'sess-miss';
+            return `<span class="sess-dot ${cls}" title="Session ${i+1}: ${h.makes}/${h.total} (${h.pct}%)">${h.pct}%</span>`;
+          }).join('') + '</div>';
+        } else {
+          histHTML = '<div class="no-sessions">Log attempts and tap Save session on the Rewards page</div>';
+        }
+        da.innerHTML += `<div class="acc-card ${isGold?'acc-gold':''}">
+          <div class="acc-head">
+            <div><div class="acc-title">${at.label}</div><div class="acc-goal">Goal: ${at.goal}%</div></div>
+            <div class="acc-pct-big">${cumP}%</div>
+          </div>
+          <div class="acc-bar"><div class="acc-fill" style="width:${Math.min(cumP,100)}%;background:${cumP>=at.goal?'#C9A84C':at.color}"></div></div>
+          <div class="acc-stats">
+            <span><b>${allM}/${allT}</b> makes</span>
+            <span><b>${st.history.length}</b> sessions</span>
+            <span><b>${best>0?best+'%':'—'}</b> best</span>
+            <span><b>${isGold?'🥇':'—'}</b> gold</span>
+          </div>
+          ${histHTML}
+        </div>`;
+      });
+    }
+
+    // Workouts
+    const dw = document.getElementById('dash-workouts'); if (dw) {
+      const wT = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+      dw.innerHTML = `<div class="dash-row ${wT>0?'dash-earned':''}">
+        <span class="dash-icon">✅</span>
+        <div class="dash-info"><div class="dash-name">Workout sessions</div><div class="dash-desc">Day 1: ${STATE.dayCompletes.d1} · Day 2: ${STATE.dayCompletes.d2}</div></div>
+        <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(wT,24),100)}%;background:#1E4FA3"></div></div>
+        <div class="dash-nums">${wT} / 24 session season · ${Math.min(pct(wT,24),100)}%</div></div>
+        <div class="dash-status ${wT>0?'s-earned':'s-locked'}">${wT} badges</div>
+      </div>`;
+    }
+
+    // Drill progress
+    const drillGroups = [
+      {id:'dash-bh', items:DATA.BH_SKILLS, color:'#1E4FA3'},
+      {id:'dash-sh', items:[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL], color:'#C9A84C'},
+      {id:'dash-of', items:DATA.OF_SKILLS, color:'#1E4FA3'},
+    ];
+    drillGroups.forEach(g => {
+      const c = document.getElementById(g.id); if (!c) return; c.innerHTML = '';
+      g.items.forEach(s => {
+        const days = STATE.sessionDays[s] || 0; const earned = days >= 10; const p = pct(days, 10);
+        c.innerHTML += `<div class="dash-row ${earned?'dash-earned':''}">
+          <span class="dash-icon" style="font-size:14px">${earned?'🏆':'○'}</span>
+          <div class="dash-info"><div class="dash-name">${s}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(p,100)}%;background:${earned?'#C9A84C':g.color}"></div></div>
+          <div class="dash-nums">${days}/10 days · ${Math.min(p,100)}%</div></div>
+          <div class="dash-status ${earned?'s-earned':'s-locked'}">${earned?'Badge!':days+'/10'}</div>
+        </div>`;
+      });
+    });
+  }
+
+  return { render };
+})();
+</script>
+<script>
+// ============================================================
+// APP CONTROLLER
+// ============================================================
+
+// ---- TOAST ----
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ---- NAVIGATION ----
+function showTab(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('pg-' + id);
+  if (pg) pg.classList.add('on');
+  if (btn) btn.classList.add('active');
+  STATE.activeTab = id;
+  if (id === 'dashboard') Dashboard.render();
+  if (id === 'rewards') { Rewards.renderAll(); Rewards.initShotTrackers(); }
+}
+
+// ---- SESSION TIMER ----
+let sessInterval = null, sessElapsed = 0;
+function startTimer() {
+  if (sessInterval) { clearInterval(sessInterval); sessInterval = null; document.getElementById('start-btn').textContent = 'Start'; return; }
+  document.getElementById('start-btn').textContent = 'Pause';
+  sessInterval = setInterval(() => {
+    sessElapsed++;
+    const rem = 1500 - sessElapsed;
+    const m = Math.floor(rem / 60), s = rem % 60;
+    const el = document.getElementById('sess-timer');
+    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    let acc = 0, cur = null;
+    for (const p of DATA.PHASES) { acc += p.dur; if (sessElapsed <= acc) { cur = p; break; } }
+    if (cur) {
+      const pl = document.getElementById('phase-label'); if (pl) pl.textContent = cur.label;
+      const pb = document.getElementById('phase-bar');
+      if (pb) { const ps = acc - cur.dur; pb.style.width = Math.round(((sessElapsed-ps)/cur.dur)*100) + '%'; pb.style.background = cur.color; }
+    }
+    if (sessElapsed >= 1500) { clearInterval(sessInterval); sessInterval = null; document.getElementById('start-btn').textContent = 'Start'; showToast('Session complete! 🏆'); }
+  }, 1000);
+}
+function resetTimer() {
+  clearInterval(sessInterval); sessInterval = null; sessElapsed = 0;
+  const el = document.getElementById('sess-timer'); if (el) el.textContent = '30:00';
+  const pl = document.getElementById('phase-label'); if (pl) pl.textContent = 'Ready to start';
+  const pb = document.getElementById('phase-bar'); if (pb) { pb.style.width = '0%'; }
+  const btn = document.getElementById('start-btn'); if (btn) btn.textContent = 'Start';
+}
+
+// ---- CIRCUIT TIMER ----
+let physInterval = null, physElapsed = 0;
+const PHYS_PHASES = [{label:'Jog warm-up',dur:300,color:'#C9A84C'},{label:'AMRAP circuit',dur:300,color:'#1E4FA3'}];
+function startPhysTimer() {
+  if (physInterval) { clearInterval(physInterval); physInterval = null; document.getElementById('phys-start-btn').textContent = 'Start'; return; }
+  document.getElementById('phys-start-btn').textContent = 'Pause';
+  physInterval = setInterval(() => {
+    physElapsed++;
+    const total = 600, rem = total - physElapsed;
+    const m = Math.floor(rem / 60), s = rem % 60;
+    const el = document.getElementById('phys-timer'); if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    let acc = 0, cur = null;
+    for (const p of PHYS_PHASES) { acc += p.dur; if (physElapsed <= acc) { cur = p; break; } }
+    if (cur) {
+      const pl = document.getElementById('phys-label'); if (pl) pl.textContent = cur.label;
+      const pb = document.getElementById('phys-bar');
+      if (pb) { const ps = acc-cur.dur; pb.style.width = Math.round(((physElapsed-ps)/cur.dur)*100)+'%'; pb.style.background=cur.color; }
+    }
+    if (physElapsed >= total) { clearInterval(physInterval); physInterval = null; document.getElementById('phys-start-btn').textContent = 'Start'; showToast('Circuit complete! 💪'); }
+  }, 1000);
+}
+function resetPhysTimer() {
+  clearInterval(physInterval); physInterval = null; physElapsed = 0;
+  const el = document.getElementById('phys-timer'); if (el) el.textContent = '5:00';
+  const pl = document.getElementById('phys-label'); if (pl) pl.textContent = 'Ready — jog first';
+  const pb = document.getElementById('phys-bar'); if (pb) pb.style.width = '0%';
+  const btn = document.getElementById('phys-start-btn'); if (btn) btn.textContent = 'Start';
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  // Sync per-day offence sets into workout on load
+  if (STATE.ofD1 && STATE.ofD1.size > 0) STATE.workout.d1.of = [...STATE.ofD1];
+  if (STATE.ofD2 && STATE.ofD2.size > 0) STATE.workout.d2.of = [...STATE.ofD2];
+  Workout.buildWorkout();
+  Workout.buildPhys();
+  Workout.renderBHChips();
+  Workout.renderSHChips();
+  Workout.renderOFChips();
+  ['upper','lower','core'].forEach(c => Workout.renderPhysChips(c));
+  Rewards.renderAll();
+  Rewards.initShotTrackers();
+
+  // Service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
+  // iOS install prompt hint
+  const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+  const isStandalone = window.navigator.standalone;
+  if (isIOS && !isStandalone) {
+    const banner = document.getElementById('install-banner');
+    if (banner) { banner.style.display = 'flex'; setTimeout(() => banner.style.opacity = '1', 100); }
+  }
+});
+</script>
+</body>
+</html>
