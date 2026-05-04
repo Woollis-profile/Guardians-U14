@@ -15,7 +15,6 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Pioneers U14 Training</title>
 <style>
-/* GBSA PIONEERS U14 — v2 — iOS scroll fix, doubled fonts, checkbox drills */
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap');
 :root {
   --navy:#0A1628;--navy-mid:#122040;--navy-light:#1E4FA3;
@@ -29,7 +28,6 @@
   --bottom-nav:72px;--safe-bottom:env(safe-area-inset-bottom,0px);--safe-top:env(safe-area-inset-top,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-/* CRITICAL iOS scroll fix — DO NOT set overflow:hidden on html or body */
 html{height:100%}
 body{font-family:var(--font-body);background:var(--navy);color:var(--text-primary);
   min-height:100%;font-size:16px;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
@@ -47,7 +45,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .header-sub{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 .gold-star{color:var(--gold);font-size:24px}
 .pages-wrap{flex:1;position:relative}
-/* Pages scroll naturally — no overflow:hidden */
 .pg{display:none;padding:18px 18px calc(var(--bottom-nav) + var(--safe-bottom) + 24px)}
 .pg.on{display:block}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;
@@ -87,7 +84,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .blk-label{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;
   margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
 .blk-time{background:rgba(201,168,76,0.15);color:var(--gold);padding:2px 8px;border-radius:20px;font-size:12px}
-/* DRILL ITEMS — checkbox style, no strikethrough */
 .drill-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);
   font-size:16px;cursor:pointer;-webkit-user-select:none;user-select:none}
 .drill-item:last-child{border-bottom:none}
@@ -105,7 +101,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   border-right:2.5px solid var(--white);border-bottom:2.5px solid var(--white);
   transform:rotate(45deg) translate(-1px,-2px)}
 .drill-item.done .drill-name{color:var(--text-muted)}
-/* No strikethrough on done items */
 .drill-name{flex:1;color:var(--text-primary);line-height:1.35;font-size:16px}
 .drill-time{font-size:13px;color:var(--text-muted);flex-shrink:0}
 .drill-del{width:22px;height:22px;border-radius:5px;border:1px solid rgba(255,255,255,0.15);
@@ -265,7 +260,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   #app{border-left:1px solid var(--border-gold);border-right:1px solid var(--border-gold)}
   .bottom-nav{max-width:480px}
 }
-/* ---- OFFENCE DAY PANEL ---- */
 .of-day-tabs{display:flex;gap:0;margin-bottom:10px;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border)}
 .of-tab{flex:1;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;
   border:none;background:var(--card-bg);color:var(--text-secondary);cursor:pointer;transition:all .15s;gap:8px}
@@ -286,7 +280,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .of-pill-num{font-size:10px;font-weight:700;background:rgba(123,97,255,0.4);
   border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
 
-/* ---- PLAYER PROFILE ---- */
+/* PROFILE */
 .profile-hero{background:linear-gradient(160deg,var(--navy-mid) 0%,#0D2250 100%);
   border:1px solid var(--border-gold);border-radius:var(--radius-lg);
   padding:20px 18px 18px;margin-bottom:14px;text-align:center;position:relative}
@@ -324,15 +318,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   font-family:var(--font-body);outline:none;transition:border-color .15s}
 .profile-input:focus{border-color:var(--gold)}
 .profile-input option{background:var(--navy-mid);color:var(--white)}
-.profile-badges-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.profile-badge-mini{font-size:18px;filter:grayscale(1) opacity(.3)}
-.profile-badge-mini.earned{filter:none}
 .profile-edit-btn{position:absolute;top:12px;right:12px}
 .profile-save-row{display:flex;gap:8px;margin-top:16px}
 #avatar-upload{display:none}
 
-
-/* ---- COUNTDOWN OVERLAY ---- */
+/* COUNTDOWN OVERLAY */
 #countdown-overlay {
   display:none;position:fixed;inset:0;z-index:500;
   background:rgba(10,22,40,0.93);
@@ -357,6 +347,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   100%{ transform:scale(1);   opacity:1; }
 }
 @keyframes fadeIn { to { opacity:1; } }
+
 /* Two-phase phys timer layout */
 .phys-timer-wrap {
   display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;
@@ -379,6 +370,93 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .phys-bar-wrap { height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:6px; }
 .phys-bar-fill { height:100%;border-radius:2px;background:var(--gold);transition:width .5s;width:0%; }
 
+/* ============================================================
+   AMRAP REP TRACKER — NEW
+   ============================================================ */
+.amrap-tracker {
+  border-top:1px solid var(--border-gold);
+  background:rgba(201,168,76,0.04);
+  padding:14px 16px;
+}
+.amrap-tracker-title {
+  font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.amrap-tracker-title span { font-family:var(--font-body);font-size:11px;color:var(--text-muted);font-weight:400;letter-spacing:.02em;text-transform:none; }
+/* Sets counter */
+.amrap-sets-row {
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 14px;
+}
+.amrap-sets-label { flex:1;font-size:14px;color:var(--text-secondary);font-weight:600; }
+.amrap-sets-val {
+  font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--gold);
+  min-width:36px;text-align:center;line-height:1;
+}
+.amrap-sets-sub { font-size:11px;color:var(--text-muted);margin-top:2px;text-align:center; }
+.amrap-counter-btns { display:flex;flex-direction:column;gap:4px; }
+.amrap-cbtn {
+  width:30px;height:24px;border-radius:5px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);color:var(--text-secondary);
+  cursor:pointer;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  transition:all .12s;
+}
+.amrap-cbtn.plus { border-color:var(--border-gold);color:var(--gold);background:rgba(201,168,76,0.1); }
+.amrap-cbtn:active { transform:scale(.92); }
+/* Last exercise selector */
+.amrap-last-ex {
+  margin-bottom:12px;
+}
+.amrap-last-ex-label {
+  font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:6px;
+}
+.amrap-ex-chips {
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.amrap-ex-chip {
+  padding:6px 12px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--text-secondary);font-size:13px;
+  cursor:pointer;font-family:var(--font-body);transition:all .1s;
+}
+.amrap-ex-chip.selected-upper { background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7); }
+.amrap-ex-chip.selected-lower { background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold); }
+.amrap-ex-chip.selected-core  { background:rgba(100,200,120,0.2);color:#80E090;border-color:rgba(100,200,120,0.5); }
+/* Individual reps counter */
+.amrap-reps-row {
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 14px;margin-bottom:12px;
+}
+.amrap-reps-label { flex:1;font-size:13px;color:var(--text-secondary); }
+.amrap-reps-label strong { display:block;font-size:14px;font-weight:600;color:var(--white); }
+.amrap-reps-val {
+  font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--white);
+  min-width:36px;text-align:center;line-height:1;
+}
+/* Summary box */
+.amrap-summary {
+  background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:10px 14px;
+  font-size:13px;color:var(--text-secondary);line-height:1.6;
+  display:none;
+}
+.amrap-summary.show { display:block; }
+.amrap-summary strong { color:var(--gold); }
+.amrap-save-row { display:flex;gap:8px;margin-top:10px;flex-wrap:wrap; }
+/* Saved history */
+.amrap-history { margin-top:10px; }
+.amrap-history-title { font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px; }
+.amrap-hist-entry {
+  font-size:12px;color:var(--text-secondary);padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;justify-content:space-between;
+}
+.amrap-hist-entry:last-child { border-bottom:none; }
+.amrap-hist-date { color:var(--text-muted); }
 </style>
 </head>
 <body>
@@ -462,8 +540,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       </div>
       <div class="menu-section">
         <div class="menu-lbl">Shooting — additional <span class="sel-count" id="sh-sel-count">Adding to Day 1</span></div>
-
-        <!-- Day selector tabs -->
         <div class="of-day-tabs">
           <button class="of-tab of-tab-on" id="sh-d1-btn" onclick="Workout.setSHDay(1)">
             <span class="of-tab-label">Day 1</span>
@@ -474,15 +550,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
             <span class="of-tab-count" id="sh-d2-count" style="background:rgba(201,168,76,0.3);color:var(--gold)">0/5</span>
           </button>
         </div>
-
-        <!-- Selected drills preview for active day -->
         <div class="of-selected-preview" id="sh-preview" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05)">
           <div class="of-preview-empty">Tap drills below to add them</div>
         </div>
-
         <div class="chips" id="sh-pool"></div>
         <div class="menu-hint">Close form shooting is always first · select up to 5 additional drills per day · tap Load to add to session</div>
-
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
           <button class="load-btn" onclick="Workout.loadSHToWorkout()" style="border-color:var(--gold);background:rgba(201,168,76,0.1);color:var(--gold)">Load into session ↑</button>
           <button class="btn btn-sm" onclick="Workout.clearSHDay()">Clear day</button>
@@ -490,8 +562,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       </div>
       <div class="menu-section">
         <div class="menu-lbl">Offence drills <span class="sel-count" id="of-sel-count">Adding to Day 1</span></div>
-
-        <!-- Day selector tabs -->
         <div class="of-day-tabs">
           <button class="of-tab of-tab-on" id="of-d1-btn" onclick="Workout.setOFDay(1)">
             <span class="of-tab-label">Day 1</span>
@@ -502,16 +572,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
             <span class="of-tab-count" id="of-d2-count">0/5</span>
           </button>
         </div>
-
-        <!-- Selected drills preview for active day -->
         <div class="of-selected-preview" id="of-preview">
           <div class="of-preview-empty">Tap drills below to add them</div>
         </div>
-
-        <!-- All 5 drill options -->
         <div class="chips" id="of-pool"></div>
         <div class="menu-hint">Select up to 5 drills per day · switching days saves your selection · 5 min splits evenly across chosen drills</div>
-
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
           <button class="load-btn" onclick="Workout.loadOFToWorkout()">Load into session ↑</button>
           <button class="btn btn-sm" onclick="Workout.clearOFDay()">Clear day</button>
@@ -545,6 +610,8 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <button class="btn" onclick="resetPhysTimer()">Reset</button>
         <span id="phys-phase-label" style="font-size:13px;color:var(--gold);font-weight:600"></span>
       </div>
+
+      <!-- DAY 1 CARD -->
       <div class="card">
         <div class="card-hdr card-hdr-d1"><span class="card-hdr-title">Day 1 — Upper + Lower + Core</span></div>
         <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · dynamic stretch at 3 min mark</div></div>
@@ -555,10 +622,72 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d1-core-name">Sit-ups</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+
+        <!-- ★ AMRAP REP TRACKER — DAY 1 ★ -->
+        <div class="amrap-tracker">
+          <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
+
+          <!-- Sets completed -->
+          <div class="amrap-sets-row">
+            <div>
+              <div class="amrap-sets-label">Full sets completed</div>
+              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(1,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(1,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-sets-val" id="d1-sets-val">0</div>
+                <div class="amrap-sets-sub">sets</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Last exercise reached -->
+          <div class="amrap-last-ex">
+            <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
+            <div class="amrap-ex-chips" id="d1-last-ex-chips">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Reps in last exercise -->
+          <div class="amrap-reps-row">
+            <div class="amrap-reps-label">
+              <strong>Reps in last exercise</strong>
+              Enter individual reps if partial set
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(1,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(1,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-reps-val" id="d1-reps-val">0</div>
+                <div class="amrap-sets-sub">reps</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="amrap-summary" id="d1-amrap-summary"></div>
+
+          <div class="amrap-save-row">
+            <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(1)">Save result</button>
+            <button class="btn btn-sm" onclick="AmrapTracker.reset(1)">Clear</button>
+          </div>
+
+          <div class="amrap-history" id="d1-amrap-history"></div>
+        </div>
+
         <div style="padding:10px 16px;border-top:1px solid var(--border)">
           <button class="btn btn-navy btn-block" onclick="Rewards.markPhysComplete(1)">✓ Mark physical Day 1 complete</button>
         </div>
       </div>
+
+      <!-- DAY 2 CARD -->
       <div class="card">
         <div class="card-hdr card-hdr-d2"><span class="card-hdr-title">Day 2 — Upper + Lower + Core</span></div>
         <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · lateral shuffles at 3 min mark</div></div>
@@ -569,15 +698,69 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d2-core-name">Plank hold — 30 sec</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+
+        <!-- ★ AMRAP REP TRACKER — DAY 2 ★ -->
+        <div class="amrap-tracker">
+          <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
+
+          <div class="amrap-sets-row">
+            <div>
+              <div class="amrap-sets-label">Full sets completed</div>
+              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(2,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(2,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-sets-val" id="d2-sets-val">0</div>
+                <div class="amrap-sets-sub">sets</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="amrap-last-ex">
+            <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
+            <div class="amrap-ex-chips" id="d2-last-ex-chips"></div>
+          </div>
+
+          <div class="amrap-reps-row">
+            <div class="amrap-reps-label">
+              <strong>Reps in last exercise</strong>
+              Enter individual reps if partial set
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(2,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(2,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-reps-val" id="d2-reps-val">0</div>
+                <div class="amrap-sets-sub">reps</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="amrap-summary" id="d2-amrap-summary"></div>
+
+          <div class="amrap-save-row">
+            <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(2)">Save result</button>
+            <button class="btn btn-sm" onclick="AmrapTracker.reset(2)">Clear</button>
+          </div>
+
+          <div class="amrap-history" id="d2-amrap-history"></div>
+        </div>
+
         <div style="padding:10px 16px;border-top:1px solid var(--border)">
           <button class="btn btn-gold btn-block" onclick="Rewards.markPhysComplete(2)">✓ Mark physical Day 2 complete</button>
         </div>
       </div>
+
+      <!-- Customise circuit -->
       <div class="menu-section">
         <div class="menu-lbl">Customise circuit</div>
         <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Choose which day to edit, pick one exercise per category, then tap Apply</div>
-
-        <!-- Day selector tabs (reuse of-day-tabs style) -->
         <div class="of-day-tabs" style="margin-bottom:12px">
           <button class="of-tab of-tab-on" id="phys-d1-btn" onclick="Workout.setPhysTarget(1)">
             <span class="of-tab-label">Day 1</span>
@@ -588,7 +771,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
             <span class="of-tab-count" id="phys-d2-preview" style="background:rgba(201,168,76,0.2);color:var(--gold);font-size:10px;max-width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">–</span>
           </button>
         </div>
-
         <div class="menu-lbl" style="font-size:14px">Upper body</div>
         <div class="chips" id="upper-pool"></div>
         <div class="menu-lbl" style="font-size:14px;margin-top:12px">Lower body</div>
@@ -640,15 +822,17 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
             <div id="phys-progress-bar" style="height:100%;border-radius:4px;background:var(--gold);width:0%;transition:width .5s"></div>
           </div>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px" id="phys-pip-row">
-        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px" id="phys-pip-row"></div>
         <div id="phys-master-announce" style="display:none;background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px;text-align:center;margin-top:10px">
           <div style="font-size:26px;margin-bottom:4px">🏋️</div>
           <div style="font-size:15px;font-weight:600;color:var(--gold)">Physical Training Master badge earned!</div>
           <div style="font-size:13px;color:var(--text-secondary);margin-top:3px">10 sessions complete — outstanding commitment!</div>
         </div>
       </div>
+
       <div class="section-lbl">Shot accuracy tests</div>
+
+      <!-- LAYUP TEST -->
       <div class="shot-card">
         <div class="shot-title">Layup test <span id="layup-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 8/10 (80%) → 🥇 Gold Layup badge</div>
@@ -661,6 +845,22 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="layup-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Layup badge earned — 8+ out of 10!</div></div>
       </div>
+
+      <!-- MID-RANGE TEST — NEW -->
+      <div class="shot-card" style="border-color:rgba(100,180,255,0.3);background:rgba(30,79,163,0.06)">
+        <div class="shot-title">Mid-range test <span id="mr-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal" style="color:rgba(120,180,255,0.8)">Goal: 5/10 (50%) → 🥇 Gold Mid-Range badge</div>
+        <div class="shot-dots" id="mr-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('mr','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('mr','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('mr')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('mr')">Reset</button>
+        </div>
+        <div class="gold-announce" id="mr-announce" style="background:rgba(30,79,163,0.15);border-color:#7AAEF5"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text" style="color:#7AAEF5">Gold Mid-Range badge earned — 5+ out of 10!</div></div>
+      </div>
+
+      <!-- FREE THROW TEST -->
       <div class="shot-card">
         <div class="shot-title">Free throw test <span id="ft-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 6/10 (60%) → 🥇 Gold Free Throw badge</div>
@@ -673,6 +873,8 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="ft-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Free Throw badge earned — 6+ out of 10!</div></div>
       </div>
+
+      <!-- THREE POINTER TEST -->
       <div class="shot-card">
         <div class="shot-title">Three pointer test <span id="tp-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 4/10 (40%) → 🥇 Gold Three Pointer badge</div>
@@ -685,6 +887,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="tp-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Three Pointer badge earned — 4+ out of 10!</div></div>
       </div>
+
       <div class="section-lbl" style="margin-top:6px">Training day tracker</div>
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Tap + each time you use a drill in a session. 10 session days = badge earned.</p>
       <div class="card" style="padding:10px 16px">
@@ -711,20 +914,16 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
     </div>
 
-
-
-<!-- COUNTDOWN OVERLAY -->
-<div id="countdown-overlay">
-  <div id="countdown-num" class="countdown-num">3</div>
-  <div id="countdown-text" class="countdown-text"></div>
-</div>
+    <!-- COUNTDOWN OVERLAY -->
+    <div id="countdown-overlay">
+      <div id="countdown-num" class="countdown-num">3</div>
+      <div id="countdown-text" class="countdown-text"></div>
+    </div>
 
     <!-- PAGE 5: PLAYER PROFILE -->
     <div id="pg-profile" class="pg">
       <div class="page-title">My profile</div>
       <p class="page-sub">Your player card, progress and season stats — all saved on your device</p>
-
-      <!-- Hero card -->
       <div class="profile-hero">
         <button class="btn btn-sm profile-edit-btn" id="profile-edit-btn" onclick="Profile.toggleEdit()">Edit</button>
         <div class="profile-avatar-wrap">
@@ -740,8 +939,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="profile-number" id="profile-display-number">#00 · Select position</div>
         <div class="profile-meta" id="profile-meta"></div>
       </div>
-
-      <!-- Edit form (hidden by default) -->
       <div id="profile-edit-form" class="card" style="display:none;padding:16px">
         <div class="profile-form-row">
           <label class="profile-form-label">Full name</label>
@@ -771,20 +968,12 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
         </div>
       </div>
-
-      <!-- Season stats -->
       <div class="dash-sec-title">Season stats</div>
       <div class="profile-stats-grid" id="profile-stats"></div>
-
-      <!-- Badge showcase -->
       <div class="dash-sec-title">Badge collection</div>
       <div class="badge-grid" id="profile-badges"></div>
-
-      <!-- Personal bests -->
       <div class="dash-sec-title">Shooting personal bests</div>
       <div class="card" id="profile-shooting" style="padding:14px 16px"></div>
-
-      <!-- Training log summary -->
       <div class="dash-sec-title">Top trained drills</div>
       <div class="card" id="profile-top-drills" style="padding:14px 16px"></div>
     </div>
@@ -807,9 +996,8 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 
 <script>
 // ============================================================
-// GBSA PIONEERS U14 — DATA & CONSTANTS
+// DATA & CONSTANTS
 // ============================================================
-
 const DATA = {
   BH_SKILLS: [
     "Right side pounds","Left side pounds","Tween (through legs)",
@@ -852,8 +1040,10 @@ const DATA = {
     {icon:'⚡',name:'Offence master',sub:'All 5 moves — 10 days each',cat:'of'},
     {icon:'🏋️',name:'Physical training master',sub:'Complete 10 physical sessions',cat:'phys'},
   ],
+  // ★ Mid-range badge added here ★
   GOLD_BADGE_DEFS: [
     {icon:'🥇',name:'Gold layup',sub:'8/10 in layup test',key:'layup',goal:8,goalPct:80},
+    {icon:'🥇',name:'Gold mid-range',sub:'5/10 in mid-range test',key:'mr',goal:5,goalPct:50},
     {icon:'🥇',name:'Gold free throw',sub:'6/10 in free throw test',key:'ft',goal:6,goalPct:60},
     {icon:'🥇',name:'Gold three pointer',sub:'4/10 in three pointer test',key:'tp',goal:4,goalPct:40},
   ]
@@ -880,8 +1070,14 @@ const STATE = {
   physCompletes: { d1: 0, d2: 0 },
   shots: {
     layup: { shots: [], goal: 8, goalPct: 80, badgeEarned: false, history: [] },
+    mr:    { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] }, // ★ NEW ★
     ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
     tp:    { shots: [], goal: 4, goalPct: 40, badgeEarned: false, history: [] }
+  },
+  // ★ AMRAP tracker state ★
+  amrap: {
+    d1: { sets: 0, lastEx: '', reps: 0, history: [] },
+    d2: { sets: 0, lastEx: '', reps: 0, history: [] }
   },
   activeTab: 'workout',
   profile: {
@@ -893,7 +1089,6 @@ const STATE = {
   }
 };
 
-// Initialise sessionDays
 [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS].forEach(t => {
   STATE.sessionDays[t] = 0;
 });
@@ -908,6 +1103,7 @@ function saveState() {
       dayCompletes: STATE.dayCompletes,
       physCompletes: STATE.physCompletes,
       shots: STATE.shots,
+      amrap: STATE.amrap,
       shD1: [...STATE.shD1],
       shD2: [...STATE.shD2],
       ofD1: [...STATE.ofD1],
@@ -927,7 +1123,12 @@ function loadState() {
     if (p.sessionDays) STATE.sessionDays = { ...STATE.sessionDays, ...p.sessionDays };
     if (p.dayCompletes) STATE.dayCompletes = p.dayCompletes;
     if (p.physCompletes) STATE.physCompletes = p.physCompletes;
-    if (p.shots) STATE.shots = p.shots;
+    if (p.shots) {
+      STATE.shots = p.shots;
+      // Ensure mr exists for existing saves
+      if (!STATE.shots.mr) STATE.shots.mr = { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] };
+    }
+    if (p.amrap) STATE.amrap = p.amrap;
     if (p.shD1) STATE.shD1 = new Set(p.shD1);
     if (p.shD2) STATE.shD2 = new Set(p.shD2);
     if (p.ofD1) STATE.ofD1 = new Set(p.ofD1);
@@ -940,8 +1141,169 @@ function keyOf(s) { return s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,''); }
 function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 100); }
 function ofTimeLabel(n) { return n===1?'5 min':n===2?'2.5 min each':'1m 40s each'; }
 </script>
+
 <script>
-// WORKOUT MODULE v2
+// ============================================================
+// AMRAP TRACKER MODULE — NEW
+// ============================================================
+const AmrapTracker = (() => {
+
+  // Returns the exercise list for a given day in order [upper, lower, core]
+  function getExList(day) {
+    const d = STATE.phys['d' + day];
+    return [
+      { label: d.upper, cat: 'upper' },
+      { label: d.lower, cat: 'lower' },
+      { label: d.core,  cat: 'core'  }
+    ];
+  }
+
+  function renderExChips(day) {
+    const c = document.getElementById('d' + day + '-last-ex-chips');
+    if (!c) return;
+    c.innerHTML = '';
+    const exList = getExList(day);
+    const current = STATE.amrap['d' + day].lastEx;
+
+    // "None (full sets only)" option
+    const noneBtn = document.createElement('button');
+    noneBtn.className = 'amrap-ex-chip' + (current === '' ? ' selected-core' : '');
+    noneBtn.textContent = current === '' ? '✓ None' : 'None';
+    noneBtn.onclick = () => {
+      STATE.amrap['d' + day].lastEx = '';
+      STATE.amrap['d' + day].reps = 0;
+      renderExChips(day);
+      document.getElementById('d' + day + '-reps-val').textContent = '0';
+      updateSummary(day);
+    };
+    c.appendChild(noneBtn);
+
+    exList.forEach(ex => {
+      const btn = document.createElement('button');
+      const isSel = current === ex.label;
+      btn.className = 'amrap-ex-chip' + (isSel ? ' selected-' + ex.cat : '');
+      btn.textContent = (isSel ? '✓ ' : '') + ex.label;
+      btn.onclick = () => {
+        STATE.amrap['d' + day].lastEx = ex.label;
+        renderExChips(day);
+        updateSummary(day);
+      };
+      c.appendChild(btn);
+    });
+  }
+
+  function adjustSets(day, delta) {
+    const a = STATE.amrap['d' + day];
+    a.sets = Math.max(0, (a.sets || 0) + delta);
+    document.getElementById('d' + day + '-sets-val').textContent = a.sets;
+    updateSummary(day);
+  }
+
+  function adjustReps(day, delta) {
+    const a = STATE.amrap['d' + day];
+    a.reps = Math.max(0, Math.min(99, (a.reps || 0) + delta));
+    document.getElementById('d' + day + '-reps-val').textContent = a.reps;
+    updateSummary(day);
+  }
+
+  function updateSummary(day) {
+    const a = STATE.amrap['d' + day];
+    const el = document.getElementById('d' + day + '-amrap-summary');
+    if (!el) return;
+    const hasData = a.sets > 0 || a.lastEx || a.reps > 0;
+    if (!hasData) { el.classList.remove('show'); el.innerHTML = ''; return; }
+    let txt = '<strong>' + a.sets + ' full set' + (a.sets !== 1 ? 's' : '') + '</strong>';
+    if (a.lastEx) {
+      txt += ' + partial: <strong>' + a.lastEx + '</strong>';
+      if (a.reps > 0) txt += ' × <strong>' + a.reps + ' reps</strong>';
+    }
+    const exList = getExList(day);
+    const fullReps = a.sets * 3 * 10; // 3 exercises × 10 reps
+    const partialReps = a.reps || 0;
+    const totalReps = fullReps + partialReps;
+    txt += '<br><span style="color:var(--text-muted);font-size:12px">Total reps: ~' + totalReps + ' · ' + (a.sets * 3) + ' exercises completed</span>';
+    el.innerHTML = txt;
+    el.classList.add('show');
+  }
+
+  function save(day) {
+    const a = STATE.amrap['d' + day];
+    if (a.sets === 0 && !a.lastEx && a.reps === 0) {
+      showToast('Enter your results first');
+      return;
+    }
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
+    const entry = {
+      sets: a.sets,
+      lastEx: a.lastEx,
+      reps: a.reps,
+      date: dateStr,
+      upper: STATE.phys['d' + day].upper,
+      lower: STATE.phys['d' + day].lower,
+      core:  STATE.phys['d' + day].core
+    };
+    if (!STATE.amrap['d' + day].history) STATE.amrap['d' + day].history = [];
+    STATE.amrap['d' + day].history.unshift(entry);
+    // Keep last 10
+    if (STATE.amrap['d' + day].history.length > 10) STATE.amrap['d' + day].history.length = 10;
+    saveState();
+    renderHistory(day);
+    showToast('AMRAP result saved 💪');
+  }
+
+  function reset(day) {
+    STATE.amrap['d' + day].sets = 0;
+    STATE.amrap['d' + day].lastEx = '';
+    STATE.amrap['d' + day].reps = 0;
+    document.getElementById('d' + day + '-sets-val').textContent = '0';
+    document.getElementById('d' + day + '-reps-val').textContent = '0';
+    const sumEl = document.getElementById('d' + day + '-amrap-summary');
+    if (sumEl) { sumEl.classList.remove('show'); sumEl.innerHTML = ''; }
+    renderExChips(day);
+  }
+
+  function renderHistory(day) {
+    const hist = STATE.amrap['d' + day].history || [];
+    const el = document.getElementById('d' + day + '-amrap-history');
+    if (!el) return;
+    if (hist.length === 0) { el.innerHTML = ''; return; }
+    let html = '<div class="amrap-history"><div class="amrap-history-title">Recent results</div>';
+    hist.forEach(h => {
+      let summary = h.sets + ' set' + (h.sets !== 1 ? 's' : '');
+      if (h.lastEx) summary += ' + ' + h.lastEx + (h.reps > 0 ? ' ×' + h.reps : '');
+      html += '<div class="amrap-hist-entry"><span>' + summary + '</span><span class="amrap-hist-date">' + h.date + '</span></div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  function init() {
+    [1, 2].forEach(day => {
+      renderExChips(day);
+      // Restore current state display
+      const a = STATE.amrap['d' + day];
+      if (!a) STATE.amrap['d' + day] = { sets: 0, lastEx: '', reps: 0, history: [] };
+      document.getElementById('d' + day + '-sets-val').textContent = (STATE.amrap['d' + day].sets || 0);
+      document.getElementById('d' + day + '-reps-val').textContent = (STATE.amrap['d' + day].reps || 0);
+      updateSummary(day);
+      renderHistory(day);
+    });
+  }
+
+  // Re-render chips after physiology customisation changes exercises
+  function refreshChips() {
+    [1, 2].forEach(day => renderExChips(day));
+  }
+
+  return { adjustSets, adjustReps, save, reset, init, refreshChips, renderHistory };
+})();
+</script>
+
+<script>
+// ============================================================
+// WORKOUT MODULE
+// ============================================================
 const Workout = (() => {
   function renderMandatory(id, name) {
     const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
@@ -961,11 +1323,9 @@ const Workout = (() => {
         d.classList.toggle('done');
         const nowDone = d.classList.contains('done');
         if (nowDone && !wasDone) {
-          // Auto-increment session day count for this drill
           if (STATE.sessionDays.hasOwnProperty(s)) {
             STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
             saveState();
-            // Live-refresh tracker and dashboard if open
             if (typeof Rewards !== 'undefined') Rewards.refreshDrillRow(s);
             if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
           }
@@ -1055,25 +1415,18 @@ const Workout = (() => {
       b.textContent = s;
       b.onclick = () => {
         if (activeSet.has(s)) {
-          activeSet.delete(s);
-          b.className = 'chip';
+          activeSet.delete(s); b.className = 'chip';
         } else if (activeSet.size < 5) {
-          activeSet.add(s);
-          b.className = 'chip chip-sel-sh';
-        } else {
-          showToast('Max 5 shooting drills per day');
-          return;
-        }
-        updateSHPreview();
-        updateSHCounts();
+          activeSet.add(s); b.className = 'chip chip-sel-sh';
+        } else { showToast('Max 5 shooting drills per day'); return; }
+        updateSHPreview(); updateSHCounts();
         if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
         else STATE.workout.d2.sh = [...activeSet];
         buildWorkout(); saveState();
       };
       c.appendChild(b);
     });
-    updateSHPreview();
-    updateSHCounts();
+    updateSHPreview(); updateSHCounts();
   }
 
   function updateSHPreview() {
@@ -1120,16 +1473,14 @@ const Workout = (() => {
     if (d1Empty && d2Empty) { showToast('Select shooting drills first'); return; }
     if (!d1Empty) STATE.workout.d1.sh = [...STATE.shD1];
     if (!d2Empty) STATE.workout.d2.sh = [...STATE.shD2];
-    buildWorkout(); saveState();
-    showToast('Shooting drills loaded into session');
+    buildWorkout(); saveState(); showToast('Shooting drills loaded into session');
   }
 
   function clearSHDay() {
     const day = STATE.targets.sh || 1;
     if (day === 1) { STATE.shD1.clear(); STATE.workout.d1.sh = []; }
     else { STATE.shD2.clear(); STATE.workout.d2.sh = []; }
-    renderSHChips(); buildWorkout(); saveState();
-    showToast('Day ' + day + ' shooting cleared');
+    renderSHChips(); buildWorkout(); saveState(); showToast('Day ' + day + ' shooting cleared');
   }
 
   function renderOFChips() {
@@ -1142,27 +1493,17 @@ const Workout = (() => {
       b.className = 'chip' + (isSel ? ' chip-sel-of' : '');
       b.textContent = s;
       b.onclick = () => {
-        if (activeSet.has(s)) {
-          activeSet.delete(s);
-          b.className = 'chip';
-        } else if (activeSet.size < 5) {
-          activeSet.add(s);
-          b.className = 'chip chip-sel-of';
-        } else {
-          showToast('Max 5 offence drills per day');
-          return;
-        }
-        updateOFPreview();
-        updateOFCounts();
-        // Also update the workout live
+        if (activeSet.has(s)) { activeSet.delete(s); b.className = 'chip'; }
+        else if (activeSet.size < 5) { activeSet.add(s); b.className = 'chip chip-sel-of'; }
+        else { showToast('Max 5 offence drills per day'); return; }
+        updateOFPreview(); updateOFCounts();
         if (activeDay === 1) STATE.workout.d1.of = [...activeSet];
         else STATE.workout.d2.of = [...activeSet];
         buildWorkout(); saveState();
       };
       c.appendChild(b);
     });
-    updateOFPreview();
-    updateOFCounts();
+    updateOFPreview(); updateOFCounts();
   }
 
   function updateOFPreview() {
@@ -1206,12 +1547,13 @@ const Workout = (() => {
       b.className = 'chip' + (isCurrent ? ' ' + cls[cat] : '');
       b.textContent = s + (isCurrent ? ' ✓' : '');
       b.onclick = () => {
-        // Deselect all in this category then select this one
         STATE.phys['d' + day][cat] = s;
         renderPhysChips(cat);
         buildPhys();
         saveState();
         updatePhysPreviews();
+        // Refresh AMRAP chips since exercises changed
+        if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
         const msg = document.getElementById('phys-msg');
         if (msg) { msg.textContent = s + ' set for Day ' + day; setTimeout(() => msg.textContent = '', 2000); }
       };
@@ -1238,8 +1580,6 @@ const Workout = (() => {
 
   function updateSelCounts() {
     const bhc = document.getElementById('bh-sel-count'); if (bhc) bhc.textContent = STATE.sel.bh.size + ' selected';
-    const shc = document.getElementById('sh-sel-count'); if (shc) shc.textContent = STATE.sel.sh.size + ' selected';
-    const ofc = document.getElementById('of-sel-count'); if (ofc) ofc.textContent = STATE.sel.of.size + '/3 selected';
   }
 
   function setOFDay(day) {
@@ -1255,16 +1595,14 @@ const Workout = (() => {
     if (d1Empty && d2Empty) { showToast('Select offence drills first'); return; }
     if (!d1Empty) STATE.workout.d1.of = [...STATE.ofD1];
     if (!d2Empty) STATE.workout.d2.of = [...STATE.ofD2];
-    buildWorkout(); saveState();
-    showToast('Offence drills loaded into session');
+    buildWorkout(); saveState(); showToast('Offence drills loaded into session');
   }
 
   function clearOFDay() {
     const day = STATE.targets.of || 1;
     if (day === 1) { STATE.ofD1.clear(); STATE.workout.d1.of = []; }
     else { STATE.ofD2.clear(); STATE.workout.d2.of = []; }
-    renderOFChips(); buildWorkout(); saveState();
-    showToast('Day ' + day + ' offence cleared');
+    renderOFChips(); buildWorkout(); saveState(); showToast('Day ' + day + ' offence cleared');
   }
 
   function setTarget(cat, t) {
@@ -1281,21 +1619,8 @@ const Workout = (() => {
     if (STATE.targets.bh === 1) STATE.workout.d1.bh = arr; else STATE.workout.d2.bh = arr;
     buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.bh);
   }
-  function loadSH() {
-    if (STATE.sel.sh.size === 0) { showToast('Select shooting drills first'); return; }
-    const arr = [...STATE.sel.sh].slice(0, 5);
-    if (STATE.targets.sh === 1) STATE.workout.d1.sh = arr; else STATE.workout.d2.sh = arr;
-    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.sh);
-  }
-  function loadOF() {
-    if (STATE.sel.of.size === 0) { showToast('Select offence drills first'); return; }
-    const arr = [...STATE.sel.of];
-    if (STATE.targets.of === 1) STATE.workout.d1.of = arr; else STATE.workout.d2.of = arr;
-    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.of);
-  }
   function loadAll() {
     if (STATE.sel.bh.size > 0) STATE.workout.d1.bh = [...STATE.sel.bh].slice(0,5);
-    if (STATE.sel.sh.size > 0) STATE.workout.d1.sh = [...STATE.sel.sh].slice(0,5);
     if (STATE.sel.of.size > 0) { STATE.workout.d1.of = [...STATE.sel.of]; STATE.workout.d2.of = [...STATE.sel.of]; }
     buildWorkout(); saveState(); showToast('All selections loaded into Day 1');
   }
@@ -1304,10 +1629,9 @@ const Workout = (() => {
     renderBHChips(); renderSHChips(); renderOFChips(); updateSelCounts();
   }
   function applyPhys() {
-    // Chips now update STATE.phys directly on tap — this button just confirms and toasts
     const day = STATE.targets.phys || 1;
-    buildPhys(); saveState();
-    updatePhysPreviews();
+    buildPhys(); saveState(); updatePhysPreviews();
+    if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
     showToast('Day ' + day + ' circuit saved ✓');
   }
   function buildPhys() {
@@ -1323,14 +1647,20 @@ const Workout = (() => {
     saveState(); showToast('🏆 Day ' + day + ' complete! Badge earned.');
     Rewards.renderAll(); Dashboard.render();
   }
-  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setSHDay, setOFDay, setPhysTarget, loadBH, loadSH, loadSHToWorkout, clearSHDay, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts, updateSHCounts, updateOFCounts, updatePhysPreviews };
+  return {
+    buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips,
+    renderPhysChips, setTarget, setSHDay, setOFDay, setPhysTarget,
+    loadBH, loadSHToWorkout, clearSHDay, loadOFToWorkout, clearOFDay,
+    loadAll, clearSelections, applyPhys, markDayComplete,
+    updateSelCounts, updateSHCounts, updateOFCounts, updatePhysPreviews
+  };
 })();
 </script>
+
 <script>
 // ============================================================
 // REWARDS MODULE
 // ============================================================
-
 const Rewards = (() => {
 
   function renderAll() {
@@ -1396,10 +1726,9 @@ const Rewards = (() => {
               <span class="rep-num" id="rn-${keyOf(s)}">${days}</span>
               <button class="rep-btn rep-btn-plus" onclick="Rewards.adjustDay('${s}',1)">+</button>
             </div>
-            <span class="rep-status ${earned?'rep-earned':''}" id="rs-${keyOf(s)}">${earned?'🏆 Badge':'${days}/10'}</span>
+            <span class="rep-status ${earned?'rep-earned':''}" id="rs-${keyOf(s)}">${earned?'🏆 Badge':days+'/10 days'}</span>
           </div>
           <div class="pip-row" id="pips-${keyOf(s)}">${pips}</div>`;
-        row.querySelector('.rep-status').textContent = earned ? '🏆 Badge' : days+'/10 days';
         c.appendChild(row);
       });
     });
@@ -1425,10 +1754,10 @@ const Rewards = (() => {
     saveState(); renderSeasonBadges(); Dashboard.render();
   }
 
-  // Shot tracking
   function buildShotDots(type) {
     const c = document.getElementById(type + '-dots'); if (!c) return; c.innerHTML = '';
     const st = STATE.shots[type];
+    if (!st) return;
     for (let i = 0; i < 10; i++) {
       const d = document.createElement('span'); d.className = 'shot-dot';
       if (st.shots[i] === 'make') d.classList.add('make');
@@ -1443,7 +1772,7 @@ const Rewards = (() => {
 
   function logShot(type, result) {
     const st = STATE.shots[type];
-    if (st.shots.length >= 10) return;
+    if (!st || st.shots.length >= 10) return;
     st.shots.push(result); buildShotDots(type);
     const makes = st.shots.filter(s => s === 'make').length;
     if (st.shots.length === 10 && makes >= st.goal && !st.badgeEarned) {
@@ -1456,7 +1785,7 @@ const Rewards = (() => {
 
   function saveSession(type) {
     const st = STATE.shots[type];
-    if (st.shots.length === 0) { showToast('No shots logged yet'); return; }
+    if (!st || st.shots.length === 0) { showToast('No shots logged yet'); return; }
     const makes = st.shots.filter(s => s === 'make').length;
     const total = st.shots.length;
     const p = Math.round((makes / total) * 100);
@@ -1468,15 +1797,15 @@ const Rewards = (() => {
   }
 
   function resetShots(type) {
-    STATE.shots[type].shots = [];
+    const st = STATE.shots[type]; if (!st) return;
+    st.shots = [];
     const ann = document.getElementById(type + '-announce');
     if (ann) ann.classList.remove('show');
     buildShotDots(type);
   }
 
   function refreshDrillRow(s) {
-    // Update the count number and pip row for a single drill in the rep tracker
-    const k = s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+    const k = keyOf(s);
     const numEl = document.getElementById('rn-' + k);
     const statusEl = document.getElementById('rs-' + k);
     const pipsEl = document.getElementById('pips-' + k);
@@ -1492,7 +1821,6 @@ const Rewards = (() => {
         '<span class="pip ' + (i < days ? (days >= 10 ? 'pip-gold' : 'pip-done') : '') + '"></span>'
       ).join('');
     }
-    // Also refresh season badges in case one just unlocked
     renderSeasonBadges();
   }
 
@@ -1513,20 +1841,16 @@ const Rewards = (() => {
 
   function renderPhysTracker() {
     const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
-    const pct = Math.min(Math.round((total / 10) * 100), 100);
-    // Count labels
+    const p = Math.min(Math.round((total / 10) * 100), 100);
     const d1el = document.getElementById('phys-d1-count-display'); if (d1el) d1el.textContent = STATE.physCompletes.d1;
     const d2el = document.getElementById('phys-d2-count-display'); if (d2el) d2el.textContent = STATE.physCompletes.d2;
     const totEl = document.getElementById('phys-total-label'); if (totEl) totEl.textContent = total + ' / 10 sessions';
-    // Progress bar
-    const bar = document.getElementById('phys-progress-bar'); if (bar) bar.style.width = pct + '%';
-    const pctEl = document.getElementById('phys-progress-pct'); if (pctEl) pctEl.textContent = pct + '%';
-    // Pip dots
+    const bar = document.getElementById('phys-progress-bar'); if (bar) bar.style.width = p + '%';
+    const pctEl = document.getElementById('phys-progress-pct'); if (pctEl) pctEl.textContent = p + '%';
     const pipRow = document.getElementById('phys-pip-row');
     if (pipRow) {
       pipRow.innerHTML = Array.from({length: 10}, (_, i) => {
-        const done = i < total;
-        const gold = done && total >= 10;
+        const done = i < total; const gold = done && total >= 10;
         return '<span style="width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:1px solid ' +
           (gold ? 'var(--gold)' : done ? 'var(--navy-light)' : 'var(--border)') + ';background:' +
           (gold ? 'rgba(201,168,76,0.25)' : done ? 'rgba(30,79,163,0.3)' : 'rgba(255,255,255,0.04)') + ';color:' +
@@ -1534,23 +1858,24 @@ const Rewards = (() => {
           (done ? (gold ? '🏋️' : '✓') : (i + 1)) + '</span>';
       }).join('');
     }
-    // Badge announcement
     const ann = document.getElementById('phys-master-announce');
     if (ann) ann.style.display = total >= 10 ? 'block' : 'none';
   }
 
   function initShotTrackers() {
-    ['layup','ft','tp'].forEach(t => buildShotDots(t));
+    ['layup','mr','ft','tp'].forEach(t => buildShotDots(t));
   }
 
-  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, markPhysComplete, renderPhysTracker, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers, refreshDrillRow };
+  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, markPhysComplete,
+           renderPhysTracker, adjustDay, buildShotDots, logShot, saveSession, resetShots,
+           initShotTrackers, refreshDrillRow };
 })();
 </script>
+
 <script>
 // ============================================================
 // DASHBOARD MODULE
 // ============================================================
-
 const Dashboard = (() => {
 
   function render() {
@@ -1560,7 +1885,6 @@ const Dashboard = (() => {
     const earnedBadges = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS].filter(b => Rewards.checkBadge(b)).length;
     const totalDays = Object.values(STATE.sessionDays).reduce((a, v) => a + v, 0);
 
-    // Hero metrics
     const hero = document.getElementById('dash-hero'); if (!hero) return;
     hero.innerHTML = `
       <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Skills</div></div>
@@ -1569,7 +1893,6 @@ const Dashboard = (() => {
       <div class="dash-metric"><div class="dash-val">${earnedTech}/${allDrills.length}</div><div class="dash-lbl">Drills 10+</div></div>
       <div class="dash-metric"><div class="dash-val">${totalDays}</div><div class="dash-lbl">Drill days</div></div>`;
 
-    // Season badges
     const ds = document.getElementById('dash-season'); if (ds) {
       ds.innerHTML = '';
       DATA.SEASON_BADGE_DEFS.forEach(b => {
@@ -1590,11 +1913,12 @@ const Dashboard = (() => {
       });
     }
 
-    // Gold badges
+    // Gold badges — now includes mid-range ★
     const dg = document.getElementById('dash-gold'); if (dg) {
       dg.innerHTML = '';
       DATA.GOLD_BADGE_DEFS.forEach(b => {
         const earned = Rewards.checkBadge(b); const st = STATE.shots[b.key];
+        if (!st) return;
         const allM = st.history.reduce((a,h)=>a+h.makes,0);
         const allT = st.history.reduce((a,h)=>a+h.total,0);
         const p = allT > 0 ? pct(allM, allT) : 0;
@@ -1608,16 +1932,17 @@ const Dashboard = (() => {
       });
     }
 
-    // Cumulative accuracy
+    // Cumulative accuracy — now includes mid-range ★
     const da = document.getElementById('dash-accuracy'); if (da) {
       da.innerHTML = '';
       const accDefs = [
-        {key:'layup', label:'Layups', color:'#1E4FA3', goal:80},
-        {key:'ft',    label:'Free throws', color:'#1E4FA3', goal:60},
-        {key:'tp',    label:'Three pointers', color:'#1E4FA3', goal:40},
+        {key:'layup', label:'Layups',        color:'#1E4FA3', goal:80},
+        {key:'mr',    label:'Mid-range',     color:'#1E4FA3', goal:50}, // ★ NEW ★
+        {key:'ft',    label:'Free throws',   color:'#1E4FA3', goal:60},
+        {key:'tp',    label:'Three pointers',color:'#1E4FA3', goal:40},
       ];
       accDefs.forEach(at => {
-        const st = STATE.shots[at.key];
+        const st = STATE.shots[at.key]; if (!st) return;
         const allM = st.history.reduce((a,h)=>a+h.makes,0);
         const allT = st.history.reduce((a,h)=>a+h.total,0);
         const cumP = allT > 0 ? Math.round((allM/allT)*100) : 0;
@@ -1649,7 +1974,6 @@ const Dashboard = (() => {
       });
     }
 
-    // Workouts
     const dw = document.getElementById('dash-workouts'); if (dw) {
       const wT = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
       const pT = STATE.physCompletes.d1 + STATE.physCompletes.d2;
@@ -1671,7 +1995,6 @@ const Dashboard = (() => {
         </div>`;
     }
 
-    // Drill progress
     const drillGroups = [
       {id:'dash-bh', items:DATA.BH_SKILLS, color:'#1E4FA3'},
       {id:'dash-sh', items:[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL], color:'#C9A84C'},
@@ -1695,12 +2018,12 @@ const Dashboard = (() => {
   return { render };
 })();
 </script>
+
 <script>
 // ============================================================
 // APP CONTROLLER
 // ============================================================
 
-// ---- TOAST ----
 function showToast(msg) {
   let t = document.getElementById('toast');
   if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
@@ -1709,7 +2032,6 @@ function showToast(msg) {
   t._timer = setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ---- NAVIGATION ----
 function showTab(id, btn) {
   document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -1722,10 +2044,7 @@ function showTab(id, btn) {
   if (id === 'profile') Profile.render();
 }
 
-// ---- SESSION TIMER ----
-// ============================================================
-// AUDIO ENGINE — Web Audio API (no file downloads needed)
-// ============================================================
+// ---- AUDIO ENGINE ----
 const Audio = (() => {
   let ctx = null;
   function getCtx() {
@@ -1748,97 +2067,67 @@ const Audio = (() => {
     } catch(e) {}
   }
   function countdownBeep(n) {
-    // n=3,2,1 → descending tone; 0 = "Lets Play" big chord
     const freqs = { 3:440, 2:349, 1:523, 0:659 };
     beep(freqs[n] || 440, n===0 ? 0.6 : 0.25, 0.5, n===0 ? 'triangle' : 'sine');
     if (n === 0) { setTimeout(()=>beep(784,0.4,0.4,'triangle'), 120); setTimeout(()=>beep(988,0.5,0.35,'triangle'), 240); }
   }
   function alarm() {
-    // 5-second alarm: 5 sharp beeps at high frequency
     for (let i = 0; i < 5; i++) {
       beep(880, 0.18, 0.6, 'square', i * 0.22);
       beep(1100, 0.12, 0.4, 'square', i * 0.22 + 0.14);
     }
   }
   function phase() {
-    // Short mid beep for phase change
     beep(660, 0.15, 0.4, 'sine');
     setTimeout(()=>beep(880,0.2,0.4,'sine'), 160);
   }
   return { countdownBeep, alarm, phase };
 })();
 
-// ============================================================
-// COUNTDOWN — shared 3-2-1 → "Let's Play!" animation
-// ============================================================
+// ---- COUNTDOWN ----
 function runCountdown(onComplete, label) {
   const overlay = document.getElementById('countdown-overlay');
   if (!overlay) { onComplete(); return; }
-
-  // Rebuild inner HTML fresh each time — avoids all cloneNode/querySelector issues
   overlay.innerHTML = '<div id="cd-num" class="countdown-num"></div><div id="cd-txt" class="countdown-text"></div>';
   overlay.classList.add('show');
-
   let count = 3;
   function showCount() {
     const numEl = document.getElementById('cd-num');
     const txtEl = document.getElementById('cd-txt');
     if (!numEl || !txtEl) { overlay.classList.remove('show'); onComplete(); return; }
-
-    // Re-trigger CSS animation by forcing reflow
     numEl.style.animation = 'none';
     void numEl.offsetWidth;
     numEl.style.animation = '';
-
     if (count > 0) {
-      numEl.textContent = count;
-      numEl.className = 'countdown-num';
-      txtEl.textContent = label || '';
-      txtEl.style.opacity = '0';
-      Audio.countdownBeep(count);
-      count--;
+      numEl.textContent = count; numEl.className = 'countdown-num';
+      txtEl.textContent = label || ''; txtEl.style.opacity = '0';
+      Audio.countdownBeep(count); count--;
       setTimeout(showCount, 900);
     } else {
-      // "Let's PLAY!"
       numEl.textContent = "Let's PLAY!";
-      numEl.style.fontSize = '52px';
-      numEl.style.color = 'var(--gold)';
+      numEl.style.fontSize = '52px'; numEl.style.color = 'var(--gold)';
       txtEl.textContent = '';
       Audio.countdownBeep(0);
-      setTimeout(() => {
-        overlay.classList.remove('show');
-        overlay.innerHTML = ''; // clean up
-        onComplete();
-      }, 950);
+      setTimeout(() => { overlay.classList.remove('show'); overlay.innerHTML = ''; onComplete(); }, 950);
     }
   }
   showCount();
 }
 
-// ============================================================
-// SESSION TIMER — 25 minutes
-// ============================================================
-const SESS_TOTAL = 25 * 60; // 1500 seconds → displayed as 25:00
+// ---- SESSION TIMER ----
+const SESS_TOTAL = 25 * 60;
 let sessInterval = null, sessElapsed = 0;
 
 function startTimer() {
   if (sessInterval) {
-    // Pause
     clearInterval(sessInterval); sessInterval = null;
-    document.getElementById('start-btn').textContent = 'Resume';
-    return;
+    document.getElementById('start-btn').textContent = 'Resume'; return;
   }
   if (sessElapsed === 0) {
-    // Fresh start — run countdown first
     document.getElementById('start-btn').textContent = '...';
-    runCountdown(() => {
-      document.getElementById('start-btn').textContent = 'Pause';
-      _runSessTimer();
-    }, 'Skills session');
+    runCountdown(() => { document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer(); }, 'Skills session');
   } else {
-    // Resuming
-    document.getElementById('start-btn').textContent = 'Pause';
-    _runSessTimer();
+    document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer();
   }
 }
 
@@ -1849,17 +2138,14 @@ function _runSessTimer() {
     const m = Math.floor(rem / 60), s = rem % 60;
     const el = document.getElementById('sess-timer');
     if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    // Phase bar
     let acc = 0, cur = null;
     for (const p of DATA.PHASES) { acc += p.dur; if (sessElapsed <= acc) { cur = p; break; } }
     if (cur) {
       const pl = document.getElementById('phase-label'); if (pl) pl.textContent = cur.label;
       const pb = document.getElementById('phase-bar');
       if (pb) { const ps = acc - cur.dur; pb.style.width = Math.round(((sessElapsed - ps) / cur.dur) * 100) + '%'; pb.style.background = cur.color; }
-      // Beep on phase change (when sessElapsed exactly hits a boundary)
       if (sessElapsed === acc && sessElapsed < SESS_TOTAL) Audio.phase();
     }
-    // 5-second alarm at the end
     if (rem === 5) Audio.alarm();
     if (sessElapsed >= SESS_TOTAL) {
       clearInterval(sessInterval); sessInterval = null;
@@ -1878,25 +2164,19 @@ function resetTimer() {
   const btn = document.getElementById('start-btn'); if (btn) btn.textContent = 'Start';
 }
 
-// ============================================================
-// PHYSICAL TIMER — 5 min jog + 5 min AMRAP, two separate cards
-// ============================================================
+// ---- PHYSICAL TIMER ----
 let physInterval = null, physElapsed = 0;
-const JOG_DUR  = 5 * 60; // 300s
-const AMRAP_DUR = 5 * 60; // 300s
-const PHYS_TOTAL = JOG_DUR + AMRAP_DUR; // 600s
+const JOG_DUR = 5 * 60, AMRAP_DUR = 5 * 60, PHYS_TOTAL = 10 * 60;
 
 function _updatePhysDisplay() {
-  const jogCard   = document.getElementById('phys-jog-card');
+  const jogCard = document.getElementById('phys-jog-card');
   const amrapCard = document.getElementById('phys-amrap-card');
-  const jogVal    = document.getElementById('phys-jog-timer');
-  const amrapVal  = document.getElementById('phys-amrap-timer');
-  const jogBar    = document.getElementById('phys-jog-bar');
-  const amrapBar  = document.getElementById('phys-amrap-bar');
-  const phaseLabel= document.getElementById('phys-phase-label');
-
+  const jogVal = document.getElementById('phys-jog-timer');
+  const amrapVal = document.getElementById('phys-amrap-timer');
+  const jogBar = document.getElementById('phys-jog-bar');
+  const amrapBar = document.getElementById('phys-amrap-bar');
+  const phaseLabel = document.getElementById('phys-phase-label');
   if (physElapsed <= JOG_DUR) {
-    // JOG phase
     const rem = JOG_DUR - physElapsed;
     const m = Math.floor(rem/60), s = rem%60;
     if (jogVal) jogVal.textContent = m + ':' + (s<10?'0':'') + s;
@@ -1907,7 +2187,6 @@ function _updatePhysDisplay() {
     if (amrapCard) amrapCard.classList.remove('active-phase');
     if (phaseLabel) phaseLabel.textContent = '🏃 Jogging...';
   } else {
-    // AMRAP phase
     const amrapElapsed = physElapsed - JOG_DUR;
     const rem = AMRAP_DUR - amrapElapsed;
     const m = Math.floor(rem/60), s = rem%60;
@@ -1924,18 +2203,13 @@ function _updatePhysDisplay() {
 function startPhysTimer() {
   if (physInterval) {
     clearInterval(physInterval); physInterval = null;
-    document.getElementById('phys-start-btn').textContent = 'Resume';
-    return;
+    document.getElementById('phys-start-btn').textContent = 'Resume'; return;
   }
   if (physElapsed === 0) {
     document.getElementById('phys-start-btn').textContent = '...';
-    runCountdown(() => {
-      document.getElementById('phys-start-btn').textContent = 'Pause';
-      _runPhysTimer();
-    }, 'Physical training');
+    runCountdown(() => { document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer(); }, 'Physical training');
   } else {
-    document.getElementById('phys-start-btn').textContent = 'Pause';
-    _runPhysTimer();
+    document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer();
   }
 }
 
@@ -1943,20 +2217,14 @@ function _runPhysTimer() {
   physInterval = setInterval(() => {
     physElapsed++;
     _updatePhysDisplay();
-    // Phase change: jog → AMRAP
     if (physElapsed === JOG_DUR) {
-      Audio.phase();
-      showToast('Jog done — start your AMRAP! 💪');
-      const pl = document.getElementById('phys-phase-label');
-      if (pl) pl.textContent = '💪 AMRAP — go!';
+      Audio.phase(); showToast('Jog done — start your AMRAP! 💪');
     }
-    // 5 sec alarm at end
     if (physElapsed === PHYS_TOTAL - 5) Audio.alarm();
     if (physElapsed >= PHYS_TOTAL) {
       clearInterval(physInterval); physInterval = null;
       document.getElementById('phys-start-btn').textContent = 'Start';
-      const pl = document.getElementById('phys-phase-label');
-      if (pl) pl.textContent = '✅ Complete!';
+      const pl = document.getElementById('phys-phase-label'); if (pl) pl.textContent = '✅ Complete!';
       showToast('Circuit complete! 💪');
     }
   }, 1000);
@@ -1972,7 +2240,6 @@ function resetPhysTimer() {
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
   loadState();
-  // Sync per-day shooting + offence sets into workout on load
   if (STATE.shD1 && STATE.shD1.size > 0) STATE.workout.d1.sh = [...STATE.shD1];
   if (STATE.shD2 && STATE.shD2.size > 0) STATE.workout.d2.sh = [...STATE.shD2];
   if (STATE.ofD1 && STATE.ofD1.size > 0) STATE.workout.d1.of = [...STATE.ofD1];
@@ -1989,13 +2256,12 @@ document.addEventListener('DOMContentLoaded', () => {
   Rewards.renderAll();
   Rewards.initShotTrackers();
   Profile.render();
+  // ★ Init AMRAP tracker ★
+  AmrapTracker.init();
 
-  // Service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
-
-  // iOS install prompt hint
   const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
   const isStandalone = window.navigator.standalone;
   if (isIOS && !isStandalone) {
@@ -2012,17 +2278,14 @@ const Profile = (() => {
 
   function render() {
     const p = STATE.profile;
-    // Avatar
     const initials = document.getElementById('profile-avatar-initials');
     const img = document.getElementById('profile-avatar-img');
     if (p.photo) { img.src = p.photo; img.style.display = 'block'; if(initials) initials.style.display='none'; }
     else { if(img) img.style.display='none'; if(initials){ initials.style.display=''; initials.textContent = p.name ? p.name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '?'; } }
-    // Name + number
     const dn = document.getElementById('profile-display-name');
     if (dn) dn.textContent = p.name || 'Your Name';
     const dnum = document.getElementById('profile-display-number');
     if (dnum) dnum.textContent = (p.number ? '#' + p.number : '#00') + (p.position ? ' · ' + p.position : ' · Select position');
-    // Meta chips
     const meta = document.getElementById('profile-meta');
     if (meta) {
       meta.innerHTML = '';
@@ -2032,10 +2295,7 @@ const Profile = (() => {
       const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
       if (badges > 0) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='🏅 '+badges+' badges'; meta.appendChild(c); }
     }
-    renderStats();
-    renderBadges();
-    renderShooting();
-    renderTopDrills();
+    renderStats(); renderBadges(); renderShooting(); renderTopDrills();
   }
 
   function renderStats() {
@@ -2057,8 +2317,7 @@ const Profile = (() => {
   }
 
   function renderBadges() {
-    const c = document.getElementById('profile-badges'); if (!c) return;
-    c.innerHTML = '';
+    const c = document.getElementById('profile-badges'); if (!c) return; c.innerHTML = '';
     [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].forEach(b => {
       const earned = Rewards.checkBadge(b);
       const card = document.createElement('div');
@@ -2071,13 +2330,14 @@ const Profile = (() => {
   function renderShooting() {
     const c = document.getElementById('profile-shooting'); if (!c) return;
     const types = [
-      { key:'layup', label:'Layups', goal:80 },
-      { key:'ft',    label:'Free throws', goal:60 },
-      { key:'tp',    label:'Three pointers', goal:40 },
+      { key:'layup', label:'Layups',        goal:80 },
+      { key:'mr',    label:'Mid-range',     goal:50 }, // ★ NEW ★
+      { key:'ft',    label:'Free throws',   goal:60 },
+      { key:'tp',    label:'Three pointers',goal:40 },
     ];
     c.innerHTML = '';
     types.forEach(t => {
-      const st = STATE.shots[t.key];
+      const st = STATE.shots[t.key]; if (!st) return;
       const allM = st.history.reduce((a,h)=>a+h.makes,0);
       const allT = st.history.reduce((a,h)=>a+h.total,0);
       const cumPct = allT > 0 ? Math.round((allM/allT)*100) : 0;
@@ -2094,7 +2354,6 @@ const Profile = (() => {
         </div>`;
       c.appendChild(row);
     });
-    if (c.children.length === 0) c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">No shot data yet — log your first test on the Rewards page</div>';
   }
 
   function renderTopDrills() {
@@ -2102,7 +2361,7 @@ const Profile = (() => {
     const all = Object.entries(STATE.sessionDays).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,8);
     if (all.length === 0) { c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">Start ticking off drills during your session and they\'ll appear here</div>'; return; }
     c.innerHTML = all.map(([drill, days]) => {
-      const pct = Math.min(Math.round((days/10)*100), 100);
+      const p = Math.min(Math.round((days/10)*100), 100);
       const earned = days >= 10;
       return `<div style="padding:6px 0;border-bottom:1px solid var(--border)">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px">
@@ -2110,7 +2369,7 @@ const Profile = (() => {
           <span style="font-size:13px;font-weight:600;color:${earned?'var(--gold)':'var(--text-secondary)'}">${days}/10 days</span>
         </div>
         <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px">
-          <div style="height:100%;border-radius:2px;width:${pct}%;background:${earned?'var(--gold)':'var(--navy-light)'}"></div>
+          <div style="height:100%;border-radius:2px;width:${p}%;background:${earned?'var(--gold)':'var(--navy-light)'}"></div>
         </div></div>`;
     }).join('');
   }
@@ -2122,20 +2381,15 @@ const Profile = (() => {
     const nameInput = document.getElementById('profile-input-name');
     const nameDisplay = document.getElementById('profile-display-name');
     if (editMode) {
-      form.style.display = 'block';
-      btn.textContent = 'Cancel';
-      nameDisplay.style.display = 'none';
-      nameInput.style.display = 'block';
-      // Populate form
+      form.style.display = 'block'; btn.textContent = 'Cancel';
+      nameDisplay.style.display = 'none'; nameInput.style.display = 'block';
       const p = STATE.profile;
       document.getElementById('pf-name').value = p.name || '';
       document.getElementById('pf-number').value = p.number || '';
       document.getElementById('pf-position').value = p.position || '';
       document.getElementById('pf-team').value = p.team || '';
       nameInput.value = p.name || '';
-    } else {
-      cancelEdit();
-    }
+    } else { cancelEdit(); }
   }
 
   function cancelEdit() {
@@ -2151,19 +2405,14 @@ const Profile = (() => {
     render();
   }
 
-  function previewName(val) {
-    const el = document.getElementById('profile-display-name');
-    // keep display hidden in edit mode, update on save
-  }
+  function previewName(val) {}
 
   function save() {
     STATE.profile.name     = document.getElementById('pf-name').value.trim();
     STATE.profile.number   = document.getElementById('pf-number').value.trim();
     STATE.profile.position = document.getElementById('pf-position').value;
     STATE.profile.team     = document.getElementById('pf-team').value.trim();
-    saveState();
-    cancelEdit();
-    showToast('Profile saved 👊');
+    saveState(); cancelEdit(); showToast('Profile saved 👊');
   }
 
   function pickPhoto() {
@@ -2172,20 +2421,14 @@ const Profile = (() => {
   }
 
   function handlePhoto(input) {
-    const file = input.files[0];
-    if (!file) return;
+    const file = input.files[0]; if (!file) return;
     const reader = new FileReader();
-    reader.onload = e => {
-      STATE.profile.photo = e.target.result;
-      saveState();
-      render();
-    };
+    reader.onload = e => { STATE.profile.photo = e.target.result; saveState(); render(); };
     reader.readAsDataURL(file);
   }
 
   return { render, toggleEdit, cancelEdit, save, pickPhoto, handlePhoto, previewName, renderStats, renderTopDrills };
 })();
-
 </script>
 </body>
 </html>
