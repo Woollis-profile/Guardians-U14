@@ -555,6 +555,9 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d1-core-name">Sit-ups</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-navy btn-block" onclick="Rewards.markPhysComplete(1)">✓ Mark physical Day 1 complete</button>
+        </div>
       </div>
       <div class="card">
         <div class="card-hdr card-hdr-d2"><span class="card-hdr-title">Day 2 — Upper + Lower + Core</span></div>
@@ -566,15 +569,34 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d2-core-name">Plank hold — 30 sec</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-gold btn-block" onclick="Rewards.markPhysComplete(2)">✓ Mark physical Day 2 complete</button>
+        </div>
       </div>
       <div class="menu-section">
         <div class="menu-lbl">Customise circuit</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Select one per category then tap Apply</div>
-        <div class="menu-lbl" style="font-size:14px">Upper body</div><div class="chips" id="upper-pool"></div>
-        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Lower body</div><div class="chips" id="lower-pool"></div>
-        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Core</div><div class="chips" id="core-pool"></div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Choose which day to edit, pick one exercise per category, then tap Apply</div>
+
+        <!-- Day selector tabs (reuse of-day-tabs style) -->
+        <div class="of-day-tabs" style="margin-bottom:12px">
+          <button class="of-tab of-tab-on" id="phys-d1-btn" onclick="Workout.setPhysTarget(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="phys-d1-preview" style="background:rgba(30,79,163,0.3);color:#7AAEF5;font-size:10px;max-width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">–</span>
+          </button>
+          <button class="of-tab" id="phys-d2-btn" onclick="Workout.setPhysTarget(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="phys-d2-preview" style="background:rgba(201,168,76,0.2);color:var(--gold);font-size:10px;max-width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">–</span>
+          </button>
+        </div>
+
+        <div class="menu-lbl" style="font-size:14px">Upper body</div>
+        <div class="chips" id="upper-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Lower body</div>
+        <div class="chips" id="lower-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Core</div>
+        <div class="chips" id="core-pool"></div>
         <div class="menu-actions">
-          <button class="btn btn-gold" onclick="Workout.applyPhys()">Apply to circuit</button>
+          <button class="btn btn-gold" onclick="Workout.applyPhys()">Apply to Day <span id="phys-apply-day">1</span></button>
           <span id="phys-msg" style="font-size:13px;color:var(--gold);align-self:center"></span>
         </div>
       </div>
@@ -586,8 +608,46 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <p class="page-sub">Track training days · earn badges · log shot accuracy each session</p>
       <div class="section-lbl">Season badges</div>
       <div class="badge-grid" id="season-badges"></div>
-      <div class="section-lbl">Workout badges</div>
+      <div class="section-lbl">Skills session badges</div>
       <div class="badge-grid" id="workout-badges"></div>
+      <div class="section-lbl">Physical training sessions</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Tick the checkbox when you complete a physical session. 10 sessions earns the Physical Training Master badge.</p>
+      <div class="card" id="phys-session-card" style="padding:14px 16px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em">Session tracker</div>
+          <div style="font-size:13px;color:var(--text-muted)" id="phys-total-label">0 / 10 sessions</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div style="background:rgba(30,79,163,0.1);border:1px solid rgba(30,79,163,0.3);border-radius:var(--radius-md);padding:10px 14px">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Day 1</div>
+            <div style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)" id="phys-d1-count-display">0</div>
+            <div style="font-size:12px;color:var(--text-muted)">sessions completed</div>
+            <button class="btn btn-navy" style="width:100%;margin-top:10px;font-size:13px;padding:8px" onclick="Rewards.markPhysComplete(1)">✓ Mark Day 1 complete</button>
+          </div>
+          <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:var(--radius-md);padding:10px 14px">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Day 2</div>
+            <div style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)" id="phys-d2-count-display">0</div>
+            <div style="font-size:12px;color:var(--text-muted)">sessions completed</div>
+            <button class="btn btn-gold" style="width:100%;margin-top:10px;font-size:13px;padding:8px" onclick="Rewards.markPhysComplete(2)">✓ Mark Day 2 complete</button>
+          </div>
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+            <span style="font-size:13px;color:var(--text-secondary)">Progress to Physical Training Master badge</span>
+            <span style="font-size:13px;font-weight:600;color:var(--gold)" id="phys-progress-pct">0%</span>
+          </div>
+          <div style="height:8px;background:rgba(255,255,255,0.08);border-radius:4px">
+            <div id="phys-progress-bar" style="height:100%;border-radius:4px;background:var(--gold);width:0%;transition:width .5s"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px" id="phys-pip-row">
+        </div>
+        <div id="phys-master-announce" style="display:none;background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px;text-align:center;margin-top:10px">
+          <div style="font-size:26px;margin-bottom:4px">🏋️</div>
+          <div style="font-size:15px;font-weight:600;color:var(--gold)">Physical Training Master badge earned!</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin-top:3px">10 sessions complete — outstanding commitment!</div>
+        </div>
+      </div>
       <div class="section-lbl">Shot accuracy tests</div>
       <div class="shot-card">
         <div class="shot-title">Layup test <span id="layup-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
@@ -645,7 +705,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <div class="dash-sec-title">Season badges</div><div id="dash-season"></div>
       <div class="dash-sec-title">Gold shooting badges</div><div id="dash-gold"></div>
       <div class="dash-sec-title">Cumulative shooting accuracy</div><div id="dash-accuracy"></div>
-      <div class="dash-sec-title">Workout sessions</div><div id="dash-workouts"></div>
+      <div class="dash-sec-title">Session tracker</div><div id="dash-workouts"></div>
       <div class="dash-sec-title">Ball handling — drill days</div><div id="dash-bh"></div>
       <div class="dash-sec-title">Shooting — drill days</div><div id="dash-sh"></div>
       <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
@@ -790,6 +850,7 @@ const DATA = {
     {icon:'🎯',name:'Ball handling master',sub:'All 12 drills — 10 days each',cat:'bh'},
     {icon:'🏀',name:'Shooting master',sub:'All shooting drills — 10 days each',cat:'sh'},
     {icon:'⚡',name:'Offence master',sub:'All 5 moves — 10 days each',cat:'of'},
+    {icon:'🏋️',name:'Physical training master',sub:'Complete 10 physical sessions',cat:'phys'},
   ],
   GOLD_BADGE_DEFS: [
     {icon:'🥇',name:'Gold layup',sub:'8/10 in layup test',key:'layup',goal:8,goalPct:80},
@@ -809,13 +870,14 @@ const STATE = {
     d2: { upper: "Pull-ups", lower: "Squat jumps", core: "Plank hold — 30 sec" }
   },
   sel: { bh: new Set(), sh: new Set(), of: new Set(), upper: new Set(), lower: new Set(), core: new Set() },
-  targets: { bh: 1, sh: 1, of: 1 },
+  targets: { bh: 1, sh: 1, of: 1, phys: 1 },
   shD1: new Set(["Right layup","Free throw (20 attempts)"]),
   shD2: new Set(["Left mid-range jump shot","Floater"]),
   ofD1: new Set(["Hesitation"]),
   ofD2: new Set(["In & Out"]),
   sessionDays: {},
   dayCompletes: { d1: 0, d2: 0 },
+  physCompletes: { d1: 0, d2: 0 },
   shots: {
     layup: { shots: [], goal: 8, goalPct: 80, badgeEarned: false, history: [] },
     ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
@@ -844,6 +906,7 @@ function saveState() {
       phys: STATE.phys,
       sessionDays: STATE.sessionDays,
       dayCompletes: STATE.dayCompletes,
+      physCompletes: STATE.physCompletes,
       shots: STATE.shots,
       shD1: [...STATE.shD1],
       shD2: [...STATE.shD2],
@@ -863,6 +926,7 @@ function loadState() {
     if (p.phys) STATE.phys = p.phys;
     if (p.sessionDays) STATE.sessionDays = { ...STATE.sessionDays, ...p.sessionDays };
     if (p.dayCompletes) STATE.dayCompletes = p.dayCompletes;
+    if (p.physCompletes) STATE.physCompletes = p.physCompletes;
     if (p.shots) STATE.shots = p.shots;
     if (p.shD1) STATE.shD1 = new Set(p.shD1);
     if (p.shD2) STATE.shD2 = new Set(p.shD2);
@@ -1134,16 +1198,42 @@ const Workout = (() => {
     const map = { upper: DATA.UPPER_EX, lower: DATA.LOWER_EX, core: DATA.CORE_EX };
     const cls = { upper: 'chip-sel-upper', lower: 'chip-sel-lower', core: 'chip-sel-core' };
     const c = document.getElementById(cat + '-pool'); if (!c) return; c.innerHTML = '';
+    const day = STATE.targets.phys || 1;
+    const currentVal = STATE.phys['d' + day][cat];
     map[cat].forEach(s => {
       const b = document.createElement('button');
-      b.className = 'chip' + (STATE.sel[cat].has(s) ? ' ' + cls[cat] : '');
-      b.textContent = s;
+      const isCurrent = (s === currentVal);
+      b.className = 'chip' + (isCurrent ? ' ' + cls[cat] : '');
+      b.textContent = s + (isCurrent ? ' ✓' : '');
       b.onclick = () => {
-        if (STATE.sel[cat].has(s)) { STATE.sel[cat].delete(s); b.className = 'chip'; }
-        else { STATE.sel[cat].add(s); b.className = 'chip ' + cls[cat]; }
+        // Deselect all in this category then select this one
+        STATE.phys['d' + day][cat] = s;
+        renderPhysChips(cat);
+        buildPhys();
+        saveState();
+        updatePhysPreviews();
+        const msg = document.getElementById('phys-msg');
+        if (msg) { msg.textContent = s + ' set for Day ' + day; setTimeout(() => msg.textContent = '', 2000); }
       };
       c.appendChild(b);
     });
+  }
+
+  function setPhysTarget(day) {
+    STATE.targets.phys = day;
+    document.getElementById('phys-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('phys-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    const applyDay = document.getElementById('phys-apply-day');
+    if (applyDay) applyDay.textContent = day;
+    ['upper','lower','core'].forEach(cat => renderPhysChips(cat));
+    updatePhysPreviews();
+  }
+
+  function updatePhysPreviews() {
+    const p1 = document.getElementById('phys-d1-preview');
+    const p2 = document.getElementById('phys-d2-preview');
+    if (p1) p1.textContent = STATE.phys.d1.upper + ' · ' + STATE.phys.d1.lower + ' · ' + STATE.phys.d1.core;
+    if (p2) p2.textContent = STATE.phys.d2.upper + ' · ' + STATE.phys.d2.lower + ' · ' + STATE.phys.d2.core;
   }
 
   function updateSelCounts() {
@@ -1214,12 +1304,11 @@ const Workout = (() => {
     renderBHChips(); renderSHChips(); renderOFChips(); updateSelCounts();
   }
   function applyPhys() {
-    const pu=[...STATE.sel.upper],lo=[...STATE.sel.lower],co=[...STATE.sel.core];
-    if (!pu.length && !lo.length && !co.length) { showToast('Select exercises first'); return; }
-    if (pu.length){STATE.phys.d1.upper=pu[0];STATE.phys.d2.upper=pu[1]||pu[0];}
-    if (lo.length){STATE.phys.d1.lower=lo[0];STATE.phys.d2.lower=lo[1]||lo[0];}
-    if (co.length){STATE.phys.d1.core=co[0];STATE.phys.d2.core=co[1]||co[0];}
-    buildPhys(); saveState(); showToast('Circuit updated');
+    // Chips now update STATE.phys directly on tap — this button just confirms and toasts
+    const day = STATE.targets.phys || 1;
+    buildPhys(); saveState();
+    updatePhysPreviews();
+    showToast('Day ' + day + ' circuit saved ✓');
   }
   function buildPhys() {
     ['d1','d2'].forEach(d => {
@@ -1234,7 +1323,7 @@ const Workout = (() => {
     saveState(); showToast('🏆 Day ' + day + ' complete! Badge earned.');
     Rewards.renderAll(); Dashboard.render();
   }
-  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setSHDay, setOFDay, loadBH, loadSH, loadSHToWorkout, clearSHDay, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts, updateSHCounts, updateOFCounts };
+  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setSHDay, setOFDay, setPhysTarget, loadBH, loadSH, loadSHToWorkout, clearSHDay, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts, updateSHCounts, updateOFCounts, updatePhysPreviews };
 })();
 </script>
 <script>
@@ -1248,6 +1337,7 @@ const Rewards = (() => {
     renderSeasonBadges();
     renderWorkoutBadges();
     renderRepTracker();
+    renderPhysTracker();
   }
 
   function renderSeasonBadges() {
@@ -1266,6 +1356,7 @@ const Rewards = (() => {
     if (b.cat === 'bh') return DATA.BH_SKILLS.every(s => STATE.sessionDays[s] >= 10);
     if (b.cat === 'sh') return [DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL].every(s => STATE.sessionDays[s] >= 10);
     if (b.cat === 'of') return DATA.OF_SKILLS.every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'phys') return (STATE.physCompletes.d1 + STATE.physCompletes.d2) >= 10;
     if (b.key) return STATE.shots[b.key]?.badgeEarned || false;
     return false;
   }
@@ -1405,11 +1496,54 @@ const Rewards = (() => {
     renderSeasonBadges();
   }
 
+  function markPhysComplete(day) {
+    if (day === 1) STATE.physCompletes.d1++; else STATE.physCompletes.d2++;
+    saveState();
+    renderPhysTracker();
+    renderSeasonBadges();
+    if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+    if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.render();
+    const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+    showToast('Physical session ' + total + ' logged! 💪');
+    if (total === 10) {
+      const ann = document.getElementById('phys-master-announce');
+      if (ann) ann.style.display = 'block';
+    }
+  }
+
+  function renderPhysTracker() {
+    const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+    const pct = Math.min(Math.round((total / 10) * 100), 100);
+    // Count labels
+    const d1el = document.getElementById('phys-d1-count-display'); if (d1el) d1el.textContent = STATE.physCompletes.d1;
+    const d2el = document.getElementById('phys-d2-count-display'); if (d2el) d2el.textContent = STATE.physCompletes.d2;
+    const totEl = document.getElementById('phys-total-label'); if (totEl) totEl.textContent = total + ' / 10 sessions';
+    // Progress bar
+    const bar = document.getElementById('phys-progress-bar'); if (bar) bar.style.width = pct + '%';
+    const pctEl = document.getElementById('phys-progress-pct'); if (pctEl) pctEl.textContent = pct + '%';
+    // Pip dots
+    const pipRow = document.getElementById('phys-pip-row');
+    if (pipRow) {
+      pipRow.innerHTML = Array.from({length: 10}, (_, i) => {
+        const done = i < total;
+        const gold = done && total >= 10;
+        return '<span style="width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:1px solid ' +
+          (gold ? 'var(--gold)' : done ? 'var(--navy-light)' : 'var(--border)') + ';background:' +
+          (gold ? 'rgba(201,168,76,0.25)' : done ? 'rgba(30,79,163,0.3)' : 'rgba(255,255,255,0.04)') + ';color:' +
+          (gold ? 'var(--gold)' : done ? '#7AAEF5' : 'var(--text-muted)') + '">' +
+          (done ? (gold ? '🏋️' : '✓') : (i + 1)) + '</span>';
+      }).join('');
+    }
+    // Badge announcement
+    const ann = document.getElementById('phys-master-announce');
+    if (ann) ann.style.display = total >= 10 ? 'block' : 'none';
+  }
+
   function initShotTrackers() {
     ['layup','ft','tp'].forEach(t => buildShotDots(t));
   }
 
-  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers, refreshDrillRow };
+  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, markPhysComplete, renderPhysTracker, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers, refreshDrillRow };
 })();
 </script>
 <script>
@@ -1429,7 +1563,8 @@ const Dashboard = (() => {
     // Hero metrics
     const hero = document.getElementById('dash-hero'); if (!hero) return;
     hero.innerHTML = `
-      <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Sessions</div></div>
+      <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Skills</div></div>
+      <div class="dash-metric"><div class="dash-val">${STATE.physCompletes.d1 + STATE.physCompletes.d2}</div><div class="dash-lbl">Physical</div></div>
       <div class="dash-metric"><div class="dash-val">${earnedBadges}</div><div class="dash-lbl">Badges</div></div>
       <div class="dash-metric"><div class="dash-val">${earnedTech}/${allDrills.length}</div><div class="dash-lbl">Drills 10+</div></div>
       <div class="dash-metric"><div class="dash-val">${totalDays}</div><div class="dash-lbl">Drill days</div></div>`;
@@ -1443,6 +1578,7 @@ const Dashboard = (() => {
         if (b.cat === 'bh') { done = DATA.BH_SKILLS.filter(s => STATE.sessionDays[s]>=10).length; total = DATA.BH_SKILLS.length; }
         else if (b.cat === 'sh') { const all=[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL]; done=all.filter(s=>STATE.sessionDays[s]>=10).length; total=all.length; }
         else if (b.cat === 'of') { done=DATA.OF_SKILLS.filter(s=>STATE.sessionDays[s]>=10).length; total=DATA.OF_SKILLS.length; }
+        else if (b.cat === 'phys') { done=Math.min(STATE.physCompletes.d1+STATE.physCompletes.d2,10); total=10; }
         const p = pct(done, total);
         ds.innerHTML += `<div class="dash-row ${earned?'dash-earned':''}">
           <span class="dash-icon">${b.icon}</span>
@@ -1516,13 +1652,23 @@ const Dashboard = (() => {
     // Workouts
     const dw = document.getElementById('dash-workouts'); if (dw) {
       const wT = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
-      dw.innerHTML = `<div class="dash-row ${wT>0?'dash-earned':''}">
-        <span class="dash-icon">✅</span>
-        <div class="dash-info"><div class="dash-name">Workout sessions</div><div class="dash-desc">Day 1: ${STATE.dayCompletes.d1} · Day 2: ${STATE.dayCompletes.d2}</div></div>
-        <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(wT,24),100)}%;background:#1E4FA3"></div></div>
-        <div class="dash-nums">${wT} / 24 session season · ${Math.min(pct(wT,24),100)}%</div></div>
-        <div class="dash-status ${wT>0?'s-earned':'s-locked'}">${wT} badges</div>
-      </div>`;
+      const pT = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+      const physMaster = pT >= 10;
+      dw.innerHTML = `
+        <div class="dash-row ${wT>0?'dash-earned':''}">
+          <span class="dash-icon">🏀</span>
+          <div class="dash-info"><div class="dash-name">Skills sessions</div><div class="dash-desc">Day 1: ${STATE.dayCompletes.d1} · Day 2: ${STATE.dayCompletes.d2}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(wT,24),100)}%;background:#1D9E75"></div></div>
+          <div class="dash-nums">${wT} / 24 · ${Math.min(pct(wT,24),100)}%</div></div>
+          <div class="dash-status ${wT>0?'s-earned':'s-locked'}">${wT} done</div>
+        </div>
+        <div class="dash-row ${physMaster?'dash-gold':pT>0?'dash-earned':''}">
+          <span class="dash-icon">🏋️</span>
+          <div class="dash-info"><div class="dash-name">Physical sessions${physMaster?' 🏆':''}</div><div class="dash-desc">Day 1: ${STATE.physCompletes.d1} · Day 2: ${STATE.physCompletes.d2}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(pT,10),100)}%;background:${physMaster?'var(--gold)':'var(--navy-light)'}"></div></div>
+          <div class="dash-nums">${pT} / 10 sessions · ${Math.min(pct(pT,10),100)}%</div></div>
+          <div class="dash-status ${physMaster?'s-gold':pT>0?'s-earned':'s-locked'}">${physMaster?'Master!':pT+'/10'}</div>
+        </div>`;
     }
 
     // Drill progress
@@ -1627,39 +1773,44 @@ const Audio = (() => {
 // ============================================================
 function runCountdown(onComplete, label) {
   const overlay = document.getElementById('countdown-overlay');
-  const numEl   = document.getElementById('countdown-num');
-  const txtEl   = document.getElementById('countdown-text');
-  if (!overlay || !numEl || !txtEl) { onComplete(); return; }
+  if (!overlay) { onComplete(); return; }
+
+  // Rebuild inner HTML fresh each time — avoids all cloneNode/querySelector issues
+  overlay.innerHTML = '<div id="cd-num" class="countdown-num"></div><div id="cd-txt" class="countdown-text"></div>';
   overlay.classList.add('show');
+
   let count = 3;
   function showCount() {
-    // Restart animation by re-cloning node
-    const fresh = numEl.cloneNode(false);
-    fresh.id = 'countdown-num';
-    numEl.parentNode.replaceChild(fresh, fresh.parentNode.querySelector('#countdown-num') || numEl);
-    const el = document.getElementById('countdown-num');
+    const numEl = document.getElementById('cd-num');
+    const txtEl = document.getElementById('cd-txt');
+    if (!numEl || !txtEl) { overlay.classList.remove('show'); onComplete(); return; }
+
+    // Re-trigger CSS animation by forcing reflow
+    numEl.style.animation = 'none';
+    void numEl.offsetWidth;
+    numEl.style.animation = '';
+
     if (count > 0) {
-      el.textContent = count;
+      numEl.textContent = count;
+      numEl.className = 'countdown-num';
       txtEl.textContent = label || '';
       txtEl.style.opacity = '0';
       Audio.countdownBeep(count);
+      count--;
+      setTimeout(showCount, 900);
     } else {
-      el.textContent = "Let's";
-      const sub = document.createElement('div');
-      sub.style.cssText = 'font-family:var(--font-display);font-size:60px;font-weight:800;color:var(--gold);animation:countPop .5s ease-out;text-shadow:0 0 30px rgba(201,168,76,0.6)';
-      sub.textContent = 'PLAY!';
-      el.insertAdjacentElement('afterend', sub);
+      // "Let's PLAY!"
+      numEl.textContent = "Let's PLAY!";
+      numEl.style.fontSize = '52px';
+      numEl.style.color = 'var(--gold)';
       txtEl.textContent = '';
       Audio.countdownBeep(0);
       setTimeout(() => {
         overlay.classList.remove('show');
-        sub.remove();
+        overlay.innerHTML = ''; // clean up
         onComplete();
-      }, 900);
-      return;
+      }, 950);
     }
-    count--;
-    setTimeout(showCount, 900);
   }
   showCount();
 }
@@ -1833,6 +1984,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Workout.renderOFChips();
   if (Workout.updateSHCounts) Workout.updateSHCounts();
   if (Workout.updateOFCounts) Workout.updateOFCounts();
+  if (Workout.updatePhysPreviews) Workout.updatePhysPreviews();
   ['upper','lower','core'].forEach(c => Workout.renderPhysChips(c));
   Rewards.renderAll();
   Rewards.initShotTrackers();
