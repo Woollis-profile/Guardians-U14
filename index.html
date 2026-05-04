@@ -285,6 +285,100 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .of-pill-remove:hover{opacity:1}
 .of-pill-num{font-size:10px;font-weight:700;background:rgba(123,97,255,0.4);
   border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+
+/* ---- PLAYER PROFILE ---- */
+.profile-hero{background:linear-gradient(160deg,var(--navy-mid) 0%,#0D2250 100%);
+  border:1px solid var(--border-gold);border-radius:var(--radius-lg);
+  padding:20px 18px 18px;margin-bottom:14px;text-align:center;position:relative}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.profile-avatar{width:90px;height:90px;border-radius:50%;border:3px solid var(--gold);
+  background:var(--navy-mid);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--gold);
+  overflow:hidden;cursor:pointer;position:relative}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.avatar-edit{position:absolute;bottom:0;right:0;width:26px;height:26px;
+  background:var(--gold);border-radius:50%;border:2px solid var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer}
+.profile-name{font-family:var(--font-display);font-size:26px;font-weight:800;
+  color:var(--white);letter-spacing:.04em;text-transform:uppercase;line-height:1;margin-bottom:2px}
+.profile-name-input{font-family:var(--font-display);font-size:26px;font-weight:800;
+  color:var(--white);letter-spacing:.04em;text-transform:uppercase;line-height:1;
+  background:transparent;border:none;border-bottom:2px solid var(--gold);
+  text-align:center;width:100%;outline:none;padding:2px 0;margin-bottom:2px}
+.profile-number{font-family:var(--font-display);font-size:16px;font-weight:700;
+  color:var(--gold);letter-spacing:.06em}
+.profile-meta{display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.profile-meta-chip{background:rgba(201,168,76,0.1);border:1px solid var(--border-gold);
+  border-radius:20px;padding:4px 12px;font-size:13px;color:var(--gold)}
+.profile-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.profile-stat{background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 6px;text-align:center}
+.profile-stat-val{font-family:var(--font-display);font-size:22px;font-weight:800;
+  color:var(--gold);line-height:1}
+.profile-stat-lbl{font-size:11px;color:var(--text-muted);margin-top:3px}
+.profile-form-row{margin-bottom:12px}
+.profile-form-label{font-size:12px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:block}
+.profile-input{width:100%;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 14px;font-size:16px;color:var(--white);
+  font-family:var(--font-body);outline:none;transition:border-color .15s}
+.profile-input:focus{border-color:var(--gold)}
+.profile-input option{background:var(--navy-mid);color:var(--white)}
+.profile-badges-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.profile-badge-mini{font-size:18px;filter:grayscale(1) opacity(.3)}
+.profile-badge-mini.earned{filter:none}
+.profile-edit-btn{position:absolute;top:12px;right:12px}
+.profile-save-row{display:flex;gap:8px;margin-top:16px}
+#avatar-upload{display:none}
+
+
+/* ---- COUNTDOWN OVERLAY ---- */
+#countdown-overlay {
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(10,22,40,0.93);
+  flex-direction:column;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+#countdown-overlay.show { display:flex; }
+.countdown-num {
+  font-family:var(--font-display);font-size:120px;font-weight:800;
+  color:var(--gold);line-height:1;
+  animation:countPop .6s ease-out;
+  text-shadow:0 0 40px rgba(201,168,76,0.6);
+}
+.countdown-text {
+  font-family:var(--font-display);font-size:36px;font-weight:700;
+  color:var(--white);letter-spacing:.1em;text-transform:uppercase;
+  margin-top:12px;opacity:0;animation:fadeIn .4s .2s forwards;
+}
+@keyframes countPop {
+  0%  { transform:scale(1.8); opacity:0; }
+  60% { transform:scale(0.9); opacity:1; }
+  100%{ transform:scale(1);   opacity:1; }
+}
+@keyframes fadeIn { to { opacity:1; } }
+/* Two-phase phys timer layout */
+.phys-timer-wrap {
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;
+}
+.phys-timer-card {
+  background:var(--navy-mid);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:12px 14px;
+}
+.phys-timer-card.active-phase { border-color:var(--gold);background:rgba(201,168,76,0.08); }
+.phys-timer-label {
+  font-size:11px;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:4px;
+}
+.phys-timer-card.active-phase .phys-timer-label { color:var(--gold); }
+.phys-timer-val {
+  font-family:var(--font-display);font-size:30px;font-weight:800;
+  color:var(--text-muted);line-height:1;
+}
+.phys-timer-card.active-phase .phys-timer-val { color:var(--gold); }
+.phys-bar-wrap { height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:6px; }
+.phys-bar-fill { height:100%;border-radius:2px;background:var(--gold);transition:width .5s;width:0%; }
+
 </style>
 </head>
 <body>
@@ -306,7 +400,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <div class="timer-row">
         <div>
           <div style="font-size:11px;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.06em">Timer</div>
-          <div id="sess-timer" class="timer-display">30:00</div>
+          <div id="sess-timer" class="timer-display">25:00</div>
         </div>
         <div class="timer-info">
           <div id="phase-label" class="timer-phase">Ready to start</div>
@@ -367,14 +461,32 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="menu-hint">Select up to 5 drills · tap Load to add them</div>
       </div>
       <div class="menu-section">
-        <div class="menu-lbl">Shooting — additional <span class="sel-count" id="sh-sel-count">0 selected</span></div>
-        <div class="day-row">
-          <button class="day-btn day-btn-on" id="sh-d1-btn" onclick="Workout.setTarget('sh',1)">Day 1</button>
-          <button class="day-btn" id="sh-d2-btn" onclick="Workout.setTarget('sh',2)">Day 2</button>
-          <button class="load-btn" onclick="Workout.loadSH()">Load ↑</button>
+        <div class="menu-lbl">Shooting — additional <span class="sel-count" id="sh-sel-count">Adding to Day 1</span></div>
+
+        <!-- Day selector tabs -->
+        <div class="of-day-tabs">
+          <button class="of-tab of-tab-on" id="sh-d1-btn" onclick="Workout.setSHDay(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="sh-d1-count" style="background:rgba(201,168,76,0.3);color:var(--gold)">0/5</span>
+          </button>
+          <button class="of-tab" id="sh-d2-btn" onclick="Workout.setSHDay(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="sh-d2-count" style="background:rgba(201,168,76,0.3);color:var(--gold)">0/5</span>
+          </button>
         </div>
+
+        <!-- Selected drills preview for active day -->
+        <div class="of-selected-preview" id="sh-preview" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05)">
+          <div class="of-preview-empty">Tap drills below to add them</div>
+        </div>
+
         <div class="chips" id="sh-pool"></div>
-        <div class="menu-hint">Close form shooting is always first — pick 1–2 more per day</div>
+        <div class="menu-hint">Close form shooting is always first · select up to 5 additional drills per day · tap Load to add to session</div>
+
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="load-btn" onclick="Workout.loadSHToWorkout()" style="border-color:var(--gold);background:rgba(201,168,76,0.1);color:var(--gold)">Load into session ↑</button>
+          <button class="btn btn-sm" onclick="Workout.clearSHDay()">Clear day</button>
+        </div>
       </div>
       <div class="menu-section">
         <div class="menu-lbl">Offence drills <span class="sel-count" id="of-sel-count">Adding to Day 1</span></div>
@@ -383,11 +495,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="of-day-tabs">
           <button class="of-tab of-tab-on" id="of-d1-btn" onclick="Workout.setOFDay(1)">
             <span class="of-tab-label">Day 1</span>
-            <span class="of-tab-count" id="of-d1-count">0/3</span>
+            <span class="of-tab-count" id="of-d1-count">0/5</span>
           </button>
           <button class="of-tab" id="of-d2-btn" onclick="Workout.setOFDay(2)">
             <span class="of-tab-label">Day 2</span>
-            <span class="of-tab-count" id="of-d2-count">0/3</span>
+            <span class="of-tab-count" id="of-d2-count">0/5</span>
           </button>
         </div>
 
@@ -398,7 +510,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 
         <!-- All 5 drill options -->
         <div class="chips" id="of-pool"></div>
-        <div class="menu-hint">Select up to 3 drills per day · switching days saves your selection · 5 min splits evenly across chosen drills</div>
+        <div class="menu-hint">Select up to 5 drills per day · switching days saves your selection · 5 min splits evenly across chosen drills</div>
 
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
           <button class="load-btn" onclick="Workout.loadOFToWorkout()">Load into session ↑</button>
@@ -415,18 +527,23 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
     <!-- PAGE 2: PHYSICAL -->
     <div id="pg-phys" class="pg">
       <div class="page-title">Physical training</div>
-      <p class="page-sub">5 min jog warm-up · 5 min AMRAP circuit · 3×10 reps per exercise</p>
-      <div class="timer-row">
-        <div>
-          <div style="font-size:11px;color:var(--text-muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.06em">Circuit Timer</div>
-          <div id="phys-timer" class="timer-display">5:00</div>
+      <p class="page-sub">5 min jog warm-up · 5 min AMRAP circuit · 3-2-1 countdown on start · 3×10 reps per exercise</p>
+      <div class="phys-timer-wrap">
+        <div class="phys-timer-card active-phase" id="phys-jog-card">
+          <div class="phys-timer-label">🏃 Jog warm-up</div>
+          <div class="phys-timer-val" id="phys-jog-timer">5:00</div>
+          <div class="phys-bar-wrap"><div class="phys-bar-fill" id="phys-jog-bar"></div></div>
         </div>
-        <div class="timer-info">
-          <div id="phys-label" class="timer-phase">Ready — jog first</div>
-          <div class="timer-bar-wrap"><div id="phys-bar" class="timer-bar" style="width:0%"></div></div>
+        <div class="phys-timer-card" id="phys-amrap-card">
+          <div class="phys-timer-label">💪 AMRAP circuit</div>
+          <div class="phys-timer-val" id="phys-amrap-timer">5:00</div>
+          <div class="phys-bar-wrap"><div class="phys-bar-fill" id="phys-amrap-bar"></div></div>
         </div>
-        <button id="phys-start-btn" class="btn btn-start btn-sm" onclick="startPhysTimer()">Start</button>
-        <button class="btn btn-sm" onclick="resetPhysTimer()">Reset</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+        <button id="phys-start-btn" class="btn btn-start" onclick="startPhysTimer()" style="flex:1">Start</button>
+        <button class="btn" onclick="resetPhysTimer()">Reset</button>
+        <span id="phys-phase-label" style="font-size:13px;color:var(--gold);font-weight:600"></span>
       </div>
       <div class="card">
         <div class="card-hdr card-hdr-d1"><span class="card-hdr-title">Day 1 — Upper + Lower + Core</span></div>
@@ -534,6 +651,84 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
     </div>
 
+
+
+<!-- COUNTDOWN OVERLAY -->
+<div id="countdown-overlay">
+  <div id="countdown-num" class="countdown-num">3</div>
+  <div id="countdown-text" class="countdown-text"></div>
+</div>
+
+    <!-- PAGE 5: PLAYER PROFILE -->
+    <div id="pg-profile" class="pg">
+      <div class="page-title">My profile</div>
+      <p class="page-sub">Your player card, progress and season stats — all saved on your device</p>
+
+      <!-- Hero card -->
+      <div class="profile-hero">
+        <button class="btn btn-sm profile-edit-btn" id="profile-edit-btn" onclick="Profile.toggleEdit()">Edit</button>
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profile-avatar" onclick="Profile.pickPhoto()">
+            <span id="profile-avatar-initials">?</span>
+            <img id="profile-avatar-img" src="" style="display:none">
+          </div>
+          <div class="avatar-edit" onclick="Profile.pickPhoto()">📷</div>
+          <input type="file" id="avatar-upload" accept="image/*" onchange="Profile.handlePhoto(this)">
+        </div>
+        <div id="profile-display-name" class="profile-name">Your Name</div>
+        <input id="profile-input-name" class="profile-name-input" placeholder="YOUR NAME" style="display:none" oninput="Profile.previewName(this.value)">
+        <div class="profile-number" id="profile-display-number">#00 · Select position</div>
+        <div class="profile-meta" id="profile-meta"></div>
+      </div>
+
+      <!-- Edit form (hidden by default) -->
+      <div id="profile-edit-form" class="card" style="display:none;padding:16px">
+        <div class="profile-form-row">
+          <label class="profile-form-label">Full name</label>
+          <input class="profile-input" id="pf-name" placeholder="e.g. Jordan Smith" maxlength="30">
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Jersey number</label>
+          <input class="profile-input" id="pf-number" placeholder="e.g. 23" type="number" min="0" max="99">
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Position</label>
+          <select class="profile-input" id="pf-position">
+            <option value="">Select position</option>
+            <option value="Point Guard">Point Guard</option>
+            <option value="Shooting Guard">Shooting Guard</option>
+            <option value="Small Forward">Small Forward</option>
+            <option value="Power Forward">Power Forward</option>
+            <option value="Centre">Centre</option>
+          </select>
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Team</label>
+          <input class="profile-input" id="pf-team" placeholder="e.g. Pioneers U14 Div 1" maxlength="40">
+        </div>
+        <div class="profile-save-row">
+          <button class="btn btn-gold" style="flex:1" onclick="Profile.save()">Save profile</button>
+          <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Season stats -->
+      <div class="dash-sec-title">Season stats</div>
+      <div class="profile-stats-grid" id="profile-stats"></div>
+
+      <!-- Badge showcase -->
+      <div class="dash-sec-title">Badge collection</div>
+      <div class="badge-grid" id="profile-badges"></div>
+
+      <!-- Personal bests -->
+      <div class="dash-sec-title">Shooting personal bests</div>
+      <div class="card" id="profile-shooting" style="padding:14px 16px"></div>
+
+      <!-- Training log summary -->
+      <div class="dash-sec-title">Top trained drills</div>
+      <div class="card" id="profile-top-drills" style="padding:14px 16px"></div>
+    </div>
+
   </div>
 
   <nav class="bottom-nav">
@@ -541,6 +736,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
     <button class="nav-btn" onclick="showTab('phys',this)"><span class="nav-icon">💪</span><span class="nav-label">Physical</span></button>
     <button class="nav-btn" onclick="showTab('rewards',this)"><span class="nav-icon">🏅</span><span class="nav-label">Rewards</span></button>
     <button class="nav-btn" onclick="showTab('dashboard',this)"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button>
+    <button class="nav-btn" onclick="showTab('profile',this)"><span class="nav-icon">👤</span><span class="nav-label">Profile</span></button>
   </nav>
 </div>
 
@@ -614,6 +810,8 @@ const STATE = {
   },
   sel: { bh: new Set(), sh: new Set(), of: new Set(), upper: new Set(), lower: new Set(), core: new Set() },
   targets: { bh: 1, sh: 1, of: 1 },
+  shD1: new Set(["Right layup","Free throw (20 attempts)"]),
+  shD2: new Set(["Left mid-range jump shot","Floater"]),
   ofD1: new Set(["Hesitation"]),
   ofD2: new Set(["In & Out"]),
   sessionDays: {},
@@ -623,7 +821,14 @@ const STATE = {
     ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
     tp:    { shots: [], goal: 4, goalPct: 40, badgeEarned: false, history: [] }
   },
-  activeTab: 'workout'
+  activeTab: 'workout',
+  profile: {
+    name: '',
+    number: '',
+    position: '',
+    team: '',
+    photo: ''
+  }
 };
 
 // Initialise sessionDays
@@ -640,8 +845,11 @@ function saveState() {
       sessionDays: STATE.sessionDays,
       dayCompletes: STATE.dayCompletes,
       shots: STATE.shots,
+      shD1: [...STATE.shD1],
+      shD2: [...STATE.shD2],
       ofD1: [...STATE.ofD1],
-      ofD2: [...STATE.ofD2]
+      ofD2: [...STATE.ofD2],
+      profile: STATE.profile
     };
     localStorage.setItem('pioneers_state', JSON.stringify(persist));
   } catch(e) {}
@@ -656,8 +864,11 @@ function loadState() {
     if (p.sessionDays) STATE.sessionDays = { ...STATE.sessionDays, ...p.sessionDays };
     if (p.dayCompletes) STATE.dayCompletes = p.dayCompletes;
     if (p.shots) STATE.shots = p.shots;
+    if (p.shD1) STATE.shD1 = new Set(p.shD1);
+    if (p.shD2) STATE.shD2 = new Set(p.shD2);
     if (p.ofD1) STATE.ofD1 = new Set(p.ofD1);
     if (p.ofD2) STATE.ofD2 = new Set(p.ofD2);
+    if (p.profile) STATE.profile = { ...STATE.profile, ...p.profile };
   } catch(e) {}
 }
 
@@ -681,8 +892,23 @@ const Workout = (() => {
     items.forEach((s, i) => {
       const d = document.createElement('div'); d.className = `drill-item ${drillClass}`;
       d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span>${showTime ? '<span class="drill-time">1 min</span>' : ''}<button class="drill-del" aria-label="Remove">×</button>`;
-      d.querySelector('.drill-check').onclick = () => d.classList.toggle('done');
-      d.querySelector('.drill-name').onclick  = () => d.classList.toggle('done');
+      const toggleDrill = () => {
+        const wasDone = d.classList.contains('done');
+        d.classList.toggle('done');
+        const nowDone = d.classList.contains('done');
+        if (nowDone && !wasDone) {
+          // Auto-increment session day count for this drill
+          if (STATE.sessionDays.hasOwnProperty(s)) {
+            STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
+            saveState();
+            // Live-refresh tracker and dashboard if open
+            if (typeof Rewards !== 'undefined') Rewards.refreshDrillRow(s);
+            if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+          }
+        }
+      };
+      d.querySelector('.drill-check').onclick = toggleDrill;
+      d.querySelector('.drill-name').onclick  = toggleDrill;
       d.querySelector('.drill-del').onclick   = (e) => { e.stopPropagation(); onDelete(i); };
       c.appendChild(d);
     });
@@ -696,8 +922,21 @@ const Workout = (() => {
     items.forEach((s, i) => {
       const d = document.createElement('div'); d.className = 'drill-item of-drill';
       d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span><span class="drill-time">${tLabel}</span><button class="drill-del" aria-label="Remove">×</button>`;
-      d.querySelector('.drill-check').onclick = () => d.classList.toggle('done');
-      d.querySelector('.drill-name').onclick  = () => d.classList.toggle('done');
+      const toggleOF = () => {
+        const wasDone = d.classList.contains('done');
+        d.classList.toggle('done');
+        const nowDone = d.classList.contains('done');
+        if (nowDone && !wasDone) {
+          if (STATE.sessionDays.hasOwnProperty(s)) {
+            STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
+            saveState();
+            if (typeof Rewards !== 'undefined') Rewards.refreshDrillRow(s);
+            if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+          }
+        }
+      };
+      d.querySelector('.drill-check').onclick = toggleOF;
+      d.querySelector('.drill-name').onclick  = toggleOF;
       d.querySelector('.drill-del').onclick   = (e) => {
         e.stopPropagation();
         const w = day === 1 ? STATE.workout.d1 : STATE.workout.d2;
@@ -743,17 +982,90 @@ const Workout = (() => {
 
   function renderSHChips() {
     const c = document.getElementById('sh-pool'); if (!c) return; c.innerHTML = '';
+    const activeDay = STATE.targets.sh || 1;
+    const activeSet = activeDay === 1 ? STATE.shD1 : STATE.shD2;
     DATA.SH_OPTIONAL.forEach(s => {
       const b = document.createElement('button');
-      b.className = 'chip' + (STATE.sel.sh.has(s) ? ' chip-sel-sh' : '');
+      const isSel = activeSet.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-sh' : '');
       b.textContent = s;
       b.onclick = () => {
-        if (STATE.sel.sh.has(s)) { STATE.sel.sh.delete(s); b.className = 'chip'; }
-        else { STATE.sel.sh.add(s); b.className = 'chip chip-sel-sh'; }
-        updateSelCounts();
+        if (activeSet.has(s)) {
+          activeSet.delete(s);
+          b.className = 'chip';
+        } else if (activeSet.size < 5) {
+          activeSet.add(s);
+          b.className = 'chip chip-sel-sh';
+        } else {
+          showToast('Max 5 shooting drills per day');
+          return;
+        }
+        updateSHPreview();
+        updateSHCounts();
+        if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
+        else STATE.workout.d2.sh = [...activeSet];
+        buildWorkout(); saveState();
       };
       c.appendChild(b);
     });
+    updateSHPreview();
+    updateSHCounts();
+  }
+
+  function updateSHPreview() {
+    const preview = document.getElementById('sh-preview'); if (!preview) return;
+    const activeDay = STATE.targets.sh || 1;
+    const activeSet = activeDay === 1 ? STATE.shD1 : STATE.shD2;
+    preview.innerHTML = '';
+    if (activeSet.size === 0) {
+      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
+      return;
+    }
+    [...activeSet].forEach((s, i) => {
+      const pill = document.createElement('div');
+      pill.className = 'of-pill';
+      pill.style.cssText = 'background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.4);color:var(--gold-light)';
+      pill.innerHTML = '<span class="of-pill-num" style="background:rgba(201,168,76,0.3)">' + (i+1) + '</span><span>' + s + '</span><button class="of-pill-remove" style="color:var(--gold)" aria-label="Remove">×</button>';
+      pill.querySelector('.of-pill-remove').onclick = () => {
+        activeSet.delete(s);
+        if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
+        else STATE.workout.d2.sh = [...activeSet];
+        renderSHChips(); buildWorkout(); saveState();
+      };
+      preview.appendChild(pill);
+    });
+  }
+
+  function updateSHCounts() {
+    const c1 = document.getElementById('sh-d1-count'); if (c1) c1.textContent = (STATE.shD1 ? STATE.shD1.size : 0) + '/5';
+    const c2 = document.getElementById('sh-d2-count'); if (c2) c2.textContent = (STATE.shD2 ? STATE.shD2.size : 0) + '/5';
+    const sc = document.getElementById('sh-sel-count');
+    if (sc) sc.textContent = 'Adding to Day ' + (STATE.targets.sh || 1);
+  }
+
+  function setSHDay(day) {
+    STATE.targets.sh = day;
+    document.getElementById('sh-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('sh-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    renderSHChips();
+  }
+
+  function loadSHToWorkout() {
+    const d1Empty = !STATE.shD1 || STATE.shD1.size === 0;
+    const d2Empty = !STATE.shD2 || STATE.shD2.size === 0;
+    if (d1Empty && d2Empty) { showToast('Select shooting drills first'); return; }
+    if (!d1Empty) STATE.workout.d1.sh = [...STATE.shD1];
+    if (!d2Empty) STATE.workout.d2.sh = [...STATE.shD2];
+    buildWorkout(); saveState();
+    showToast('Shooting drills loaded into session');
+  }
+
+  function clearSHDay() {
+    const day = STATE.targets.sh || 1;
+    if (day === 1) { STATE.shD1.clear(); STATE.workout.d1.sh = []; }
+    else { STATE.shD2.clear(); STATE.workout.d2.sh = []; }
+    renderSHChips(); buildWorkout(); saveState();
+    showToast('Day ' + day + ' shooting cleared');
   }
 
   function renderOFChips() {
@@ -769,11 +1081,11 @@ const Workout = (() => {
         if (activeSet.has(s)) {
           activeSet.delete(s);
           b.className = 'chip';
-        } else if (activeSet.size < 3) {
+        } else if (activeSet.size < 5) {
           activeSet.add(s);
           b.className = 'chip chip-sel-of';
         } else {
-          showToast('Max 3 offence drills per day');
+          showToast('Max 5 offence drills per day');
           return;
         }
         updateOFPreview();
@@ -812,8 +1124,8 @@ const Workout = (() => {
   }
 
   function updateOFCounts() {
-    const c1 = document.getElementById('of-d1-count'); if (c1) c1.textContent = (STATE.ofD1 ? STATE.ofD1.size : 0) + '/3';
-    const c2 = document.getElementById('of-d2-count'); if (c2) c2.textContent = (STATE.ofD2 ? STATE.ofD2.size : 0) + '/3';
+    const c1 = document.getElementById('of-d1-count'); if (c1) c1.textContent = (STATE.ofD1 ? STATE.ofD1.size : 0) + '/5';
+    const c2 = document.getElementById('of-d2-count'); if (c2) c2.textContent = (STATE.ofD2 ? STATE.ofD2.size : 0) + '/5';
     const sc = document.getElementById('of-sel-count');
     if (sc) sc.textContent = 'Adding to Day ' + (STATE.targets.of || 1);
   }
@@ -881,7 +1193,7 @@ const Workout = (() => {
   }
   function loadSH() {
     if (STATE.sel.sh.size === 0) { showToast('Select shooting drills first'); return; }
-    const arr = [...STATE.sel.sh].slice(0, 2);
+    const arr = [...STATE.sel.sh].slice(0, 5);
     if (STATE.targets.sh === 1) STATE.workout.d1.sh = arr; else STATE.workout.d2.sh = arr;
     buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.sh);
   }
@@ -893,7 +1205,7 @@ const Workout = (() => {
   }
   function loadAll() {
     if (STATE.sel.bh.size > 0) STATE.workout.d1.bh = [...STATE.sel.bh].slice(0,5);
-    if (STATE.sel.sh.size > 0) STATE.workout.d1.sh = [...STATE.sel.sh].slice(0,2);
+    if (STATE.sel.sh.size > 0) STATE.workout.d1.sh = [...STATE.sel.sh].slice(0,5);
     if (STATE.sel.of.size > 0) { STATE.workout.d1.of = [...STATE.sel.of]; STATE.workout.d2.of = [...STATE.sel.of]; }
     buildWorkout(); saveState(); showToast('All selections loaded into Day 1');
   }
@@ -922,7 +1234,7 @@ const Workout = (() => {
     saveState(); showToast('🏆 Day ' + day + ' complete! Badge earned.');
     Rewards.renderAll(); Dashboard.render();
   }
-  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setOFDay, loadBH, loadSH, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts };
+  return { buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips, renderPhysChips, setTarget, setSHDay, setOFDay, loadBH, loadSH, loadSHToWorkout, clearSHDay, loadOF, loadOFToWorkout, clearOFDay, loadAll, clearSelections, applyPhys, markDayComplete, updateSelCounts, updateSHCounts, updateOFCounts };
 })();
 </script>
 <script>
@@ -1071,11 +1383,33 @@ const Rewards = (() => {
     buildShotDots(type);
   }
 
+  function refreshDrillRow(s) {
+    // Update the count number and pip row for a single drill in the rep tracker
+    const k = s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+    const numEl = document.getElementById('rn-' + k);
+    const statusEl = document.getElementById('rs-' + k);
+    const pipsEl = document.getElementById('pips-' + k);
+    const days = STATE.sessionDays[s] || 0;
+    const earned = days >= 10;
+    if (numEl) numEl.textContent = days;
+    if (statusEl) {
+      statusEl.textContent = earned ? '🏆 Badge' : days + '/10 days';
+      statusEl.className = 'rep-status' + (earned ? ' rep-earned' : '');
+    }
+    if (pipsEl) {
+      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
+        '<span class="pip ' + (i < days ? (days >= 10 ? 'pip-gold' : 'pip-done') : '') + '"></span>'
+      ).join('');
+    }
+    // Also refresh season badges in case one just unlocked
+    renderSeasonBadges();
+  }
+
   function initShotTrackers() {
     ['layup','ft','tp'].forEach(t => buildShotDots(t));
   }
 
-  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers };
+  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, adjustDay, buildShotDots, logShot, saveSession, resetShots, initShotTrackers, refreshDrillRow };
 })();
 </script>
 <script>
@@ -1239,70 +1573,257 @@ function showTab(id, btn) {
   STATE.activeTab = id;
   if (id === 'dashboard') Dashboard.render();
   if (id === 'rewards') { Rewards.renderAll(); Rewards.initShotTrackers(); }
+  if (id === 'profile') Profile.render();
 }
 
 // ---- SESSION TIMER ----
+// ============================================================
+// AUDIO ENGINE — Web Audio API (no file downloads needed)
+// ============================================================
+const Audio = (() => {
+  let ctx = null;
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function beep(freq, dur, vol, type='sine', when=0) {
+    try {
+      const c = getCtx();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.connect(gain); gain.connect(c.destination);
+      osc.type = type; osc.frequency.value = freq;
+      const t = c.currentTime + when;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(vol, t + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      osc.start(t); osc.stop(t + dur + 0.05);
+    } catch(e) {}
+  }
+  function countdownBeep(n) {
+    // n=3,2,1 → descending tone; 0 = "Lets Play" big chord
+    const freqs = { 3:440, 2:349, 1:523, 0:659 };
+    beep(freqs[n] || 440, n===0 ? 0.6 : 0.25, 0.5, n===0 ? 'triangle' : 'sine');
+    if (n === 0) { setTimeout(()=>beep(784,0.4,0.4,'triangle'), 120); setTimeout(()=>beep(988,0.5,0.35,'triangle'), 240); }
+  }
+  function alarm() {
+    // 5-second alarm: 5 sharp beeps at high frequency
+    for (let i = 0; i < 5; i++) {
+      beep(880, 0.18, 0.6, 'square', i * 0.22);
+      beep(1100, 0.12, 0.4, 'square', i * 0.22 + 0.14);
+    }
+  }
+  function phase() {
+    // Short mid beep for phase change
+    beep(660, 0.15, 0.4, 'sine');
+    setTimeout(()=>beep(880,0.2,0.4,'sine'), 160);
+  }
+  return { countdownBeep, alarm, phase };
+})();
+
+// ============================================================
+// COUNTDOWN — shared 3-2-1 → "Let's Play!" animation
+// ============================================================
+function runCountdown(onComplete, label) {
+  const overlay = document.getElementById('countdown-overlay');
+  const numEl   = document.getElementById('countdown-num');
+  const txtEl   = document.getElementById('countdown-text');
+  if (!overlay || !numEl || !txtEl) { onComplete(); return; }
+  overlay.classList.add('show');
+  let count = 3;
+  function showCount() {
+    // Restart animation by re-cloning node
+    const fresh = numEl.cloneNode(false);
+    fresh.id = 'countdown-num';
+    numEl.parentNode.replaceChild(fresh, fresh.parentNode.querySelector('#countdown-num') || numEl);
+    const el = document.getElementById('countdown-num');
+    if (count > 0) {
+      el.textContent = count;
+      txtEl.textContent = label || '';
+      txtEl.style.opacity = '0';
+      Audio.countdownBeep(count);
+    } else {
+      el.textContent = "Let's";
+      const sub = document.createElement('div');
+      sub.style.cssText = 'font-family:var(--font-display);font-size:60px;font-weight:800;color:var(--gold);animation:countPop .5s ease-out;text-shadow:0 0 30px rgba(201,168,76,0.6)';
+      sub.textContent = 'PLAY!';
+      el.insertAdjacentElement('afterend', sub);
+      txtEl.textContent = '';
+      Audio.countdownBeep(0);
+      setTimeout(() => {
+        overlay.classList.remove('show');
+        sub.remove();
+        onComplete();
+      }, 900);
+      return;
+    }
+    count--;
+    setTimeout(showCount, 900);
+  }
+  showCount();
+}
+
+// ============================================================
+// SESSION TIMER — 25 minutes
+// ============================================================
+const SESS_TOTAL = 25 * 60; // 1500 seconds → displayed as 25:00
 let sessInterval = null, sessElapsed = 0;
+
 function startTimer() {
-  if (sessInterval) { clearInterval(sessInterval); sessInterval = null; document.getElementById('start-btn').textContent = 'Start'; return; }
-  document.getElementById('start-btn').textContent = 'Pause';
+  if (sessInterval) {
+    // Pause
+    clearInterval(sessInterval); sessInterval = null;
+    document.getElementById('start-btn').textContent = 'Resume';
+    return;
+  }
+  if (sessElapsed === 0) {
+    // Fresh start — run countdown first
+    document.getElementById('start-btn').textContent = '...';
+    runCountdown(() => {
+      document.getElementById('start-btn').textContent = 'Pause';
+      _runSessTimer();
+    }, 'Skills session');
+  } else {
+    // Resuming
+    document.getElementById('start-btn').textContent = 'Pause';
+    _runSessTimer();
+  }
+}
+
+function _runSessTimer() {
   sessInterval = setInterval(() => {
     sessElapsed++;
-    const rem = 1500 - sessElapsed;
+    const rem = SESS_TOTAL - sessElapsed;
     const m = Math.floor(rem / 60), s = rem % 60;
     const el = document.getElementById('sess-timer');
     if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    // Phase bar
     let acc = 0, cur = null;
     for (const p of DATA.PHASES) { acc += p.dur; if (sessElapsed <= acc) { cur = p; break; } }
     if (cur) {
       const pl = document.getElementById('phase-label'); if (pl) pl.textContent = cur.label;
       const pb = document.getElementById('phase-bar');
-      if (pb) { const ps = acc - cur.dur; pb.style.width = Math.round(((sessElapsed-ps)/cur.dur)*100) + '%'; pb.style.background = cur.color; }
+      if (pb) { const ps = acc - cur.dur; pb.style.width = Math.round(((sessElapsed - ps) / cur.dur) * 100) + '%'; pb.style.background = cur.color; }
+      // Beep on phase change (when sessElapsed exactly hits a boundary)
+      if (sessElapsed === acc && sessElapsed < SESS_TOTAL) Audio.phase();
     }
-    if (sessElapsed >= 1500) { clearInterval(sessInterval); sessInterval = null; document.getElementById('start-btn').textContent = 'Start'; showToast('Session complete! 🏆'); }
+    // 5-second alarm at the end
+    if (rem === 5) Audio.alarm();
+    if (sessElapsed >= SESS_TOTAL) {
+      clearInterval(sessInterval); sessInterval = null;
+      document.getElementById('start-btn').textContent = 'Start';
+      const pl = document.getElementById('phase-label'); if (pl) pl.textContent = 'Session complete!';
+      showToast('Session complete! 🏆');
+    }
   }, 1000);
 }
+
 function resetTimer() {
   clearInterval(sessInterval); sessInterval = null; sessElapsed = 0;
-  const el = document.getElementById('sess-timer'); if (el) el.textContent = '30:00';
+  const el = document.getElementById('sess-timer'); if (el) el.textContent = '25:00';
   const pl = document.getElementById('phase-label'); if (pl) pl.textContent = 'Ready to start';
-  const pb = document.getElementById('phase-bar'); if (pb) { pb.style.width = '0%'; }
+  const pb = document.getElementById('phase-bar'); if (pb) pb.style.width = '0%';
   const btn = document.getElementById('start-btn'); if (btn) btn.textContent = 'Start';
 }
 
-// ---- CIRCUIT TIMER ----
+// ============================================================
+// PHYSICAL TIMER — 5 min jog + 5 min AMRAP, two separate cards
+// ============================================================
 let physInterval = null, physElapsed = 0;
-const PHYS_PHASES = [{label:'Jog warm-up',dur:300,color:'#C9A84C'},{label:'AMRAP circuit',dur:300,color:'#1E4FA3'}];
+const JOG_DUR  = 5 * 60; // 300s
+const AMRAP_DUR = 5 * 60; // 300s
+const PHYS_TOTAL = JOG_DUR + AMRAP_DUR; // 600s
+
+function _updatePhysDisplay() {
+  const jogCard   = document.getElementById('phys-jog-card');
+  const amrapCard = document.getElementById('phys-amrap-card');
+  const jogVal    = document.getElementById('phys-jog-timer');
+  const amrapVal  = document.getElementById('phys-amrap-timer');
+  const jogBar    = document.getElementById('phys-jog-bar');
+  const amrapBar  = document.getElementById('phys-amrap-bar');
+  const phaseLabel= document.getElementById('phys-phase-label');
+
+  if (physElapsed <= JOG_DUR) {
+    // JOG phase
+    const rem = JOG_DUR - physElapsed;
+    const m = Math.floor(rem/60), s = rem%60;
+    if (jogVal) jogVal.textContent = m + ':' + (s<10?'0':'') + s;
+    if (amrapVal) amrapVal.textContent = '5:00';
+    if (jogBar) jogBar.style.width = Math.round((physElapsed/JOG_DUR)*100) + '%';
+    if (amrapBar) amrapBar.style.width = '0%';
+    if (jogCard) jogCard.classList.add('active-phase');
+    if (amrapCard) amrapCard.classList.remove('active-phase');
+    if (phaseLabel) phaseLabel.textContent = '🏃 Jogging...';
+  } else {
+    // AMRAP phase
+    const amrapElapsed = physElapsed - JOG_DUR;
+    const rem = AMRAP_DUR - amrapElapsed;
+    const m = Math.floor(rem/60), s = rem%60;
+    if (jogVal) jogVal.textContent = '0:00';
+    if (amrapVal) amrapVal.textContent = m + ':' + (s<10?'0':'') + s;
+    if (jogBar) jogBar.style.width = '100%';
+    if (amrapBar) amrapBar.style.width = Math.round((amrapElapsed/AMRAP_DUR)*100) + '%';
+    if (jogCard) jogCard.classList.remove('active-phase');
+    if (amrapCard) amrapCard.classList.add('active-phase');
+    if (phaseLabel) phaseLabel.textContent = '💪 AMRAP — go!';
+  }
+}
+
 function startPhysTimer() {
-  if (physInterval) { clearInterval(physInterval); physInterval = null; document.getElementById('phys-start-btn').textContent = 'Start'; return; }
-  document.getElementById('phys-start-btn').textContent = 'Pause';
+  if (physInterval) {
+    clearInterval(physInterval); physInterval = null;
+    document.getElementById('phys-start-btn').textContent = 'Resume';
+    return;
+  }
+  if (physElapsed === 0) {
+    document.getElementById('phys-start-btn').textContent = '...';
+    runCountdown(() => {
+      document.getElementById('phys-start-btn').textContent = 'Pause';
+      _runPhysTimer();
+    }, 'Physical training');
+  } else {
+    document.getElementById('phys-start-btn').textContent = 'Pause';
+    _runPhysTimer();
+  }
+}
+
+function _runPhysTimer() {
   physInterval = setInterval(() => {
     physElapsed++;
-    const total = 600, rem = total - physElapsed;
-    const m = Math.floor(rem / 60), s = rem % 60;
-    const el = document.getElementById('phys-timer'); if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    let acc = 0, cur = null;
-    for (const p of PHYS_PHASES) { acc += p.dur; if (physElapsed <= acc) { cur = p; break; } }
-    if (cur) {
-      const pl = document.getElementById('phys-label'); if (pl) pl.textContent = cur.label;
-      const pb = document.getElementById('phys-bar');
-      if (pb) { const ps = acc-cur.dur; pb.style.width = Math.round(((physElapsed-ps)/cur.dur)*100)+'%'; pb.style.background=cur.color; }
+    _updatePhysDisplay();
+    // Phase change: jog → AMRAP
+    if (physElapsed === JOG_DUR) {
+      Audio.phase();
+      showToast('Jog done — start your AMRAP! 💪');
+      const pl = document.getElementById('phys-phase-label');
+      if (pl) pl.textContent = '💪 AMRAP — go!';
     }
-    if (physElapsed >= total) { clearInterval(physInterval); physInterval = null; document.getElementById('phys-start-btn').textContent = 'Start'; showToast('Circuit complete! 💪'); }
+    // 5 sec alarm at end
+    if (physElapsed === PHYS_TOTAL - 5) Audio.alarm();
+    if (physElapsed >= PHYS_TOTAL) {
+      clearInterval(physInterval); physInterval = null;
+      document.getElementById('phys-start-btn').textContent = 'Start';
+      const pl = document.getElementById('phys-phase-label');
+      if (pl) pl.textContent = '✅ Complete!';
+      showToast('Circuit complete! 💪');
+    }
   }, 1000);
 }
+
 function resetPhysTimer() {
   clearInterval(physInterval); physInterval = null; physElapsed = 0;
-  const el = document.getElementById('phys-timer'); if (el) el.textContent = '5:00';
-  const pl = document.getElementById('phys-label'); if (pl) pl.textContent = 'Ready — jog first';
-  const pb = document.getElementById('phys-bar'); if (pb) pb.style.width = '0%';
-  const btn = document.getElementById('phys-start-btn'); if (btn) btn.textContent = 'Start';
+  document.getElementById('phys-start-btn').textContent = 'Start';
+  const pl = document.getElementById('phys-phase-label'); if (pl) pl.textContent = '';
+  _updatePhysDisplay();
 }
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
   loadState();
-  // Sync per-day offence sets into workout on load
+  // Sync per-day shooting + offence sets into workout on load
+  if (STATE.shD1 && STATE.shD1.size > 0) STATE.workout.d1.sh = [...STATE.shD1];
+  if (STATE.shD2 && STATE.shD2.size > 0) STATE.workout.d2.sh = [...STATE.shD2];
   if (STATE.ofD1 && STATE.ofD1.size > 0) STATE.workout.d1.of = [...STATE.ofD1];
   if (STATE.ofD2 && STATE.ofD2.size > 0) STATE.workout.d2.of = [...STATE.ofD2];
   Workout.buildWorkout();
@@ -1310,9 +1831,12 @@ document.addEventListener('DOMContentLoaded', () => {
   Workout.renderBHChips();
   Workout.renderSHChips();
   Workout.renderOFChips();
+  if (Workout.updateSHCounts) Workout.updateSHCounts();
+  if (Workout.updateOFCounts) Workout.updateOFCounts();
   ['upper','lower','core'].forEach(c => Workout.renderPhysChips(c));
   Rewards.renderAll();
   Rewards.initShotTrackers();
+  Profile.render();
 
   // Service worker
   if ('serviceWorker' in navigator) {
@@ -1327,6 +1851,189 @@ document.addEventListener('DOMContentLoaded', () => {
     if (banner) { banner.style.display = 'flex'; setTimeout(() => banner.style.opacity = '1', 100); }
   }
 });
+
+// ============================================================
+// PROFILE MODULE
+// ============================================================
+const Profile = (() => {
+  let editMode = false;
+
+  function render() {
+    const p = STATE.profile;
+    // Avatar
+    const initials = document.getElementById('profile-avatar-initials');
+    const img = document.getElementById('profile-avatar-img');
+    if (p.photo) { img.src = p.photo; img.style.display = 'block'; if(initials) initials.style.display='none'; }
+    else { if(img) img.style.display='none'; if(initials){ initials.style.display=''; initials.textContent = p.name ? p.name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '?'; } }
+    // Name + number
+    const dn = document.getElementById('profile-display-name');
+    if (dn) dn.textContent = p.name || 'Your Name';
+    const dnum = document.getElementById('profile-display-number');
+    if (dnum) dnum.textContent = (p.number ? '#' + p.number : '#00') + (p.position ? ' · ' + p.position : ' · Select position');
+    // Meta chips
+    const meta = document.getElementById('profile-meta');
+    if (meta) {
+      meta.innerHTML = '';
+      if (p.team) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='🏀 '+p.team; meta.appendChild(c); }
+      const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+      if (totalSessions > 0) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='⚡ '+totalSessions+' sessions'; meta.appendChild(c); }
+      const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+      if (badges > 0) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='🏅 '+badges+' badges'; meta.appendChild(c); }
+    }
+    renderStats();
+    renderBadges();
+    renderShooting();
+    renderTopDrills();
+  }
+
+  function renderStats() {
+    const c = document.getElementById('profile-stats'); if (!c) return;
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+    const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
+    const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+    const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
+    c.innerHTML = [
+      { val: totalSessions, lbl: 'Sessions' },
+      { val: badges, lbl: 'Badges' },
+      { val: drillsAt10 + '/' + allDrills.length, lbl: 'Drills 10+' },
+      { val: totalDrillDays, lbl: 'Drill days' },
+      { val: layupBest ? layupBest + '%' : '—', lbl: 'Best layup%' },
+      { val: STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) + '%' : '—', lbl: 'Best FT%' },
+    ].map(s => `<div class="profile-stat"><div class="profile-stat-val">${s.val}</div><div class="profile-stat-lbl">${s.lbl}</div></div>`).join('');
+  }
+
+  function renderBadges() {
+    const c = document.getElementById('profile-badges'); if (!c) return;
+    c.innerHTML = '';
+    [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].forEach(b => {
+      const earned = Rewards.checkBadge(b);
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned && b.key ? ' gold' : earned ? ' earned' : '');
+      card.innerHTML = '<span class="badge-emoji">' + b.icon + '</span><div class="badge-name">' + b.name + '</div><div class="badge-sub">' + b.sub + '</div>';
+      c.appendChild(card);
+    });
+  }
+
+  function renderShooting() {
+    const c = document.getElementById('profile-shooting'); if (!c) return;
+    const types = [
+      { key:'layup', label:'Layups', goal:80 },
+      { key:'ft',    label:'Free throws', goal:60 },
+      { key:'tp',    label:'Three pointers', goal:40 },
+    ];
+    c.innerHTML = '';
+    types.forEach(t => {
+      const st = STATE.shots[t.key];
+      const allM = st.history.reduce((a,h)=>a+h.makes,0);
+      const allT = st.history.reduce((a,h)=>a+h.total,0);
+      const cumPct = allT > 0 ? Math.round((allM/allT)*100) : 0;
+      const best = st.history.length > 0 ? Math.max(...st.history.map(h=>h.pct)) : 0;
+      const goldEarned = st.badgeEarned;
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)';
+      row.innerHTML = `<span style="font-size:18px">${goldEarned?'🥇':'🎯'}</span>
+        <div style="flex:1"><div style="font-size:15px;font-weight:600;color:var(--white)">${t.label}</div>
+        <div style="font-size:12px;color:var(--text-muted)">${allT > 0 ? allM+'/'+allT+' total attempts' : 'No attempts yet'}</div></div>
+        <div style="text-align:right">
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:800;color:${cumPct>=t.goal?'var(--gold)':'var(--text-secondary)'}">${cumPct}%</div>
+          <div style="font-size:11px;color:var(--text-muted)">Best: ${best>0?best+'%':'—'}</div>
+        </div>`;
+      c.appendChild(row);
+    });
+    if (c.children.length === 0) c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">No shot data yet — log your first test on the Rewards page</div>';
+  }
+
+  function renderTopDrills() {
+    const c = document.getElementById('profile-top-drills'); if (!c) return;
+    const all = Object.entries(STATE.sessionDays).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    if (all.length === 0) { c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">Start ticking off drills during your session and they\'ll appear here</div>'; return; }
+    c.innerHTML = all.map(([drill, days]) => {
+      const pct = Math.min(Math.round((days/10)*100), 100);
+      const earned = days >= 10;
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:14px;color:var(--text-primary)">${earned?'🏆 ':''}${drill}</span>
+          <span style="font-size:13px;font-weight:600;color:${earned?'var(--gold)':'var(--text-secondary)'}">${days}/10 days</span>
+        </div>
+        <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px">
+          <div style="height:100%;border-radius:2px;width:${pct}%;background:${earned?'var(--gold)':'var(--navy-light)'}"></div>
+        </div></div>`;
+    }).join('');
+  }
+
+  function toggleEdit() {
+    editMode = !editMode;
+    const form = document.getElementById('profile-edit-form');
+    const btn = document.getElementById('profile-edit-btn');
+    const nameInput = document.getElementById('profile-input-name');
+    const nameDisplay = document.getElementById('profile-display-name');
+    if (editMode) {
+      form.style.display = 'block';
+      btn.textContent = 'Cancel';
+      nameDisplay.style.display = 'none';
+      nameInput.style.display = 'block';
+      // Populate form
+      const p = STATE.profile;
+      document.getElementById('pf-name').value = p.name || '';
+      document.getElementById('pf-number').value = p.number || '';
+      document.getElementById('pf-position').value = p.position || '';
+      document.getElementById('pf-team').value = p.team || '';
+      nameInput.value = p.name || '';
+    } else {
+      cancelEdit();
+    }
+  }
+
+  function cancelEdit() {
+    editMode = false;
+    const form = document.getElementById('profile-edit-form');
+    const btn = document.getElementById('profile-edit-btn');
+    const nameInput = document.getElementById('profile-input-name');
+    const nameDisplay = document.getElementById('profile-display-name');
+    if (form) form.style.display = 'none';
+    if (btn) btn.textContent = 'Edit';
+    if (nameInput) nameInput.style.display = 'none';
+    if (nameDisplay) nameDisplay.style.display = 'block';
+    render();
+  }
+
+  function previewName(val) {
+    const el = document.getElementById('profile-display-name');
+    // keep display hidden in edit mode, update on save
+  }
+
+  function save() {
+    STATE.profile.name     = document.getElementById('pf-name').value.trim();
+    STATE.profile.number   = document.getElementById('pf-number').value.trim();
+    STATE.profile.position = document.getElementById('pf-position').value;
+    STATE.profile.team     = document.getElementById('pf-team').value.trim();
+    saveState();
+    cancelEdit();
+    showToast('Profile saved 👊');
+  }
+
+  function pickPhoto() {
+    const input = document.getElementById('avatar-upload');
+    if (input) input.click();
+  }
+
+  function handlePhoto(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      STATE.profile.photo = e.target.result;
+      saveState();
+      render();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  return { render, toggleEdit, cancelEdit, save, pickPhoto, handlePhoto, previewName, renderStats, renderTopDrills };
+})();
+
 </script>
 </body>
 </html>
