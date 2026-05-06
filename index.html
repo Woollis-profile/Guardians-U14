@@ -457,6 +457,131 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 }
 .amrap-hist-entry:last-child { border-bottom:none; }
 .amrap-hist-date { color:var(--text-muted); }
+
+/* ============================================================
+   LEADERBOARD & POINTS — NEW STYLES
+   ============================================================ */
+.pts-hero {
+  background: linear-gradient(135deg, #0D1F3C 0%, #162B50 50%, #0D1F3C 100%);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 20px 18px 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.pts-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pts-hero-label {
+  font-size: 12px; font-weight: 700; color: var(--gold);
+  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 6px;
+}
+.pts-hero-total {
+  font-family: var(--font-display); font-size: 64px; font-weight: 800;
+  color: var(--gold); line-height: 1;
+  text-shadow: 0 0 30px rgba(201,168,76,0.4);
+}
+.pts-hero-sub {
+  font-size: 13px; color: var(--text-muted); margin-top: 4px;
+}
+.pts-rank-badge {
+  display: inline-block; background: rgba(201,168,76,0.15);
+  border: 1px solid var(--border-gold); border-radius: 20px;
+  padding: 4px 16px; font-size: 13px; font-weight: 700; color: var(--gold);
+  margin-top: 10px;
+}
+.pts-accordion {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 10px; overflow: hidden;
+}
+.pts-acc-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; cursor: pointer;
+  -webkit-user-select: none; user-select: none;
+  transition: background .15s;
+}
+.pts-acc-head:active { background: rgba(255,255,255,0.04); }
+.pts-acc-icon { font-size: 20px; flex-shrink: 0; }
+.pts-acc-info { flex: 1; }
+.pts-acc-name { font-size: 15px; font-weight: 600; color: var(--white); }
+.pts-acc-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.pts-acc-pts {
+  font-family: var(--font-display); font-size: 22px; font-weight: 800;
+  color: var(--gold); min-width: 52px; text-align: right; line-height: 1;
+}
+.pts-acc-arrow {
+  font-size: 12px; color: var(--text-muted);
+  transition: transform .2s; margin-left: 4px;
+}
+.pts-accordion.open .pts-acc-arrow { transform: rotate(180deg); }
+.pts-acc-body {
+  display: none; border-top: 1px solid var(--border);
+  padding: 10px 16px 12px;
+}
+.pts-accordion.open .pts-acc-body { display: block; }
+.pts-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+}
+.pts-row:last-child { border-bottom: none; }
+.pts-row-label { flex: 1; color: var(--text-secondary); }
+.pts-row-val { font-weight: 700; color: var(--gold); white-space: nowrap; }
+.pts-row-val.muted { color: var(--text-muted); }
+.pts-milestone-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: var(--radius-sm);
+  margin-bottom: 4px; font-size: 12px;
+}
+.pts-milestone-earned { background: rgba(201,168,76,0.1); color: var(--gold); }
+.pts-milestone-locked { background: rgba(255,255,255,0.03); color: var(--text-muted); }
+.pts-milestone-icon { font-size: 14px; }
+.pts-progress-bar {
+  height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 8px;
+}
+.pts-progress-fill { height: 100%; border-radius: 2px; background: var(--gold); transition: width .4s; }
+.pts-progress-label {
+  font-size: 11px; color: var(--text-muted); margin-top: 4px;
+  display: flex; justify-content: space-between;
+}
+.profile-stat.pts-stat {
+  background: rgba(201,168,76,0.12); border-color: var(--border-gold);
+  grid-column: span 3;
+}
+.profile-stat.pts-stat .profile-stat-val {
+  font-size: 32px; color: var(--gold);
+}
+.rules-section {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 12px;
+}
+.rules-title {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--gold); text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.rules-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+}
+.rules-row:last-child { border-bottom: none; }
+.rules-pts {
+  font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  color: var(--gold); min-width: 52px; text-align: right; flex-shrink: 0; line-height: 1.2;
+}
+.rules-desc { color: var(--text-secondary); line-height: 1.4; flex: 1; }
+.rules-desc small { display: block; color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+.rules-back-btn {
+  display: flex; align-items: center; gap: 6px; padding: 8px 0; margin-bottom: 14px;
+  background: none; border: none; color: var(--gold); cursor: pointer;
+  font-size: 14px; font-weight: 600; font-family: var(--font-body);
+}
 </style>
 </head>
 <body>
@@ -904,6 +1029,18 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
     <div id="pg-dashboard" class="pg">
       <div class="page-title">Dashboard</div>
       <p class="page-sub">Full season progress — badges, accuracy, drill days</p>
+      <!-- LEADERBOARD SECTION -->
+      <div class="pts-hero">
+        <div class="pts-hero-label">Team Leaderboard</div>
+        <div class="pts-hero-total" id="lb-total-pts">0</div>
+        <div class="pts-hero-sub">Total points this season</div>
+        <div class="pts-rank-badge" id="lb-rank-badge">🌱 New Pioneer</div>
+        <div style="text-align:right;margin-top:8px">
+          <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:6px 14px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">View Points Rules →</button>
+        </div>
+      </div>
+      <div id="lb-accordions"></div>
+
       <div class="dash-hero" id="dash-hero"></div>
       <div class="dash-sec-title">Season badges</div><div id="dash-season"></div>
       <div class="dash-sec-title">Gold shooting badges</div><div id="dash-gold"></div>
@@ -912,6 +1049,67 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <div class="dash-sec-title">Ball handling — drill days</div><div id="dash-bh"></div>
       <div class="dash-sec-title">Shooting — drill days</div><div id="dash-sh"></div>
       <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
+    </div>
+
+    <!-- PAGE: LEADERBOARD RULES -->
+    <div id="pg-leaderboard" class="pg">
+      <button class="rules-back-btn" onclick="showTab('dashboard', document.querySelector('.nav-btn:nth-child(4)'))">← Back to Dashboard</button>
+      <div class="page-title">Points Rules</div>
+      <p class="page-sub">How to earn points — listed from highest to lowest value</p>
+
+      <!-- Master Badges -->
+      <div class="rules-section">
+        <div class="rules-title">🏅 Season Master Badges</div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Ball Handling Master<small>All 12 drills completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Shooting Master<small>All shooting drills completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Offence Master<small>All offence moves completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Physical Training Master<small>10 physical training sessions completed</small></div></div>
+      </div>
+
+      <!-- Skills milestones -->
+      <div class="rules-section">
+        <div class="rules-title">🏀 Skills Session Milestones</div>
+        <div class="rules-row"><div class="rules-pts">+25</div><div class="rules-desc">24 sessions milestone<small>Complete all 24 planned skills sessions</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+20</div><div class="rules-desc">16 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+15</div><div class="rules-desc">10 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">6 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each skills session<small>Mark Day 1 or Day 2 complete</small></div></div>
+      </div>
+
+      <!-- Training drills -->
+      <div class="rules-section">
+        <div class="rules-title">📈 Training Drill Days</div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Each drill at 10/10 days<small>26 drills available, max 260pts</small></div></div>
+      </div>
+
+      <!-- Physical training -->
+      <div class="rules-section">
+        <div class="rules-title">💪 Physical Training</div>
+        <div class="rules-row"><div class="rules-pts">+7</div><div class="rules-desc">Each physical session<small>Mark Day 1 or Day 2 complete</small></div></div>
+      </div>
+
+      <!-- Shot accuracy -->
+      <div class="rules-section">
+        <div class="rules-title">🎯 Shot Accuracy Tests</div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Gold badge bonus (per type)<small>When you reach 5 qualifying attempts for Layup, Mid-range, Free Throw or Three Pointer</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each qualifying test session<small>Score 8/10 layups, 5/10 mid-range, 6/10 FT or 4/10 threes</small></div></div>
+      </div>
+
+      <!-- Summary -->
+      <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Maximum season points</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:var(--text-secondary)">
+          <span>Skills sessions + milestones</span><span style="color:var(--gold);font-weight:700;text-align:right">190 pts</span>
+          <span>Physical sessions (10 × 7)</span><span style="color:var(--gold);font-weight:700;text-align:right">70 pts</span>
+          <span>Training drills (26 × 10)</span><span style="color:var(--gold);font-weight:700;text-align:right">260 pts</span>
+          <span>Master badges (4 × 50)</span><span style="color:var(--gold);font-weight:700;text-align:right">200 pts</span>
+          <span>Shot accuracy (unlimited)</span><span style="color:var(--gold);font-weight:700;text-align:right">Unlimited</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-gold);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;font-weight:600;color:var(--white)">Guaranteed baseline</span>
+          <span style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)">720+ pts</span>
+        </div>
+      </div>
     </div>
 
     <!-- COUNTDOWN OVERLAY -->
@@ -968,7 +1166,10 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
         </div>
       </div>
-      <div class="dash-sec-title">Season stats</div>
+      <div class="dash-sec-title" style="display:flex;align-items:center;justify-content:space-between">
+        Season stats
+        <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:4px 12px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">Points rules →</button>
+      </div>
       <div class="profile-stats-grid" id="profile-stats"></div>
       <div class="dash-sec-title">Badge collection</div>
       <div class="badge-grid" id="profile-badges"></div>
@@ -1079,6 +1280,10 @@ const STATE = {
     d1: { sets: 0, lastEx: '', reps: 0, history: [] },
     d2: { sets: 0, lastEx: '', reps: 0, history: [] }
   },
+  points: {
+    skillPts: 0, physPts: 0, drillPts: 0, badgePts: 0, shotPts: {},
+    _drillFlags: {}, _masterFlags: {}
+  },
   activeTab: 'workout',
   profile: {
     name: '',
@@ -1104,6 +1309,7 @@ function saveState() {
       physCompletes: STATE.physCompletes,
       shots: STATE.shots,
       amrap: STATE.amrap,
+      points: STATE.points,
       shD1: [...STATE.shD1],
       shD2: [...STATE.shD2],
       ofD1: [...STATE.ofD1],
@@ -1129,6 +1335,13 @@ function loadState() {
       if (!STATE.shots.mr) STATE.shots.mr = { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] };
     }
     if (p.amrap) STATE.amrap = p.amrap;
+    if (p.points) {
+      STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      Object.assign(STATE.points, p.points);
+      if (!STATE.points.shotPts) STATE.points.shotPts = {};
+      if (!STATE.points._drillFlags) STATE.points._drillFlags = {};
+      if (!STATE.points._masterFlags) STATE.points._masterFlags = {};
+    }
     if (p.shD1) STATE.shD1 = new Set(p.shD1);
     if (p.shD2) STATE.shD2 = new Set(p.shD2);
     if (p.ofD1) STATE.ofD1 = new Set(p.ofD1);
@@ -1644,8 +1857,19 @@ const Workout = (() => {
   }
   function markDayComplete(day) {
     if (day === 1) STATE.dayCompletes.d1++; else STATE.dayCompletes.d2++;
-    saveState(); showToast('🏆 Day ' + day + ' complete! Badge earned.');
+    const total = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    // ★ POINTS: 5pts per session + milestone bonuses
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    STATE.points.skillPts = (STATE.points.skillPts || 0) + 5;
+    let bonusMsg = '';
+    if (total === 6)  { STATE.points.skillPts += 10; bonusMsg = ' +10pts milestone!'; }
+    if (total === 10) { STATE.points.skillPts += 15; bonusMsg = ' +15pts milestone!'; }
+    if (total === 16) { STATE.points.skillPts += 20; bonusMsg = ' +20pts milestone!'; }
+    if (total === 24) { STATE.points.skillPts += 25; bonusMsg = ' +25pts milestone!'; }
+    saveState();
+    showToast('🏆 Day ' + day + ' complete! +5pts' + bonusMsg);
     Rewards.renderAll(); Dashboard.render();
+    if (typeof Profile !== 'undefined') Profile.renderStats();
   }
   return {
     buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips,
@@ -1679,6 +1903,24 @@ const Rewards = (() => {
       card.className = 'badge-card' + (earned && b.key ? ' gold' : earned ? ' earned' : '');
       card.innerHTML = `<span class="badge-emoji">${b.icon}</span><div class="badge-name">${b.name}</div><div class="badge-sub">${b.sub}</div>`;
       c.appendChild(card);
+    });
+    // ★ POINTS: award 50pts for master badges (one-time each)
+    awardMasterBadgePts();
+  }
+
+  function awardMasterBadgePts() {
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    if (!STATE.points._masterFlags) STATE.points._masterFlags = {};
+    DATA.SEASON_BADGE_DEFS.forEach(b => {
+      const earned = checkBadge(b);
+      const key = 'master_' + b.cat;
+      if (earned && !STATE.points._masterFlags[key]) {
+        STATE.points._masterFlags[key] = true;
+        STATE.points.badgePts = (STATE.points.badgePts || 0) + 50;
+        saveState();
+        showToast('🏅 ' + b.name + ' badge! +50pts');
+        if (typeof Profile !== 'undefined') Profile.renderStats();
+      }
     });
   }
 
@@ -1735,20 +1977,31 @@ const Rewards = (() => {
   }
 
   function adjustDay(s, delta) {
-    STATE.sessionDays[s] = Math.max(0, Math.min(99, (STATE.sessionDays[s] || 0) + delta));
+    const prev = STATE.sessionDays[s] || 0;
+    STATE.sessionDays[s] = Math.max(0, Math.min(99, prev + delta));
+    const cur = STATE.sessionDays[s];
+    
+    // ★ POINTS: 10pts when drill first hits 10/10 (one-time)
+    if (delta > 0 && prev < 10 && cur >= 10) {
+      if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      STATE.points.drillPts = (STATE.points.drillPts || 0) + 10;
+      saveState();
+      showToast('🏆 ' + s + ' — 10/10! +10pts');
+      if (typeof Profile !== 'undefined') Profile.renderStats();
+    }
+    
     const num = document.getElementById('rn-' + keyOf(s));
     const status = document.getElementById('rs-' + keyOf(s));
     const pipsEl = document.getElementById('pips-' + keyOf(s));
-    if (num) num.textContent = STATE.sessionDays[s];
+    if (num) num.textContent = cur;
     if (status) {
-      const earned = STATE.sessionDays[s] >= 10;
-      status.textContent = earned ? '🏆 Badge' : STATE.sessionDays[s] + '/10 days';
+      const earned = cur >= 10;
+      status.textContent = earned ? '🏆 Badge' : cur + '/10 days';
       status.className = 'rep-status' + (earned ? ' rep-earned' : '');
     }
     if (pipsEl) {
-      const days = STATE.sessionDays[s];
       pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
-        `<span class="pip ${i<days?(days>=10?'pip-gold':'pip-done'):''}"></span>`
+        `<span class="pip ${i<cur?(cur>=10?'pip-gold':'pip-done'):''}"></span>`
       ).join('');
     }
     saveState(); renderSeasonBadges(); Dashboard.render();
@@ -1791,9 +2044,31 @@ const Rewards = (() => {
     const p = Math.round((makes / total) * 100);
     const isGoldDay = makes >= st.goal && total >= 10;
     st.history.push({ makes, total, pct: p, gold: isGoldDay, label: 'Session ' + (st.history.length + 1) });
+
+    // ★ POINTS: 5pts per qualifying attempt + 10pt bonus at 5th
+    let ptsMsg = '';
+    if (isGoldDay) {
+      if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      if (!STATE.points.shotPts) STATE.points.shotPts = {};
+      STATE.points.shotPts[type] = (STATE.points.shotPts[type] || 0) + 5;
+      ptsMsg = ' +5pts';
+      
+      // Check if this is 5th qualifying session
+      const qualCount = st.history.filter(h => h.gold).length;
+      if (qualCount >= 5 && !st.badgeEarned) {
+        st.badgeEarned = true;
+        STATE.points.shotPts[type] += 10;
+        ptsMsg = ' +15pts (badge bonus!)';
+        const ann = document.getElementById(type + '-announce');
+        if (ann) ann.classList.add('show');
+        renderSeasonBadges();
+      }
+    }
+
     st.shots = []; buildShotDots(type);
     saveState(); Dashboard.render();
-    showToast(`Saved — ${makes}/${total} (${p}%)`);
+    if (typeof Profile !== 'undefined') Profile.renderStats();
+    showToast('Saved — ' + makes + '/' + total + ' (' + p + '%)' + ptsMsg);
   }
 
   function resetShots(type) {
@@ -1826,13 +2101,16 @@ const Rewards = (() => {
 
   function markPhysComplete(day) {
     if (day === 1) STATE.physCompletes.d1++; else STATE.physCompletes.d2++;
+    // ★ POINTS: 7pts per physical session
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    STATE.points.physPts = (STATE.points.physPts || 0) + 7;
     saveState();
     renderPhysTracker();
     renderSeasonBadges();
     if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
-    if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.render();
+    if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.renderStats();
     const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
-    showToast('Physical session ' + total + ' logged! 💪');
+    showToast('Physical session ' + total + ' logged! +7pts 💪');
     if (total === 10) {
       const ann = document.getElementById('phys-master-announce');
       if (ann) ann.style.display = 'block';
@@ -1878,7 +2156,54 @@ const Rewards = (() => {
 // ============================================================
 const Dashboard = (() => {
 
+  function renderLeaderboard() {
+    const bp = Points.compute();
+    const totEl = document.getElementById('lb-total-pts');
+    if (totEl) totEl.textContent = bp.total.toLocaleString();
+    const rankEl = document.getElementById('lb-rank-badge');
+    if (rankEl) {
+      const rank = bp.total >= 500 ? '🏆 Elite Pioneer' : bp.total >= 300 ? '⭐ Senior Pioneer' : bp.total >= 150 ? '🔥 Rising Pioneer' : bp.total >= 50 ? '💪 Developing Pioneer' : '🌱 New Pioneer';
+      rankEl.textContent = rank;
+    }
+    const acc = document.getElementById('lb-accordions');
+    if (!acc) return;
+    acc.innerHTML = '';
+    
+    // Skills section
+    const skillMilestones = Points.skillMilestoneInfo(bp.skill.sessions);
+    const skillBody = '<div class="pts-row"><span class="pts-row-label">Base (5pts × ' + bp.skill.sessions + ' sessions)</span><span class="pts-row-val">' + (bp.skill.sessions * 5) + 'pts</span></div>' +
+      '<div style="margin-top:8px;font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:600">Milestones</div>' +
+      [6,10,16,24].map(at => {
+        const done = bp.skill.sessions >= at;
+        const bonus = {6:10,10:15,16:20,24:25}[at];
+        return '<div class="pts-milestone-row ' + (done ? 'pts-milestone-earned' : 'pts-milestone-locked') + '"><span class="pts-milestone-icon">' + (done ? '✓' : '○') + '</span><span style="flex:1">' + at + ' sessions</span><span style="font-weight:700">+' + bonus + 'pts</span></div>';
+      }).join('') +
+      (skillMilestones.next ? '<div class="pts-progress-bar"><div class="pts-progress-fill" style="width:' + Math.min(100, Math.round((bp.skill.sessions/skillMilestones.next.at)*100)) + '%"></div></div><div class="pts-progress-label"><span>Next: ' + skillMilestones.next.at + ' sessions</span><span>' + bp.skill.sessions + '/' + skillMilestones.next.at + '</span></div>' : '');
+    
+    const sections = [
+      { icon: '🏀', name: 'Skills Sessions', sub: bp.skill.sessions + ' sessions · +5pts each', pts: bp.skill.pts, body: skillBody },
+      { icon: '💪', name: 'Physical Training', sub: bp.phys.sessions + ' sessions · +7pts each', pts: bp.phys.pts, body: '<div class="pts-row"><span class="pts-row-label">7pts × ' + bp.phys.sessions + ' sessions</span><span class="pts-row-val">' + bp.phys.pts + 'pts</span></div>' },
+      { icon: '🎯', name: 'Shot Accuracy', sub: 'Layup · Mid-range · FT · Three pointer', pts: bp.shot.pts, body: Object.keys(bp.shot.detail).map(t => {
+        const d = bp.shot.detail[t];
+        const labels = {layup:'Layup',mr:'Mid-range',ft:'Free throw',tp:'Three pointer'};
+        const st = STATE.shots[t];
+        const badgeEarned = st && st.badgeEarned;
+        return '<div class="pts-row"><span class="pts-row-label">' + labels[t] + ' (' + d.qualCount + '/5)</span><span class="pts-row-val">' + d.pts + 'pts</span></div>' + (badgeEarned ? '<div class="pts-row"><span class="pts-row-label" style="color:var(--gold)">🥇 Gold bonus</span><span class="pts-row-val">+10pts ✓</span></div>' : '');
+      }).join('') },
+      { icon: '📈', name: 'Training Drills', sub: bp.drill.at10 + ' drills at 10/10 · +10pts each', pts: bp.drill.pts, body: '<div class="pts-row"><span class="pts-row-label">10pts × ' + bp.drill.at10 + ' drills</span><span class="pts-row-val">' + bp.drill.pts + 'pts</span></div>' },
+      { icon: '🏅', name: 'Master Badges', sub: bp.badge.earned + '/4 earned · +50pts each', pts: bp.badge.pts, body: DATA.SEASON_BADGE_DEFS.map(b => '<div class="pts-row"><span class="pts-row-label">' + (Rewards.checkBadge(b) ? '✓ ' : '○ ') + b.name + '</span><span class="pts-row-val ' + (Rewards.checkBadge(b) ? '' : 'muted') + '">' + (Rewards.checkBadge(b) ? '+50pts' : '50pts') + '</span></div>').join('') }
+    ];
+    
+    sections.forEach((s, idx) => {
+      const div = document.createElement('div');
+      div.className = 'pts-accordion';
+      div.innerHTML = '<div class="pts-acc-head" onclick="togglePointsAccordion(' + idx + ')"><span class="pts-acc-icon">' + s.icon + '</span><div class="pts-acc-info"><div class="pts-acc-name">' + s.name + '</div><div class="pts-acc-sub">' + s.sub + '</div></div><span class="pts-acc-pts">' + s.pts + '</span><span class="pts-acc-arrow">▼</span></div><div class="pts-acc-body">' + s.body + '</div>';
+      acc.appendChild(div);
+    });
+  }
+
   function render() {
+    renderLeaderboard();
     const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
     const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
     const earnedTech = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
@@ -2032,6 +2357,11 @@ function showToast(msg) {
   t._timer = setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+function togglePointsAccordion(idx) {
+  const el = document.querySelector('.pts-accordion:nth-of-type(' + (idx+1) + ')');
+  if (el) el.classList.toggle('open');
+}
+
 function showTab(id, btn) {
   document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -2042,7 +2372,57 @@ function showTab(id, btn) {
   if (id === 'dashboard') Dashboard.render();
   if (id === 'rewards') { Rewards.renderAll(); Rewards.initShotTrackers(); }
   if (id === 'profile') Profile.render();
+  if (id === 'leaderboard') window.scrollTo(0, 0);
 }
+
+// ============================================================
+// POINTS MODULE — Compute totals from STATE
+// ============================================================
+const Points = (() => {
+  function compute() {
+    const p = STATE.points || {};
+    const skillBase = p.skillPts || 0;
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const physBase = p.physPts || 0;
+    
+    let shotBase = 0;
+    const shotDetail = {};
+    ['layup','mr','ft','tp'].forEach(t => {
+      const pts = (p.shotPts && p.shotPts[t]) || 0;
+      shotBase += pts;
+      const qualCount = (STATE.shots[t]?.history || []).filter(h => h.gold).length;
+      shotDetail[t] = { pts, qualCount };
+    });
+    
+    const drillBase = p.drillPts || 0;
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const drillsAt10 = allDrills.filter(s => (STATE.sessionDays[s] || 0) >= 10).length;
+    
+    const badgeBase = p.badgePts || 0;
+    const masterEarned = DATA.SEASON_BADGE_DEFS.filter(b => Rewards.checkBadge(b)).length;
+    
+    return {
+      total: skillBase + physBase + shotBase + drillBase + badgeBase,
+      skill: { pts: skillBase, sessions: totalSessions },
+      phys: { pts: physBase, sessions: STATE.physCompletes.d1 + STATE.physCompletes.d2 },
+      shot: { pts: shotBase, detail: shotDetail },
+      drill: { pts: drillBase, at10: drillsAt10 },
+      badge: { pts: badgeBase, earned: masterEarned }
+    };
+  }
+
+  function skillMilestoneInfo(sessions) {
+    const milestones = [
+      { at: 6, bonus: 10 }, { at: 10, bonus: 15 }, { at: 16, bonus: 20 }, { at: 24, bonus: 25 }
+    ];
+    return {
+      next: milestones.find(m => sessions < m.at),
+      earned: milestones.filter(m => sessions >= m.at)
+    };
+  }
+
+  return { compute, skillMilestoneInfo };
+})();
 
 // ---- AUDIO ENGINE ----
 const Audio = (() => {
@@ -2306,14 +2686,22 @@ const Profile = (() => {
     const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
     const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
     const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
-    c.innerHTML = [
+    
+    // ★ Total points
+    const totalPts = Points.compute().total;
+    const rank = totalPts >= 500 ? 'Elite Pioneer' : totalPts >= 300 ? 'Senior Pioneer' : totalPts >= 150 ? 'Rising Pioneer' : totalPts >= 50 ? 'Developing Pioneer' : 'New Pioneer';
+    
+    let html = '<div class="profile-stat pts-stat"><div class="profile-stat-val">' + totalPts.toLocaleString() + '</div><div class="profile-stat-lbl">Season Points · ' + rank + '</div></div>';
+    html += [
       { val: totalSessions, lbl: 'Sessions' },
       { val: badges, lbl: 'Badges' },
       { val: drillsAt10 + '/' + allDrills.length, lbl: 'Drills 10+' },
       { val: totalDrillDays, lbl: 'Drill days' },
       { val: layupBest ? layupBest + '%' : '—', lbl: 'Best layup%' },
       { val: STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) + '%' : '—', lbl: 'Best FT%' },
-    ].map(s => `<div class="profile-stat"><div class="profile-stat-val">${s.val}</div><div class="profile-stat-lbl">${s.lbl}</div></div>`).join('');
+    ].map(s => '<div class="profile-stat"><div class="profile-stat-val">' + s.val + '</div><div class="profile-stat-lbl">' + s.lbl + '</div></div>').join('');
+    
+    c.innerHTML = html;
   }
 
   function renderBadges() {
