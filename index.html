@@ -1176,9 +1176,10 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
         </div>
       </div>
-      <div class="dash-sec-title" style="display:flex;align-items:center;justify-content:space-between">
-        Season stats
-        <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:4px 12px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">Points rules →</button>
+      <div class="dash-sec-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="flex:1">Season stats</div>
+        <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:4px 10px;font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">Rules</button>
+        <button onclick="pushLeaderboardUpdate()" style="background:linear-gradient(135deg,#C9A84C,#E8C96B);border:none;border-radius:var(--radius-sm);padding:4px 12px;font-size:11px;font-weight:700;color:#0D1F3C;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em">📤 Push</button>
       </div>
       <div class="profile-stats-grid" id="profile-stats"></div>
       <div class="dash-sec-title">Badge collection</div>
@@ -1294,6 +1295,7 @@ const STATE = {
     skillPts: 0, physPts: 0, drillPts: 0, badgePts: 0, shotPts: {},
     _drillFlags: {}, _masterFlags: {}
   },
+  playerName: '',
   activeTab: 'workout',
   profile: {
     name: '',
@@ -1880,6 +1882,7 @@ const Workout = (() => {
     showToast('🏆 Day ' + day + ' complete! +5pts' + bonusMsg);
     Rewards.renderAll(); Dashboard.render();
     if (typeof Profile !== 'undefined') Profile.renderStats();
+    setTimeout(() => promptLeaderboardUpdate(), 500);
   }
   return {
     buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips,
@@ -2079,6 +2082,7 @@ const Rewards = (() => {
     saveState(); Dashboard.render();
     if (typeof Profile !== 'undefined') Profile.renderStats();
     showToast('Saved — ' + makes + '/' + total + ' (' + p + '%)' + ptsMsg);
+    setTimeout(() => promptLeaderboardUpdate(), 500);
   }
 
   function resetShots(type) {
@@ -2121,6 +2125,7 @@ const Rewards = (() => {
     if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.renderStats();
     const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
     showToast('Physical session ' + total + ' logged! +7pts 💪');
+    setTimeout(() => promptLeaderboardUpdate(), 500);
     if (total === 10) {
       const ann = document.getElementById('phys-master-announce');
       if (ann) ann.style.display = 'block';
@@ -2355,6 +2360,88 @@ const Dashboard = (() => {
 </script>
 
 <script>
+
+// ============================================================
+// PUSH TO COACHES DASHBOARD
+// ============================================================
+
+function pushLeaderboardUpdate() {
+  if (!STATE.playerName) {
+    const name = prompt('Enter your player name:');
+    if (!name) return;
+    STATE.playerName = name;
+    saveState();
+  }
+
+  const bp = Points.compute();
+  const rank = bp.total >= 500 ? '🏆 Elite' : bp.total >= 300 ? '⭐ Senior' : bp.total >= 150 ? '🔥 Rising' : bp.total >= 50 ? '💪 Dev' : '🌱 New';
+  
+  // CAPTURE EXACT PROFILE PAGE FORMAT
+  const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+  const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+  const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+  const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
+  const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+  const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
+  const ftBest = STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) : 0;
+  const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+  
+  const update = {
+    playerName: STATE.playerName,
+    points: bp.total,
+    rank: rank,
+    timestamp: Date.now(),
+    
+    // TEAM LEADERBOARD DATA
+    stats: {
+      skillSessions: totalSessions,
+      physicalSessions: physTotal,
+      shotAccuracy: bp.shot.pts,
+      drillsAt10: drillsAt10,
+      badges: badges
+    },
+    
+    // ★ EXACT PROFILE PAGE CAPTURE
+    profilePageData: {
+      playerName: STATE.playerName,
+      totalPoints: bp.total,
+      rankBadge: rank,
+      
+      seasonStats: {
+        totalPoints: bp.total,
+        sessions: totalSessions,
+        badges: badges,
+        drillsCompleted: drillsAt10 + '/' + allDrills.length,
+        totalDrillDays: totalDrillDays,
+        bestLayupPct: layupBest ? layupBest + '%' : '—',
+        bestFtPct: ftBest ? ftBest + '%' : '—'
+      }
+    }
+  };
+
+  const pending = JSON.parse(localStorage.getItem('pioneers_pending_updates') || '[]');
+  pending.push(update);
+  localStorage.setItem('pioneers_pending_updates', JSON.stringify(pending));
+
+  showToast('📤 Update sent! Coach will approve soon.');
+  alert('✅ Profile pushed to coach dashboard!\n\n' + STATE.playerName + '\n' + bp.total + ' points\nRank: ' + rank);
+}
+
+function promptLeaderboardUpdate() {
+  if (!STATE.playerName) {
+    const name = prompt('Enter your player name (one time):');
+    if (!name) return;
+    STATE.playerName = name;
+    saveState();
+  }
+
+  const confirmed = confirm('Push your leaderboard stats to coach dashboard?\n\nName: ' + STATE.playerName);
+  if (confirmed) {
+    pushLeaderboardUpdate();
+  }
+}
+
+
 // ============================================================
 // APP CONTROLLER
 // ============================================================
