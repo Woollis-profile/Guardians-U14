@@ -8,13 +8,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Pioneers">
 <meta name="description" content="Greater Springfield Pioneers U14 Basketball Training Guide">
+<!-- ★ APP VERSION (increment this on each release) ★ -->
+<meta name="app-version" content="1.0.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<!-- ★ APP VERSION (increment this on each release) ★ -->
-<meta name="app-version" content="1.0.0">
 <title>Pioneers U14 Training</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap');
@@ -67,6 +67,523 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .card-hdr-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
 .card-hdr-d1{border-bottom-color:var(--navy-light)}
 .card-hdr-d2{border-bottom-color:var(--gold)}
+.timer-row{background:var(--navy-mid);border:1px solid var(--border-gold);border-radius:var(--radius-md);
+  padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.timer-display{font-family:var(--font-display);font-size:34px;font-weight:800;color:var(--gold);min-width:80px;letter-spacing:.02em}
+.timer-info{flex:1}
+.timer-phase{font-size:14px;color:var(--text-secondary);margin-bottom:5px}
+.timer-bar-wrap{height:4px;background:rgba(255,255,255,0.1);border-radius:2px}
+.timer-bar{height:100%;border-radius:2px;transition:width .5s;background:var(--gold)}
+.btn{padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;font-weight:600;
+  cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all .15s;white-space:nowrap}
+.btn:active{transform:scale(.96)}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-navy{background:var(--navy-light);color:var(--white);border-color:var(--navy-light)}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-block{width:100%;margin-top:10px;padding:12px;font-size:16px}
+.btn-start{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+.blk{padding:12px 16px;border-top:1px solid var(--border)}
+.blk-label{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.blk-time{background:rgba(201,168,76,0.15);color:var(--gold);padding:2px 8px;border-radius:20px;font-size:12px}
+.drill-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:16px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.drill-item:last-child{border-bottom:none}
+.drill-check{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,0.25);
+  background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;position:relative}
+.drill-item.bh-drill .drill-check{border-color:rgba(30,79,163,0.6)}
+.drill-item.sh-drill .drill-check{border-color:rgba(201,168,76,0.6)}
+.drill-item.of-drill .drill-check{border-color:rgba(123,97,255,0.6)}
+.drill-item.done .drill-check{border-color:transparent}
+.drill-item.bh-drill.done .drill-check{background:#1E4FA3}
+.drill-item.sh-drill.done .drill-check{background:var(--gold)}
+.drill-item.of-drill.done .drill-check{background:#7B61FF}
+.drill-item.done .drill-check::after{content:'';display:block;width:6px;height:11px;
+  border-right:2.5px solid var(--white);border-bottom:2.5px solid var(--white);
+  transform:rotate(45deg) translate(-1px,-2px)}
+.drill-item.done .drill-name{color:var(--text-muted)}
+.drill-name{flex:1;color:var(--text-primary);line-height:1.35;font-size:16px}
+.drill-time{font-size:13px;color:var(--text-muted);flex-shrink:0}
+.drill-del{width:22px;height:22px;border-radius:5px;border:1px solid rgba(255,255,255,0.15);
+  background:transparent;color:var(--text-muted);cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+.drill-del:active{background:rgba(255,80,80,0.2);color:#FF8080}
+.drill-empty{font-size:14px;color:var(--text-muted);padding:4px 0;font-style:italic}
+.drill-item.mandatory{background:rgba(201,168,76,0.08);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:4px;cursor:default}
+.mandatory-tag{font-size:12px;background:rgba(201,168,76,0.2);color:var(--gold);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.scrim-blk{background:rgba(30,79,163,0.12);border-top:1px solid rgba(30,79,163,0.3);padding:12px 16px}
+.scrim-title{font-size:13px;font-weight:700;color:var(--navy-light);text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:5px;display:flex;justify-content:space-between}
+.scrim-item{font-size:15px;color:var(--text-secondary);padding:2px 0}
+.menu-section{margin-bottom:20px}
+.menu-lbl{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sel-count{font-family:var(--font-body);font-size:12px;background:rgba(201,168,76,0.15);color:var(--gold);
+  padding:2px 10px;border-radius:20px;font-weight:600;letter-spacing:.04em}
+.day-row{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.day-btn{padding:7px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+  border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer}
+.day-btn.day-btn-on{background:var(--navy-light);color:var(--white);border-color:var(--navy-light)}
+.load-btn{margin-left:auto;padding:7px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;
+  border:1px solid var(--gold);background:rgba(201,168,76,0.1);color:var(--gold);cursor:pointer}
+.load-btn:active{background:rgba(201,168,76,0.25)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;
+  color:var(--text-secondary);font-size:14px;cursor:pointer;font-family:var(--font-body);transition:all .1s}
+.chip-sel-bh{background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7)}
+.chip-sel-sh{background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold)}
+.chip-sel-of{background:rgba(123,97,255,0.2);color:#B8AAFF;border-color:rgba(123,97,255,0.5)}
+.chip-sel-upper{background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7)}
+.chip-sel-lower{background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold)}
+.chip-sel-core{background:rgba(100,200,120,0.2);color:#80E090;border-color:rgba(100,200,120,0.5)}
+.chip-new{border-style:dashed;border-color:var(--gold)}
+.new-pill{display:inline-block;font-size:11px;background:rgba(201,168,76,0.2);color:var(--gold);
+  padding:0 6px;border-radius:10px;margin-left:4px;vertical-align:middle}
+.menu-hint{font-size:13px;color:var(--text-muted);margin-top:5px;font-style:italic}
+.menu-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.legend-box{border-radius:var(--radius-lg);overflow:hidden;margin-bottom:18px;border:1px solid var(--border-gold)}
+.legend-hdr{background:linear-gradient(135deg,#1a1a18,#2C2C2A);padding:10px 16px}
+.legend-hdr-text{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.06em}
+.legend-quote{display:flex;gap:12px;padding:12px 16px;border-top:1px solid var(--border);background:rgba(0,0,0,0.2)}
+.legend-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.av-kobe{background:#2C2C2A;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2)}
+.av-sga{background:#0C2A5C;color:#7AAEF5;border:1px solid rgba(30,79,163,0.5)}
+.av-steph{background:#3A2000;color:var(--gold);border:1px solid var(--border-gold)}
+.legend-body{flex:1}
+.legend-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+.legend-text{font-size:14px;color:var(--text-secondary);line-height:1.5;font-style:italic}
+.legend-text em{font-style:normal;font-weight:600;color:var(--white)}
+.phy-jog{background:rgba(201,168,76,0.08);border-top:1px solid var(--border-gold);padding:10px 16px}
+.phy-jog-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;
+  display:flex;justify-content:space-between;margin-bottom:3px}
+.phy-jog-text{font-size:15px;color:var(--text-secondary)}
+.ex-row{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border);font-size:16px}
+.ex-row:last-child{border-bottom:none}
+.ex-tag{font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+.upper-tag{background:rgba(30,79,163,0.25);color:#7AAEF5}
+.lower-tag{background:rgba(201,168,76,0.2);color:var(--gold)}
+.core-tag{background:rgba(100,200,120,0.2);color:#80E090}
+.amrap-note{font-size:13px;color:var(--text-muted);padding:8px 16px}
+.section-lbl{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.badge-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 8px;text-align:center}
+.badge-card.earned{background:rgba(201,168,76,0.1);border-color:var(--border-gold)}
+.badge-card.gold{background:rgba(201,168,76,0.2);border:2px solid var(--gold)}
+.badge-emoji{font-size:28px;display:block;margin-bottom:5px;filter:grayscale(1) opacity(0.3)}
+.badge-card.earned .badge-emoji,.badge-card.gold .badge-emoji{filter:none}
+.badge-name{font-size:13px;font-weight:600;color:var(--text-muted);line-height:1.3}
+.badge-card.earned .badge-name,.badge-card.gold .badge-name{color:var(--gold)}
+.badge-sub{font-size:11px;color:var(--text-muted);margin-top:3px}
+.shot-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:12px}
+.shot-title{font-size:16px;font-weight:600;color:var(--white);margin-bottom:3px;display:flex;justify-content:space-between}
+.shot-goal{font-size:14px;color:var(--text-secondary);margin-bottom:12px}
+.shot-dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.shot-dot{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-muted)}
+.shot-dot.make{background:rgba(100,200,100,0.2);border-color:#4CAF50;color:#80E090}
+.shot-dot.miss{background:rgba(200,80,80,0.2);border-color:#E57373;color:#FF8080}
+.shot-actions{display:flex;gap:8px;flex-wrap:wrap}
+.gold-announce{background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-sm);
+  padding:12px;text-align:center;margin-top:10px;display:none}
+.gold-announce.show{display:block}
+.gold-announce-icon{font-size:28px;margin-bottom:3px}
+.gold-announce-text{font-size:15px;font-weight:600;color:var(--gold)}
+.rep-row{padding:10px 0;border-bottom:1px solid var(--border)}
+.rep-row:last-child{border-bottom:none}
+.rep-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.rep-label{flex:1;font-size:15px;color:var(--text-primary)}
+.rep-controls{display:flex;align-items:center;gap:6px}
+.rep-btn{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);color:var(--text-secondary);cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;line-height:1}
+.rep-btn-plus{border-color:var(--border-gold);color:var(--gold)}
+.rep-num{min-width:30px;text-align:center;font-size:15px;font-weight:600;color:var(--white)}
+.rep-status{font-size:13px;color:var(--text-muted);white-space:nowrap}
+.rep-earned{color:var(--gold)!important}
+.pip-row{display:flex;gap:4px;flex-wrap:wrap}
+.pip{width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid var(--border)}
+.pip-done{background:var(--navy-light);border-color:var(--navy-light)}
+.pip-gold{background:var(--gold);border-color:var(--gold)}
+.dash-hero{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.dash-metric{background:var(--navy-mid);border:1px solid var(--border-gold);border-radius:var(--radius-md);padding:12px 6px;text-align:center}
+.dash-val{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold);line-height:1}
+.dash-lbl{font-size:12px;color:var(--text-muted);margin-top:4px}
+.dash-sec-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-gold);
+  padding-bottom:6px;margin-bottom:12px;margin-top:18px}
+.dash-row{display:flex;align-items:center;gap:12px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:11px 14px;margin-bottom:8px}
+.dash-row.dash-earned{background:rgba(201,168,76,0.07);border-color:var(--border-gold)}
+.dash-row.dash-gold{background:rgba(201,168,76,0.15);border-color:var(--gold)}
+.dash-icon{font-size:20px;flex-shrink:0}
+.dash-info{flex:1;min-width:0}
+.dash-name{font-size:14px;font-weight:600;color:var(--text-primary)}
+.dash-desc{font-size:12px;color:var(--text-muted);margin-top:2px}
+.dash-prog-wrap{min-width:80px;max-width:110px}
+.dash-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:4px}
+.dash-fill{height:100%;border-radius:3px;transition:width .4s}
+.dash-nums{font-size:12px;color:var(--text-muted);text-align:right}
+.dash-status{font-size:12px;font-weight:700;white-space:nowrap}
+.s-earned{color:var(--gold)}.s-gold{color:var(--gold-light)}.s-locked{color:var(--text-muted)}
+.acc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px;margin-bottom:12px}
+.acc-card.acc-gold{background:rgba(201,168,76,0.1);border-color:var(--gold)}
+.acc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.acc-title{font-size:16px;font-weight:600;color:var(--white)}
+.acc-goal{font-size:13px;color:var(--text-muted);margin-top:3px}
+.acc-pct-big{font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--gold);line-height:1}
+.acc-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:10px}
+.acc-fill{height:100%;border-radius:3px;transition:width .4s}
+.acc-stats{display:flex;gap:14px;font-size:12px;color:var(--text-muted);margin-bottom:10px;flex-wrap:wrap}
+.acc-stats b{display:block;font-size:15px;font-weight:600;color:var(--white);margin-bottom:2px}
+.sess-hist{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;border-top:1px solid var(--border);padding-top:8px}
+.sess-dot{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;border:1px solid var(--border);color:var(--text-muted)}
+.sess-hit{background:rgba(100,200,100,0.15);border-color:#4CAF50;color:#80E090}
+.sess-miss{background:rgba(200,80,80,0.1);border-color:#E57373;color:#FF8080}
+.sess-gold{background:rgba(201,168,76,0.25);border-color:var(--gold);color:var(--gold)}
+.no-sessions{font-size:13px;color:var(--text-muted);font-style:italic;margin-top:4px}
+#toast{position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 14px);left:50%;
+  transform:translateX(-50%) translateY(10px);background:var(--navy-mid);color:var(--gold);
+  border:1px solid var(--border-gold);border-radius:24px;padding:10px 22px;font-size:15px;font-weight:600;
+  white-space:nowrap;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:999;
+  max-width:calc(100vw - 40px);text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#install-banner{display:none;opacity:0;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
+  left:16px;right:16px;background:var(--navy-mid);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:12px 16px;align-items:center;gap:12px;z-index:200;transition:opacity .3s}
+.install-text{flex:1;font-size:15px;color:var(--text-secondary)}
+.install-text strong{color:var(--gold)}
+#complete-banner{background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-md);
+  padding:12px 16px;font-size:16px;color:var(--gold);margin-bottom:14px;text-align:center;font-weight:600}
+@media(min-width:480px){
+  #app{border-left:1px solid var(--border-gold);border-right:1px solid var(--border-gold)}
+  .bottom-nav{max-width:480px}
+}
+.of-day-tabs{display:flex;gap:0;margin-bottom:10px;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border)}
+.of-tab{flex:1;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;
+  border:none;background:var(--card-bg);color:var(--text-secondary);cursor:pointer;transition:all .15s;gap:8px}
+.of-tab:first-child{border-right:1px solid var(--border)}
+.of-tab-on{background:rgba(123,97,255,0.2);color:#B8AAFF}
+.of-tab-label{font-size:14px;font-weight:600}
+.of-tab-count{font-size:12px;font-weight:700;background:rgba(123,97,255,0.3);color:#B8AAFF;
+  padding:2px 8px;border-radius:20px;min-width:30px;text-align:center}
+.of-tab-on .of-tab-count{background:rgba(123,97,255,0.5);color:#fff}
+.of-selected-preview{min-height:44px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.25);
+  border-radius:var(--radius-md);padding:8px 12px;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.of-preview-empty{font-size:13px;color:var(--text-muted);font-style:italic}
+.of-pill{display:flex;align-items:center;gap:6px;background:rgba(123,97,255,0.2);
+  border:1px solid rgba(123,97,255,0.4);border-radius:20px;padding:5px 10px;font-size:13px;color:#B8AAFF}
+.of-pill-remove{background:none;border:none;color:#B8AAFF;cursor:pointer;font-size:15px;
+  line-height:1;padding:0;opacity:.7;display:flex;align-items:center}
+.of-pill-remove:hover{opacity:1}
+.of-pill-num{font-size:10px;font-weight:700;background:rgba(123,97,255,0.4);
+  border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+
+/* PROFILE */
+.profile-hero{background:linear-gradient(160deg,var(--navy-mid) 0%,#0D2250 100%);
+  border:1px solid var(--border-gold);border-radius:var(--radius-lg);
+  padding:20px 18px 18px;margin-bottom:14px;text-align:center;position:relative}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.profile-avatar{width:90px;height:90px;border-radius:50%;border:3px solid var(--gold);
+  background:var(--navy-mid);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--gold);
+  overflow:hidden;cursor:pointer;position:relative}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.avatar-edit{position:absolute;bottom:0;right:0;width:26px;height:26px;
+  background:var(--gold);border-radius:50%;border:2px solid var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer}
+.profile-name{font-family:var(--font-display);font-size:26px;font-weight:800;
+  color:var(--white);letter-spacing:.04em;text-transform:uppercase;line-height:1;margin-bottom:2px}
+.profile-name-input{font-family:var(--font-display);font-size:26px;font-weight:800;
+  color:var(--white);letter-spacing:.04em;text-transform:uppercase;line-height:1;
+  background:transparent;border:none;border-bottom:2px solid var(--gold);
+  text-align:center;width:100%;outline:none;padding:2px 0;margin-bottom:2px}
+.profile-number{font-family:var(--font-display);font-size:16px;font-weight:700;
+  color:var(--gold);letter-spacing:.06em}
+.profile-meta{display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.profile-meta-chip{background:rgba(201,168,76,0.1);border:1px solid var(--border-gold);
+  border-radius:20px;padding:4px 12px;font-size:13px;color:var(--gold)}
+.profile-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.profile-stat{background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 6px;text-align:center}
+.profile-stat-val{font-family:var(--font-display);font-size:22px;font-weight:800;
+  color:var(--gold);line-height:1}
+.profile-stat-lbl{font-size:11px;color:var(--text-muted);margin-top:3px}
+.profile-form-row{margin-bottom:12px}
+.profile-form-label{font-size:12px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:block}
+.profile-input{width:100%;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 14px;font-size:16px;color:var(--white);
+  font-family:var(--font-body);outline:none;transition:border-color .15s}
+.profile-input:focus{border-color:var(--gold)}
+.profile-input option{background:var(--navy-mid);color:var(--white)}
+.profile-edit-btn{position:absolute;top:12px;right:12px}
+.profile-save-row{display:flex;gap:8px;margin-top:16px}
+#avatar-upload{display:none}
+
+/* COUNTDOWN OVERLAY */
+#countdown-overlay {
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(10,22,40,0.93);
+  flex-direction:column;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+#countdown-overlay.show { display:flex; }
+.countdown-num {
+  font-family:var(--font-display);font-size:120px;font-weight:800;
+  color:var(--gold);line-height:1;
+  animation:countPop .6s ease-out;
+  text-shadow:0 0 40px rgba(201,168,76,0.6);
+}
+.countdown-text {
+  font-family:var(--font-display);font-size:36px;font-weight:700;
+  color:var(--white);letter-spacing:.1em;text-transform:uppercase;
+  margin-top:12px;opacity:0;animation:fadeIn .4s .2s forwards;
+}
+@keyframes countPop {
+  0%  { transform:scale(1.8); opacity:0; }
+  60% { transform:scale(0.9); opacity:1; }
+  100%{ transform:scale(1);   opacity:1; }
+}
+@keyframes fadeIn { to { opacity:1; } }
+
+/* Two-phase phys timer layout */
+.phys-timer-wrap {
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;
+}
+.phys-timer-card {
+  background:var(--navy-mid);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:12px 14px;
+}
+.phys-timer-card.active-phase { border-color:var(--gold);background:rgba(201,168,76,0.08); }
+.phys-timer-label {
+  font-size:11px;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:4px;
+}
+.phys-timer-card.active-phase .phys-timer-label { color:var(--gold); }
+.phys-timer-val {
+  font-family:var(--font-display);font-size:30px;font-weight:800;
+  color:var(--text-muted);line-height:1;
+}
+.phys-timer-card.active-phase .phys-timer-val { color:var(--gold); }
+.phys-bar-wrap { height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:6px; }
+.phys-bar-fill { height:100%;border-radius:2px;background:var(--gold);transition:width .5s;width:0%; }
+
+/* ============================================================
+   AMRAP REP TRACKER — NEW
+   ============================================================ */
+.amrap-tracker {
+  border-top:1px solid var(--border-gold);
+  background:rgba(201,168,76,0.04);
+  padding:14px 16px;
+}
+.amrap-tracker-title {
+  font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.amrap-tracker-title span { font-family:var(--font-body);font-size:11px;color:var(--text-muted);font-weight:400;letter-spacing:.02em;text-transform:none; }
+/* Sets counter */
+.amrap-sets-row {
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 14px;
+}
+.amrap-sets-label { flex:1;font-size:14px;color:var(--text-secondary);font-weight:600; }
+.amrap-sets-val {
+  font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--gold);
+  min-width:36px;text-align:center;line-height:1;
+}
+.amrap-sets-sub { font-size:11px;color:var(--text-muted);margin-top:2px;text-align:center; }
+.amrap-counter-btns { display:flex;flex-direction:column;gap:4px; }
+.amrap-cbtn {
+  width:30px;height:24px;border-radius:5px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);color:var(--text-secondary);
+  cursor:pointer;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  transition:all .12s;
+}
+.amrap-cbtn.plus { border-color:var(--border-gold);color:var(--gold);background:rgba(201,168,76,0.1); }
+.amrap-cbtn:active { transform:scale(.92); }
+/* Last exercise selector */
+.amrap-last-ex {
+  margin-bottom:12px;
+}
+.amrap-last-ex-label {
+  font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:6px;
+}
+.amrap-ex-chips {
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.amrap-ex-chip {
+  padding:6px 12px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--text-secondary);font-size:13px;
+  cursor:pointer;font-family:var(--font-body);transition:all .1s;
+}
+.amrap-ex-chip.selected-upper { background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7); }
+.amrap-ex-chip.selected-lower { background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold); }
+.amrap-ex-chip.selected-core  { background:rgba(100,200,120,0.2);color:#80E090;border-color:rgba(100,200,120,0.5); }
+/* Individual reps counter */
+.amrap-reps-row {
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:10px 14px;margin-bottom:12px;
+}
+.amrap-reps-label { flex:1;font-size:13px;color:var(--text-secondary); }
+.amrap-reps-label strong { display:block;font-size:14px;font-weight:600;color:var(--white); }
+.amrap-reps-val {
+  font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--white);
+  min-width:36px;text-align:center;line-height:1;
+}
+/* Summary box */
+.amrap-summary {
+  background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);
+  border-radius:var(--radius-md);padding:10px 14px;
+  font-size:13px;color:var(--text-secondary);line-height:1.6;
+  display:none;
+}
+.amrap-summary.show { display:block; }
+.amrap-summary strong { color:var(--gold); }
+.amrap-save-row { display:flex;gap:8px;margin-top:10px;flex-wrap:wrap; }
+/* Saved history */
+.amrap-history { margin-top:10px; }
+.amrap-history-title { font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px; }
+.amrap-hist-entry {
+  font-size:12px;color:var(--text-secondary);padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;justify-content:space-between;
+}
+.amrap-hist-entry:last-child { border-bottom:none; }
+.amrap-hist-date { color:var(--text-muted); }
+
+/* ============================================================
+   LEADERBOARD & POINTS — NEW STYLES
+   ============================================================ */
+.pts-hero {
+  background: linear-gradient(135deg, #0D1F3C 0%, #162B50 50%, #0D1F3C 100%);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 20px 18px 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.pts-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pts-hero-label {
+  font-size: 12px; font-weight: 700; color: var(--gold);
+  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 6px;
+}
+.pts-hero-total {
+  font-family: var(--font-display); font-size: 64px; font-weight: 800;
+  color: var(--gold); line-height: 1;
+  text-shadow: 0 0 30px rgba(201,168,76,0.4);
+}
+.pts-hero-sub {
+  font-size: 13px; color: var(--text-muted); margin-top: 4px;
+}
+.pts-rank-badge {
+  display: inline-block; background: rgba(201,168,76,0.15);
+  border: 1px solid var(--border-gold); border-radius: 20px;
+  padding: 4px 16px; font-size: 13px; font-weight: 700; color: var(--gold);
+  margin-top: 10px;
+}
+.pts-accordion {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 10px; overflow: hidden;
+}
+.pts-acc-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; cursor: pointer;
+  -webkit-user-select: none; user-select: none;
+  transition: background .15s;
+}
+.pts-acc-head:active { background: rgba(255,255,255,0.04); }
+.pts-acc-icon { font-size: 20px; flex-shrink: 0; }
+.pts-acc-info { flex: 1; }
+.pts-acc-name { font-size: 15px; font-weight: 600; color: var(--white); }
+.pts-acc-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.pts-acc-pts {
+  font-family: var(--font-display); font-size: 22px; font-weight: 800;
+  color: var(--gold); min-width: 52px; text-align: right; line-height: 1;
+}
+.pts-acc-arrow {
+  font-size: 12px; color: var(--text-muted);
+  transition: transform .2s; margin-left: 4px;
+}
+.pts-accordion.open .pts-acc-arrow { transform: rotate(180deg); }
+.pts-acc-body {
+  display: none; border-top: 1px solid var(--border);
+  padding: 10px 16px 12px;
+}
+.pts-accordion.open .pts-acc-body { display: block; }
+.pts-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+}
+.pts-row:last-child { border-bottom: none; }
+.pts-row-label { flex: 1; color: var(--text-secondary); }
+.pts-row-val { font-weight: 700; color: var(--gold); white-space: nowrap; }
+.pts-row-val.muted { color: var(--text-muted); }
+.pts-milestone-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: var(--radius-sm);
+  margin-bottom: 4px; font-size: 12px;
+}
+.pts-milestone-earned { background: rgba(201,168,76,0.1); color: var(--gold); }
+.pts-milestone-locked { background: rgba(255,255,255,0.03); color: var(--text-muted); }
+.pts-milestone-icon { font-size: 14px; }
+.pts-progress-bar {
+  height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 8px;
+}
+.pts-progress-fill { height: 100%; border-radius: 2px; background: var(--gold); transition: width .4s; }
+.pts-progress-label {
+  font-size: 11px; color: var(--text-muted); margin-top: 4px;
+  display: flex; justify-content: space-between;
+}
+.profile-stat.pts-stat {
+  background: rgba(201,168,76,0.12); border-color: var(--border-gold);
+  grid-column: span 3;
+}
+.profile-stat.pts-stat .profile-stat-val {
+  font-size: 32px; color: var(--gold);
+}
+.rules-section {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 12px;
+}
+.rules-title {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--gold); text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.rules-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+}
+.rules-row:last-child { border-bottom: none; }
+.rules-pts {
+  font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  color: var(--gold); min-width: 52px; text-align: right; flex-shrink: 0; line-height: 1.2;
+}
+.rules-desc { color: var(--text-secondary); line-height: 1.4; flex: 1; }
+.rules-desc small { display: block; color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+.rules-back-btn {
+  display: flex; align-items: center; gap: 6px; padding: 8px 0; margin-bottom: 14px;
+  background: none; border: none; color: var(--gold); cursor: pointer;
+  font-size: 14px; font-weight: 600; font-family: var(--font-body);
+}
 
 /* ★ UPDATE SYSTEM STYLES ★ */
 #install-banner{display:none;opacity:0;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
@@ -97,8 +614,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .update-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E8C96B);
   width:0%;transition:width .3s;border-radius:3px}
 .update-progress-text{font-size:12px;color:var(--text-muted)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 /* ★ TEAM LEADERBOARD PUSH SYSTEM ★ */
 #push-prompt-modal{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.95);z-index:400;
@@ -122,32 +637,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .success-title{font-family:var(--font-display);font-size:28px;font-weight:800;color:#4CAF50;
   text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
 .success-text{font-size:15px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-/* Rest of existing styles continue below... */
-.timer-row{background:var(--navy-mid);border:1px solid var(--border-gold);border-radius:var(--radius-md);
-  padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.timer-display{font-family:var(--font-display);font-size:34px;font-weight:800;color:var(--gold);min-width:80px;letter-spacing:.02em}
-.timer-info{flex:1}
-.timer-phase{font-size:14px;color:var(--text-secondary);margin-bottom:5px}
-.timer-bar-wrap{height:4px;background:rgba(255,255,255,0.1);border-radius:2px}
-.timer-bar{height:100%;border-radius:2px;transition:width .5s;background:var(--gold)}
-.btn{padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;font-weight:600;
-  cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all .15s;white-space:nowrap}
-.btn:active{transform:scale(.96)}
-.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.btn-navy{background:var(--navy-light);color:var(--white);border-color:var(--navy-light)}
-.btn-sm{padding:6px 12px;font-size:13px}
-.btn-block{width:100%;margin-top:10px;padding:12px;font-size:16px}
-.btn-start{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
-.blk{padding:12px 16px;border-top:1px solid var(--border)}
-.blk-label{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;
-  margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.blk-time{background:rgba(201,168,76,0.15);color:var(--gold);padding:2px 8px;border-radius:20px;font-size:12px}
-@media(min-width:480px){
-  #app{border-left:1px solid var(--border-gold);border-right:1px solid var(--border-gold)}
-  .bottom-nav{max-width:480px}
-}
 </style>
 </head>
 <body>
@@ -162,7 +656,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   </header>
   <div class="pages-wrap">
 
-    <!-- PAGE 1: WORKOUT (simplified for demonstration) -->
+    <!-- PAGE 1: WORKOUT -->
     <div id="pg-workout" class="pg on">
       <div class="page-title">Skills session</div>
       <p class="page-sub">Build your session using the menu · tap drills to check them off · tap × to remove</p>
@@ -178,10 +672,582 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <button id="start-btn" class="btn btn-start btn-sm" onclick="startTimer()">Start</button>
         <button class="btn btn-sm" onclick="resetTimer()">Reset</button>
       </div>
-      <div style="background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:8px;padding:12px;margin-bottom:14px;text-align:center;">
-        <div style="font-size:13px;color:var(--gold);font-weight:600;margin-bottom:4px">✅ Latest Version Active</div>
-        <div style="font-size:12px;color:var(--text-secondary);" id="version-info">App Version: <span id="app-version-display">1.0.0</span></div>
+      <div id="complete-banner" style="display:none" class="complete-banner"></div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d1">
+          <span class="card-hdr-title">Day 1 — Shooting consistency</span>
+          <button class="btn btn-sm" onclick="Workout.resetDay(1)">Reset</button>
+        </div>
+        <div class="blk"><div class="blk-label">Ball handling — 1 min each <span class="blk-time">5 min</span></div><div id="d1-bh"></div></div>
+        <div class="blk"><div class="blk-label">Shooting <span class="blk-time">5 min</span></div><div id="d1-sh-mandatory"></div><div id="d1-sh"></div></div>
+        <div class="blk"><div class="blk-label">Offence drills <span class="blk-time" id="d1-of-time">5 min</span></div><div id="d1-of"></div></div>
+        <div class="scrim-blk">
+          <div class="scrim-title">Scrimmage <span>10 min</span></div>
+          <div class="scrim-item">1-on-1 half court — use today's offence drills</div>
+          <div class="scrim-item">First to 5 baskets, swap sides each game</div>
+        </div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-gold btn-block" onclick="Workout.markDayComplete(1)">Mark Day 1 complete 🏆</button>
+        </div>
       </div>
+      <div class="card">
+        <div class="card-hdr card-hdr-d2">
+          <span class="card-hdr-title">Day 2 — Defeating defence</span>
+          <button class="btn btn-sm" onclick="Workout.resetDay(2)">Reset</button>
+        </div>
+        <div class="blk"><div class="blk-label">Ball handling — 1 min each <span class="blk-time">5 min</span></div><div id="d2-bh"></div></div>
+        <div class="blk"><div class="blk-label">Shooting <span class="blk-time">5 min</span></div><div id="d2-sh-mandatory"></div><div id="d2-sh"></div></div>
+        <div class="blk"><div class="blk-label">Offence drills <span class="blk-time" id="d2-of-time">5 min</span></div><div id="d2-of"></div></div>
+        <div class="scrim-blk">
+          <div class="scrim-title">Scrimmage <span>10 min</span></div>
+          <div class="scrim-item">2-on-2 or 3-on-3 if friends available</div>
+          <div class="scrim-item">Apply the offence drills in live play</div>
+        </div>
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-navy btn-block" onclick="Workout.markDayComplete(2)">Mark Day 2 complete 🏆</button>
+        </div>
+      </div>
+      <div class="legend-box">
+        <div class="legend-hdr"><div class="legend-hdr-text">Why close form shooting comes first — every single session</div></div>
+        <div class="legend-quote"><div class="legend-avatar av-kobe">KB</div><div class="legend-body"><div class="legend-name">Kobe Bryant</div><div class="legend-text">Every single day I would start from <em>close range</em> — one hand, pure form. You cannot build a great shot on a weak foundation. <em>5 makes minimum</em> before you move back an inch.</div></div></div>
+        <div class="legend-quote"><div class="legend-avatar av-sga">SG</div><div class="legend-body"><div class="legend-name">Shai Gilgeous-Alexander</div><div class="legend-text">Close form shooting is the first thing I do every workout — no exceptions. <em>Feel the ball, feel your release.</em> Get 5 clean makes before anything else.</div></div></div>
+        <div class="legend-quote"><div class="legend-avatar av-steph">SC</div><div class="legend-body"><div class="legend-name">Stephen Curry</div><div class="legend-text">My range comes from <em>perfect repetition up close</em>. Lock in your mechanics first. <em>5 makes from close range</em> — then earn the right to step back.</div></div></div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Ball handling <span class="sel-count" id="bh-sel-count">0 selected</span></div>
+        <div class="day-row">
+          <button class="day-btn day-btn-on" id="bh-d1-btn" onclick="Workout.setTarget('bh',1)">Day 1</button>
+          <button class="day-btn" id="bh-d2-btn" onclick="Workout.setTarget('bh',2)">Day 2</button>
+          <button class="load-btn" onclick="Workout.loadBH()">Load ↑</button>
+        </div>
+        <div class="chips" id="bh-pool"></div>
+        <div class="menu-hint">Select up to 5 drills · tap Load to add them</div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Shooting — additional <span class="sel-count" id="sh-sel-count">Adding to Day 1</span></div>
+        <div class="of-day-tabs">
+          <button class="of-tab of-tab-on" id="sh-d1-btn" onclick="Workout.setSHDay(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="sh-d1-count" style="background:rgba(201,168,76,0.3);color:var(--gold)">0/5</span>
+          </button>
+          <button class="of-tab" id="sh-d2-btn" onclick="Workout.setSHDay(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="sh-d2-count" style="background:rgba(201,168,76,0.3);color:var(--gold)">0/5</span>
+          </button>
+        </div>
+        <div class="of-selected-preview" id="sh-preview" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05)">
+          <div class="of-preview-empty">Tap drills below to add them</div>
+        </div>
+        <div class="chips" id="sh-pool"></div>
+        <div class="menu-hint">Close form shooting is always first · select up to 5 additional drills per day · tap Load to add to session</div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="load-btn" onclick="Workout.loadSHToWorkout()" style="border-color:var(--gold);background:rgba(201,168,76,0.1);color:var(--gold)">Load into session ↑</button>
+          <button class="btn btn-sm" onclick="Workout.clearSHDay()">Clear day</button>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="menu-lbl">Offence drills <span class="sel-count" id="of-sel-count">Adding to Day 1</span></div>
+        <div class="of-day-tabs">
+          <button class="of-tab of-tab-on" id="of-d1-btn" onclick="Workout.setOFDay(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="of-d1-count">0/5</span>
+          </button>
+          <button class="of-tab" id="of-d2-btn" onclick="Workout.setOFDay(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="of-d2-count">0/5</span>
+          </button>
+        </div>
+        <div class="of-selected-preview" id="of-preview">
+          <div class="of-preview-empty">Tap drills below to add them</div>
+        </div>
+        <div class="chips" id="of-pool"></div>
+        <div class="menu-hint">Select up to 5 drills per day · switching days saves your selection · 5 min splits evenly across chosen drills</div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="load-btn" onclick="Workout.loadOFToWorkout()">Load into session ↑</button>
+          <button class="btn btn-sm" onclick="Workout.clearOFDay()">Clear day</button>
+        </div>
+      </div>
+      <div class="menu-actions">
+        <button class="btn btn-gold" onclick="Workout.loadAll()">Load all → Day 1</button>
+        <button class="btn" onclick="Workout.clearSelections()">Clear</button>
+        <span id="skill-msg" style="font-size:13px;color:var(--gold);align-self:center"></span>
+      </div>
+    </div>
+
+    <!-- PAGE 2: PHYSICAL -->
+    <div id="pg-phys" class="pg">
+      <div class="page-title">Physical training</div>
+      <p class="page-sub">5 min jog warm-up · 5 min AMRAP circuit · 3-2-1 countdown on start · 3×10 reps per exercise</p>
+      <div class="phys-timer-wrap">
+        <div class="phys-timer-card active-phase" id="phys-jog-card">
+          <div class="phys-timer-label">🏃 Jog warm-up</div>
+          <div class="phys-timer-val" id="phys-jog-timer">5:00</div>
+          <div class="phys-bar-wrap"><div class="phys-bar-fill" id="phys-jog-bar"></div></div>
+        </div>
+        <div class="phys-timer-card" id="phys-amrap-card">
+          <div class="phys-timer-label">💪 AMRAP circuit</div>
+          <div class="phys-timer-val" id="phys-amrap-timer">5:00</div>
+          <div class="phys-bar-wrap"><div class="phys-bar-fill" id="phys-amrap-bar"></div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+        <button id="phys-start-btn" class="btn btn-start" onclick="startPhysTimer()" style="flex:1">Start</button>
+        <button class="btn" onclick="resetPhysTimer()">Reset</button>
+        <span id="phys-phase-label" style="font-size:13px;color:var(--gold);font-weight:600"></span>
+      </div>
+
+      <!-- DAY 1 CARD -->
+      <div class="card">
+        <div class="card-hdr card-hdr-d1"><span class="card-hdr-title">Day 1 — Upper + Lower + Core</span></div>
+        <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · dynamic stretch at 3 min mark</div></div>
+        <div style="padding:4px 0">
+          <div class="blk-label" style="padding:6px 16px 4px;border:none">AMRAP — 3×10 <span class="blk-time">5 min</span></div>
+          <div class="ex-row"><span class="ex-tag upper-tag">Upper</span><span id="d1-upper-name">Push-up to T</span></div>
+          <div class="ex-row"><span class="ex-tag lower-tag">Lower</span><span id="d1-lower-name">Squats</span></div>
+          <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d1-core-name">Sit-ups</span></div>
+        </div>
+        <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+
+        <!-- ★ AMRAP REP TRACKER — DAY 1 ★ -->
+        <div class="amrap-tracker">
+          <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
+
+          <!-- Sets completed -->
+          <div class="amrap-sets-row">
+            <div>
+              <div class="amrap-sets-label">Full sets completed</div>
+              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(1,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(1,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-sets-val" id="d1-sets-val">0</div>
+                <div class="amrap-sets-sub">sets</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Last exercise reached -->
+          <div class="amrap-last-ex">
+            <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
+            <div class="amrap-ex-chips" id="d1-last-ex-chips">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Reps in last exercise -->
+          <div class="amrap-reps-row">
+            <div class="amrap-reps-label">
+              <strong>Reps in last exercise</strong>
+              Enter individual reps if partial set
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(1,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(1,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-reps-val" id="d1-reps-val">0</div>
+                <div class="amrap-sets-sub">reps</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="amrap-summary" id="d1-amrap-summary"></div>
+
+          <div class="amrap-save-row">
+            <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(1)">Save result</button>
+            <button class="btn btn-sm" onclick="AmrapTracker.reset(1)">Clear</button>
+          </div>
+
+          <div class="amrap-history" id="d1-amrap-history"></div>
+        </div>
+
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-navy btn-block" onclick="Rewards.markPhysComplete(1)">✓ Mark physical Day 1 complete</button>
+        </div>
+      </div>
+
+      <!-- DAY 2 CARD -->
+      <div class="card">
+        <div class="card-hdr card-hdr-d2"><span class="card-hdr-title">Day 2 — Upper + Lower + Core</span></div>
+        <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · lateral shuffles at 3 min mark</div></div>
+        <div style="padding:4px 0">
+          <div class="blk-label" style="padding:6px 16px 4px;border:none">AMRAP — 3×10 <span class="blk-time">5 min</span></div>
+          <div class="ex-row"><span class="ex-tag upper-tag">Upper</span><span id="d2-upper-name">Pull-ups</span></div>
+          <div class="ex-row"><span class="ex-tag lower-tag">Lower</span><span id="d2-lower-name">Squat jumps</span></div>
+          <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d2-core-name">Plank hold — 30 sec</span></div>
+        </div>
+        <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
+
+        <!-- ★ AMRAP REP TRACKER — DAY 2 ★ -->
+        <div class="amrap-tracker">
+          <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
+
+          <div class="amrap-sets-row">
+            <div>
+              <div class="amrap-sets-label">Full sets completed</div>
+              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(2,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(2,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-sets-val" id="d2-sets-val">0</div>
+                <div class="amrap-sets-sub">sets</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="amrap-last-ex">
+            <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
+            <div class="amrap-ex-chips" id="d2-last-ex-chips"></div>
+          </div>
+
+          <div class="amrap-reps-row">
+            <div class="amrap-reps-label">
+              <strong>Reps in last exercise</strong>
+              Enter individual reps if partial set
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="amrap-counter-btns">
+                <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(2,1)">+</button>
+                <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(2,-1)">−</button>
+              </div>
+              <div>
+                <div class="amrap-reps-val" id="d2-reps-val">0</div>
+                <div class="amrap-sets-sub">reps</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="amrap-summary" id="d2-amrap-summary"></div>
+
+          <div class="amrap-save-row">
+            <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(2)">Save result</button>
+            <button class="btn btn-sm" onclick="AmrapTracker.reset(2)">Clear</button>
+          </div>
+
+          <div class="amrap-history" id="d2-amrap-history"></div>
+        </div>
+
+        <div style="padding:10px 16px;border-top:1px solid var(--border)">
+          <button class="btn btn-gold btn-block" onclick="Rewards.markPhysComplete(2)">✓ Mark physical Day 2 complete</button>
+        </div>
+      </div>
+
+      <!-- Customise circuit -->
+      <div class="menu-section">
+        <div class="menu-lbl">Customise circuit</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Choose which day to edit, pick one exercise per category, then tap Apply</div>
+        <div class="of-day-tabs" style="margin-bottom:12px">
+          <button class="of-tab of-tab-on" id="phys-d1-btn" onclick="Workout.setPhysTarget(1)">
+            <span class="of-tab-label">Day 1</span>
+            <span class="of-tab-count" id="phys-d1-preview" style="background:rgba(30,79,163,0.3);color:#7AAEF5;font-size:10px;max-width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">–</span>
+          </button>
+          <button class="of-tab" id="phys-d2-btn" onclick="Workout.setPhysTarget(2)">
+            <span class="of-tab-label">Day 2</span>
+            <span class="of-tab-count" id="phys-d2-preview" style="background:rgba(201,168,76,0.2);color:var(--gold);font-size:10px;max-width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">–</span>
+          </button>
+        </div>
+        <div class="menu-lbl" style="font-size:14px">Upper body</div>
+        <div class="chips" id="upper-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Lower body</div>
+        <div class="chips" id="lower-pool"></div>
+        <div class="menu-lbl" style="font-size:14px;margin-top:12px">Core</div>
+        <div class="chips" id="core-pool"></div>
+        <div class="menu-actions">
+          <button class="btn btn-gold" onclick="Workout.applyPhys()">Apply to Day <span id="phys-apply-day">1</span></button>
+          <span id="phys-msg" style="font-size:13px;color:var(--gold);align-self:center"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: REWARDS -->
+    <div id="pg-rewards" class="pg">
+      <div class="page-title">Rewards</div>
+      <p class="page-sub">Track training days · earn badges · log shot accuracy each session</p>
+      <div class="section-lbl">Season badges</div>
+      <div class="badge-grid" id="season-badges"></div>
+      <div class="section-lbl">Skills session badges</div>
+      <div class="badge-grid" id="workout-badges"></div>
+      <div class="section-lbl">Physical training sessions</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Tick the checkbox when you complete a physical session. 10 sessions earns the Physical Training Master badge.</p>
+      <div class="card" id="phys-session-card" style="padding:14px 16px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em">Session tracker</div>
+          <div style="font-size:13px;color:var(--text-muted)" id="phys-total-label">0 / 10 sessions</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div style="background:rgba(30,79,163,0.1);border:1px solid rgba(30,79,163,0.3);border-radius:var(--radius-md);padding:10px 14px">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Day 1</div>
+            <div style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)" id="phys-d1-count-display">0</div>
+            <div style="font-size:12px;color:var(--text-muted)">sessions completed</div>
+            <button class="btn btn-navy" style="width:100%;margin-top:10px;font-size:13px;padding:8px" onclick="Rewards.markPhysComplete(1)">✓ Mark Day 1 complete</button>
+          </div>
+          <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:var(--radius-md);padding:10px 14px">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Day 2</div>
+            <div style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)" id="phys-d2-count-display">0</div>
+            <div style="font-size:12px;color:var(--text-muted)">sessions completed</div>
+            <button class="btn btn-gold" style="width:100%;margin-top:10px;font-size:13px;padding:8px" onclick="Rewards.markPhysComplete(2)">✓ Mark Day 2 complete</button>
+          </div>
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+            <span style="font-size:13px;color:var(--text-secondary)">Progress to Physical Training Master badge</span>
+            <span style="font-size:13px;font-weight:600;color:var(--gold)" id="phys-progress-pct">0%</span>
+          </div>
+          <div style="height:8px;background:rgba(255,255,255,0.08);border-radius:4px">
+            <div id="phys-progress-bar" style="height:100%;border-radius:4px;background:var(--gold);width:0%;transition:width .5s"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px" id="phys-pip-row"></div>
+        <div id="phys-master-announce" style="display:none;background:rgba(201,168,76,0.1);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px;text-align:center;margin-top:10px">
+          <div style="font-size:26px;margin-bottom:4px">🏋️</div>
+          <div style="font-size:15px;font-weight:600;color:var(--gold)">Physical Training Master badge earned!</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin-top:3px">10 sessions complete — outstanding commitment!</div>
+        </div>
+      </div>
+
+      <div class="section-lbl">Shot accuracy tests</div>
+
+      <!-- LAYUP TEST -->
+      <div class="shot-card">
+        <div class="shot-title">Layup test <span id="layup-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 8/10 (80%) → 🥇 Gold Layup badge</div>
+        <div class="shot-dots" id="layup-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('layup','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('layup','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('layup')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('layup')">Reset</button>
+        </div>
+        <div class="gold-announce" id="layup-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Layup badge earned — 8+ out of 10!</div></div>
+      </div>
+
+      <!-- MID-RANGE TEST — NEW -->
+      <div class="shot-card" style="border-color:rgba(100,180,255,0.3);background:rgba(30,79,163,0.06)">
+        <div class="shot-title">Mid-range test <span id="mr-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal" style="color:rgba(120,180,255,0.8)">Goal: 5/10 (50%) → 🥇 Gold Mid-Range badge</div>
+        <div class="shot-dots" id="mr-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('mr','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('mr','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('mr')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('mr')">Reset</button>
+        </div>
+        <div class="gold-announce" id="mr-announce" style="background:rgba(30,79,163,0.15);border-color:#7AAEF5"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text" style="color:#7AAEF5">Gold Mid-Range badge earned — 5+ out of 10!</div></div>
+      </div>
+
+      <!-- FREE THROW TEST -->
+      <div class="shot-card">
+        <div class="shot-title">Free throw test <span id="ft-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 6/10 (60%) → 🥇 Gold Free Throw badge</div>
+        <div class="shot-dots" id="ft-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('ft','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('ft','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('ft')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('ft')">Reset</button>
+        </div>
+        <div class="gold-announce" id="ft-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Free Throw badge earned — 6+ out of 10!</div></div>
+      </div>
+
+      <!-- THREE POINTER TEST -->
+      <div class="shot-card">
+        <div class="shot-title">Three pointer test <span id="tp-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
+        <div class="shot-goal">Goal: 4/10 (40%) → 🥇 Gold Three Pointer badge</div>
+        <div class="shot-dots" id="tp-dots"></div>
+        <div class="shot-actions">
+          <button class="btn btn-start btn-sm" onclick="Rewards.logShot('tp','make')">Make</button>
+          <button class="btn btn-sm" style="background:rgba(200,80,80,0.15);color:#FF8080;border-color:#E57373" onclick="Rewards.logShot('tp','miss')">Miss</button>
+          <button class="btn btn-sm" onclick="Rewards.saveSession('tp')">Save</button>
+          <button class="btn btn-sm" onclick="Rewards.resetShots('tp')">Reset</button>
+        </div>
+        <div class="gold-announce" id="tp-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Three Pointer badge earned — 4+ out of 10!</div></div>
+      </div>
+
+      <div class="section-lbl" style="margin-top:6px">Training day tracker</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Tap + each time you use a drill in a session. 10 session days = badge earned.</p>
+      <div class="card" style="padding:10px 16px">
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Ball handling</div>
+        <div id="rep-bh"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 10px">Shooting</div>
+        <div id="rep-sh"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 10px">Offence</div>
+        <div id="rep-of"></div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: DASHBOARD -->
+    <div id="pg-dashboard" class="pg">
+      <div class="page-title">Dashboard</div>
+      <p class="page-sub">Full season progress — badges, accuracy, drill days</p>
+      <!-- LEADERBOARD SECTION -->
+      <div class="pts-hero">
+        <div class="pts-hero-label">Team Leaderboard</div>
+        <div class="pts-hero-total" id="lb-total-pts">0</div>
+        <div class="pts-hero-sub">Total points this season</div>
+        <div class="pts-rank-badge" id="lb-rank-badge">🌱 New Pioneer</div>
+        <div style="text-align:right;margin-top:8px">
+          <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:6px 14px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">View Points Rules →</button>
+        </div>
+      </div>
+      <div id="lb-accordions"></div>
+
+      <div class="dash-hero" id="dash-hero"></div>
+      <div class="dash-sec-title">Season badges</div><div id="dash-season"></div>
+      <div class="dash-sec-title">Gold shooting badges</div><div id="dash-gold"></div>
+      <div class="dash-sec-title">Cumulative shooting accuracy</div><div id="dash-accuracy"></div>
+      <div class="dash-sec-title">Session tracker</div><div id="dash-workouts"></div>
+      <div class="dash-sec-title">Ball handling — drill days</div><div id="dash-bh"></div>
+      <div class="dash-sec-title">Shooting — drill days</div><div id="dash-sh"></div>
+      <div class="dash-sec-title">Offence — drill days</div><div id="dash-of"></div>
+    </div>
+
+    <!-- PAGE: LEADERBOARD RULES -->
+    <div id="pg-leaderboard" class="pg">
+      <button class="rules-back-btn" onclick="showTab('dashboard', document.querySelector('.nav-btn:nth-child(4)'))">← Back to Dashboard</button>
+      <div class="page-title">Points Rules</div>
+      <p class="page-sub">How to earn points — listed from highest to lowest value</p>
+
+      <!-- Master Badges -->
+      <div class="rules-section">
+        <div class="rules-title">🏅 Season Master Badges</div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Ball Handling Master<small>All 12 drills completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Shooting Master<small>All shooting drills completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Offence Master<small>All offence moves completed 10 days each</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Physical Training Master<small>10 physical training sessions completed</small></div></div>
+      </div>
+
+      <!-- Skills milestones -->
+      <div class="rules-section">
+        <div class="rules-title">🏀 Skills Session Milestones</div>
+        <div class="rules-row"><div class="rules-pts">+25</div><div class="rules-desc">24 sessions milestone<small>Complete all 24 planned skills sessions</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+20</div><div class="rules-desc">16 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+15</div><div class="rules-desc">10 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">6 sessions milestone</div></div>
+        <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each skills session<small>Mark Day 1 or Day 2 complete</small></div></div>
+      </div>
+
+      <!-- Training drills -->
+      <div class="rules-section">
+        <div class="rules-title">📈 Training Drill Days</div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Each drill at 10/10 days<small>26 drills available, max 260pts</small></div></div>
+      </div>
+
+      <!-- Physical training -->
+      <div class="rules-section">
+        <div class="rules-title">💪 Physical Training</div>
+        <div class="rules-row"><div class="rules-pts">+7</div><div class="rules-desc">Each physical session<small>Mark Day 1 or Day 2 complete</small></div></div>
+      </div>
+
+      <!-- Shot accuracy -->
+      <div class="rules-section">
+        <div class="rules-title">🎯 Shot Accuracy Tests</div>
+        <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Gold badge bonus (per type)<small>When you reach 5 qualifying attempts for Layup, Mid-range, Free Throw or Three Pointer</small></div></div>
+        <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each qualifying test session<small>Score 8/10 layups, 5/10 mid-range, 6/10 FT or 4/10 threes</small></div></div>
+      </div>
+
+      <!-- Ranking Levels -->
+      <div class="rules-section">
+        <div class="rules-title">🏆 Ranking Levels</div>
+        <div class="rules-row"><div class="rules-pts">0-49</div><div class="rules-desc">🌱 New Pioneer<small>Just starting your journey</small></div></div>
+        <div class="rules-row"><div class="rules-pts">50-149</div><div class="rules-desc">💪 Developing Pioneer<small>Building skills and consistency</small></div></div>
+        <div class="rules-row"><div class="rules-pts">150-299</div><div class="rules-desc">🔥 Rising Pioneer<small>Strong progress on all fronts</small></div></div>
+        <div class="rules-row"><div class="rules-pts">300-499</div><div class="rules-desc">⭐ Senior Pioneer<small>Mastering drills and badges</small></div></div>
+        <div class="rules-row"><div class="rules-pts">500+</div><div class="rules-desc">🏆 Elite Pioneer<small>Peak performance achieved</small></div></div>
+      </div>
+
+      <!-- Summary -->
+      <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Maximum season points</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:var(--text-secondary)">
+          <span>Skills sessions + milestones</span><span style="color:var(--gold);font-weight:700;text-align:right">190 pts</span>
+          <span>Physical sessions (10 × 7)</span><span style="color:var(--gold);font-weight:700;text-align:right">70 pts</span>
+          <span>Training drills (26 × 10)</span><span style="color:var(--gold);font-weight:700;text-align:right">260 pts</span>
+          <span>Master badges (4 × 50)</span><span style="color:var(--gold);font-weight:700;text-align:right">200 pts</span>
+          <span>Shot accuracy (unlimited)</span><span style="color:var(--gold);font-weight:700;text-align:right">Unlimited</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-gold);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;font-weight:600;color:var(--white)">Guaranteed baseline</span>
+          <span style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold)">720+ pts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWN OVERLAY -->
+    <div id="countdown-overlay">
+      <div id="countdown-num" class="countdown-num">3</div>
+      <div id="countdown-text" class="countdown-text"></div>
+    </div>
+
+    <!-- PAGE 5: PLAYER PROFILE -->
+    <div id="pg-profile" class="pg">
+      <div class="page-title">My profile</div>
+      <p class="page-sub">Your player card, progress and season stats — all saved on your device</p>
+      <div class="profile-hero">
+        <button class="btn btn-sm profile-edit-btn" id="profile-edit-btn" onclick="Profile.toggleEdit()">Edit</button>
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profile-avatar" onclick="Profile.pickPhoto()">
+            <span id="profile-avatar-initials">?</span>
+            <img id="profile-avatar-img" src="" style="display:none">
+          </div>
+          <div class="avatar-edit" onclick="Profile.pickPhoto()">📷</div>
+          <input type="file" id="avatar-upload" accept="image/*" onchange="Profile.handlePhoto(this)">
+        </div>
+        <div id="profile-display-name" class="profile-name">Your Name</div>
+        <input id="profile-input-name" class="profile-name-input" placeholder="YOUR NAME" style="display:none" oninput="Profile.previewName(this.value)">
+        <div class="profile-number" id="profile-display-number">#00 · Select position</div>
+        <div class="profile-meta" id="profile-meta"></div>
+      </div>
+      <div id="profile-edit-form" class="card" style="display:none;padding:16px">
+        <div class="profile-form-row">
+          <label class="profile-form-label">Full name</label>
+          <input class="profile-input" id="pf-name" placeholder="e.g. Jordan Smith" maxlength="30">
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Jersey number</label>
+          <input class="profile-input" id="pf-number" placeholder="e.g. 23" type="number" min="0" max="99">
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Position</label>
+          <select class="profile-input" id="pf-position">
+            <option value="">Select position</option>
+            <option value="Point Guard">Point Guard</option>
+            <option value="Shooting Guard">Shooting Guard</option>
+            <option value="Small Forward">Small Forward</option>
+            <option value="Power Forward">Power Forward</option>
+            <option value="Centre">Centre</option>
+          </select>
+        </div>
+        <div class="profile-form-row">
+          <label class="profile-form-label">Team</label>
+          <input class="profile-input" id="pf-team" placeholder="e.g. Pioneers U14 Div 1" maxlength="40">
+        </div>
+        <div class="profile-save-row">
+          <button class="btn btn-gold" style="flex:1" onclick="Profile.save()">Save profile</button>
+          <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
+        </div>
+      </div>
+      <div class="dash-sec-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="flex:1">Season stats</div>
+        <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:4px 10px;font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">Rules</button>
+        <button onclick="pushLeaderboardUpdate()" style="background:linear-gradient(135deg,#C9A84C,#E8C96B);border:none;border-radius:var(--radius-sm);padding:4px 12px;font-size:11px;font-weight:700;color:#0D1F3C;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em">📤 Push</button>
+      </div>
+      <div class="profile-stats-grid" id="profile-stats"></div>
+      <div class="dash-sec-title">Badge collection</div>
+      <div class="badge-grid" id="profile-badges"></div>
+      <div class="dash-sec-title">Shooting personal bests</div>
+      <div class="card" id="profile-shooting" style="padding:14px 16px"></div>
+      <div class="dash-sec-title">Top trained drills</div>
+      <div class="card" id="profile-top-drills" style="padding:14px 16px"></div>
     </div>
 
   </div>
@@ -193,6 +1259,1751 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
     <button class="nav-btn" onclick="showTab('dashboard',this)"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button>
     <button class="nav-btn" onclick="showTab('profile',this)"><span class="nav-icon">👤</span><span class="nav-label">Profile</span></button>
   </nav>
+</div>
+
+<div id="install-banner">
+  <div class="install-text">Install: tap <strong>Share</strong> then <strong>Add to Home Screen</strong></div>
+  <button class="btn btn-sm" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
+</div>
+
+<script>
+// ============================================================
+// DATA & CONSTANTS
+// ============================================================
+const DATA = {
+  BH_SKILLS: [
+    "Right side pounds","Left side pounds","Tween (through legs)",
+    "Behind the back","Continuous cross","V dribble","Spider dribble",
+    "Figure 8 weave","Pound windmill","Split stance tween",
+    "Pound tween cross pound","Pound tween behind cross pound"
+  ],
+  BH_NEW: new Set(["Pound tween cross pound","Pound tween behind cross pound"]),
+
+  SH_OPTIONAL: [
+    "Right layup","Left layup","Free throw (20 attempts)",
+    "Left mid-range jump shot","Right mid-range jump shot",
+    "Floater","Reverse layup","Shooting off the dribble"
+  ],
+  MANDATORY_D1: "Close form shooting — one hand",
+  MANDATORY_D2: "Close form shooting — two hands",
+
+  OF_SKILLS: [
+    "Hesitation","In & Out","Crossover and behind the back (wrap)",
+    "Double crossover","Crossover and spin"
+  ],
+
+  UPPER_EX: ["Push-up to T","Pull-ups","Navy seal burpees","Military push-ups","Bear crawl 10 steps"],
+  LOWER_EX: ["Squats","Squat jumps","Lunges"],
+  CORE_EX: ["Sit-ups","Plank hold — 30 sec","Mountain climbers","Russian twists","Dead bug"],
+
+  D1_BH_DEF: ["Right side pounds","Left side pounds","Tween (through legs)","Behind the back","Continuous cross"],
+  D2_BH_DEF: ["V dribble","Spider dribble","Figure 8 weave","Pound windmill","Split stance tween"],
+
+  PHASES: [
+    {label:'Ball handling',dur:300,color:'#C9A84C'},
+    {label:'Shooting drills',dur:300,color:'#1E4FA3'},
+    {label:'Offence drills',dur:300,color:'#C9A84C'},
+    {label:'Scrimmage!',dur:600,color:'#1E4FA3'}
+  ],
+
+  SEASON_BADGE_DEFS: [
+    {icon:'🎯',name:'Ball handling master',sub:'All 12 drills — 10 days each',cat:'bh'},
+    {icon:'🏀',name:'Shooting master',sub:'All shooting drills — 10 days each',cat:'sh'},
+    {icon:'⚡',name:'Offence master',sub:'All 5 moves — 10 days each',cat:'of'},
+    {icon:'🏋️',name:'Physical training master',sub:'Complete 10 physical sessions',cat:'phys'},
+  ],
+  // ★ Mid-range badge added here ★
+  GOLD_BADGE_DEFS: [
+    {icon:'🥇',name:'Gold layup',sub:'8/10 in layup test',key:'layup',goal:8,goalPct:80},
+    {icon:'🥇',name:'Gold mid-range',sub:'5/10 in mid-range test',key:'mr',goal:5,goalPct:50},
+    {icon:'🥇',name:'Gold free throw',sub:'6/10 in free throw test',key:'ft',goal:6,goalPct:60},
+    {icon:'🥇',name:'Gold three pointer',sub:'4/10 in three pointer test',key:'tp',goal:4,goalPct:40},
+  ]
+};
+
+// ---- STATE ----
+const STATE = {
+  workout: {
+    d1: { bh: [...DATA.D1_BH_DEF], sh: ["Right layup","Free throw (20 attempts)"], of: ["Hesitation"] },
+    d2: { bh: [...DATA.D2_BH_DEF], sh: ["Left mid-range jump shot","Floater"], of: ["In & Out"] }
+  },
+  phys: {
+    d1: { upper: "Push-up to T", lower: "Squats", core: "Sit-ups" },
+    d2: { upper: "Pull-ups", lower: "Squat jumps", core: "Plank hold — 30 sec" }
+  },
+  sel: { bh: new Set(), sh: new Set(), of: new Set(), upper: new Set(), lower: new Set(), core: new Set() },
+  targets: { bh: 1, sh: 1, of: 1, phys: 1 },
+  shD1: new Set(["Right layup","Free throw (20 attempts)"]),
+  shD2: new Set(["Left mid-range jump shot","Floater"]),
+  ofD1: new Set(["Hesitation"]),
+  ofD2: new Set(["In & Out"]),
+  sessionDays: {},
+  dayCompletes: { d1: 0, d2: 0 },
+  physCompletes: { d1: 0, d2: 0 },
+  shots: {
+    layup: { shots: [], goal: 8, goalPct: 80, badgeEarned: false, history: [] },
+    mr:    { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] }, // ★ NEW ★
+    ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
+    tp:    { shots: [], goal: 4, goalPct: 40, badgeEarned: false, history: [] }
+  },
+  // ★ AMRAP tracker state ★
+  amrap: {
+    d1: { sets: 0, lastEx: '', reps: 0, history: [] },
+    d2: { sets: 0, lastEx: '', reps: 0, history: [] }
+  },
+  points: {
+    skillPts: 0, physPts: 0, drillPts: 0, badgePts: 0, shotPts: {},
+    _drillFlags: {}, _masterFlags: {}
+  },
+  playerName: '',
+  activeTab: 'workout',
+  profile: {
+    name: '',
+    number: '',
+    position: '',
+    team: '',
+    photo: ''
+  }
+};
+
+[...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS].forEach(t => {
+  STATE.sessionDays[t] = 0;
+});
+
+// ---- PERSISTENCE ----
+function saveState() {
+  try {
+    const persist = {
+      workout: STATE.workout,
+      phys: STATE.phys,
+      sessionDays: STATE.sessionDays,
+      dayCompletes: STATE.dayCompletes,
+      physCompletes: STATE.physCompletes,
+      shots: STATE.shots,
+      amrap: STATE.amrap,
+      points: STATE.points,
+      shD1: [...STATE.shD1],
+      shD2: [...STATE.shD2],
+      ofD1: [...STATE.ofD1],
+      ofD2: [...STATE.ofD2],
+      profile: STATE.profile
+    };
+    localStorage.setItem('pioneers_state', JSON.stringify(persist));
+  } catch(e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem('pioneers_state');
+    if (!raw) return;
+    const p = JSON.parse(raw);
+    if (p.workout) STATE.workout = p.workout;
+    if (p.phys) STATE.phys = p.phys;
+    if (p.sessionDays) STATE.sessionDays = { ...STATE.sessionDays, ...p.sessionDays };
+    if (p.dayCompletes) STATE.dayCompletes = p.dayCompletes;
+    if (p.physCompletes) STATE.physCompletes = p.physCompletes;
+    if (p.shots) {
+      STATE.shots = p.shots;
+      // Ensure mr exists for existing saves
+      if (!STATE.shots.mr) STATE.shots.mr = { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] };
+    }
+    if (p.amrap) STATE.amrap = p.amrap;
+    if (p.points) {
+      STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      Object.assign(STATE.points, p.points);
+      if (!STATE.points.shotPts) STATE.points.shotPts = {};
+      if (!STATE.points._drillFlags) STATE.points._drillFlags = {};
+      if (!STATE.points._masterFlags) STATE.points._masterFlags = {};
+    }
+    if (p.shD1) STATE.shD1 = new Set(p.shD1);
+    if (p.shD2) STATE.shD2 = new Set(p.shD2);
+    if (p.ofD1) STATE.ofD1 = new Set(p.ofD1);
+    if (p.ofD2) STATE.ofD2 = new Set(p.ofD2);
+    if (p.profile) STATE.profile = { ...STATE.profile, ...p.profile };
+  } catch(e) {}
+}
+
+function keyOf(s) { return s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,''); }
+function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 100); }
+function ofTimeLabel(n) { return n===1?'5 min':n===2?'2.5 min each':'1m 40s each'; }
+</script>
+
+<script>
+// ============================================================
+// AMRAP TRACKER MODULE — NEW
+// ============================================================
+const AmrapTracker = (() => {
+
+  // Returns the exercise list for a given day in order [upper, lower, core]
+  function getExList(day) {
+    const d = STATE.phys['d' + day];
+    return [
+      { label: d.upper, cat: 'upper' },
+      { label: d.lower, cat: 'lower' },
+      { label: d.core,  cat: 'core'  }
+    ];
+  }
+
+  function renderExChips(day) {
+    const c = document.getElementById('d' + day + '-last-ex-chips');
+    if (!c) return;
+    c.innerHTML = '';
+    const exList = getExList(day);
+    const current = STATE.amrap['d' + day].lastEx;
+
+    // "None (full sets only)" option
+    const noneBtn = document.createElement('button');
+    noneBtn.className = 'amrap-ex-chip' + (current === '' ? ' selected-core' : '');
+    noneBtn.textContent = current === '' ? '✓ None' : 'None';
+    noneBtn.onclick = () => {
+      STATE.amrap['d' + day].lastEx = '';
+      STATE.amrap['d' + day].reps = 0;
+      renderExChips(day);
+      document.getElementById('d' + day + '-reps-val').textContent = '0';
+      updateSummary(day);
+    };
+    c.appendChild(noneBtn);
+
+    exList.forEach(ex => {
+      const btn = document.createElement('button');
+      const isSel = current === ex.label;
+      btn.className = 'amrap-ex-chip' + (isSel ? ' selected-' + ex.cat : '');
+      btn.textContent = (isSel ? '✓ ' : '') + ex.label;
+      btn.onclick = () => {
+        STATE.amrap['d' + day].lastEx = ex.label;
+        renderExChips(day);
+        updateSummary(day);
+      };
+      c.appendChild(btn);
+    });
+  }
+
+  function adjustSets(day, delta) {
+    const a = STATE.amrap['d' + day];
+    a.sets = Math.max(0, (a.sets || 0) + delta);
+    document.getElementById('d' + day + '-sets-val').textContent = a.sets;
+    updateSummary(day);
+  }
+
+  function adjustReps(day, delta) {
+    const a = STATE.amrap['d' + day];
+    a.reps = Math.max(0, Math.min(99, (a.reps || 0) + delta));
+    document.getElementById('d' + day + '-reps-val').textContent = a.reps;
+    updateSummary(day);
+  }
+
+  function updateSummary(day) {
+    const a = STATE.amrap['d' + day];
+    const el = document.getElementById('d' + day + '-amrap-summary');
+    if (!el) return;
+    const hasData = a.sets > 0 || a.lastEx || a.reps > 0;
+    if (!hasData) { el.classList.remove('show'); el.innerHTML = ''; return; }
+    let txt = '<strong>' + a.sets + ' full set' + (a.sets !== 1 ? 's' : '') + '</strong>';
+    if (a.lastEx) {
+      txt += ' + partial: <strong>' + a.lastEx + '</strong>';
+      if (a.reps > 0) txt += ' × <strong>' + a.reps + ' reps</strong>';
+    }
+    const exList = getExList(day);
+    const fullReps = a.sets * 3 * 10; // 3 exercises × 10 reps
+    const partialReps = a.reps || 0;
+    const totalReps = fullReps + partialReps;
+    txt += '<br><span style="color:var(--text-muted);font-size:12px">Total reps: ~' + totalReps + ' · ' + (a.sets * 3) + ' exercises completed</span>';
+    el.innerHTML = txt;
+    el.classList.add('show');
+  }
+
+  function save(day) {
+    const a = STATE.amrap['d' + day];
+    if (a.sets === 0 && !a.lastEx && a.reps === 0) {
+      showToast('Enter your results first');
+      return;
+    }
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
+    const entry = {
+      sets: a.sets,
+      lastEx: a.lastEx,
+      reps: a.reps,
+      date: dateStr,
+      upper: STATE.phys['d' + day].upper,
+      lower: STATE.phys['d' + day].lower,
+      core:  STATE.phys['d' + day].core
+    };
+    if (!STATE.amrap['d' + day].history) STATE.amrap['d' + day].history = [];
+    STATE.amrap['d' + day].history.unshift(entry);
+    // Keep last 10
+    if (STATE.amrap['d' + day].history.length > 10) STATE.amrap['d' + day].history.length = 10;
+    saveState();
+    renderHistory(day);
+    showToast('AMRAP result saved 💪');
+  }
+
+  function reset(day) {
+    STATE.amrap['d' + day].sets = 0;
+    STATE.amrap['d' + day].lastEx = '';
+    STATE.amrap['d' + day].reps = 0;
+    document.getElementById('d' + day + '-sets-val').textContent = '0';
+    document.getElementById('d' + day + '-reps-val').textContent = '0';
+    const sumEl = document.getElementById('d' + day + '-amrap-summary');
+    if (sumEl) { sumEl.classList.remove('show'); sumEl.innerHTML = ''; }
+    renderExChips(day);
+  }
+
+  function renderHistory(day) {
+    const hist = STATE.amrap['d' + day].history || [];
+    const el = document.getElementById('d' + day + '-amrap-history');
+    if (!el) return;
+    if (hist.length === 0) { el.innerHTML = ''; return; }
+    let html = '<div class="amrap-history"><div class="amrap-history-title">Recent results</div>';
+    hist.forEach(h => {
+      let summary = h.sets + ' set' + (h.sets !== 1 ? 's' : '');
+      if (h.lastEx) summary += ' + ' + h.lastEx + (h.reps > 0 ? ' ×' + h.reps : '');
+      html += '<div class="amrap-hist-entry"><span>' + summary + '</span><span class="amrap-hist-date">' + h.date + '</span></div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  function init() {
+    [1, 2].forEach(day => {
+      renderExChips(day);
+      // Restore current state display
+      const a = STATE.amrap['d' + day];
+      if (!a) STATE.amrap['d' + day] = { sets: 0, lastEx: '', reps: 0, history: [] };
+      document.getElementById('d' + day + '-sets-val').textContent = (STATE.amrap['d' + day].sets || 0);
+      document.getElementById('d' + day + '-reps-val').textContent = (STATE.amrap['d' + day].reps || 0);
+      updateSummary(day);
+      renderHistory(day);
+    });
+  }
+
+  // Re-render chips after physiology customisation changes exercises
+  function refreshChips() {
+    [1, 2].forEach(day => renderExChips(day));
+  }
+
+  return { adjustSets, adjustReps, save, reset, init, refreshChips, renderHistory };
+})();
+</script>
+
+<script>
+// ============================================================
+// WORKOUT MODULE
+// ============================================================
+const Workout = (() => {
+  function renderMandatory(id, name) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    const d = document.createElement('div'); d.className = 'drill-item mandatory';
+    d.innerHTML = `<span class="drill-check sh-check" style="background:rgba(201,168,76,0.15);border-color:var(--gold)"></span><span class="drill-name">${name}</span><span class="mandatory-tag">5 makes min</span>`;
+    c.appendChild(d);
+  }
+
+  function renderEditableDrills(id, items, drillClass, showTime, onDelete) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    if (items.length === 0) { c.innerHTML = '<div class="drill-empty">No drills — use the menu below to add some</div>'; return; }
+    items.forEach((s, i) => {
+      const d = document.createElement('div'); d.className = `drill-item ${drillClass}`;
+      d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span>${showTime ? '<span class="drill-time">1 min</span>' : ''}<button class="drill-del" aria-label="Remove">×</button>`;
+      const toggleDrill = () => {
+        const wasDone = d.classList.contains('done');
+        d.classList.toggle('done');
+        const nowDone = d.classList.contains('done');
+        if (nowDone && !wasDone) {
+          if (STATE.sessionDays.hasOwnProperty(s)) {
+            STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
+            saveState();
+            if (typeof Rewards !== 'undefined') Rewards.refreshDrillRow(s);
+            if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+          }
+        }
+      };
+      d.querySelector('.drill-check').onclick = toggleDrill;
+      d.querySelector('.drill-name').onclick  = toggleDrill;
+      d.querySelector('.drill-del').onclick   = (e) => { e.stopPropagation(); onDelete(i); };
+      c.appendChild(d);
+    });
+  }
+
+  function renderOFDrills(id, items, timeId, day) {
+    const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+    const n = items.length || 1; const tLabel = ofTimeLabel(n);
+    const tel = document.getElementById(timeId); if (tel) tel.textContent = n > 1 ? '5 min total' : '5 min';
+    if (items.length === 0) { c.innerHTML = '<div class="drill-empty">No offence drills selected</div>'; return; }
+    items.forEach((s, i) => {
+      const d = document.createElement('div'); d.className = 'drill-item of-drill';
+      d.innerHTML = `<span class="drill-check"></span><span class="drill-name">${s}</span><span class="drill-time">${tLabel}</span><button class="drill-del" aria-label="Remove">×</button>`;
+      const toggleOF = () => {
+        const wasDone = d.classList.contains('done');
+        d.classList.toggle('done');
+        const nowDone = d.classList.contains('done');
+        if (nowDone && !wasDone) {
+          if (STATE.sessionDays.hasOwnProperty(s)) {
+            STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
+            saveState();
+            if (typeof Rewards !== 'undefined') Rewards.refreshDrillRow(s);
+            if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+          }
+        }
+      };
+      d.querySelector('.drill-check').onclick = toggleOF;
+      d.querySelector('.drill-name').onclick  = toggleOF;
+      d.querySelector('.drill-del').onclick   = (e) => {
+        e.stopPropagation();
+        const w = day === 1 ? STATE.workout.d1 : STATE.workout.d2;
+        w.of.splice(i, 1); buildWorkout(); saveState();
+      };
+      c.appendChild(d);
+    });
+  }
+
+  function buildWorkout() {
+    renderEditableDrills('d1-bh', STATE.workout.d1.bh, 'bh-drill', true, i => { STATE.workout.d1.bh.splice(i,1); buildWorkout(); saveState(); });
+    renderMandatory('d1-sh-mandatory', DATA.MANDATORY_D1);
+    renderEditableDrills('d1-sh', STATE.workout.d1.sh, 'sh-drill', false, i => { STATE.workout.d1.sh.splice(i,1); buildWorkout(); saveState(); });
+    renderOFDrills('d1-of', STATE.workout.d1.of, 'd1-of-time', 1);
+    renderEditableDrills('d2-bh', STATE.workout.d2.bh, 'bh-drill', true, i => { STATE.workout.d2.bh.splice(i,1); buildWorkout(); saveState(); });
+    renderMandatory('d2-sh-mandatory', DATA.MANDATORY_D2);
+    renderEditableDrills('d2-sh', STATE.workout.d2.sh, 'sh-drill', false, i => { STATE.workout.d2.sh.splice(i,1); buildWorkout(); saveState(); });
+    renderOFDrills('d2-of', STATE.workout.d2.of, 'd2-of-time', 2);
+  }
+
+  function resetDay(day) {
+    if (day === 1) STATE.workout.d1 = { bh: [...DATA.D1_BH_DEF], sh: ["Right layup","Free throw (20 attempts)"], of: ["Hesitation"] };
+    else STATE.workout.d2 = { bh: [...DATA.D2_BH_DEF], sh: ["Left mid-range jump shot","Floater"], of: ["In & Out"] };
+    buildWorkout(); saveState(); showToast('Day ' + day + ' reset to defaults');
+  }
+
+  function renderBHChips() {
+    const c = document.getElementById('bh-pool'); if (!c) return; c.innerHTML = '';
+    DATA.BH_SKILLS.forEach(s => {
+      const b = document.createElement('button');
+      const isNew = DATA.BH_NEW.has(s); const isSel = STATE.sel.bh.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-bh' : '') + (isNew ? ' chip-new' : '');
+      b.innerHTML = s + (isNew ? ' <span class="new-pill">new</span>' : '');
+      b.onclick = () => {
+        if (STATE.sel.bh.has(s)) { STATE.sel.bh.delete(s); b.className = 'chip'+(isNew?' chip-new':''); }
+        else { STATE.sel.bh.add(s); b.className = 'chip chip-sel-bh'+(isNew?' chip-new':''); }
+        updateSelCounts();
+      };
+      c.appendChild(b);
+    });
+    updateSelCounts();
+  }
+
+  function renderSHChips() {
+    const c = document.getElementById('sh-pool'); if (!c) return; c.innerHTML = '';
+    const activeDay = STATE.targets.sh || 1;
+    const activeSet = activeDay === 1 ? STATE.shD1 : STATE.shD2;
+    DATA.SH_OPTIONAL.forEach(s => {
+      const b = document.createElement('button');
+      const isSel = activeSet.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-sh' : '');
+      b.textContent = s;
+      b.onclick = () => {
+        if (activeSet.has(s)) {
+          activeSet.delete(s); b.className = 'chip';
+        } else if (activeSet.size < 5) {
+          activeSet.add(s); b.className = 'chip chip-sel-sh';
+        } else { showToast('Max 5 shooting drills per day'); return; }
+        updateSHPreview(); updateSHCounts();
+        if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
+        else STATE.workout.d2.sh = [...activeSet];
+        buildWorkout(); saveState();
+      };
+      c.appendChild(b);
+    });
+    updateSHPreview(); updateSHCounts();
+  }
+
+  function updateSHPreview() {
+    const preview = document.getElementById('sh-preview'); if (!preview) return;
+    const activeDay = STATE.targets.sh || 1;
+    const activeSet = activeDay === 1 ? STATE.shD1 : STATE.shD2;
+    preview.innerHTML = '';
+    if (activeSet.size === 0) {
+      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
+      return;
+    }
+    [...activeSet].forEach((s, i) => {
+      const pill = document.createElement('div');
+      pill.className = 'of-pill';
+      pill.style.cssText = 'background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.4);color:var(--gold-light)';
+      pill.innerHTML = '<span class="of-pill-num" style="background:rgba(201,168,76,0.3)">' + (i+1) + '</span><span>' + s + '</span><button class="of-pill-remove" style="color:var(--gold)" aria-label="Remove">×</button>';
+      pill.querySelector('.of-pill-remove').onclick = () => {
+        activeSet.delete(s);
+        if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
+        else STATE.workout.d2.sh = [...activeSet];
+        renderSHChips(); buildWorkout(); saveState();
+      };
+      preview.appendChild(pill);
+    });
+  }
+
+  function updateSHCounts() {
+    const c1 = document.getElementById('sh-d1-count'); if (c1) c1.textContent = (STATE.shD1 ? STATE.shD1.size : 0) + '/5';
+    const c2 = document.getElementById('sh-d2-count'); if (c2) c2.textContent = (STATE.shD2 ? STATE.shD2.size : 0) + '/5';
+    const sc = document.getElementById('sh-sel-count');
+    if (sc) sc.textContent = 'Adding to Day ' + (STATE.targets.sh || 1);
+  }
+
+  function setSHDay(day) {
+    STATE.targets.sh = day;
+    document.getElementById('sh-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('sh-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    renderSHChips();
+  }
+
+  function loadSHToWorkout() {
+    const d1Empty = !STATE.shD1 || STATE.shD1.size === 0;
+    const d2Empty = !STATE.shD2 || STATE.shD2.size === 0;
+    if (d1Empty && d2Empty) { showToast('Select shooting drills first'); return; }
+    if (!d1Empty) STATE.workout.d1.sh = [...STATE.shD1];
+    if (!d2Empty) STATE.workout.d2.sh = [...STATE.shD2];
+    buildWorkout(); saveState(); showToast('Shooting drills loaded into session');
+  }
+
+  function clearSHDay() {
+    const day = STATE.targets.sh || 1;
+    if (day === 1) { STATE.shD1.clear(); STATE.workout.d1.sh = []; }
+    else { STATE.shD2.clear(); STATE.workout.d2.sh = []; }
+    renderSHChips(); buildWorkout(); saveState(); showToast('Day ' + day + ' shooting cleared');
+  }
+
+  function renderOFChips() {
+    const c = document.getElementById('of-pool'); if (!c) return; c.innerHTML = '';
+    const activeDay = STATE.targets.of || 1;
+    const activeSet = activeDay === 1 ? STATE.ofD1 : STATE.ofD2;
+    DATA.OF_SKILLS.forEach(s => {
+      const b = document.createElement('button');
+      const isSel = activeSet.has(s);
+      b.className = 'chip' + (isSel ? ' chip-sel-of' : '');
+      b.textContent = s;
+      b.onclick = () => {
+        if (activeSet.has(s)) { activeSet.delete(s); b.className = 'chip'; }
+        else if (activeSet.size < 5) { activeSet.add(s); b.className = 'chip chip-sel-of'; }
+        else { showToast('Max 5 offence drills per day'); return; }
+        updateOFPreview(); updateOFCounts();
+        if (activeDay === 1) STATE.workout.d1.of = [...activeSet];
+        else STATE.workout.d2.of = [...activeSet];
+        buildWorkout(); saveState();
+      };
+      c.appendChild(b);
+    });
+    updateOFPreview(); updateOFCounts();
+  }
+
+  function updateOFPreview() {
+    const preview = document.getElementById('of-preview'); if (!preview) return;
+    const activeDay = STATE.targets.of || 1;
+    const activeSet = activeDay === 1 ? STATE.ofD1 : STATE.ofD2;
+    preview.innerHTML = '';
+    if (activeSet.size === 0) {
+      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
+      return;
+    }
+    [...activeSet].forEach((s, i) => {
+      const pill = document.createElement('div'); pill.className = 'of-pill';
+      pill.innerHTML = `<span class="of-pill-num">${i+1}</span><span>${s}</span><button class="of-pill-remove" aria-label="Remove">×</button>`;
+      pill.querySelector('.of-pill-remove').onclick = () => {
+        activeSet.delete(s);
+        if (activeDay === 1) STATE.workout.d1.of = [...activeSet];
+        else STATE.workout.d2.of = [...activeSet];
+        renderOFChips(); buildWorkout(); saveState();
+      };
+      preview.appendChild(pill);
+    });
+  }
+
+  function updateOFCounts() {
+    const c1 = document.getElementById('of-d1-count'); if (c1) c1.textContent = (STATE.ofD1 ? STATE.ofD1.size : 0) + '/5';
+    const c2 = document.getElementById('of-d2-count'); if (c2) c2.textContent = (STATE.ofD2 ? STATE.ofD2.size : 0) + '/5';
+    const sc = document.getElementById('of-sel-count');
+    if (sc) sc.textContent = 'Adding to Day ' + (STATE.targets.of || 1);
+  }
+
+  function renderPhysChips(cat) {
+    const map = { upper: DATA.UPPER_EX, lower: DATA.LOWER_EX, core: DATA.CORE_EX };
+    const cls = { upper: 'chip-sel-upper', lower: 'chip-sel-lower', core: 'chip-sel-core' };
+    const c = document.getElementById(cat + '-pool'); if (!c) return; c.innerHTML = '';
+    const day = STATE.targets.phys || 1;
+    const currentVal = STATE.phys['d' + day][cat];
+    map[cat].forEach(s => {
+      const b = document.createElement('button');
+      const isCurrent = (s === currentVal);
+      b.className = 'chip' + (isCurrent ? ' ' + cls[cat] : '');
+      b.textContent = s + (isCurrent ? ' ✓' : '');
+      b.onclick = () => {
+        STATE.phys['d' + day][cat] = s;
+        renderPhysChips(cat);
+        buildPhys();
+        saveState();
+        updatePhysPreviews();
+        // Refresh AMRAP chips since exercises changed
+        if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
+        const msg = document.getElementById('phys-msg');
+        if (msg) { msg.textContent = s + ' set for Day ' + day; setTimeout(() => msg.textContent = '', 2000); }
+      };
+      c.appendChild(b);
+    });
+  }
+
+  function setPhysTarget(day) {
+    STATE.targets.phys = day;
+    document.getElementById('phys-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('phys-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    const applyDay = document.getElementById('phys-apply-day');
+    if (applyDay) applyDay.textContent = day;
+    ['upper','lower','core'].forEach(cat => renderPhysChips(cat));
+    updatePhysPreviews();
+  }
+
+  function updatePhysPreviews() {
+    const p1 = document.getElementById('phys-d1-preview');
+    const p2 = document.getElementById('phys-d2-preview');
+    if (p1) p1.textContent = STATE.phys.d1.upper + ' · ' + STATE.phys.d1.lower + ' · ' + STATE.phys.d1.core;
+    if (p2) p2.textContent = STATE.phys.d2.upper + ' · ' + STATE.phys.d2.lower + ' · ' + STATE.phys.d2.core;
+  }
+
+  function updateSelCounts() {
+    const bhc = document.getElementById('bh-sel-count'); if (bhc) bhc.textContent = STATE.sel.bh.size + ' selected';
+  }
+
+  function setOFDay(day) {
+    STATE.targets.of = day;
+    document.getElementById('of-d1-btn').className = 'of-tab' + (day === 1 ? ' of-tab-on' : '');
+    document.getElementById('of-d2-btn').className = 'of-tab' + (day === 2 ? ' of-tab-on' : '');
+    renderOFChips();
+  }
+
+  function loadOFToWorkout() {
+    const d1Empty = !STATE.ofD1 || STATE.ofD1.size === 0;
+    const d2Empty = !STATE.ofD2 || STATE.ofD2.size === 0;
+    if (d1Empty && d2Empty) { showToast('Select offence drills first'); return; }
+    if (!d1Empty) STATE.workout.d1.of = [...STATE.ofD1];
+    if (!d2Empty) STATE.workout.d2.of = [...STATE.ofD2];
+    buildWorkout(); saveState(); showToast('Offence drills loaded into session');
+  }
+
+  function clearOFDay() {
+    const day = STATE.targets.of || 1;
+    if (day === 1) { STATE.ofD1.clear(); STATE.workout.d1.of = []; }
+    else { STATE.ofD2.clear(); STATE.workout.d2.of = []; }
+    renderOFChips(); buildWorkout(); saveState(); showToast('Day ' + day + ' offence cleared');
+  }
+
+  function setTarget(cat, t) {
+    STATE.targets[cat] = t;
+    ['1','2'].forEach(n => {
+      const btn = document.getElementById(cat + '-d' + n + '-btn');
+      if (btn) btn.className = 'day-btn' + (parseInt(n) === t ? ' day-btn-on' : '');
+    });
+  }
+
+  function loadBH() {
+    if (STATE.sel.bh.size === 0) { showToast('Select ball handling drills first'); return; }
+    const arr = [...STATE.sel.bh].slice(0, 5);
+    if (STATE.targets.bh === 1) STATE.workout.d1.bh = arr; else STATE.workout.d2.bh = arr;
+    buildWorkout(); saveState(); showToast('Loaded into Day ' + STATE.targets.bh);
+  }
+  function loadAll() {
+    if (STATE.sel.bh.size > 0) STATE.workout.d1.bh = [...STATE.sel.bh].slice(0,5);
+    if (STATE.sel.of.size > 0) { STATE.workout.d1.of = [...STATE.sel.of]; STATE.workout.d2.of = [...STATE.sel.of]; }
+    buildWorkout(); saveState(); showToast('All selections loaded into Day 1');
+  }
+  function clearSelections() {
+    ['bh','sh','of'].forEach(k => STATE.sel[k].clear());
+    renderBHChips(); renderSHChips(); renderOFChips(); updateSelCounts();
+  }
+  function applyPhys() {
+    const day = STATE.targets.phys || 1;
+    buildPhys(); saveState(); updatePhysPreviews();
+    if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
+    showToast('Day ' + day + ' circuit saved ✓');
+  }
+  function buildPhys() {
+    ['d1','d2'].forEach(d => {
+      ['upper','lower','core'].forEach(cat => {
+        const el = document.getElementById(`${d}-${cat}-name`);
+        if (el) el.textContent = STATE.phys[d][cat];
+      });
+    });
+  }
+  function markDayComplete(day) {
+    if (day === 1) STATE.dayCompletes.d1++; else STATE.dayCompletes.d2++;
+    const total = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    // ★ POINTS: 5pts per session + milestone bonuses
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    STATE.points.skillPts = (STATE.points.skillPts || 0) + 5;
+    let bonusMsg = '';
+    if (total === 6)  { STATE.points.skillPts += 10; bonusMsg = ' +10pts milestone!'; }
+    if (total === 10) { STATE.points.skillPts += 15; bonusMsg = ' +15pts milestone!'; }
+    if (total === 16) { STATE.points.skillPts += 20; bonusMsg = ' +20pts milestone!'; }
+    if (total === 24) { STATE.points.skillPts += 25; bonusMsg = ' +25pts milestone!'; }
+    saveState();
+    showToast('🏆 Day ' + day + ' complete! +5pts' + bonusMsg);
+    Rewards.renderAll(); Dashboard.render();
+    if (typeof Profile !== 'undefined') Profile.renderStats();
+    setTimeout(() => promptLeaderboardUpdate(), 500);
+  }
+  return {
+    buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips,
+    renderPhysChips, setTarget, setSHDay, setOFDay, setPhysTarget,
+    loadBH, loadSHToWorkout, clearSHDay, loadOFToWorkout, clearOFDay,
+    loadAll, clearSelections, applyPhys, markDayComplete,
+    updateSelCounts, updateSHCounts, updateOFCounts, updatePhysPreviews
+  };
+})();
+</script>
+
+<script>
+// ============================================================
+// REWARDS MODULE
+// ============================================================
+const Rewards = (() => {
+
+  function renderAll() {
+    renderSeasonBadges();
+    renderWorkoutBadges();
+    renderRepTracker();
+    renderPhysTracker();
+  }
+
+  function renderSeasonBadges() {
+    const c = document.getElementById('season-badges'); if (!c) return; c.innerHTML = '';
+    const allDefs = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS];
+    allDefs.forEach(b => {
+      const earned = checkBadge(b);
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned && b.key ? ' gold' : earned ? ' earned' : '');
+      card.innerHTML = `<span class="badge-emoji">${b.icon}</span><div class="badge-name">${b.name}</div><div class="badge-sub">${b.sub}</div>`;
+      c.appendChild(card);
+    });
+    // ★ POINTS: award 50pts for master badges (one-time each)
+    awardMasterBadgePts();
+  }
+
+  function awardMasterBadgePts() {
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    if (!STATE.points._masterFlags) STATE.points._masterFlags = {};
+    DATA.SEASON_BADGE_DEFS.forEach(b => {
+      const earned = checkBadge(b);
+      const key = 'master_' + b.cat;
+      if (earned && !STATE.points._masterFlags[key]) {
+        STATE.points._masterFlags[key] = true;
+        STATE.points.badgePts = (STATE.points.badgePts || 0) + 50;
+        saveState();
+        showToast('🏅 ' + b.name + ' badge! +50pts');
+        if (typeof Profile !== 'undefined') Profile.renderStats();
+      }
+    });
+  }
+
+  function checkBadge(b) {
+    if (b.cat === 'bh') return DATA.BH_SKILLS.every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'sh') return [DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL].every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'of') return DATA.OF_SKILLS.every(s => STATE.sessionDays[s] >= 10);
+    if (b.cat === 'phys') return (STATE.physCompletes.d1 + STATE.physCompletes.d2) >= 10;
+    if (b.key) return STATE.shots[b.key]?.badgeEarned || false;
+    return false;
+  }
+
+  function renderWorkoutBadges() {
+    const c = document.getElementById('workout-badges'); if (!c) return; c.innerHTML = '';
+    const total = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const shown = Math.max(6, total + 3);
+    for (let i = 0; i < shown; i++) {
+      const earned = i < total;
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned ? ' earned' : '');
+      card.innerHTML = `<span class="badge-emoji">${earned ? '✅' : '⬜'}</span><div class="badge-name">Session ${i+1}</div><div class="badge-sub">${earned ? 'Complete' : 'Not yet'}</div>`;
+      c.appendChild(card);
+    }
+  }
+
+  function renderRepTracker() {
+    const groups = [
+      {id:'rep-bh', items: DATA.BH_SKILLS},
+      {id:'rep-sh', items: [DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL]},
+      {id:'rep-of', items: DATA.OF_SKILLS}
+    ];
+    groups.forEach(g => {
+      const c = document.getElementById(g.id); if (!c) return; c.innerHTML = '';
+      g.items.forEach(s => {
+        const days = STATE.sessionDays[s] || 0; const earned = days >= 10;
+        const row = document.createElement('div'); row.className = 'rep-row';
+        const pips = Array.from({length:10}, (_,i) =>
+          `<span class="pip ${i<days?(days>=10?'pip-gold':'pip-done'):''}"></span>`
+        ).join('');
+        row.innerHTML = `
+          <div class="rep-top">
+            <span class="rep-label">${s}</span>
+            <div class="rep-controls">
+              <button class="rep-btn" onclick="Rewards.adjustDay('${s}',-1)">−</button>
+              <span class="rep-num" id="rn-${keyOf(s)}">${days}</span>
+              <button class="rep-btn rep-btn-plus" onclick="Rewards.adjustDay('${s}',1)">+</button>
+            </div>
+            <span class="rep-status ${earned?'rep-earned':''}" id="rs-${keyOf(s)}">${earned?'🏆 Badge':days+'/10 days'}</span>
+          </div>
+          <div class="pip-row" id="pips-${keyOf(s)}">${pips}</div>`;
+        c.appendChild(row);
+      });
+    });
+  }
+
+  function adjustDay(s, delta) {
+    const prev = STATE.sessionDays[s] || 0;
+    STATE.sessionDays[s] = Math.max(0, Math.min(99, prev + delta));
+    const cur = STATE.sessionDays[s];
+    
+    // ★ POINTS: 10pts when drill first hits 10/10 (one-time)
+    if (delta > 0 && prev < 10 && cur >= 10) {
+      if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      STATE.points.drillPts = (STATE.points.drillPts || 0) + 10;
+      saveState();
+      showToast('🏆 ' + s + ' — 10/10! +10pts');
+      if (typeof Profile !== 'undefined') Profile.renderStats();
+    }
+    
+    const num = document.getElementById('rn-' + keyOf(s));
+    const status = document.getElementById('rs-' + keyOf(s));
+    const pipsEl = document.getElementById('pips-' + keyOf(s));
+    if (num) num.textContent = cur;
+    if (status) {
+      const earned = cur >= 10;
+      status.textContent = earned ? '🏆 Badge' : cur + '/10 days';
+      status.className = 'rep-status' + (earned ? ' rep-earned' : '');
+    }
+    if (pipsEl) {
+      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
+        `<span class="pip ${i<cur?(cur>=10?'pip-gold':'pip-done'):''}"></span>`
+      ).join('');
+    }
+    saveState(); renderSeasonBadges(); Dashboard.render();
+  }
+
+  function buildShotDots(type) {
+    const c = document.getElementById(type + '-dots'); if (!c) return; c.innerHTML = '';
+    const st = STATE.shots[type];
+    if (!st) return;
+    for (let i = 0; i < 10; i++) {
+      const d = document.createElement('span'); d.className = 'shot-dot';
+      if (st.shots[i] === 'make') d.classList.add('make');
+      else if (st.shots[i] === 'miss') d.classList.add('miss');
+      d.textContent = i + 1;
+      c.appendChild(d);
+    }
+    const makes = st.shots.filter(s => s === 'make').length;
+    const pctEl = document.getElementById(type + '-pct');
+    if (pctEl) pctEl.textContent = makes + '/' + st.shots.length;
+  }
+
+  function logShot(type, result) {
+    const st = STATE.shots[type];
+    if (!st || st.shots.length >= 10) return;
+    st.shots.push(result); buildShotDots(type);
+    const makes = st.shots.filter(s => s === 'make').length;
+    if (st.shots.length === 10 && makes >= st.goal && !st.badgeEarned) {
+      st.badgeEarned = true;
+      const ann = document.getElementById(type + '-announce');
+      if (ann) ann.classList.add('show');
+      saveState(); renderSeasonBadges(); Dashboard.render();
+    }
+  }
+
+  function saveSession(type) {
+    const st = STATE.shots[type];
+    if (!st || st.shots.length === 0) { showToast('No shots logged yet'); return; }
+    const makes = st.shots.filter(s => s === 'make').length;
+    const total = st.shots.length;
+    const p = Math.round((makes / total) * 100);
+    const isGoldDay = makes >= st.goal && total >= 10;
+    st.history.push({ makes, total, pct: p, gold: isGoldDay, label: 'Session ' + (st.history.length + 1) });
+
+    // ★ POINTS: 5pts per qualifying attempt + 10pt bonus at 5th
+    let ptsMsg = '';
+    if (isGoldDay) {
+      if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+      if (!STATE.points.shotPts) STATE.points.shotPts = {};
+      STATE.points.shotPts[type] = (STATE.points.shotPts[type] || 0) + 5;
+      ptsMsg = ' +5pts';
+      
+      // Check if this is 5th qualifying session
+      const qualCount = st.history.filter(h => h.gold).length;
+      if (qualCount >= 5 && !st.badgeEarned) {
+        st.badgeEarned = true;
+        STATE.points.shotPts[type] += 10;
+        ptsMsg = ' +15pts (badge bonus!)';
+        const ann = document.getElementById(type + '-announce');
+        if (ann) ann.classList.add('show');
+        renderSeasonBadges();
+      }
+    }
+
+    st.shots = []; buildShotDots(type);
+    saveState(); Dashboard.render();
+    if (typeof Profile !== 'undefined') Profile.renderStats();
+    showToast('Saved — ' + makes + '/' + total + ' (' + p + '%)' + ptsMsg);
+    setTimeout(() => promptLeaderboardUpdate(), 500);
+  }
+
+  function resetShots(type) {
+    const st = STATE.shots[type]; if (!st) return;
+    st.shots = [];
+    const ann = document.getElementById(type + '-announce');
+    if (ann) ann.classList.remove('show');
+    buildShotDots(type);
+  }
+
+  function refreshDrillRow(s) {
+    const k = keyOf(s);
+    const numEl = document.getElementById('rn-' + k);
+    const statusEl = document.getElementById('rs-' + k);
+    const pipsEl = document.getElementById('pips-' + k);
+    const days = STATE.sessionDays[s] || 0;
+    const earned = days >= 10;
+    if (numEl) numEl.textContent = days;
+    if (statusEl) {
+      statusEl.textContent = earned ? '🏆 Badge' : days + '/10 days';
+      statusEl.className = 'rep-status' + (earned ? ' rep-earned' : '');
+    }
+    if (pipsEl) {
+      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
+        '<span class="pip ' + (i < days ? (days >= 10 ? 'pip-gold' : 'pip-done') : '') + '"></span>'
+      ).join('');
+    }
+    renderSeasonBadges();
+  }
+
+  function markPhysComplete(day) {
+    if (day === 1) STATE.physCompletes.d1++; else STATE.physCompletes.d2++;
+    // ★ POINTS: 7pts per physical session
+    if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
+    STATE.points.physPts = (STATE.points.physPts || 0) + 7;
+    saveState();
+    renderPhysTracker();
+    renderSeasonBadges();
+    if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
+    if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.renderStats();
+    const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+    showToast('Physical session ' + total + ' logged! +7pts 💪');
+    setTimeout(() => promptLeaderboardUpdate(), 500);
+    if (total === 10) {
+      const ann = document.getElementById('phys-master-announce');
+      if (ann) ann.style.display = 'block';
+    }
+  }
+
+  function renderPhysTracker() {
+    const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+    const p = Math.min(Math.round((total / 10) * 100), 100);
+    const d1el = document.getElementById('phys-d1-count-display'); if (d1el) d1el.textContent = STATE.physCompletes.d1;
+    const d2el = document.getElementById('phys-d2-count-display'); if (d2el) d2el.textContent = STATE.physCompletes.d2;
+    const totEl = document.getElementById('phys-total-label'); if (totEl) totEl.textContent = total + ' / 10 sessions';
+    const bar = document.getElementById('phys-progress-bar'); if (bar) bar.style.width = p + '%';
+    const pctEl = document.getElementById('phys-progress-pct'); if (pctEl) pctEl.textContent = p + '%';
+    const pipRow = document.getElementById('phys-pip-row');
+    if (pipRow) {
+      pipRow.innerHTML = Array.from({length: 10}, (_, i) => {
+        const done = i < total; const gold = done && total >= 10;
+        return '<span style="width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:1px solid ' +
+          (gold ? 'var(--gold)' : done ? 'var(--navy-light)' : 'var(--border)') + ';background:' +
+          (gold ? 'rgba(201,168,76,0.25)' : done ? 'rgba(30,79,163,0.3)' : 'rgba(255,255,255,0.04)') + ';color:' +
+          (gold ? 'var(--gold)' : done ? '#7AAEF5' : 'var(--text-muted)') + '">' +
+          (done ? (gold ? '🏋️' : '✓') : (i + 1)) + '</span>';
+      }).join('');
+    }
+    const ann = document.getElementById('phys-master-announce');
+    if (ann) ann.style.display = total >= 10 ? 'block' : 'none';
+  }
+
+  function initShotTrackers() {
+    ['layup','mr','ft','tp'].forEach(t => buildShotDots(t));
+  }
+
+  return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, markPhysComplete,
+           renderPhysTracker, adjustDay, buildShotDots, logShot, saveSession, resetShots,
+           initShotTrackers, refreshDrillRow };
+})();
+</script>
+
+<script>
+// ============================================================
+// DASHBOARD MODULE
+// ============================================================
+const Dashboard = (() => {
+
+  function renderLeaderboard() {
+    const bp = Points.compute();
+    const totEl = document.getElementById('lb-total-pts');
+    if (totEl) totEl.textContent = bp.total.toLocaleString();
+    const rankEl = document.getElementById('lb-rank-badge');
+    if (rankEl) {
+      const rank = bp.total >= 500 ? '🏆 Elite Pioneer' : bp.total >= 300 ? '⭐ Senior Pioneer' : bp.total >= 150 ? '🔥 Rising Pioneer' : bp.total >= 50 ? '💪 Developing Pioneer' : '🌱 New Pioneer';
+      rankEl.textContent = rank;
+    }
+    const acc = document.getElementById('lb-accordions');
+    if (!acc) return;
+    acc.innerHTML = '';
+    
+    // Skills section
+    const skillMilestones = Points.skillMilestoneInfo(bp.skill.sessions);
+    const skillBody = '<div class="pts-row"><span class="pts-row-label">Base (5pts × ' + bp.skill.sessions + ' sessions)</span><span class="pts-row-val">' + (bp.skill.sessions * 5) + 'pts</span></div>' +
+      '<div style="margin-top:8px;font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:600">Milestones</div>' +
+      [6,10,16,24].map(at => {
+        const done = bp.skill.sessions >= at;
+        const bonus = {6:10,10:15,16:20,24:25}[at];
+        return '<div class="pts-milestone-row ' + (done ? 'pts-milestone-earned' : 'pts-milestone-locked') + '"><span class="pts-milestone-icon">' + (done ? '✓' : '○') + '</span><span style="flex:1">' + at + ' sessions</span><span style="font-weight:700">+' + bonus + 'pts</span></div>';
+      }).join('') +
+      (skillMilestones.next ? '<div class="pts-progress-bar"><div class="pts-progress-fill" style="width:' + Math.min(100, Math.round((bp.skill.sessions/skillMilestones.next.at)*100)) + '%"></div></div><div class="pts-progress-label"><span>Next: ' + skillMilestones.next.at + ' sessions</span><span>' + bp.skill.sessions + '/' + skillMilestones.next.at + '</span></div>' : '');
+    
+    const sections = [
+      { icon: '🏀', name: 'Skills Sessions', sub: bp.skill.sessions + ' sessions · +5pts each', pts: bp.skill.pts, body: skillBody },
+      { icon: '💪', name: 'Physical Training', sub: bp.phys.sessions + ' sessions · +7pts each', pts: bp.phys.pts, body: '<div class="pts-row"><span class="pts-row-label">7pts × ' + bp.phys.sessions + ' sessions</span><span class="pts-row-val">' + bp.phys.pts + 'pts</span></div>' },
+      { icon: '🎯', name: 'Shot Accuracy', sub: 'Layup · Mid-range · FT · Three pointer', pts: bp.shot.pts, body: Object.keys(bp.shot.detail).map(t => {
+        const d = bp.shot.detail[t];
+        const labels = {layup:'Layup',mr:'Mid-range',ft:'Free throw',tp:'Three pointer'};
+        const st = STATE.shots[t];
+        const badgeEarned = st && st.badgeEarned;
+        return '<div class="pts-row"><span class="pts-row-label">' + labels[t] + ' (' + d.qualCount + '/5)</span><span class="pts-row-val">' + d.pts + 'pts</span></div>' + (badgeEarned ? '<div class="pts-row"><span class="pts-row-label" style="color:var(--gold)">🥇 Gold bonus</span><span class="pts-row-val">+10pts ✓</span></div>' : '');
+      }).join('') },
+      { icon: '📈', name: 'Training Drills', sub: bp.drill.at10 + ' drills at 10/10 · +10pts each', pts: bp.drill.pts, body: '<div class="pts-row"><span class="pts-row-label">10pts × ' + bp.drill.at10 + ' drills</span><span class="pts-row-val">' + bp.drill.pts + 'pts</span></div>' },
+      { icon: '🏅', name: 'Master Badges', sub: bp.badge.earned + '/4 earned · +50pts each', pts: bp.badge.pts, body: DATA.SEASON_BADGE_DEFS.map(b => '<div class="pts-row"><span class="pts-row-label">' + (Rewards.checkBadge(b) ? '✓ ' : '○ ') + b.name + '</span><span class="pts-row-val ' + (Rewards.checkBadge(b) ? '' : 'muted') + '">' + (Rewards.checkBadge(b) ? '+50pts' : '50pts') + '</span></div>').join('') }
+    ];
+    
+    sections.forEach((s, idx) => {
+      const div = document.createElement('div');
+      div.className = 'pts-accordion';
+      div.innerHTML = '<div class="pts-acc-head" onclick="togglePointsAccordion(' + idx + ')"><span class="pts-acc-icon">' + s.icon + '</span><div class="pts-acc-info"><div class="pts-acc-name">' + s.name + '</div><div class="pts-acc-sub">' + s.sub + '</div></div><span class="pts-acc-pts">' + s.pts + '</span><span class="pts-acc-arrow">▼</span></div><div class="pts-acc-body">' + s.body + '</div>';
+      acc.appendChild(div);
+    });
+  }
+
+  function render() {
+    renderLeaderboard();
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const earnedTech = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+    const earnedBadges = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS].filter(b => Rewards.checkBadge(b)).length;
+    const totalDays = Object.values(STATE.sessionDays).reduce((a, v) => a + v, 0);
+
+    const hero = document.getElementById('dash-hero'); if (!hero) return;
+    hero.innerHTML = `
+      <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Skills</div></div>
+      <div class="dash-metric"><div class="dash-val">${STATE.physCompletes.d1 + STATE.physCompletes.d2}</div><div class="dash-lbl">Physical</div></div>
+      <div class="dash-metric"><div class="dash-val">${earnedBadges}</div><div class="dash-lbl">Badges</div></div>
+      <div class="dash-metric"><div class="dash-val">${earnedTech}/${allDrills.length}</div><div class="dash-lbl">Drills 10+</div></div>
+      <div class="dash-metric"><div class="dash-val">${totalDays}</div><div class="dash-lbl">Drill days</div></div>`;
+
+    const ds = document.getElementById('dash-season'); if (ds) {
+      ds.innerHTML = '';
+      DATA.SEASON_BADGE_DEFS.forEach(b => {
+        const earned = Rewards.checkBadge(b);
+        let done = 0, total = 0;
+        if (b.cat === 'bh') { done = DATA.BH_SKILLS.filter(s => STATE.sessionDays[s]>=10).length; total = DATA.BH_SKILLS.length; }
+        else if (b.cat === 'sh') { const all=[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL]; done=all.filter(s=>STATE.sessionDays[s]>=10).length; total=all.length; }
+        else if (b.cat === 'of') { done=DATA.OF_SKILLS.filter(s=>STATE.sessionDays[s]>=10).length; total=DATA.OF_SKILLS.length; }
+        else if (b.cat === 'phys') { done=Math.min(STATE.physCompletes.d1+STATE.physCompletes.d2,10); total=10; }
+        const p = pct(done, total);
+        ds.innerHTML += `<div class="dash-row ${earned?'dash-earned':''}">
+          <span class="dash-icon">${b.icon}</span>
+          <div class="dash-info"><div class="dash-name">${b.name}</div><div class="dash-desc">${b.sub}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${p}%;background:${earned?'#C9A84C':'#1E4FA3'}"></div></div>
+          <div class="dash-nums">${done}/${total} · ${p}%</div></div>
+          <div class="dash-status ${earned?'s-earned':'s-locked'}">${earned?'Earned':'Locked'}</div>
+        </div>`;
+      });
+    }
+
+    // Gold badges — now includes mid-range ★
+    const dg = document.getElementById('dash-gold'); if (dg) {
+      dg.innerHTML = '';
+      DATA.GOLD_BADGE_DEFS.forEach(b => {
+        const earned = Rewards.checkBadge(b); const st = STATE.shots[b.key];
+        if (!st) return;
+        const allM = st.history.reduce((a,h)=>a+h.makes,0);
+        const allT = st.history.reduce((a,h)=>a+h.total,0);
+        const p = allT > 0 ? pct(allM, allT) : 0;
+        dg.innerHTML += `<div class="dash-row ${earned?'dash-gold':''}">
+          <span class="dash-icon">${b.icon}</span>
+          <div class="dash-info"><div class="dash-name">${b.name}</div><div class="dash-desc">${b.sub} · ${allM}/${allT} cumulative</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${p}%;background:${earned?'#C9A84C':'#1E4FA3'}"></div></div>
+          <div class="dash-nums">${allT>0?allM+'/'+allT+' · '+p+'%':'No attempts yet'}</div></div>
+          <div class="dash-status ${earned?'s-gold':'s-locked'}">${earned?'🥇 Gold':'Locked'}</div>
+        </div>`;
+      });
+    }
+
+    // Cumulative accuracy — now includes mid-range ★
+    const da = document.getElementById('dash-accuracy'); if (da) {
+      da.innerHTML = '';
+      const accDefs = [
+        {key:'layup', label:'Layups',        color:'#1E4FA3', goal:80},
+        {key:'mr',    label:'Mid-range',     color:'#1E4FA3', goal:50}, // ★ NEW ★
+        {key:'ft',    label:'Free throws',   color:'#1E4FA3', goal:60},
+        {key:'tp',    label:'Three pointers',color:'#1E4FA3', goal:40},
+      ];
+      accDefs.forEach(at => {
+        const st = STATE.shots[at.key]; if (!st) return;
+        const allM = st.history.reduce((a,h)=>a+h.makes,0);
+        const allT = st.history.reduce((a,h)=>a+h.total,0);
+        const cumP = allT > 0 ? Math.round((allM/allT)*100) : 0;
+        const best = st.history.length > 0 ? Math.max(...st.history.map(h=>h.pct)) : 0;
+        const isGold = st.badgeEarned;
+        let histHTML = '';
+        if (st.history.length > 0) {
+          histHTML = '<div class="sess-hist">' + st.history.map((h,i) => {
+            const cls = h.gold ? 'sess-gold' : h.pct >= at.goal ? 'sess-hit' : 'sess-miss';
+            return `<span class="sess-dot ${cls}" title="Session ${i+1}: ${h.makes}/${h.total} (${h.pct}%)">${h.pct}%</span>`;
+          }).join('') + '</div>';
+        } else {
+          histHTML = '<div class="no-sessions">Log attempts and tap Save session on the Rewards page</div>';
+        }
+        da.innerHTML += `<div class="acc-card ${isGold?'acc-gold':''}">
+          <div class="acc-head">
+            <div><div class="acc-title">${at.label}</div><div class="acc-goal">Goal: ${at.goal}%</div></div>
+            <div class="acc-pct-big">${cumP}%</div>
+          </div>
+          <div class="acc-bar"><div class="acc-fill" style="width:${Math.min(cumP,100)}%;background:${cumP>=at.goal?'#C9A84C':at.color}"></div></div>
+          <div class="acc-stats">
+            <span><b>${allM}/${allT}</b> makes</span>
+            <span><b>${st.history.length}</b> sessions</span>
+            <span><b>${best>0?best+'%':'—'}</b> best</span>
+            <span><b>${isGold?'🥇':'—'}</b> gold</span>
+          </div>
+          ${histHTML}
+        </div>`;
+      });
+    }
+
+    const dw = document.getElementById('dash-workouts'); if (dw) {
+      const wT = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+      const pT = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+      const physMaster = pT >= 10;
+      dw.innerHTML = `
+        <div class="dash-row ${wT>0?'dash-earned':''}">
+          <span class="dash-icon">🏀</span>
+          <div class="dash-info"><div class="dash-name">Skills sessions</div><div class="dash-desc">Day 1: ${STATE.dayCompletes.d1} · Day 2: ${STATE.dayCompletes.d2}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(wT,24),100)}%;background:#1D9E75"></div></div>
+          <div class="dash-nums">${wT} / 24 · ${Math.min(pct(wT,24),100)}%</div></div>
+          <div class="dash-status ${wT>0?'s-earned':'s-locked'}">${wT} done</div>
+        </div>
+        <div class="dash-row ${physMaster?'dash-gold':pT>0?'dash-earned':''}">
+          <span class="dash-icon">🏋️</span>
+          <div class="dash-info"><div class="dash-name">Physical sessions${physMaster?' 🏆':''}</div><div class="dash-desc">Day 1: ${STATE.physCompletes.d1} · Day 2: ${STATE.physCompletes.d2}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(pct(pT,10),100)}%;background:${physMaster?'var(--gold)':'var(--navy-light)'}"></div></div>
+          <div class="dash-nums">${pT} / 10 sessions · ${Math.min(pct(pT,10),100)}%</div></div>
+          <div class="dash-status ${physMaster?'s-gold':pT>0?'s-earned':'s-locked'}">${physMaster?'Master!':pT+'/10'}</div>
+        </div>`;
+    }
+
+    const drillGroups = [
+      {id:'dash-bh', items:DATA.BH_SKILLS, color:'#1E4FA3'},
+      {id:'dash-sh', items:[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL], color:'#C9A84C'},
+      {id:'dash-of', items:DATA.OF_SKILLS, color:'#1E4FA3'},
+    ];
+    drillGroups.forEach(g => {
+      const c = document.getElementById(g.id); if (!c) return; c.innerHTML = '';
+      g.items.forEach(s => {
+        const days = STATE.sessionDays[s] || 0; const earned = days >= 10; const p = pct(days, 10);
+        c.innerHTML += `<div class="dash-row ${earned?'dash-earned':''}">
+          <span class="dash-icon" style="font-size:14px">${earned?'🏆':'○'}</span>
+          <div class="dash-info"><div class="dash-name">${s}</div></div>
+          <div class="dash-prog-wrap"><div class="dash-bar"><div class="dash-fill" style="width:${Math.min(p,100)}%;background:${earned?'#C9A84C':g.color}"></div></div>
+          <div class="dash-nums">${days}/10 days · ${Math.min(p,100)}%</div></div>
+          <div class="dash-status ${earned?'s-earned':'s-locked'}">${earned?'Badge!':days+'/10'}</div>
+        </div>`;
+      });
+    });
+  }
+
+  return { render };
+})();
+</script>
+
+<script>
+
+// ============================================================
+// PUSH TO COACHES DASHBOARD
+// ============================================================
+
+function pushLeaderboardUpdate() {
+  if (!STATE.playerName) {
+    const name = prompt('Enter your player name:');
+    if (!name) return;
+    STATE.playerName = name;
+    saveState();
+  }
+
+  const bp = Points.compute();
+  const rank = bp.total >= 500 ? '🏆 Elite' : bp.total >= 300 ? '⭐ Senior' : bp.total >= 150 ? '🔥 Rising' : bp.total >= 50 ? '💪 Dev' : '🌱 New';
+  
+  // CAPTURE EXACT PROFILE PAGE FORMAT
+  const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+  const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+  const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+  const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
+  const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+  const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
+  const ftBest = STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) : 0;
+  const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+  
+  const update = {
+    playerName: STATE.playerName,
+    points: bp.total,
+    rank: rank,
+    timestamp: Date.now(),
+    
+    // TEAM LEADERBOARD DATA
+    stats: {
+      skillSessions: totalSessions,
+      physicalSessions: physTotal,
+      shotAccuracy: bp.shot.pts,
+      drillsAt10: drillsAt10,
+      badges: badges
+    },
+    
+    // ★ EXACT PROFILE PAGE CAPTURE
+    profilePageData: {
+      playerName: STATE.playerName,
+      totalPoints: bp.total,
+      rankBadge: rank,
+      
+      seasonStats: {
+        totalPoints: bp.total,
+        sessions: totalSessions,
+        badges: badges,
+        drillsCompleted: drillsAt10 + '/' + allDrills.length,
+        totalDrillDays: totalDrillDays,
+        bestLayupPct: layupBest ? layupBest + '%' : '—',
+        bestFtPct: ftBest ? ftBest + '%' : '—'
+      }
+    }
+  };
+
+  const pending = JSON.parse(localStorage.getItem('pioneers_pending_updates') || '[]');
+  pending.push(update);
+  localStorage.setItem('pioneers_pending_updates', JSON.stringify(pending));
+
+  showToast('📤 Update sent! Coach will approve soon.');
+  alert('✅ Profile pushed to coach dashboard!\n\n' + STATE.playerName + '\n' + bp.total + ' points\nRank: ' + rank);
+}
+
+function promptLeaderboardUpdate() {
+  if (!STATE.playerName) {
+    const name = prompt('Enter your player name (one time):');
+    if (!name) return;
+    STATE.playerName = name;
+    saveState();
+  }
+
+  const confirmed = confirm('Push your leaderboard stats to coach dashboard?\n\nName: ' + STATE.playerName);
+  if (confirmed) {
+    pushLeaderboardUpdate();
+  }
+}
+
+
+// ============================================================
+// APP CONTROLLER
+// ============================================================
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function togglePointsAccordion(idx) {
+  const el = document.querySelector('.pts-accordion:nth-of-type(' + (idx+1) + ')');
+  if (el) el.classList.toggle('open');
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('pg-' + id);
+  if (pg) pg.classList.add('on');
+  if (btn) btn.classList.add('active');
+  STATE.activeTab = id;
+  if (id === 'dashboard') Dashboard.render();
+  if (id === 'rewards') { Rewards.renderAll(); Rewards.initShotTrackers(); }
+  if (id === 'profile') Profile.render();
+  if (id === 'leaderboard') window.scrollTo(0, 0);
+}
+
+// ============================================================
+// POINTS MODULE — Compute totals from STATE
+// ============================================================
+const Points = (() => {
+  function compute() {
+    const p = STATE.points || {};
+    const skillBase = p.skillPts || 0;
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const physBase = p.physPts || 0;
+    
+    let shotBase = 0;
+    const shotDetail = {};
+    ['layup','mr','ft','tp'].forEach(t => {
+      const pts = (p.shotPts && p.shotPts[t]) || 0;
+      shotBase += pts;
+      const qualCount = (STATE.shots[t]?.history || []).filter(h => h.gold).length;
+      shotDetail[t] = { pts, qualCount };
+    });
+    
+    const drillBase = p.drillPts || 0;
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const drillsAt10 = allDrills.filter(s => (STATE.sessionDays[s] || 0) >= 10).length;
+    
+    const badgeBase = p.badgePts || 0;
+    const masterEarned = DATA.SEASON_BADGE_DEFS.filter(b => Rewards.checkBadge(b)).length;
+    
+    return {
+      total: skillBase + physBase + shotBase + drillBase + badgeBase,
+      skill: { pts: skillBase, sessions: totalSessions },
+      phys: { pts: physBase, sessions: STATE.physCompletes.d1 + STATE.physCompletes.d2 },
+      shot: { pts: shotBase, detail: shotDetail },
+      drill: { pts: drillBase, at10: drillsAt10 },
+      badge: { pts: badgeBase, earned: masterEarned }
+    };
+  }
+
+  function skillMilestoneInfo(sessions) {
+    const milestones = [
+      { at: 6, bonus: 10 }, { at: 10, bonus: 15 }, { at: 16, bonus: 20 }, { at: 24, bonus: 25 }
+    ];
+    return {
+      next: milestones.find(m => sessions < m.at),
+      earned: milestones.filter(m => sessions >= m.at)
+    };
+  }
+
+  return { compute, skillMilestoneInfo };
+})();
+
+// ---- AUDIO ENGINE ----
+const Audio = (() => {
+  let ctx = null;
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function beep(freq, dur, vol, type='sine', when=0) {
+    try {
+      const c = getCtx();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.connect(gain); gain.connect(c.destination);
+      osc.type = type; osc.frequency.value = freq;
+      const t = c.currentTime + when;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(vol, t + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      osc.start(t); osc.stop(t + dur + 0.05);
+    } catch(e) {}
+  }
+  function countdownBeep(n) {
+    const freqs = { 3:440, 2:349, 1:523, 0:659 };
+    beep(freqs[n] || 440, n===0 ? 0.6 : 0.25, 0.5, n===0 ? 'triangle' : 'sine');
+    if (n === 0) { setTimeout(()=>beep(784,0.4,0.4,'triangle'), 120); setTimeout(()=>beep(988,0.5,0.35,'triangle'), 240); }
+  }
+  function alarm() {
+    for (let i = 0; i < 5; i++) {
+      beep(880, 0.18, 0.6, 'square', i * 0.22);
+      beep(1100, 0.12, 0.4, 'square', i * 0.22 + 0.14);
+    }
+  }
+  function phase() {
+    beep(660, 0.15, 0.4, 'sine');
+    setTimeout(()=>beep(880,0.2,0.4,'sine'), 160);
+  }
+  return { countdownBeep, alarm, phase };
+})();
+
+// ---- COUNTDOWN ----
+function runCountdown(onComplete, label) {
+  const overlay = document.getElementById('countdown-overlay');
+  if (!overlay) { onComplete(); return; }
+  overlay.innerHTML = '<div id="cd-num" class="countdown-num"></div><div id="cd-txt" class="countdown-text"></div>';
+  overlay.classList.add('show');
+  let count = 3;
+  function showCount() {
+    const numEl = document.getElementById('cd-num');
+    const txtEl = document.getElementById('cd-txt');
+    if (!numEl || !txtEl) { overlay.classList.remove('show'); onComplete(); return; }
+    numEl.style.animation = 'none';
+    void numEl.offsetWidth;
+    numEl.style.animation = '';
+    if (count > 0) {
+      numEl.textContent = count; numEl.className = 'countdown-num';
+      txtEl.textContent = label || ''; txtEl.style.opacity = '0';
+      Audio.countdownBeep(count); count--;
+      setTimeout(showCount, 900);
+    } else {
+      numEl.textContent = "Let's PLAY!";
+      numEl.style.fontSize = '52px'; numEl.style.color = 'var(--gold)';
+      txtEl.textContent = '';
+      Audio.countdownBeep(0);
+      setTimeout(() => { overlay.classList.remove('show'); overlay.innerHTML = ''; onComplete(); }, 950);
+    }
+  }
+  showCount();
+}
+
+// ---- SESSION TIMER ----
+const SESS_TOTAL = 25 * 60;
+let sessInterval = null, sessElapsed = 0;
+
+function startTimer() {
+  if (sessInterval) {
+    clearInterval(sessInterval); sessInterval = null;
+    document.getElementById('start-btn').textContent = 'Resume'; return;
+  }
+  if (sessElapsed === 0) {
+    document.getElementById('start-btn').textContent = '...';
+    runCountdown(() => { document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer(); }, 'Skills session');
+  } else {
+    document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer();
+  }
+}
+
+function _runSessTimer() {
+  sessInterval = setInterval(() => {
+    sessElapsed++;
+    const rem = SESS_TOTAL - sessElapsed;
+    const m = Math.floor(rem / 60), s = rem % 60;
+    const el = document.getElementById('sess-timer');
+    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    let acc = 0, cur = null;
+    for (const p of DATA.PHASES) { acc += p.dur; if (sessElapsed <= acc) { cur = p; break; } }
+    if (cur) {
+      const pl = document.getElementById('phase-label'); if (pl) pl.textContent = cur.label;
+      const pb = document.getElementById('phase-bar');
+      if (pb) { const ps = acc - cur.dur; pb.style.width = Math.round(((sessElapsed - ps) / cur.dur) * 100) + '%'; pb.style.background = cur.color; }
+      if (sessElapsed === acc && sessElapsed < SESS_TOTAL) Audio.phase();
+    }
+    if (rem === 5) Audio.alarm();
+    if (sessElapsed >= SESS_TOTAL) {
+      clearInterval(sessInterval); sessInterval = null;
+      document.getElementById('start-btn').textContent = 'Start';
+      const pl = document.getElementById('phase-label'); if (pl) pl.textContent = 'Session complete!';
+      showToast('Session complete! 🏆');
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(sessInterval); sessInterval = null; sessElapsed = 0;
+  const el = document.getElementById('sess-timer'); if (el) el.textContent = '25:00';
+  const pl = document.getElementById('phase-label'); if (pl) pl.textContent = 'Ready to start';
+  const pb = document.getElementById('phase-bar'); if (pb) pb.style.width = '0%';
+  const btn = document.getElementById('start-btn'); if (btn) btn.textContent = 'Start';
+}
+
+// ---- PHYSICAL TIMER ----
+let physInterval = null, physElapsed = 0;
+const JOG_DUR = 5 * 60, AMRAP_DUR = 5 * 60, PHYS_TOTAL = 10 * 60;
+
+function _updatePhysDisplay() {
+  const jogCard = document.getElementById('phys-jog-card');
+  const amrapCard = document.getElementById('phys-amrap-card');
+  const jogVal = document.getElementById('phys-jog-timer');
+  const amrapVal = document.getElementById('phys-amrap-timer');
+  const jogBar = document.getElementById('phys-jog-bar');
+  const amrapBar = document.getElementById('phys-amrap-bar');
+  const phaseLabel = document.getElementById('phys-phase-label');
+  if (physElapsed <= JOG_DUR) {
+    const rem = JOG_DUR - physElapsed;
+    const m = Math.floor(rem/60), s = rem%60;
+    if (jogVal) jogVal.textContent = m + ':' + (s<10?'0':'') + s;
+    if (amrapVal) amrapVal.textContent = '5:00';
+    if (jogBar) jogBar.style.width = Math.round((physElapsed/JOG_DUR)*100) + '%';
+    if (amrapBar) amrapBar.style.width = '0%';
+    if (jogCard) jogCard.classList.add('active-phase');
+    if (amrapCard) amrapCard.classList.remove('active-phase');
+    if (phaseLabel) phaseLabel.textContent = '🏃 Jogging...';
+  } else {
+    const amrapElapsed = physElapsed - JOG_DUR;
+    const rem = AMRAP_DUR - amrapElapsed;
+    const m = Math.floor(rem/60), s = rem%60;
+    if (jogVal) jogVal.textContent = '0:00';
+    if (amrapVal) amrapVal.textContent = m + ':' + (s<10?'0':'') + s;
+    if (jogBar) jogBar.style.width = '100%';
+    if (amrapBar) amrapBar.style.width = Math.round((amrapElapsed/AMRAP_DUR)*100) + '%';
+    if (jogCard) jogCard.classList.remove('active-phase');
+    if (amrapCard) amrapCard.classList.add('active-phase');
+    if (phaseLabel) phaseLabel.textContent = '💪 AMRAP — go!';
+  }
+}
+
+function startPhysTimer() {
+  if (physInterval) {
+    clearInterval(physInterval); physInterval = null;
+    document.getElementById('phys-start-btn').textContent = 'Resume'; return;
+  }
+  if (physElapsed === 0) {
+    document.getElementById('phys-start-btn').textContent = '...';
+    runCountdown(() => { document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer(); }, 'Physical training');
+  } else {
+    document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer();
+  }
+}
+
+function _runPhysTimer() {
+  physInterval = setInterval(() => {
+    physElapsed++;
+    _updatePhysDisplay();
+    if (physElapsed === JOG_DUR) {
+      Audio.phase(); showToast('Jog done — start your AMRAP! 💪');
+    }
+    if (physElapsed === PHYS_TOTAL - 5) Audio.alarm();
+    if (physElapsed >= PHYS_TOTAL) {
+      clearInterval(physInterval); physInterval = null;
+      document.getElementById('phys-start-btn').textContent = 'Start';
+      const pl = document.getElementById('phys-phase-label'); if (pl) pl.textContent = '✅ Complete!';
+      showToast('Circuit complete! 💪');
+    }
+  }, 1000);
+}
+
+function resetPhysTimer() {
+  clearInterval(physInterval); physInterval = null; physElapsed = 0;
+  document.getElementById('phys-start-btn').textContent = 'Start';
+  const pl = document.getElementById('phys-phase-label'); if (pl) pl.textContent = '';
+  _updatePhysDisplay();
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  if (STATE.shD1 && STATE.shD1.size > 0) STATE.workout.d1.sh = [...STATE.shD1];
+  if (STATE.shD2 && STATE.shD2.size > 0) STATE.workout.d2.sh = [...STATE.shD2];
+  if (STATE.ofD1 && STATE.ofD1.size > 0) STATE.workout.d1.of = [...STATE.ofD1];
+  if (STATE.ofD2 && STATE.ofD2.size > 0) STATE.workout.d2.of = [...STATE.ofD2];
+  Workout.buildWorkout();
+  Workout.buildPhys();
+  Workout.renderBHChips();
+  Workout.renderSHChips();
+  Workout.renderOFChips();
+  if (Workout.updateSHCounts) Workout.updateSHCounts();
+  if (Workout.updateOFCounts) Workout.updateOFCounts();
+  if (Workout.updatePhysPreviews) Workout.updatePhysPreviews();
+  ['upper','lower','core'].forEach(c => Workout.renderPhysChips(c));
+  Rewards.renderAll();
+  Rewards.initShotTrackers();
+  Profile.render();
+  // ★ Init AMRAP tracker ★
+  AmrapTracker.init();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+  const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+  const isStandalone = window.navigator.standalone;
+  if (isIOS && !isStandalone) {
+    const banner = document.getElementById('install-banner');
+    if (banner) { banner.style.display = 'flex'; setTimeout(() => banner.style.opacity = '1', 100); }
+  }
+});
+
+// ============================================================
+// PROFILE MODULE
+// ============================================================
+const Profile = (() => {
+  let editMode = false;
+
+  function render() {
+    const p = STATE.profile;
+    const initials = document.getElementById('profile-avatar-initials');
+    const img = document.getElementById('profile-avatar-img');
+    if (p.photo) { img.src = p.photo; img.style.display = 'block'; if(initials) initials.style.display='none'; }
+    else { if(img) img.style.display='none'; if(initials){ initials.style.display=''; initials.textContent = p.name ? p.name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '?'; } }
+    const dn = document.getElementById('profile-display-name');
+    if (dn) dn.textContent = p.name || 'Your Name';
+    const dnum = document.getElementById('profile-display-number');
+    if (dnum) dnum.textContent = (p.number ? '#' + p.number : '#00') + (p.position ? ' · ' + p.position : ' · Select position');
+    const meta = document.getElementById('profile-meta');
+    if (meta) {
+      meta.innerHTML = '';
+      if (p.team) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='🏀 '+p.team; meta.appendChild(c); }
+      const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+      if (totalSessions > 0) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='⚡ '+totalSessions+' sessions'; meta.appendChild(c); }
+      const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+      if (badges > 0) { const c=document.createElement('span'); c.className='profile-meta-chip'; c.textContent='🏅 '+badges+' badges'; meta.appendChild(c); }
+    }
+    renderStats(); renderBadges(); renderShooting(); renderTopDrills();
+  }
+
+  function renderStats() {
+    const c = document.getElementById('profile-stats'); if (!c) return;
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
+    const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
+    const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
+    const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
+    
+    // ★ Total points
+    const totalPts = Points.compute().total;
+    const rank = totalPts >= 500 ? 'Elite Pioneer' : totalPts >= 300 ? 'Senior Pioneer' : totalPts >= 150 ? 'Rising Pioneer' : totalPts >= 50 ? 'Developing Pioneer' : 'New Pioneer';
+    
+    let html = '<div class="profile-stat pts-stat"><div class="profile-stat-val">' + totalPts.toLocaleString() + '</div><div class="profile-stat-lbl">Season Points · ' + rank + '</div></div>';
+    html += [
+      { val: totalSessions, lbl: 'Sessions' },
+      { val: badges, lbl: 'Badges' },
+      { val: drillsAt10 + '/' + allDrills.length, lbl: 'Drills 10+' },
+      { val: totalDrillDays, lbl: 'Drill days' },
+      { val: layupBest ? layupBest + '%' : '—', lbl: 'Best layup%' },
+      { val: STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) + '%' : '—', lbl: 'Best FT%' },
+    ].map(s => '<div class="profile-stat"><div class="profile-stat-val">' + s.val + '</div><div class="profile-stat-lbl">' + s.lbl + '</div></div>').join('');
+    
+    c.innerHTML = html;
+  }
+
+  function renderBadges() {
+    const c = document.getElementById('profile-badges'); if (!c) return; c.innerHTML = '';
+    [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].forEach(b => {
+      const earned = Rewards.checkBadge(b);
+      const card = document.createElement('div');
+      card.className = 'badge-card' + (earned && b.key ? ' gold' : earned ? ' earned' : '');
+      card.innerHTML = '<span class="badge-emoji">' + b.icon + '</span><div class="badge-name">' + b.name + '</div><div class="badge-sub">' + b.sub + '</div>';
+      c.appendChild(card);
+    });
+  }
+
+  function renderShooting() {
+    const c = document.getElementById('profile-shooting'); if (!c) return;
+    const types = [
+      { key:'layup', label:'Layups',        goal:80 },
+      { key:'mr',    label:'Mid-range',     goal:50 }, // ★ NEW ★
+      { key:'ft',    label:'Free throws',   goal:60 },
+      { key:'tp',    label:'Three pointers',goal:40 },
+    ];
+    c.innerHTML = '';
+    types.forEach(t => {
+      const st = STATE.shots[t.key]; if (!st) return;
+      const allM = st.history.reduce((a,h)=>a+h.makes,0);
+      const allT = st.history.reduce((a,h)=>a+h.total,0);
+      const cumPct = allT > 0 ? Math.round((allM/allT)*100) : 0;
+      const best = st.history.length > 0 ? Math.max(...st.history.map(h=>h.pct)) : 0;
+      const goldEarned = st.badgeEarned;
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)';
+      row.innerHTML = `<span style="font-size:18px">${goldEarned?'🥇':'🎯'}</span>
+        <div style="flex:1"><div style="font-size:15px;font-weight:600;color:var(--white)">${t.label}</div>
+        <div style="font-size:12px;color:var(--text-muted)">${allT > 0 ? allM+'/'+allT+' total attempts' : 'No attempts yet'}</div></div>
+        <div style="text-align:right">
+          <div style="font-family:var(--font-display);font-size:20px;font-weight:800;color:${cumPct>=t.goal?'var(--gold)':'var(--text-secondary)'}">${cumPct}%</div>
+          <div style="font-size:11px;color:var(--text-muted)">Best: ${best>0?best+'%':'—'}</div>
+        </div>`;
+      c.appendChild(row);
+    });
+  }
+
+  function renderTopDrills() {
+    const c = document.getElementById('profile-top-drills'); if (!c) return;
+    const all = Object.entries(STATE.sessionDays).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    if (all.length === 0) { c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">Start ticking off drills during your session and they\'ll appear here</div>'; return; }
+    c.innerHTML = all.map(([drill, days]) => {
+      const p = Math.min(Math.round((days/10)*100), 100);
+      const earned = days >= 10;
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:14px;color:var(--text-primary)">${earned?'🏆 ':''}${drill}</span>
+          <span style="font-size:13px;font-weight:600;color:${earned?'var(--gold)':'var(--text-secondary)'}">${days}/10 days</span>
+        </div>
+        <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px">
+          <div style="height:100%;border-radius:2px;width:${p}%;background:${earned?'var(--gold)':'var(--navy-light)'}"></div>
+        </div></div>`;
+    }).join('');
+  }
+
+  function toggleEdit() {
+    editMode = !editMode;
+    const form = document.getElementById('profile-edit-form');
+    const btn = document.getElementById('profile-edit-btn');
+    const nameInput = document.getElementById('profile-input-name');
+    const nameDisplay = document.getElementById('profile-display-name');
+    if (editMode) {
+      form.style.display = 'block'; btn.textContent = 'Cancel';
+      nameDisplay.style.display = 'none'; nameInput.style.display = 'block';
+      const p = STATE.profile;
+      document.getElementById('pf-name').value = p.name || '';
+      document.getElementById('pf-number').value = p.number || '';
+      document.getElementById('pf-position').value = p.position || '';
+      document.getElementById('pf-team').value = p.team || '';
+      nameInput.value = p.name || '';
+    } else { cancelEdit(); }
+  }
+
+  function cancelEdit() {
+    editMode = false;
+    const form = document.getElementById('profile-edit-form');
+    const btn = document.getElementById('profile-edit-btn');
+    const nameInput = document.getElementById('profile-input-name');
+    const nameDisplay = document.getElementById('profile-display-name');
+    if (form) form.style.display = 'none';
+    if (btn) btn.textContent = 'Edit';
+    if (nameInput) nameInput.style.display = 'none';
+    if (nameDisplay) nameDisplay.style.display = 'block';
+    render();
+  }
+
+  function previewName(val) {}
+
+  function save() {
+    STATE.profile.name     = document.getElementById('pf-name').value.trim();
+    STATE.profile.number   = document.getElementById('pf-number').value.trim();
+    STATE.profile.position = document.getElementById('pf-position').value;
+    STATE.profile.team     = document.getElementById('pf-team').value.trim();
+    saveState(); cancelEdit(); showToast('Profile saved 👊');
+  }
+
+  function pickPhoto() {
+    const input = document.getElementById('avatar-upload');
+    if (input) input.click();
+  }
+
+  function handlePhoto(input) {
+    const file = input.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => { STATE.profile.photo = e.target.result; saveState(); render(); };
+    reader.readAsDataURL(file);
+  }
+
+  return { render, toggleEdit, cancelEdit, save, pickPhoto, handlePhoto, previewName, renderStats, renderTopDrills };
+})();
+</script>
+
+<!-- ★ UPDATE BANNER ★ -->
+<div id="update-banner">
+  <div class="update-content">
+    <div class="update-title">🚀 App Update Available</div>
+    <div class="update-text">New features and improvements — tap to update</div>
+  </div>
+  <div class="update-actions">
+    <button class="btn btn-sm" onclick="AppUpdater.dismissUpdate()">Later</button>
+    <button class="btn btn-start btn-sm" onclick="AppUpdater.startUpdate()">Update</button>
+  </div>
+</div>
+
+<!-- ★ UPDATE MODAL ★ -->
+<div id="update-modal">
+  <div class="update-modal-content">
+    <div class="update-modal-icon" id="update-icon">⬇️</div>
+    <div class="update-modal-title" id="update-modal-title">Updating App</div>
+    <div class="update-modal-text" id="update-modal-text">Downloading latest version from GitHub...</div>
+    <div class="update-progress" id="update-progress-wrap" style="display:none">
+      <div class="update-progress-bar">
+        <div class="update-progress-fill" id="update-progress-fill"></div>
+      </div>
+      <div class="update-progress-text" id="update-progress-text">0%</div>
+    </div>
+    <div id="update-modal-actions" style="display:none;margin-top:16px">
+      <button class="btn btn-gold" onclick="location.reload()">Reload App</button>
+    </div>
+  </div>
 </div>
 
 <!-- ★ TEAM LEADERBOARD PUSH PROMPT ★ -->
@@ -229,37 +3040,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   </div>
 </div>
 
-<!-- ★ UPDATE BANNER ★ -->
-<div id="update-banner">
-  <div class="update-content">
-    <div class="update-title">🚀 App Update Available</div>
-    <div class="update-text">New features and improvements — tap to update</div>
-  </div>
-  <div class="update-actions">
-    <button class="btn btn-sm" onclick="AppUpdater.dismissUpdate()">Later</button>
-    <button class="btn btn-start btn-sm" onclick="AppUpdater.startUpdate()">Update</button>
-  </div>
-</div>
-
-<!-- ★ UPDATE MODAL (progress screen) ★ -->
-<div id="update-modal">
-  <div class="update-modal-content">
-    <div class="update-modal-icon" id="update-icon">⬇️</div>
-    <div class="update-modal-title" id="update-modal-title">Updating App</div>
-    <div class="update-modal-text" id="update-modal-text">Downloading latest version from GitHub...</div>
-    <div class="update-progress" id="update-progress-wrap" style="display:none">
-      <div class="update-progress-bar">
-        <div class="update-progress-fill" id="update-progress-fill"></div>
-      </div>
-      <div class="update-progress-text" id="update-progress-text">0%</div>
-    </div>
-    <div id="update-modal-actions" style="display:none;margin-top:16px">
-      <button class="btn btn-gold" onclick="location.reload()">Reload App</button>
-    </div>
-  </div>
-</div>
-
-<!-- ★ UPDATE SYSTEM SCRIPT ★ -->
+<!-- ★ UPDATE AND PUSH SYSTEMS SCRIPT ★ -->
 <script>
 // ============================================================
 // APP UPDATE SYSTEM
@@ -273,7 +3054,6 @@ const AppUpdater = (() => {
   let updateAvailable = false;
   let latestVersion = null;
 
-  // Extract version from HTML meta tag
   function extractVersionFromHtml(htmlContent) {
     try {
       const match = htmlContent.match(/<meta\s+name="app-version"\s+content="([^"]+)"/i);
@@ -284,7 +3064,6 @@ const AppUpdater = (() => {
     }
   }
 
-  // Compare semantic versions (e.g., "1.0.0" vs "1.0.1")
   function isNewVersion(current, latest) {
     if (!current || !latest) return false;
     const currParts = current.split('.').map(Number);
@@ -298,25 +3077,18 @@ const AppUpdater = (() => {
     return false;
   }
 
-  // Check GitHub for updates
   async function checkForUpdates() {
     try {
       console.log('🔍 Checking GitHub for updates...');
-      
-      // Fetch the latest index.html from GitHub
       const response = await fetch(GITHUB_RAW, {
         method: 'GET',
         headers: { 'Accept': 'text/html' }
       });
-
       if (!response.ok) throw new Error('Failed to fetch from GitHub');
-      
       const htmlContent = await response.text();
       const extractedVersion = extractVersionFromHtml(htmlContent);
-
       console.log('Current version:', APP_VERSION);
       console.log('Latest version:', extractedVersion);
-
       if (extractedVersion && isNewVersion(APP_VERSION, extractedVersion)) {
         console.log('✅ Update available:', extractedVersion);
         updateAvailable = true;
@@ -333,7 +3105,6 @@ const AppUpdater = (() => {
     }
   }
 
-  // Show the update banner
   function showUpdateBanner() {
     const banner = document.getElementById('update-banner');
     if (banner) {
@@ -342,16 +3113,12 @@ const AppUpdater = (() => {
     }
   }
 
-  // Start the update process
   async function startUpdate() {
     const banner = document.getElementById('update-banner');
     if (banner) banner.classList.remove('show');
-
     const modal = document.getElementById('update-modal');
     if (modal) modal.classList.add('show');
-
     try {
-      // Save all player data before updating
       console.log('💾 Saving player data...');
       const playerData = {
         state: window.STATE || {},
@@ -359,51 +3126,22 @@ const AppUpdater = (() => {
         version: APP_VERSION
       };
       localStorage.setItem('pioneers_backup_' + Date.now(), JSON.stringify(playerData));
-      
-      // Keep the main state backup
       localStorage.setItem('pioneers_state_backup', JSON.stringify(playerData.state));
-
       console.log('⬇️ Downloading latest version...');
       updateModalTitle('Downloading Update');
       updateModalText('Fetching latest version from GitHub...');
-
       const response = await fetch(GITHUB_RAW);
       if (!response.ok) throw new Error('Download failed');
-
-      let receivedLength = 0;
-      const contentLength = response.headers.get('content-length');
-      const reader = response.body.getReader();
-      const chunks = [];
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        chunks.push(value);
-        receivedLength += value.length;
-        
-        // Update progress
-        const progress = Math.round((receivedLength / contentLength) * 100);
-        showUpdateProgress(progress);
-      }
-
-      // Convert chunks to text
-      const htmlContent = new TextDecoder().decode(new Uint8Array(chunks.reduce((a, v) => a.concat(Array.from(v)), [])));
-
+      const htmlContent = await response.text();
       console.log('✅ Download complete');
       updateModalTitle('Installing Update');
       updateModalText('Installing new version...');
       showUpdateProgress(95);
-
-      // Verify version in downloaded content
       const newVersion = extractVersionFromHtml(htmlContent);
       if (!newVersion) throw new Error('Could not verify downloaded version');
-
       console.log('📦 Installing version:', newVersion);
-
-      // Store the new HTML in localStorage
       localStorage.setItem('pioneers_html_update', htmlContent);
       localStorage.setItem('pioneers_update_version', newVersion);
-
       showUpdateProgress(100);
       setTimeout(() => {
         updateModalTitle('✅ Update Complete');
@@ -412,7 +3150,6 @@ const AppUpdater = (() => {
         document.getElementById('update-progress-wrap').style.display = 'none';
         document.getElementById('update-modal-actions').style.display = 'block';
       }, 800);
-
     } catch (error) {
       console.error('Update failed:', error);
       updateModalTitle('❌ Update Failed');
@@ -456,15 +3193,8 @@ const AppUpdater = (() => {
     if (modal) modal.classList.remove('show');
   }
 
-  // Initialize on app load
   async function init() {
     console.log('🚀 Guardians U14 App - Version', APP_VERSION);
-    
-    // Display current version
-    const versionDisplay = document.getElementById('app-version-display');
-    if (versionDisplay) versionDisplay.textContent = APP_VERSION;
-
-    // Check if user dismissed update today
     const dismissed = localStorage.getItem('pioneers_update_dismissed');
     if (dismissed) {
       const dayAgo = Date.now() - (24 * 60 * 60 * 1000);
@@ -473,8 +3203,6 @@ const AppUpdater = (() => {
         return;
       }
     }
-
-    // Check for updates
     await checkForUpdates();
   }
 
@@ -495,87 +3223,59 @@ const AppUpdater = (() => {
 const LeaderboardPush = (() => {
   const LEADERBOARD_REPO = 'https://github.com/Woollis-profile/Guardians-Team-Leaderboard.git';
   const LEADERBOARD_API = 'https://api.github.com/repos/Woollis-profile/Guardians-Team-Leaderboard';
-  const PUSH_COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  const PUSH_COOLDOWN = 7 * 24 * 60 * 60 * 1000;
 
-  // Check if player should be prompted to push
   function shouldPromptPush() {
     const lastPush = localStorage.getItem('pioneers_last_push_time');
     const now = Date.now();
-    
-    if (!lastPush) {
-      // Never pushed before
-      return true;
-    }
-    
+    if (!lastPush) return true;
     const timeSinceLastPush = now - parseInt(lastPush);
     return timeSinceLastPush >= PUSH_COOLDOWN;
   }
 
-  // Show push prompt modal
   function showPrompt() {
     const modal = document.getElementById('push-prompt-modal');
-    if (modal) {
-      modal.classList.add('show');
-    }
+    if (modal) modal.classList.add('show');
   }
 
-  // Dismiss the prompt
   function dismissPrompt() {
     const modal = document.getElementById('push-prompt-modal');
-    if (modal) {
-      modal.classList.remove('show');
-    }
-    // Record dismissal (remind in 7 days)
+    if (modal) modal.classList.remove('show');
     localStorage.setItem('pioneers_last_push_time', Date.now().toString());
   }
 
-  // Collect player stats from profile page
   function collectPlayerStats() {
     if (!STATE.profile || !STATE.profile.name) {
       showToast('Please complete your profile first');
       return null;
     }
-
     const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
     const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
     const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
     const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
     const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
     const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
-    
-    // Calculate accuracy stats
     const layupMakes = STATE.shots.layup.history.reduce((a,h)=>a+h.makes,0);
     const layupTotal = STATE.shots.layup.history.reduce((a,h)=>a+h.total,0);
     const layupPct = layupTotal > 0 ? Math.round((layupMakes/layupTotal)*100) : 0;
-    
     const ftMakes = STATE.shots.ft.history.reduce((a,h)=>a+h.makes,0);
     const ftTotal = STATE.shots.ft.history.reduce((a,h)=>a+h.total,0);
     const ftPct = ftTotal > 0 ? Math.round((ftMakes/ftTotal)*100) : 0;
-
     const totalPoints = Points.compute().total;
-
     return {
       playerName: STATE.profile.name,
       playerNumber: STATE.profile.number || '00',
       position: STATE.profile.position || 'TBD',
       team: STATE.profile.team || 'Pioneers U14',
       timestamp: new Date().toISOString(),
-      
-      // Training stats
       skillSessions: totalSessions,
       physicalSessions: physTotal,
       drillsCompleted: drillsAt10,
       totalDrillDays: totalDrillDays,
       badgesEarned: badges,
-      
-      // Shooting stats
       layupAccuracy: layupPct,
       freeThrowAccuracy: ftPct,
-      
-      // Overall
       totalPoints: totalPoints,
-      
-      // Raw data
       sessionDays: STATE.sessionDays,
       shots: STATE.shots,
       dayCompletes: STATE.dayCompletes,
@@ -583,90 +3283,59 @@ const LeaderboardPush = (() => {
     };
   }
 
-  // Send stats to leaderboard (simulated - would need backend)
   async function sendToLeaderboard() {
     const stats = collectPlayerStats();
     if (!stats) return;
-
     dismissPrompt();
-    
     try {
       console.log('📤 Sending stats to team leaderboard...');
-      
-      // Create backup/snapshot of stats being sent
       const pushRecord = {
         stats: stats,
         sentAt: Date.now(),
         success: false
       };
-      
-      // Store the push record locally
       const pushHistory = JSON.parse(localStorage.getItem('pioneers_push_history') || '[]');
       pushHistory.unshift(pushRecord);
-      if (pushHistory.length > 10) pushHistory.length = 10; // Keep last 10
+      if (pushHistory.length > 10) pushHistory.length = 10;
       localStorage.setItem('pioneers_push_history', JSON.stringify(pushHistory));
-
-      // In a real implementation, this would send to a backend server
-      // that then commits the data to the GitHub leaderboard repo
-      // For now, we simulate the success
-      
       console.log('✅ Stats collected and recorded:', stats);
       console.log('📍 Leaderboard repo: ' + LEADERBOARD_REPO);
-      
-      // Mark the push time
       localStorage.setItem('pioneers_last_push_time', Date.now().toString());
       localStorage.setItem('pioneers_last_push_stats', JSON.stringify(stats));
-      
-      // Show success modal
       showSuccess();
-
-      // Log for coach debugging
       console.log('🏀 Player:', stats.playerName);
       console.log('📊 Points:', stats.totalPoints);
       console.log('🎯 Sessions:', stats.skillSessions);
       console.log('💪 Physical:', stats.physicalSessions);
-
     } catch (error) {
       console.error('Failed to send stats:', error);
       showToast('Failed to send stats. Please try again.');
     }
   }
 
-  // Show success confirmation
   function showSuccess() {
     const modal = document.getElementById('push-success-modal');
     if (modal) {
       modal.classList.add('show');
       setTimeout(() => {
-        // Auto-close after 3 seconds
         setTimeout(() => closeSuccess(), 3000);
       }, 500);
     }
   }
 
-  // Close success modal
   function closeSuccess() {
     const modal = document.getElementById('push-success-modal');
-    if (modal) {
-      modal.classList.remove('show');
-    }
+    if (modal) modal.classList.remove('show');
   }
 
-  // Trigger prompt when appropriate
   function checkAndPrompt() {
     if (shouldPromptPush()) {
-      // Wait a moment for user to see their completion
-      setTimeout(() => {
-        showPrompt();
-      }, 1000);
+      setTimeout(() => showPrompt(), 1000);
     }
   }
 
-  // Initialize on app load
   function init() {
     console.log('📤 Team Leaderboard Push System Ready');
-    
-    // Check if there are pending pushes
     const lastPush = localStorage.getItem('pioneers_last_push_time');
     if (lastPush) {
       const daysSince = Math.floor((Date.now() - parseInt(lastPush)) / (24 * 60 * 60 * 1000));
@@ -687,135 +3356,11 @@ const LeaderboardPush = (() => {
   };
 })();
 
-// Minimal session timer (keep existing timer logic)
-const SESS_TOTAL = 25 * 60;
-let sessInterval = null, sessElapsed = 0;
-
-function startTimer() {
-  if (sessInterval) {
-    clearInterval(sessInterval);
-    sessInterval = null;
-    document.getElementById('start-btn').textContent = 'Resume';
-    return;
-  }
-  if (sessElapsed === 0) {
-    document.getElementById('start-btn').textContent = 'Pause';
-    _runSessTimer();
-  } else {
-    document.getElementById('start-btn').textContent = 'Pause';
-    _runSessTimer();
-  }
-}
-
-function _runSessTimer() {
-  sessInterval = setInterval(() => {
-    sessElapsed++;
-    const rem = SESS_TOTAL - sessElapsed;
-    const m = Math.floor(rem / 60), s = rem % 60;
-    const el = document.getElementById('sess-timer');
-    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    if (sessElapsed >= SESS_TOTAL) {
-      clearInterval(sessInterval);
-      sessInterval = null;
-      document.getElementById('start-btn').textContent = 'Start';
-      const pl = document.getElementById('phase-label');
-      if (pl) pl.textContent = 'Session complete!';
-    }
-  }, 1000);
-}
-
-function resetTimer() {
-  clearInterval(sessInterval);
-  sessInterval = null;
-  sessElapsed = 0;
-  const el = document.getElementById('sess-timer');
-  if (el) el.textContent = '25:00';
-  const pl = document.getElementById('phase-label');
-  if (pl) pl.textContent = 'Ready to start';
-  const btn = document.getElementById('start-btn');
-  if (btn) btn.textContent = 'Start';
-}
-
-function showTab(id, btn) {
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  const pg = document.getElementById('pg-' + id);
-  if (pg) pg.classList.add('on');
-  if (btn) btn.classList.add('active');
-}
-
-// Toast notification system
-function showToast(msg) {
-  let t = document.getElementById('toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'toast';
-    t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--navy-mid);color:var(--gold);border:1px solid var(--border-gold);border-radius:24px;padding:10px 22px;font-size:15px;font-weight:600;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;z-index:999;max-width:calc(100vw - 40px);text-align:center';
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.opacity = '1';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.style.opacity = '0', 2500);
-}
-
-// Keep minimal STATE object for data persistence
-const STATE = {
-  workout: {},
-  phys: {},
-  sessionDays: {},
-  dayCompletes: { d1: 0, d2: 0 },
-  physCompletes: { d1: 0, d2: 0 },
-  shots: {},
-  amrap: {},
-  points: {},
-  playerName: '',
-  activeTab: 'workout',
-  profile: {}
-};
-
-// Minimal data structures for leaderboard system
-const DATA = {
-  BH_SKILLS: [],
-  MANDATORY_D1: 'Close form shooting',
-  MANDATORY_D2: 'Close form shooting',
-  SH_OPTIONAL: [],
-  OF_SKILLS: [],
-  SEASON_BADGE_DEFS: [],
-  GOLD_BADGE_DEFS: []
-};
-
-const Rewards = {
-  checkBadge: () => false
-};
-
-const Points = {
-  compute: () => ({ total: 0 })
-};
-
-function saveState() {
-  try {
-    localStorage.setItem('pioneers_state', JSON.stringify(STATE));
-  } catch(e) {}
-}
-
-function loadState() {
-  try {
-    const raw = localStorage.getItem('pioneers_state');
-    if (raw) {
-      const loaded = JSON.parse(raw);
-      Object.assign(STATE, loaded);
-    }
-  } catch(e) {}
-}
-
-// Initialize app on load
+// Initialize update and push systems
 document.addEventListener('DOMContentLoaded', () => {
-  loadState();
   AppUpdater.init();
   LeaderboardPush.init();
 });
 </script>
-
 </body>
 </html>
