@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Pioneers">
 <meta name="description" content="Greater Springfield Pioneers U14 Basketball Training Guide">
 <!-- ★ APP VERSION (increment this on each release) ★ -->
-<meta name="app-version" content="1.0.0">
+<meta name="app-version" content="1.0.1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -372,9 +372,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .phys-bar-wrap { height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:6px; }
 .phys-bar-fill { height:100%;border-radius:2px;background:var(--gold);transition:width .5s;width:0%; }
 
-/* ============================================================
-   AMRAP REP TRACKER — NEW
-   ============================================================ */
+/* AMRAP REP TRACKER */
 .amrap-tracker {
   border-top:1px solid var(--border-gold);
   background:rgba(201,168,76,0.04);
@@ -386,7 +384,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   display:flex;align-items:center;justify-content:space-between;
 }
 .amrap-tracker-title span { font-family:var(--font-body);font-size:11px;color:var(--text-muted);font-weight:400;letter-spacing:.02em;text-transform:none; }
-/* Sets counter */
 .amrap-sets-row {
   display:flex;align-items:center;gap:10px;margin-bottom:14px;
   background:rgba(255,255,255,0.04);border:1px solid var(--border);
@@ -408,17 +405,12 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 }
 .amrap-cbtn.plus { border-color:var(--border-gold);color:var(--gold);background:rgba(201,168,76,0.1); }
 .amrap-cbtn:active { transform:scale(.92); }
-/* Last exercise selector */
-.amrap-last-ex {
-  margin-bottom:12px;
-}
+.amrap-last-ex { margin-bottom:12px; }
 .amrap-last-ex-label {
   font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;
   letter-spacing:.06em;margin-bottom:6px;
 }
-.amrap-ex-chips {
-  display:flex;flex-wrap:wrap;gap:6px;
-}
+.amrap-ex-chips { display:flex;flex-wrap:wrap;gap:6px; }
 .amrap-ex-chip {
   padding:6px 12px;border-radius:20px;border:1px solid var(--border);
   background:transparent;color:var(--text-secondary);font-size:13px;
@@ -427,7 +419,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .amrap-ex-chip.selected-upper { background:rgba(30,79,163,0.3);color:#7AAEF5;border-color:rgba(30,79,163,0.7); }
 .amrap-ex-chip.selected-lower { background:rgba(201,168,76,0.2);color:var(--gold-light);border-color:var(--border-gold); }
 .amrap-ex-chip.selected-core  { background:rgba(100,200,120,0.2);color:#80E090;border-color:rgba(100,200,120,0.5); }
-/* Individual reps counter */
 .amrap-reps-row {
   display:flex;align-items:center;gap:10px;
   background:rgba(255,255,255,0.04);border:1px solid var(--border);
@@ -439,7 +430,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--white);
   min-width:36px;text-align:center;line-height:1;
 }
-/* Summary box */
 .amrap-summary {
   background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);
   border-radius:var(--radius-md);padding:10px 14px;
@@ -449,7 +439,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .amrap-summary.show { display:block; }
 .amrap-summary strong { color:var(--gold); }
 .amrap-save-row { display:flex;gap:8px;margin-top:10px;flex-wrap:wrap; }
-/* Saved history */
 .amrap-history { margin-top:10px; }
 .amrap-history-title { font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px; }
 .amrap-hist-entry {
@@ -460,9 +449,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
 .amrap-hist-entry:last-child { border-bottom:none; }
 .amrap-hist-date { color:var(--text-muted); }
 
-/* ============================================================
-   LEADERBOARD & POINTS — NEW STYLES
-   ============================================================ */
+/* LEADERBOARD & POINTS */
 .pts-hero {
   background: linear-gradient(135deg, #0D1F3C 0%, #162B50 50%, #0D1F3C 100%);
   border: 2px solid var(--gold);
@@ -585,63 +572,35 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   font-size: 14px; font-weight: 600; font-family: var(--font-body);
 }
 
-/* ★ UPDATE SYSTEM STYLES ★ */
-#install-banner{display:none;opacity:0;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
-  left:16px;right:16px;background:var(--navy-mid);border:1px solid var(--border-gold);
-  border-radius:var(--radius-md);padding:12px 16px;align-items:center;gap:12px;z-index:200;transition:opacity .3s}
-.install-text{flex:1;font-size:15px;color:var(--text-secondary)}
-.install-text strong{color:var(--gold)}
-#update-banner{display:none;opacity:0;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
+/* ★ VERSION BANNER ★ */
+#version-banner{display:none;position:fixed;bottom:calc(var(--bottom-nav) + var(--safe-bottom) + 10px);
   left:16px;right:16px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.08));
   border:2px solid var(--gold);border-radius:var(--radius-md);padding:14px 16px;
-  align-items:center;gap:12px;z-index:200;transition:opacity .3s;backdrop-filter:blur(8px)}
-#update-banner.show{display:flex;opacity:1}
-.update-content{flex:1}
-.update-title{font-size:15px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.update-text{font-size:13px;color:var(--text-secondary)}
-.update-actions{display:flex;gap:8px}
-#update-modal{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.95);z-index:300;
-  flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-#update-modal.show{display:flex}
-.update-modal-content{background:var(--navy-mid);border:2px solid var(--gold);border-radius:var(--radius-lg);
-  padding:30px 24px;max-width:90%;text-align:center;position:relative}
-.update-modal-icon{font-size:48px;margin-bottom:12px;animation:pulse 2s infinite}
-.update-modal-title{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold);
-  text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.update-modal-text{font-size:14px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
-.update-progress{margin:20px 0}
-.update-progress-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:8px;overflow:hidden}
-.update-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E8C96B);
-  width:0%;transition:width .3s;border-radius:3px}
-.update-progress-text{font-size:12px;color:var(--text-muted)}
+  align-items:center;gap:12px;z-index:200;backdrop-filter:blur(8px)}
+#version-banner.show{display:flex}
+.vb-content{flex:1}
+.vb-title{font-size:15px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.vb-text{font-size:13px;color:var(--text-secondary)}
+.vb-actions{display:flex;gap:8px;flex-shrink:0}
 
-/* ★ TEAM LEADERBOARD PUSH SYSTEM ★ */
-#push-prompt-modal{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.95);z-index:400;
-  flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-#push-prompt-modal.show{display:flex}
-.push-prompt-content{background:linear-gradient(135deg,var(--navy-mid),#0D1F3C);border:2px solid var(--gold);
-  border-radius:var(--radius-lg);padding:30px 24px;max-width:90%;text-align:center;position:relative}
-.push-prompt-icon{font-size:48px;margin-bottom:12px}
-.push-prompt-title{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--gold);
-  text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-.push-prompt-text{font-size:15px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
-.push-prompt-highlight{color:var(--gold);font-weight:600}
-.push-prompt-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;justify-content:center}
-.push-success-modal{position:fixed;inset:0;background:rgba(10,22,40,0.95);z-index:400;
-  flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(8px);
-  display:none}
-.push-success-modal.show{display:flex}
-.success-content{background:linear-gradient(135deg,rgba(76,175,80,0.1),rgba(76,175,80,0.05));
-  border:2px solid #4CAF50;border-radius:var(--radius-lg);padding:40px 24px;max-width:90%;text-align:center}
-.success-icon{font-size:64px;margin-bottom:12px;animation:bounce 0.6s}
-.success-title{font-family:var(--font-display);font-size:28px;font-weight:800;color:#4CAF50;
-  text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-.success-text{font-size:15px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
+/* ★ PUSH MODAL ★ */
+#push-modal{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.95);z-index:400;
+  flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:20px}
+#push-modal.show{display:flex}
+.push-box{background:linear-gradient(135deg,var(--navy-mid),#0D1F3C);border:2px solid var(--gold);
+  border-radius:var(--radius-lg);padding:28px 24px;width:100%;max-width:380px;text-align:center}
+.push-icon{font-size:48px;margin-bottom:12px}
+.push-title{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.push-body{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:6px}
+.push-name{font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px}
+.push-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.push-status{font-size:13px;margin-top:14px;min-height:20px;font-weight:600}
+.push-status.sending{color:var(--gold)}.push-status.ok{color:#80E090}.push-status.err{color:#FF8080}
 
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
 </style>
 </head>
 <body>
@@ -795,8 +754,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <button class="btn" onclick="resetPhysTimer()">Reset</button>
         <span id="phys-phase-label" style="font-size:13px;color:var(--gold);font-weight:600"></span>
       </div>
-
-      <!-- DAY 1 CARD -->
       <div class="card">
         <div class="card-hdr card-hdr-d1"><span class="card-hdr-title">Day 1 — Upper + Lower + Core</span></div>
         <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · dynamic stretch at 3 min mark</div></div>
@@ -807,72 +764,43 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d1-core-name">Sit-ups</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
-
-        <!-- ★ AMRAP REP TRACKER — DAY 1 ★ -->
         <div class="amrap-tracker">
           <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
-
-          <!-- Sets completed -->
           <div class="amrap-sets-row">
-            <div>
-              <div class="amrap-sets-label">Full sets completed</div>
-              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
-            </div>
+            <div><div class="amrap-sets-label">Full sets completed</div><div class="amrap-sets-sub">upper + lower + core = 1 set</div></div>
             <div style="display:flex;align-items:center;gap:8px">
               <div class="amrap-counter-btns">
                 <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(1,1)">+</button>
                 <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(1,-1)">−</button>
               </div>
-              <div>
-                <div class="amrap-sets-val" id="d1-sets-val">0</div>
-                <div class="amrap-sets-sub">sets</div>
-              </div>
+              <div><div class="amrap-sets-val" id="d1-sets-val">0</div><div class="amrap-sets-sub">sets</div></div>
             </div>
           </div>
-
-          <!-- Last exercise reached -->
           <div class="amrap-last-ex">
             <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
-            <div class="amrap-ex-chips" id="d1-last-ex-chips">
-              <!-- rendered by JS -->
-            </div>
+            <div class="amrap-ex-chips" id="d1-last-ex-chips"></div>
           </div>
-
-          <!-- Reps in last exercise -->
           <div class="amrap-reps-row">
-            <div class="amrap-reps-label">
-              <strong>Reps in last exercise</strong>
-              Enter individual reps if partial set
-            </div>
+            <div class="amrap-reps-label"><strong>Reps in last exercise</strong>Enter individual reps if partial set</div>
             <div style="display:flex;align-items:center;gap:8px">
               <div class="amrap-counter-btns">
                 <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(1,1)">+</button>
                 <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(1,-1)">−</button>
               </div>
-              <div>
-                <div class="amrap-reps-val" id="d1-reps-val">0</div>
-                <div class="amrap-sets-sub">reps</div>
-              </div>
+              <div><div class="amrap-reps-val" id="d1-reps-val">0</div><div class="amrap-sets-sub">reps</div></div>
             </div>
           </div>
-
-          <!-- Summary -->
           <div class="amrap-summary" id="d1-amrap-summary"></div>
-
           <div class="amrap-save-row">
             <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(1)">Save result</button>
             <button class="btn btn-sm" onclick="AmrapTracker.reset(1)">Clear</button>
           </div>
-
           <div class="amrap-history" id="d1-amrap-history"></div>
         </div>
-
         <div style="padding:10px 16px;border-top:1px solid var(--border)">
           <button class="btn btn-navy btn-block" onclick="Rewards.markPhysComplete(1)">✓ Mark physical Day 1 complete</button>
         </div>
       </div>
-
-      <!-- DAY 2 CARD -->
       <div class="card">
         <div class="card-hdr card-hdr-d2"><span class="card-hdr-title">Day 2 — Upper + Lower + Core</span></div>
         <div class="phy-jog"><div class="phy-jog-title">Warm-up jog <span>5 min</span></div><div class="phy-jog-text">60% pace · lateral shuffles at 3 min mark</div></div>
@@ -883,66 +811,43 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div class="ex-row"><span class="ex-tag core-tag">Core</span><span id="d2-core-name">Plank hold — 30 sec</span></div>
         </div>
         <div class="amrap-note">Repeat the full circuit until 5 min is up · Plank = 3 × 30 sec</div>
-
-        <!-- ★ AMRAP REP TRACKER — DAY 2 ★ -->
         <div class="amrap-tracker">
           <div class="amrap-tracker-title">Rep tracker <span>Record your AMRAP result</span></div>
-
           <div class="amrap-sets-row">
-            <div>
-              <div class="amrap-sets-label">Full sets completed</div>
-              <div class="amrap-sets-sub">upper + lower + core = 1 set</div>
-            </div>
+            <div><div class="amrap-sets-label">Full sets completed</div><div class="amrap-sets-sub">upper + lower + core = 1 set</div></div>
             <div style="display:flex;align-items:center;gap:8px">
               <div class="amrap-counter-btns">
                 <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustSets(2,1)">+</button>
                 <button class="amrap-cbtn" onclick="AmrapTracker.adjustSets(2,-1)">−</button>
               </div>
-              <div>
-                <div class="amrap-sets-val" id="d2-sets-val">0</div>
-                <div class="amrap-sets-sub">sets</div>
-              </div>
+              <div><div class="amrap-sets-val" id="d2-sets-val">0</div><div class="amrap-sets-sub">sets</div></div>
             </div>
           </div>
-
           <div class="amrap-last-ex">
             <div class="amrap-last-ex-label">Last exercise completed (partial set)</div>
             <div class="amrap-ex-chips" id="d2-last-ex-chips"></div>
           </div>
-
           <div class="amrap-reps-row">
-            <div class="amrap-reps-label">
-              <strong>Reps in last exercise</strong>
-              Enter individual reps if partial set
-            </div>
+            <div class="amrap-reps-label"><strong>Reps in last exercise</strong>Enter individual reps if partial set</div>
             <div style="display:flex;align-items:center;gap:8px">
               <div class="amrap-counter-btns">
                 <button class="amrap-cbtn plus" onclick="AmrapTracker.adjustReps(2,1)">+</button>
                 <button class="amrap-cbtn" onclick="AmrapTracker.adjustReps(2,-1)">−</button>
               </div>
-              <div>
-                <div class="amrap-reps-val" id="d2-reps-val">0</div>
-                <div class="amrap-sets-sub">reps</div>
-              </div>
+              <div><div class="amrap-reps-val" id="d2-reps-val">0</div><div class="amrap-sets-sub">reps</div></div>
             </div>
           </div>
-
           <div class="amrap-summary" id="d2-amrap-summary"></div>
-
           <div class="amrap-save-row">
             <button class="btn btn-gold btn-sm" onclick="AmrapTracker.save(2)">Save result</button>
             <button class="btn btn-sm" onclick="AmrapTracker.reset(2)">Clear</button>
           </div>
-
           <div class="amrap-history" id="d2-amrap-history"></div>
         </div>
-
         <div style="padding:10px 16px;border-top:1px solid var(--border)">
           <button class="btn btn-gold btn-block" onclick="Rewards.markPhysComplete(2)">✓ Mark physical Day 2 complete</button>
         </div>
       </div>
-
-      <!-- Customise circuit -->
       <div class="menu-section">
         <div class="menu-lbl">Customise circuit</div>
         <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Choose which day to edit, pick one exercise per category, then tap Apply</div>
@@ -1014,10 +919,7 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <div style="font-size:13px;color:var(--text-secondary);margin-top:3px">10 sessions complete — outstanding commitment!</div>
         </div>
       </div>
-
       <div class="section-lbl">Shot accuracy tests</div>
-
-      <!-- LAYUP TEST -->
       <div class="shot-card">
         <div class="shot-title">Layup test <span id="layup-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 8/10 (80%) → 🥇 Gold Layup badge</div>
@@ -1030,8 +932,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="layup-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Layup badge earned — 8+ out of 10!</div></div>
       </div>
-
-      <!-- MID-RANGE TEST — NEW -->
       <div class="shot-card" style="border-color:rgba(100,180,255,0.3);background:rgba(30,79,163,0.06)">
         <div class="shot-title">Mid-range test <span id="mr-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal" style="color:rgba(120,180,255,0.8)">Goal: 5/10 (50%) → 🥇 Gold Mid-Range badge</div>
@@ -1044,8 +944,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="mr-announce" style="background:rgba(30,79,163,0.15);border-color:#7AAEF5"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text" style="color:#7AAEF5">Gold Mid-Range badge earned — 5+ out of 10!</div></div>
       </div>
-
-      <!-- FREE THROW TEST -->
       <div class="shot-card">
         <div class="shot-title">Free throw test <span id="ft-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 6/10 (60%) → 🥇 Gold Free Throw badge</div>
@@ -1058,8 +956,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="ft-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Free Throw badge earned — 6+ out of 10!</div></div>
       </div>
-
-      <!-- THREE POINTER TEST -->
       <div class="shot-card">
         <div class="shot-title">Three pointer test <span id="tp-pct" style="color:var(--text-muted);font-size:14px">0/10</span></div>
         <div class="shot-goal">Goal: 4/10 (40%) → 🥇 Gold Three Pointer badge</div>
@@ -1072,7 +968,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
         <div class="gold-announce" id="tp-announce"><div class="gold-announce-icon">🥇</div><div class="gold-announce-text">Gold Three Pointer badge earned — 4+ out of 10!</div></div>
       </div>
-
       <div class="section-lbl" style="margin-top:6px">Training day tracker</div>
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Tap + each time you use a drill in a session. 10 session days = badge earned.</p>
       <div class="card" style="padding:10px 16px">
@@ -1089,7 +984,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
     <div id="pg-dashboard" class="pg">
       <div class="page-title">Dashboard</div>
       <p class="page-sub">Full season progress — badges, accuracy, drill days</p>
-      <!-- LEADERBOARD SECTION -->
       <div class="pts-hero">
         <div class="pts-hero-label">Team Leaderboard</div>
         <div class="pts-hero-total" id="lb-total-pts">0</div>
@@ -1100,7 +994,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         </div>
       </div>
       <div id="lb-accordions"></div>
-
       <div class="dash-hero" id="dash-hero"></div>
       <div class="dash-sec-title">Season badges</div><div id="dash-season"></div>
       <div class="dash-sec-title">Gold shooting badges</div><div id="dash-gold"></div>
@@ -1116,8 +1009,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <button class="rules-back-btn" onclick="showTab('dashboard', document.querySelector('.nav-btn:nth-child(4)'))">← Back to Dashboard</button>
       <div class="page-title">Points Rules</div>
       <p class="page-sub">How to earn points — listed from highest to lowest value</p>
-
-      <!-- Master Badges -->
       <div class="rules-section">
         <div class="rules-title">🏅 Season Master Badges</div>
         <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Ball Handling Master<small>All 12 drills completed 10 days each</small></div></div>
@@ -1125,8 +1016,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Offence Master<small>All offence moves completed 10 days each</small></div></div>
         <div class="rules-row"><div class="rules-pts">+50</div><div class="rules-desc">Physical Training Master<small>10 physical training sessions completed</small></div></div>
       </div>
-
-      <!-- Skills milestones -->
       <div class="rules-section">
         <div class="rules-title">🏀 Skills Session Milestones</div>
         <div class="rules-row"><div class="rules-pts">+25</div><div class="rules-desc">24 sessions milestone<small>Complete all 24 planned skills sessions</small></div></div>
@@ -1135,27 +1024,19 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">6 sessions milestone</div></div>
         <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each skills session<small>Mark Day 1 or Day 2 complete</small></div></div>
       </div>
-
-      <!-- Training drills -->
       <div class="rules-section">
         <div class="rules-title">📈 Training Drill Days</div>
         <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Each drill at 10/10 days<small>26 drills available, max 260pts</small></div></div>
       </div>
-
-      <!-- Physical training -->
       <div class="rules-section">
         <div class="rules-title">💪 Physical Training</div>
         <div class="rules-row"><div class="rules-pts">+7</div><div class="rules-desc">Each physical session<small>Mark Day 1 or Day 2 complete</small></div></div>
       </div>
-
-      <!-- Shot accuracy -->
       <div class="rules-section">
         <div class="rules-title">🎯 Shot Accuracy Tests</div>
         <div class="rules-row"><div class="rules-pts">+10</div><div class="rules-desc">Gold badge bonus (per type)<small>When you reach 5 qualifying attempts for Layup, Mid-range, Free Throw or Three Pointer</small></div></div>
         <div class="rules-row"><div class="rules-pts">+5</div><div class="rules-desc">Each qualifying test session<small>Score 8/10 layups, 5/10 mid-range, 6/10 FT or 4/10 threes</small></div></div>
       </div>
-
-      <!-- Ranking Levels -->
       <div class="rules-section">
         <div class="rules-title">🏆 Ranking Levels</div>
         <div class="rules-row"><div class="rules-pts">0-49</div><div class="rules-desc">🌱 New Pioneer<small>Just starting your journey</small></div></div>
@@ -1164,8 +1045,6 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
         <div class="rules-row"><div class="rules-pts">300-499</div><div class="rules-desc">⭐ Senior Pioneer<small>Mastering drills and badges</small></div></div>
         <div class="rules-row"><div class="rules-pts">500+</div><div class="rules-desc">🏆 Elite Pioneer<small>Peak performance achieved</small></div></div>
       </div>
-
-      <!-- Summary -->
       <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px">
         <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Maximum season points</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:var(--text-secondary)">
@@ -1236,10 +1115,11 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
           <button class="btn" onclick="Profile.cancelEdit()">Cancel</button>
         </div>
       </div>
+      <!-- ★ Season stats header with Push button calling PushManager ★ -->
       <div class="dash-sec-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px">
         <div style="flex:1">Season stats</div>
         <button onclick="showTab('leaderboard',null)" style="background:transparent;border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:4px 10px;font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font-body)">Rules</button>
-        <button onclick="pushLeaderboardUpdate()" style="background:linear-gradient(135deg,#C9A84C,#E8C96B);border:none;border-radius:var(--radius-sm);padding:4px 12px;font-size:11px;font-weight:700;color:#0D1F3C;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em">📤 Push</button>
+        <button onclick="PushManager.openModal()" style="background:linear-gradient(135deg,#C9A84C,#E8C96B);border:none;border-radius:var(--radius-sm);padding:4px 12px;font-size:11px;font-weight:700;color:#0D1F3C;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em">📤 Push to Coach</button>
       </div>
       <div class="profile-stats-grid" id="profile-stats"></div>
       <div class="dash-sec-title">Badge collection</div>
@@ -1266,6 +1146,33 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
   <button class="btn btn-sm" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
 </div>
 
+<!-- ★ VERSION BANNER ★ -->
+<div id="version-banner">
+  <div class="vb-content">
+    <div class="vb-title">🚀 Update Available</div>
+    <div class="vb-text" id="vb-text">A new version is ready to download</div>
+  </div>
+  <div class="vb-actions">
+    <button class="btn btn-sm" onclick="VersionChecker.dismiss()">Later</button>
+    <button class="btn btn-start btn-sm" onclick="VersionChecker.download()">Download</button>
+  </div>
+</div>
+
+<!-- ★ PUSH MODAL ★ -->
+<div id="push-modal">
+  <div class="push-box">
+    <div class="push-icon">📤</div>
+    <div class="push-title">Push to Coach</div>
+    <div class="push-body">Send your season stats to the<br>Guardians Team Leaderboard</div>
+    <div class="push-name" id="push-player-name"></div>
+    <div class="push-actions">
+      <button class="btn btn-sm" onclick="PushManager.closeModal()">Cancel</button>
+      <button class="btn btn-start btn-sm" id="push-send-btn" onclick="PushManager.send()">📤 Send Stats</button>
+    </div>
+    <div class="push-status" id="push-status"></div>
+  </div>
+</div>
+
 <script>
 // ============================================================
 // DATA & CONSTANTS
@@ -1278,7 +1185,6 @@ const DATA = {
     "Pound tween cross pound","Pound tween behind cross pound"
   ],
   BH_NEW: new Set(["Pound tween cross pound","Pound tween behind cross pound"]),
-
   SH_OPTIONAL: [
     "Right layup","Left layup","Free throw (20 attempts)",
     "Left mid-range jump shot","Right mid-range jump shot",
@@ -1286,33 +1192,27 @@ const DATA = {
   ],
   MANDATORY_D1: "Close form shooting — one hand",
   MANDATORY_D2: "Close form shooting — two hands",
-
   OF_SKILLS: [
     "Hesitation","In & Out","Crossover and behind the back (wrap)",
     "Double crossover","Crossover and spin"
   ],
-
   UPPER_EX: ["Push-up to T","Pull-ups","Navy seal burpees","Military push-ups","Bear crawl 10 steps"],
   LOWER_EX: ["Squats","Squat jumps","Lunges"],
   CORE_EX: ["Sit-ups","Plank hold — 30 sec","Mountain climbers","Russian twists","Dead bug"],
-
   D1_BH_DEF: ["Right side pounds","Left side pounds","Tween (through legs)","Behind the back","Continuous cross"],
   D2_BH_DEF: ["V dribble","Spider dribble","Figure 8 weave","Pound windmill","Split stance tween"],
-
   PHASES: [
     {label:'Ball handling',dur:300,color:'#C9A84C'},
     {label:'Shooting drills',dur:300,color:'#1E4FA3'},
     {label:'Offence drills',dur:300,color:'#C9A84C'},
     {label:'Scrimmage!',dur:600,color:'#1E4FA3'}
   ],
-
   SEASON_BADGE_DEFS: [
     {icon:'🎯',name:'Ball handling master',sub:'All 12 drills — 10 days each',cat:'bh'},
     {icon:'🏀',name:'Shooting master',sub:'All shooting drills — 10 days each',cat:'sh'},
     {icon:'⚡',name:'Offence master',sub:'All 5 moves — 10 days each',cat:'of'},
     {icon:'🏋️',name:'Physical training master',sub:'Complete 10 physical sessions',cat:'phys'},
   ],
-  // ★ Mid-range badge added here ★
   GOLD_BADGE_DEFS: [
     {icon:'🥇',name:'Gold layup',sub:'8/10 in layup test',key:'layup',goal:8,goalPct:80},
     {icon:'🥇',name:'Gold mid-range',sub:'5/10 in mid-range test',key:'mr',goal:5,goalPct:50},
@@ -1321,7 +1221,6 @@ const DATA = {
   ]
 };
 
-// ---- STATE ----
 const STATE = {
   workout: {
     d1: { bh: [...DATA.D1_BH_DEF], sh: ["Right layup","Free throw (20 attempts)"], of: ["Hesitation"] },
@@ -1342,11 +1241,10 @@ const STATE = {
   physCompletes: { d1: 0, d2: 0 },
   shots: {
     layup: { shots: [], goal: 8, goalPct: 80, badgeEarned: false, history: [] },
-    mr:    { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] }, // ★ NEW ★
+    mr:    { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] },
     ft:    { shots: [], goal: 6, goalPct: 60, badgeEarned: false, history: [] },
     tp:    { shots: [], goal: 4, goalPct: 40, badgeEarned: false, history: [] }
   },
-  // ★ AMRAP tracker state ★
   amrap: {
     d1: { sets: 0, lastEx: '', reps: 0, history: [] },
     d2: { sets: 0, lastEx: '', reps: 0, history: [] }
@@ -1355,42 +1253,29 @@ const STATE = {
     skillPts: 0, physPts: 0, drillPts: 0, badgePts: 0, shotPts: {},
     _drillFlags: {}, _masterFlags: {}
   },
-  playerName: '',
   activeTab: 'workout',
-  profile: {
-    name: '',
-    number: '',
-    position: '',
-    team: '',
-    photo: ''
-  }
+  profile: { name: '', number: '', position: '', team: '', photo: '' }
 };
 
 [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS].forEach(t => {
   STATE.sessionDays[t] = 0;
 });
 
-// ---- PERSISTENCE ----
 function saveState() {
   try {
     const persist = {
-      workout: STATE.workout,
-      phys: STATE.phys,
-      sessionDays: STATE.sessionDays,
-      dayCompletes: STATE.dayCompletes,
-      physCompletes: STATE.physCompletes,
-      shots: STATE.shots,
-      amrap: STATE.amrap,
-      points: STATE.points,
-      shD1: [...STATE.shD1],
-      shD2: [...STATE.shD2],
-      ofD1: [...STATE.ofD1],
-      ofD2: [...STATE.ofD2],
+      workout: STATE.workout, phys: STATE.phys,
+      sessionDays: STATE.sessionDays, dayCompletes: STATE.dayCompletes,
+      physCompletes: STATE.physCompletes, shots: STATE.shots,
+      amrap: STATE.amrap, points: STATE.points,
+      shD1: [...STATE.shD1], shD2: [...STATE.shD2],
+      ofD1: [...STATE.ofD1], ofD2: [...STATE.ofD2],
       profile: STATE.profile
     };
     localStorage.setItem('pioneers_state', JSON.stringify(persist));
   } catch(e) {}
 }
+
 function loadState() {
   try {
     const raw = localStorage.getItem('pioneers_state');
@@ -1403,7 +1288,6 @@ function loadState() {
     if (p.physCompletes) STATE.physCompletes = p.physCompletes;
     if (p.shots) {
       STATE.shots = p.shots;
-      // Ensure mr exists for existing saves
       if (!STATE.shots.mr) STATE.shots.mr = { shots: [], goal: 5, goalPct: 50, badgeEarned: false, history: [] };
     }
     if (p.amrap) STATE.amrap = p.amrap;
@@ -1429,11 +1313,241 @@ function ofTimeLabel(n) { return n===1?'5 min':n===2?'2.5 min each':'1m 40s each
 
 <script>
 // ============================================================
-// AMRAP TRACKER MODULE — NEW
+// ★ JSONBIN MODULE ★
+// Shared relay between player app and coach dashboard
+// ============================================================
+const JSONBIN = {
+  BIN_ID: '6a01a4e6250b1311c332dd44',
+  ACCESS_KEY: '$2a$10$eJdDS0tMBKRnAS5Sjyj3Ae4nOm0J2p2tXrCDOiB49mTaBg6U1Y54O',
+  BASE: 'https://api.jsonbin.io/v3/b',
+
+  async read() {
+    const res = await fetch(this.BASE + '/' + this.BIN_ID + '/latest', {
+      headers: { 'X-Access-Key': this.ACCESS_KEY }
+    });
+    if (!res.ok) throw new Error('Read failed: ' + res.status);
+    const data = await res.json();
+    return data.record;
+  },
+
+  async write(record) {
+    const res = await fetch(this.BASE + '/' + this.BIN_ID, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Key': this.ACCESS_KEY
+      },
+      body: JSON.stringify(record)
+    });
+    if (!res.ok) throw new Error('Write failed: ' + res.status);
+    return await res.json();
+  }
+};
+</script>
+
+<script>
+// ============================================================
+// ★ VERSION CHECKER ★
+// Checks GitHub for a newer app version on load.
+// If found: stores HTML and shows the version banner.
+// Player can tap Download to save the updated file locally.
+// ============================================================
+const VersionChecker = (() => {
+  const CURRENT = '1.0.1';
+  const RAW_URL = 'https://raw.githubusercontent.com/Woollis-profile/Guardians-U14/main/index.html';
+  const DISMISS_KEY = 'pioneers_version_dismissed';
+  const HTML_KEY = 'pioneers_update_html';
+  const VER_KEY = 'pioneers_update_version';
+
+  function semverGt(a, b) {
+    const ap = a.split('.').map(Number);
+    const bp = b.split('.').map(Number);
+    for (let i = 0; i < 3; i++) {
+      if ((ap[i]||0) > (bp[i]||0)) return true;
+      if ((ap[i]||0) < (bp[i]||0)) return false;
+    }
+    return false;
+  }
+
+  async function check() {
+    // Respect 24-hour dismiss cooldown
+    const dismissed = localStorage.getItem(DISMISS_KEY);
+    if (dismissed && Date.now() - parseInt(dismissed) < 86400000) return;
+
+    try {
+      const res = await fetch(RAW_URL);
+      if (!res.ok) return;
+      const html = await res.text();
+      const match = html.match(/<meta\s+name="app-version"\s+content="([^"]+)"/i);
+      if (!match) return;
+      const latest = match[1];
+      if (semverGt(latest, CURRENT)) {
+        localStorage.setItem(HTML_KEY, html);
+        localStorage.setItem(VER_KEY, latest);
+        const banner = document.getElementById('version-banner');
+        const text = document.getElementById('vb-text');
+        if (text) text.textContent = 'Version ' + latest + ' is ready — tap Download to save';
+        if (banner) banner.classList.add('show');
+      }
+    } catch(e) { /* silent fail — no network or blocked */ }
+  }
+
+  function dismiss() {
+    localStorage.setItem(DISMISS_KEY, Date.now().toString());
+    const banner = document.getElementById('version-banner');
+    if (banner) banner.classList.remove('show');
+  }
+
+  function download() {
+    const html = localStorage.getItem(HTML_KEY);
+    const ver  = localStorage.getItem(VER_KEY) || 'latest';
+    if (!html) { showToast('Update file not found — try again'); return; }
+    const blob = new Blob([html], { type: 'text/html' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'pioneers-u14-v' + ver + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    dismiss();
+    showToast('Downloaded v' + ver + ' — replace this file on your device');
+  }
+
+  return { check, dismiss, download };
+})();
+</script>
+
+<script>
+// ============================================================
+// ★ PUSH MANAGER ★
+// Manual push: player taps "📤 Push to Coach" on Profile page.
+// Reads current bin, upserts this player by id, writes back.
+// ============================================================
+const PushManager = (() => {
+
+  function openModal() {
+    const name = STATE.profile.name ? STATE.profile.name.trim() : '';
+    if (!name) {
+      showToast('Set your name in Profile first');
+      showTab('profile', document.querySelector('.nav-btn:nth-child(5)'));
+      return;
+    }
+    const nameEl = document.getElementById('push-player-name');
+    if (nameEl) nameEl.textContent = name;
+    const statusEl = document.getElementById('push-status');
+    if (statusEl) { statusEl.textContent = ''; statusEl.className = 'push-status'; }
+    const sendBtn = document.getElementById('push-send-btn');
+    if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = '📤 Send Stats'; }
+    const modal = document.getElementById('push-modal');
+    if (modal) modal.classList.add('show');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('push-modal');
+    if (modal) modal.classList.remove('show');
+  }
+
+  function buildPayload() {
+    const p = STATE.profile;
+    const bp = Points.compute();
+    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
+    const drillsCompleted = allDrills.filter(s => (STATE.sessionDays[s]||0) >= 10).length;
+    const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
+    const earnedBadges = DATA.SEASON_BADGE_DEFS.filter(b=>Rewards.checkBadge(b)).map(b=>b.name);
+    const earnedShooting = DATA.GOLD_BADGE_DEFS.filter(b=>Rewards.checkBadge(b)).map(b=>b.name);
+    const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
+    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
+
+    // Build accuracy stats
+    function acc(key) {
+      const st = STATE.shots[key];
+      if (!st || !st.history.length) return 0;
+      const makes = st.history.reduce((a,h)=>a+h.makes,0);
+      const total = st.history.reduce((a,h)=>a+h.total,0);
+      return total > 0 ? Math.round((makes/total)*100) : 0;
+    }
+
+    const rank = bp.total >= 500 ? '🏆 Elite Pioneer'
+               : bp.total >= 300 ? '⭐ Senior Pioneer'
+               : bp.total >= 150 ? '🔥 Rising Pioneer'
+               : bp.total >= 50  ? '💪 Developing Pioneer'
+               : '🌱 New Pioneer';
+
+    const id = p.name.trim().toLowerCase().replace(/\s+/g,'-');
+
+    return {
+      id,
+      name: p.name.trim(),
+      number: p.number || '00',
+      position: p.position || '',
+      team: p.team || 'Pioneers U14',
+      totalPoints: bp.total,
+      rank,
+      skillSessionsCompleted: totalSessions,
+      physicalSessionsCompleted: physTotal,
+      drillsCompleted,
+      totalDrillDays,
+      badges: earnedBadges,
+      shootingBadges: earnedShooting,
+      shootingStats: {
+        layupAccuracy:    acc('layup'),
+        midRangeAccuracy: acc('mr'),
+        freeThrowAccuracy: acc('ft'),
+        threePointAccuracy: acc('tp')
+      },
+      shotTestsCompleted: ['layup','mr','ft','tp'].reduce((a,t)=>{
+        return a + (STATE.shots[t]?.history?.length||0);
+      }, 0),
+      lastUpdated: new Date().toISOString()
+    };
+  }
+
+  async function send() {
+    const statusEl = document.getElementById('push-status');
+    const sendBtn  = document.getElementById('push-send-btn');
+
+    function setStatus(msg, cls) {
+      if (statusEl) { statusEl.textContent = msg; statusEl.className = 'push-status ' + cls; }
+    }
+
+    if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
+    setStatus('Connecting to leaderboard…', 'sending');
+
+    try {
+      // Read current bin
+      const record = await JSONBIN.read();
+      const players = Array.isArray(record.players) ? record.players : [];
+
+      // Upsert: replace existing entry by id or append
+      const payload = buildPayload();
+      const idx = players.findIndex(p => p.id === payload.id);
+      if (idx >= 0) players[idx] = payload;
+      else players.push(payload);
+
+      // Write back
+      await JSONBIN.write({ players, lastUpdated: new Date().toISOString() });
+
+      setStatus('✅ Sent! Coach can see your stats now.', 'ok');
+      if (sendBtn) sendBtn.textContent = '✅ Sent';
+      showToast('📤 Stats pushed to coach! 🏆');
+    } catch(err) {
+      console.error('Push failed:', err);
+      setStatus('❌ Failed — check your connection and try again.', 'err');
+      if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = '📤 Retry'; }
+    }
+  }
+
+  return { openModal, closeModal, send };
+})();
+</script>
+
+<script>
+// ============================================================
+// AMRAP TRACKER MODULE
 // ============================================================
 const AmrapTracker = (() => {
-
-  // Returns the exercise list for a given day in order [upper, lower, core]
   function getExList(day) {
     const d = STATE.phys['d' + day];
     return [
@@ -1450,7 +1564,6 @@ const AmrapTracker = (() => {
     const exList = getExList(day);
     const current = STATE.amrap['d' + day].lastEx;
 
-    // "None (full sets only)" option
     const noneBtn = document.createElement('button');
     noneBtn.className = 'amrap-ex-chip' + (current === '' ? ' selected-core' : '');
     noneBtn.textContent = current === '' ? '✓ None' : 'None';
@@ -1502,10 +1615,7 @@ const AmrapTracker = (() => {
       txt += ' + partial: <strong>' + a.lastEx + '</strong>';
       if (a.reps > 0) txt += ' × <strong>' + a.reps + ' reps</strong>';
     }
-    const exList = getExList(day);
-    const fullReps = a.sets * 3 * 10; // 3 exercises × 10 reps
-    const partialReps = a.reps || 0;
-    const totalReps = fullReps + partialReps;
+    const totalReps = a.sets * 3 * 10 + (a.reps || 0);
     txt += '<br><span style="color:var(--text-muted);font-size:12px">Total reps: ~' + totalReps + ' · ' + (a.sets * 3) + ' exercises completed</span>';
     el.innerHTML = txt;
     el.classList.add('show');
@@ -1513,24 +1623,17 @@ const AmrapTracker = (() => {
 
   function save(day) {
     const a = STATE.amrap['d' + day];
-    if (a.sets === 0 && !a.lastEx && a.reps === 0) {
-      showToast('Enter your results first');
-      return;
-    }
+    if (a.sets === 0 && !a.lastEx && a.reps === 0) { showToast('Enter your results first'); return; }
     const now = new Date();
     const dateStr = now.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
     const entry = {
-      sets: a.sets,
-      lastEx: a.lastEx,
-      reps: a.reps,
-      date: dateStr,
+      sets: a.sets, lastEx: a.lastEx, reps: a.reps, date: dateStr,
       upper: STATE.phys['d' + day].upper,
       lower: STATE.phys['d' + day].lower,
       core:  STATE.phys['d' + day].core
     };
     if (!STATE.amrap['d' + day].history) STATE.amrap['d' + day].history = [];
     STATE.amrap['d' + day].history.unshift(entry);
-    // Keep last 10
     if (STATE.amrap['d' + day].history.length > 10) STATE.amrap['d' + day].history.length = 10;
     saveState();
     renderHistory(day);
@@ -1565,10 +1668,8 @@ const AmrapTracker = (() => {
 
   function init() {
     [1, 2].forEach(day => {
+      if (!STATE.amrap['d' + day]) STATE.amrap['d' + day] = { sets: 0, lastEx: '', reps: 0, history: [] };
       renderExChips(day);
-      // Restore current state display
-      const a = STATE.amrap['d' + day];
-      if (!a) STATE.amrap['d' + day] = { sets: 0, lastEx: '', reps: 0, history: [] };
       document.getElementById('d' + day + '-sets-val').textContent = (STATE.amrap['d' + day].sets || 0);
       document.getElementById('d' + day + '-reps-val').textContent = (STATE.amrap['d' + day].reps || 0);
       updateSummary(day);
@@ -1576,10 +1677,7 @@ const AmrapTracker = (() => {
     });
   }
 
-  // Re-render chips after physiology customisation changes exercises
-  function refreshChips() {
-    [1, 2].forEach(day => renderExChips(day));
-  }
+  function refreshChips() { [1, 2].forEach(day => renderExChips(day)); }
 
   return { adjustSets, adjustReps, save, reset, init, refreshChips, renderHistory };
 })();
@@ -1606,8 +1704,7 @@ const Workout = (() => {
       const toggleDrill = () => {
         const wasDone = d.classList.contains('done');
         d.classList.toggle('done');
-        const nowDone = d.classList.contains('done');
-        if (nowDone && !wasDone) {
+        if (!wasDone && d.classList.contains('done')) {
           if (STATE.sessionDays.hasOwnProperty(s)) {
             STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
             saveState();
@@ -1634,8 +1731,7 @@ const Workout = (() => {
       const toggleOF = () => {
         const wasDone = d.classList.contains('done');
         d.classList.toggle('done');
-        const nowDone = d.classList.contains('done');
-        if (nowDone && !wasDone) {
+        if (!wasDone && d.classList.contains('done')) {
           if (STATE.sessionDays.hasOwnProperty(s)) {
             STATE.sessionDays[s] = Math.min(99, (STATE.sessionDays[s] || 0) + 1);
             saveState();
@@ -1699,11 +1795,9 @@ const Workout = (() => {
       b.className = 'chip' + (isSel ? ' chip-sel-sh' : '');
       b.textContent = s;
       b.onclick = () => {
-        if (activeSet.has(s)) {
-          activeSet.delete(s); b.className = 'chip';
-        } else if (activeSet.size < 5) {
-          activeSet.add(s); b.className = 'chip chip-sel-sh';
-        } else { showToast('Max 5 shooting drills per day'); return; }
+        if (activeSet.has(s)) { activeSet.delete(s); b.className = 'chip'; }
+        else if (activeSet.size < 5) { activeSet.add(s); b.className = 'chip chip-sel-sh'; }
+        else { showToast('Max 5 shooting drills per day'); return; }
         updateSHPreview(); updateSHCounts();
         if (activeDay === 1) STATE.workout.d1.sh = [...activeSet];
         else STATE.workout.d2.sh = [...activeSet];
@@ -1719,13 +1813,9 @@ const Workout = (() => {
     const activeDay = STATE.targets.sh || 1;
     const activeSet = activeDay === 1 ? STATE.shD1 : STATE.shD2;
     preview.innerHTML = '';
-    if (activeSet.size === 0) {
-      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
-      return;
-    }
+    if (activeSet.size === 0) { preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>'; return; }
     [...activeSet].forEach((s, i) => {
-      const pill = document.createElement('div');
-      pill.className = 'of-pill';
+      const pill = document.createElement('div'); pill.className = 'of-pill';
       pill.style.cssText = 'background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.4);color:var(--gold-light)';
       pill.innerHTML = '<span class="of-pill-num" style="background:rgba(201,168,76,0.3)">' + (i+1) + '</span><span>' + s + '</span><button class="of-pill-remove" style="color:var(--gold)" aria-label="Remove">×</button>';
       pill.querySelector('.of-pill-remove').onclick = () => {
@@ -1796,10 +1886,7 @@ const Workout = (() => {
     const activeDay = STATE.targets.of || 1;
     const activeSet = activeDay === 1 ? STATE.ofD1 : STATE.ofD2;
     preview.innerHTML = '';
-    if (activeSet.size === 0) {
-      preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>';
-      return;
-    }
+    if (activeSet.size === 0) { preview.innerHTML = '<div class="of-preview-empty">Tap drills below to add them to Day ' + activeDay + '</div>'; return; }
     [...activeSet].forEach((s, i) => {
       const pill = document.createElement('div'); pill.className = 'of-pill';
       pill.innerHTML = `<span class="of-pill-num">${i+1}</span><span>${s}</span><button class="of-pill-remove" aria-label="Remove">×</button>`;
@@ -1833,11 +1920,7 @@ const Workout = (() => {
       b.textContent = s + (isCurrent ? ' ✓' : '');
       b.onclick = () => {
         STATE.phys['d' + day][cat] = s;
-        renderPhysChips(cat);
-        buildPhys();
-        saveState();
-        updatePhysPreviews();
-        // Refresh AMRAP chips since exercises changed
+        renderPhysChips(cat); buildPhys(); saveState(); updatePhysPreviews();
         if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
         const msg = document.getElementById('phys-msg');
         if (msg) { msg.textContent = s + ' set for Day ' + day; setTimeout(() => msg.textContent = '', 2000); }
@@ -1914,10 +1997,9 @@ const Workout = (() => {
     renderBHChips(); renderSHChips(); renderOFChips(); updateSelCounts();
   }
   function applyPhys() {
-    const day = STATE.targets.phys || 1;
     buildPhys(); saveState(); updatePhysPreviews();
     if (typeof AmrapTracker !== 'undefined') AmrapTracker.refreshChips();
-    showToast('Day ' + day + ' circuit saved ✓');
+    showToast('Day ' + (STATE.targets.phys||1) + ' circuit saved ✓');
   }
   function buildPhys() {
     ['d1','d2'].forEach(d => {
@@ -1930,7 +2012,6 @@ const Workout = (() => {
   function markDayComplete(day) {
     if (day === 1) STATE.dayCompletes.d1++; else STATE.dayCompletes.d2++;
     const total = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
-    // ★ POINTS: 5pts per session + milestone bonuses
     if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
     STATE.points.skillPts = (STATE.points.skillPts || 0) + 5;
     let bonusMsg = '';
@@ -1942,7 +2023,6 @@ const Workout = (() => {
     showToast('🏆 Day ' + day + ' complete! +5pts' + bonusMsg);
     Rewards.renderAll(); Dashboard.render();
     if (typeof Profile !== 'undefined') Profile.renderStats();
-    setTimeout(() => promptLeaderboardUpdate(), 500);
   }
   return {
     buildWorkout, buildPhys, resetDay, renderBHChips, renderSHChips, renderOFChips,
@@ -1959,13 +2039,7 @@ const Workout = (() => {
 // REWARDS MODULE
 // ============================================================
 const Rewards = (() => {
-
-  function renderAll() {
-    renderSeasonBadges();
-    renderWorkoutBadges();
-    renderRepTracker();
-    renderPhysTracker();
-  }
+  function renderAll() { renderSeasonBadges(); renderWorkoutBadges(); renderRepTracker(); renderPhysTracker(); }
 
   function renderSeasonBadges() {
     const c = document.getElementById('season-badges'); if (!c) return; c.innerHTML = '';
@@ -1977,7 +2051,6 @@ const Rewards = (() => {
       card.innerHTML = `<span class="badge-emoji">${b.icon}</span><div class="badge-name">${b.name}</div><div class="badge-sub">${b.sub}</div>`;
       c.appendChild(card);
     });
-    // ★ POINTS: award 50pts for master badges (one-time each)
     awardMasterBadgePts();
   }
 
@@ -1990,8 +2063,7 @@ const Rewards = (() => {
       if (earned && !STATE.points._masterFlags[key]) {
         STATE.points._masterFlags[key] = true;
         STATE.points.badgePts = (STATE.points.badgePts || 0) + 50;
-        saveState();
-        showToast('🏅 ' + b.name + ' badge! +50pts');
+        saveState(); showToast('🏅 ' + b.name + ' badge! +50pts');
         if (typeof Profile !== 'undefined') Profile.renderStats();
       }
     });
@@ -2053,37 +2125,24 @@ const Rewards = (() => {
     const prev = STATE.sessionDays[s] || 0;
     STATE.sessionDays[s] = Math.max(0, Math.min(99, prev + delta));
     const cur = STATE.sessionDays[s];
-    
-    // ★ POINTS: 10pts when drill first hits 10/10 (one-time)
     if (delta > 0 && prev < 10 && cur >= 10) {
       if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
       STATE.points.drillPts = (STATE.points.drillPts || 0) + 10;
-      saveState();
-      showToast('🏆 ' + s + ' — 10/10! +10pts');
+      saveState(); showToast('🏆 ' + s + ' — 10/10! +10pts');
       if (typeof Profile !== 'undefined') Profile.renderStats();
     }
-    
     const num = document.getElementById('rn-' + keyOf(s));
     const status = document.getElementById('rs-' + keyOf(s));
     const pipsEl = document.getElementById('pips-' + keyOf(s));
     if (num) num.textContent = cur;
-    if (status) {
-      const earned = cur >= 10;
-      status.textContent = earned ? '🏆 Badge' : cur + '/10 days';
-      status.className = 'rep-status' + (earned ? ' rep-earned' : '');
-    }
-    if (pipsEl) {
-      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
-        `<span class="pip ${i<cur?(cur>=10?'pip-gold':'pip-done'):''}"></span>`
-      ).join('');
-    }
+    if (status) { const earned = cur >= 10; status.textContent = earned ? '🏆 Badge' : cur + '/10 days'; status.className = 'rep-status' + (earned ? ' rep-earned' : ''); }
+    if (pipsEl) { pipsEl.innerHTML = Array.from({length:10}, (_,i) => `<span class="pip ${i<cur?(cur>=10?'pip-gold':'pip-done'):''}"></span>`).join(''); }
     saveState(); renderSeasonBadges(); Dashboard.render();
   }
 
   function buildShotDots(type) {
     const c = document.getElementById(type + '-dots'); if (!c) return; c.innerHTML = '';
-    const st = STATE.shots[type];
-    if (!st) return;
+    const st = STATE.shots[type]; if (!st) return;
     for (let i = 0; i < 10; i++) {
       const d = document.createElement('span'); d.className = 'shot-dot';
       if (st.shots[i] === 'make') d.classList.add('make');
@@ -2117,16 +2176,12 @@ const Rewards = (() => {
     const p = Math.round((makes / total) * 100);
     const isGoldDay = makes >= st.goal && total >= 10;
     st.history.push({ makes, total, pct: p, gold: isGoldDay, label: 'Session ' + (st.history.length + 1) });
-
-    // ★ POINTS: 5pts per qualifying attempt + 10pt bonus at 5th
     let ptsMsg = '';
     if (isGoldDay) {
       if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
       if (!STATE.points.shotPts) STATE.points.shotPts = {};
       STATE.points.shotPts[type] = (STATE.points.shotPts[type] || 0) + 5;
       ptsMsg = ' +5pts';
-      
-      // Check if this is 5th qualifying session
       const qualCount = st.history.filter(h => h.gold).length;
       if (qualCount >= 5 && !st.badgeEarned) {
         st.badgeEarned = true;
@@ -2137,12 +2192,10 @@ const Rewards = (() => {
         renderSeasonBadges();
       }
     }
-
     st.shots = []; buildShotDots(type);
     saveState(); Dashboard.render();
     if (typeof Profile !== 'undefined') Profile.renderStats();
     showToast('Saved — ' + makes + '/' + total + ' (' + p + '%)' + ptsMsg);
-    setTimeout(() => promptLeaderboardUpdate(), 500);
   }
 
   function resetShots(type) {
@@ -2161,35 +2214,22 @@ const Rewards = (() => {
     const days = STATE.sessionDays[s] || 0;
     const earned = days >= 10;
     if (numEl) numEl.textContent = days;
-    if (statusEl) {
-      statusEl.textContent = earned ? '🏆 Badge' : days + '/10 days';
-      statusEl.className = 'rep-status' + (earned ? ' rep-earned' : '');
-    }
-    if (pipsEl) {
-      pipsEl.innerHTML = Array.from({length:10}, (_,i) =>
-        '<span class="pip ' + (i < days ? (days >= 10 ? 'pip-gold' : 'pip-done') : '') + '"></span>'
-      ).join('');
-    }
+    if (statusEl) { statusEl.textContent = earned ? '🏆 Badge' : days + '/10 days'; statusEl.className = 'rep-status' + (earned ? ' rep-earned' : ''); }
+    if (pipsEl) { pipsEl.innerHTML = Array.from({length:10}, (_,i) => '<span class="pip ' + (i < days ? (days >= 10 ? 'pip-gold' : 'pip-done') : '') + '"></span>').join(''); }
     renderSeasonBadges();
   }
 
   function markPhysComplete(day) {
     if (day === 1) STATE.physCompletes.d1++; else STATE.physCompletes.d2++;
-    // ★ POINTS: 7pts per physical session
     if (!STATE.points) STATE.points = { skillPts:0, physPts:0, drillPts:0, badgePts:0, shotPts:{}, _drillFlags:{}, _masterFlags:{} };
     STATE.points.physPts = (STATE.points.physPts || 0) + 7;
     saveState();
-    renderPhysTracker();
-    renderSeasonBadges();
+    renderPhysTracker(); renderSeasonBadges();
     if (typeof Dashboard !== 'undefined' && STATE.activeTab === 'dashboard') Dashboard.render();
     if (typeof Profile !== 'undefined' && STATE.activeTab === 'profile') Profile.renderStats();
     const total = STATE.physCompletes.d1 + STATE.physCompletes.d2;
     showToast('Physical session ' + total + ' logged! +7pts 💪');
-    setTimeout(() => promptLeaderboardUpdate(), 500);
-    if (total === 10) {
-      const ann = document.getElementById('phys-master-announce');
-      if (ann) ann.style.display = 'block';
-    }
+    if (total === 10) { const ann = document.getElementById('phys-master-announce'); if (ann) ann.style.display = 'block'; }
   }
 
   function renderPhysTracker() {
@@ -2215,9 +2255,7 @@ const Rewards = (() => {
     if (ann) ann.style.display = total >= 10 ? 'block' : 'none';
   }
 
-  function initShotTrackers() {
-    ['layup','mr','ft','tp'].forEach(t => buildShotDots(t));
-  }
+  function initShotTrackers() { ['layup','mr','ft','tp'].forEach(t => buildShotDots(t)); }
 
   return { renderAll, checkBadge, renderSeasonBadges, renderWorkoutBadges, markPhysComplete,
            renderPhysTracker, adjustDay, buildShotDots, logShot, saveSession, resetShots,
@@ -2230,7 +2268,6 @@ const Rewards = (() => {
 // DASHBOARD MODULE
 // ============================================================
 const Dashboard = (() => {
-
   function renderLeaderboard() {
     const bp = Points.compute();
     const totEl = document.getElementById('lb-total-pts');
@@ -2243,8 +2280,6 @@ const Dashboard = (() => {
     const acc = document.getElementById('lb-accordions');
     if (!acc) return;
     acc.innerHTML = '';
-    
-    // Skills section
     const skillMilestones = Points.skillMilestoneInfo(bp.skill.sessions);
     const skillBody = '<div class="pts-row"><span class="pts-row-label">Base (5pts × ' + bp.skill.sessions + ' sessions)</span><span class="pts-row-val">' + (bp.skill.sessions * 5) + 'pts</span></div>' +
       '<div style="margin-top:8px;font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:600">Milestones</div>' +
@@ -2254,7 +2289,6 @@ const Dashboard = (() => {
         return '<div class="pts-milestone-row ' + (done ? 'pts-milestone-earned' : 'pts-milestone-locked') + '"><span class="pts-milestone-icon">' + (done ? '✓' : '○') + '</span><span style="flex:1">' + at + ' sessions</span><span style="font-weight:700">+' + bonus + 'pts</span></div>';
       }).join('') +
       (skillMilestones.next ? '<div class="pts-progress-bar"><div class="pts-progress-fill" style="width:' + Math.min(100, Math.round((bp.skill.sessions/skillMilestones.next.at)*100)) + '%"></div></div><div class="pts-progress-label"><span>Next: ' + skillMilestones.next.at + ' sessions</span><span>' + bp.skill.sessions + '/' + skillMilestones.next.at + '</span></div>' : '');
-    
     const sections = [
       { icon: '🏀', name: 'Skills Sessions', sub: bp.skill.sessions + ' sessions · +5pts each', pts: bp.skill.pts, body: skillBody },
       { icon: '💪', name: 'Physical Training', sub: bp.phys.sessions + ' sessions · +7pts each', pts: bp.phys.pts, body: '<div class="pts-row"><span class="pts-row-label">7pts × ' + bp.phys.sessions + ' sessions</span><span class="pts-row-val">' + bp.phys.pts + 'pts</span></div>' },
@@ -2268,10 +2302,8 @@ const Dashboard = (() => {
       { icon: '📈', name: 'Training Drills', sub: bp.drill.at10 + ' drills at 10/10 · +10pts each', pts: bp.drill.pts, body: '<div class="pts-row"><span class="pts-row-label">10pts × ' + bp.drill.at10 + ' drills</span><span class="pts-row-val">' + bp.drill.pts + 'pts</span></div>' },
       { icon: '🏅', name: 'Master Badges', sub: bp.badge.earned + '/4 earned · +50pts each', pts: bp.badge.pts, body: DATA.SEASON_BADGE_DEFS.map(b => '<div class="pts-row"><span class="pts-row-label">' + (Rewards.checkBadge(b) ? '✓ ' : '○ ') + b.name + '</span><span class="pts-row-val ' + (Rewards.checkBadge(b) ? '' : 'muted') + '">' + (Rewards.checkBadge(b) ? '+50pts' : '50pts') + '</span></div>').join('') }
     ];
-    
     sections.forEach((s, idx) => {
-      const div = document.createElement('div');
-      div.className = 'pts-accordion';
+      const div = document.createElement('div'); div.className = 'pts-accordion';
       div.innerHTML = '<div class="pts-acc-head" onclick="togglePointsAccordion(' + idx + ')"><span class="pts-acc-icon">' + s.icon + '</span><div class="pts-acc-info"><div class="pts-acc-name">' + s.name + '</div><div class="pts-acc-sub">' + s.sub + '</div></div><span class="pts-acc-pts">' + s.pts + '</span><span class="pts-acc-arrow">▼</span></div><div class="pts-acc-body">' + s.body + '</div>';
       acc.appendChild(div);
     });
@@ -2284,7 +2316,6 @@ const Dashboard = (() => {
     const earnedTech = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
     const earnedBadges = [...DATA.SEASON_BADGE_DEFS, ...DATA.GOLD_BADGE_DEFS].filter(b => Rewards.checkBadge(b)).length;
     const totalDays = Object.values(STATE.sessionDays).reduce((a, v) => a + v, 0);
-
     const hero = document.getElementById('dash-hero'); if (!hero) return;
     hero.innerHTML = `
       <div class="dash-metric"><div class="dash-val">${totalSessions}</div><div class="dash-lbl">Skills</div></div>
@@ -2292,7 +2323,6 @@ const Dashboard = (() => {
       <div class="dash-metric"><div class="dash-val">${earnedBadges}</div><div class="dash-lbl">Badges</div></div>
       <div class="dash-metric"><div class="dash-val">${earnedTech}/${allDrills.length}</div><div class="dash-lbl">Drills 10+</div></div>
       <div class="dash-metric"><div class="dash-val">${totalDays}</div><div class="dash-lbl">Drill days</div></div>`;
-
     const ds = document.getElementById('dash-season'); if (ds) {
       ds.innerHTML = '';
       DATA.SEASON_BADGE_DEFS.forEach(b => {
@@ -2312,13 +2342,10 @@ const Dashboard = (() => {
         </div>`;
       });
     }
-
-    // Gold badges — now includes mid-range ★
     const dg = document.getElementById('dash-gold'); if (dg) {
       dg.innerHTML = '';
       DATA.GOLD_BADGE_DEFS.forEach(b => {
-        const earned = Rewards.checkBadge(b); const st = STATE.shots[b.key];
-        if (!st) return;
+        const earned = Rewards.checkBadge(b); const st = STATE.shots[b.key]; if (!st) return;
         const allM = st.history.reduce((a,h)=>a+h.makes,0);
         const allT = st.history.reduce((a,h)=>a+h.total,0);
         const p = allT > 0 ? pct(allM, allT) : 0;
@@ -2331,13 +2358,11 @@ const Dashboard = (() => {
         </div>`;
       });
     }
-
-    // Cumulative accuracy — now includes mid-range ★
     const da = document.getElementById('dash-accuracy'); if (da) {
       da.innerHTML = '';
       const accDefs = [
         {key:'layup', label:'Layups',        color:'#1E4FA3', goal:80},
-        {key:'mr',    label:'Mid-range',     color:'#1E4FA3', goal:50}, // ★ NEW ★
+        {key:'mr',    label:'Mid-range',     color:'#1E4FA3', goal:50},
         {key:'ft',    label:'Free throws',   color:'#1E4FA3', goal:60},
         {key:'tp',    label:'Three pointers',color:'#1E4FA3', goal:40},
       ];
@@ -2373,7 +2398,6 @@ const Dashboard = (() => {
         </div>`;
       });
     }
-
     const dw = document.getElementById('dash-workouts'); if (dw) {
       const wT = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
       const pT = STATE.physCompletes.d1 + STATE.physCompletes.d2;
@@ -2394,7 +2418,6 @@ const Dashboard = (() => {
           <div class="dash-status ${physMaster?'s-gold':pT>0?'s-earned':'s-locked'}">${physMaster?'Master!':pT+'/10'}</div>
         </div>`;
     }
-
     const drillGroups = [
       {id:'dash-bh', items:DATA.BH_SKILLS, color:'#1E4FA3'},
       {id:'dash-sh', items:[DATA.MANDATORY_D1,DATA.MANDATORY_D2,...DATA.SH_OPTIONAL], color:'#C9A84C'},
@@ -2414,98 +2437,14 @@ const Dashboard = (() => {
       });
     });
   }
-
   return { render };
 })();
 </script>
 
 <script>
-
-// ============================================================
-// PUSH TO COACHES DASHBOARD
-// ============================================================
-
-function pushLeaderboardUpdate() {
-  if (!STATE.playerName) {
-    const name = prompt('Enter your player name:');
-    if (!name) return;
-    STATE.playerName = name;
-    saveState();
-  }
-
-  const bp = Points.compute();
-  const rank = bp.total >= 500 ? '🏆 Elite' : bp.total >= 300 ? '⭐ Senior' : bp.total >= 150 ? '🔥 Rising' : bp.total >= 50 ? '💪 Dev' : '🌱 New';
-  
-  // CAPTURE EXACT PROFILE PAGE FORMAT
-  const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
-  const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
-  const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
-  const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
-  const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
-  const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
-  const ftBest = STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) : 0;
-  const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
-  
-  const update = {
-    playerName: STATE.playerName,
-    points: bp.total,
-    rank: rank,
-    timestamp: Date.now(),
-    
-    // TEAM LEADERBOARD DATA
-    stats: {
-      skillSessions: totalSessions,
-      physicalSessions: physTotal,
-      shotAccuracy: bp.shot.pts,
-      drillsAt10: drillsAt10,
-      badges: badges
-    },
-    
-    // ★ EXACT PROFILE PAGE CAPTURE
-    profilePageData: {
-      playerName: STATE.playerName,
-      totalPoints: bp.total,
-      rankBadge: rank,
-      
-      seasonStats: {
-        totalPoints: bp.total,
-        sessions: totalSessions,
-        badges: badges,
-        drillsCompleted: drillsAt10 + '/' + allDrills.length,
-        totalDrillDays: totalDrillDays,
-        bestLayupPct: layupBest ? layupBest + '%' : '—',
-        bestFtPct: ftBest ? ftBest + '%' : '—'
-      }
-    }
-  };
-
-  const pending = JSON.parse(localStorage.getItem('pioneers_pending_updates') || '[]');
-  pending.push(update);
-  localStorage.setItem('pioneers_pending_updates', JSON.stringify(pending));
-
-  showToast('📤 Update sent! Coach will approve soon.');
-  alert('✅ Profile pushed to coach dashboard!\n\n' + STATE.playerName + '\n' + bp.total + ' points\nRank: ' + rank);
-}
-
-function promptLeaderboardUpdate() {
-  if (!STATE.playerName) {
-    const name = prompt('Enter your player name (one time):');
-    if (!name) return;
-    STATE.playerName = name;
-    saveState();
-  }
-
-  const confirmed = confirm('Push your leaderboard stats to coach dashboard?\n\nName: ' + STATE.playerName);
-  if (confirmed) {
-    pushLeaderboardUpdate();
-  }
-}
-
-
 // ============================================================
 // APP CONTROLLER
 // ============================================================
-
 function showToast(msg) {
   let t = document.getElementById('toast');
   if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
@@ -2533,7 +2472,7 @@ function showTab(id, btn) {
 }
 
 // ============================================================
-// POINTS MODULE — Compute totals from STATE
+// POINTS MODULE
 // ============================================================
 const Points = (() => {
   function compute() {
@@ -2541,7 +2480,6 @@ const Points = (() => {
     const skillBase = p.skillPts || 0;
     const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
     const physBase = p.physPts || 0;
-    
     let shotBase = 0;
     const shotDetail = {};
     ['layup','mr','ft','tp'].forEach(t => {
@@ -2550,14 +2488,11 @@ const Points = (() => {
       const qualCount = (STATE.shots[t]?.history || []).filter(h => h.gold).length;
       shotDetail[t] = { pts, qualCount };
     });
-    
     const drillBase = p.drillPts || 0;
     const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
     const drillsAt10 = allDrills.filter(s => (STATE.sessionDays[s] || 0) >= 10).length;
-    
     const badgeBase = p.badgePts || 0;
     const masterEarned = DATA.SEASON_BADGE_DEFS.filter(b => Rewards.checkBadge(b)).length;
-    
     return {
       total: skillBase + physBase + shotBase + drillBase + badgeBase,
       skill: { pts: skillBase, sessions: totalSessions },
@@ -2567,17 +2502,10 @@ const Points = (() => {
       badge: { pts: badgeBase, earned: masterEarned }
     };
   }
-
   function skillMilestoneInfo(sessions) {
-    const milestones = [
-      { at: 6, bonus: 10 }, { at: 10, bonus: 15 }, { at: 16, bonus: 20 }, { at: 24, bonus: 25 }
-    ];
-    return {
-      next: milestones.find(m => sessions < m.at),
-      earned: milestones.filter(m => sessions >= m.at)
-    };
+    const milestones = [{ at: 6, bonus: 10 }, { at: 10, bonus: 15 }, { at: 16, bonus: 20 }, { at: 24, bonus: 25 }];
+    return { next: milestones.find(m => sessions < m.at), earned: milestones.filter(m => sessions >= m.at) };
   }
-
   return { compute, skillMilestoneInfo };
 })();
 
@@ -2592,8 +2520,7 @@ const Audio = (() => {
   function beep(freq, dur, vol, type='sine', when=0) {
     try {
       const c = getCtx();
-      const osc = c.createOscillator();
-      const gain = c.createGain();
+      const osc = c.createOscillator(); const gain = c.createGain();
       osc.connect(gain); gain.connect(c.destination);
       osc.type = type; osc.frequency.value = freq;
       const t = c.currentTime + when;
@@ -2608,16 +2535,8 @@ const Audio = (() => {
     beep(freqs[n] || 440, n===0 ? 0.6 : 0.25, 0.5, n===0 ? 'triangle' : 'sine');
     if (n === 0) { setTimeout(()=>beep(784,0.4,0.4,'triangle'), 120); setTimeout(()=>beep(988,0.5,0.35,'triangle'), 240); }
   }
-  function alarm() {
-    for (let i = 0; i < 5; i++) {
-      beep(880, 0.18, 0.6, 'square', i * 0.22);
-      beep(1100, 0.12, 0.4, 'square', i * 0.22 + 0.14);
-    }
-  }
-  function phase() {
-    beep(660, 0.15, 0.4, 'sine');
-    setTimeout(()=>beep(880,0.2,0.4,'sine'), 160);
-  }
+  function alarm() { for (let i = 0; i < 5; i++) { beep(880, 0.18, 0.6, 'square', i * 0.22); beep(1100, 0.12, 0.4, 'square', i * 0.22 + 0.14); } }
+  function phase() { beep(660, 0.15, 0.4, 'sine'); setTimeout(()=>beep(880,0.2,0.4,'sine'), 160); }
   return { countdownBeep, alarm, phase };
 })();
 
@@ -2629,21 +2548,16 @@ function runCountdown(onComplete, label) {
   overlay.classList.add('show');
   let count = 3;
   function showCount() {
-    const numEl = document.getElementById('cd-num');
-    const txtEl = document.getElementById('cd-txt');
+    const numEl = document.getElementById('cd-num'); const txtEl = document.getElementById('cd-txt');
     if (!numEl || !txtEl) { overlay.classList.remove('show'); onComplete(); return; }
-    numEl.style.animation = 'none';
-    void numEl.offsetWidth;
-    numEl.style.animation = '';
+    numEl.style.animation = 'none'; void numEl.offsetWidth; numEl.style.animation = '';
     if (count > 0) {
       numEl.textContent = count; numEl.className = 'countdown-num';
       txtEl.textContent = label || ''; txtEl.style.opacity = '0';
       Audio.countdownBeep(count); count--;
       setTimeout(showCount, 900);
     } else {
-      numEl.textContent = "Let's PLAY!";
-      numEl.style.fontSize = '52px'; numEl.style.color = 'var(--gold)';
-      txtEl.textContent = '';
+      numEl.textContent = "Let's PLAY!"; numEl.style.fontSize = '52px'; numEl.style.color = 'var(--gold)'; txtEl.textContent = '';
       Audio.countdownBeep(0);
       setTimeout(() => { overlay.classList.remove('show'); overlay.innerHTML = ''; onComplete(); }, 950);
     }
@@ -2656,16 +2570,11 @@ const SESS_TOTAL = 25 * 60;
 let sessInterval = null, sessElapsed = 0;
 
 function startTimer() {
-  if (sessInterval) {
-    clearInterval(sessInterval); sessInterval = null;
-    document.getElementById('start-btn').textContent = 'Resume'; return;
-  }
+  if (sessInterval) { clearInterval(sessInterval); sessInterval = null; document.getElementById('start-btn').textContent = 'Resume'; return; }
   if (sessElapsed === 0) {
     document.getElementById('start-btn').textContent = '...';
     runCountdown(() => { document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer(); }, 'Skills session');
-  } else {
-    document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer();
-  }
+  } else { document.getElementById('start-btn').textContent = 'Pause'; _runSessTimer(); }
 }
 
 function _runSessTimer() {
@@ -2673,8 +2582,7 @@ function _runSessTimer() {
     sessElapsed++;
     const rem = SESS_TOTAL - sessElapsed;
     const m = Math.floor(rem / 60), s = rem % 60;
-    const el = document.getElementById('sess-timer');
-    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    const el = document.getElementById('sess-timer'); if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
     let acc = 0, cur = null;
     for (const p of DATA.PHASES) { acc += p.dur; if (sessElapsed <= acc) { cur = p; break; } }
     if (cur) {
@@ -2714,8 +2622,7 @@ function _updatePhysDisplay() {
   const amrapBar = document.getElementById('phys-amrap-bar');
   const phaseLabel = document.getElementById('phys-phase-label');
   if (physElapsed <= JOG_DUR) {
-    const rem = JOG_DUR - physElapsed;
-    const m = Math.floor(rem/60), s = rem%60;
+    const rem = JOG_DUR - physElapsed; const m = Math.floor(rem/60), s = rem%60;
     if (jogVal) jogVal.textContent = m + ':' + (s<10?'0':'') + s;
     if (amrapVal) amrapVal.textContent = '5:00';
     if (jogBar) jogBar.style.width = Math.round((physElapsed/JOG_DUR)*100) + '%';
@@ -2724,8 +2631,7 @@ function _updatePhysDisplay() {
     if (amrapCard) amrapCard.classList.remove('active-phase');
     if (phaseLabel) phaseLabel.textContent = '🏃 Jogging...';
   } else {
-    const amrapElapsed = physElapsed - JOG_DUR;
-    const rem = AMRAP_DUR - amrapElapsed;
+    const amrapElapsed = physElapsed - JOG_DUR; const rem = AMRAP_DUR - amrapElapsed;
     const m = Math.floor(rem/60), s = rem%60;
     if (jogVal) jogVal.textContent = '0:00';
     if (amrapVal) amrapVal.textContent = m + ':' + (s<10?'0':'') + s;
@@ -2738,25 +2644,18 @@ function _updatePhysDisplay() {
 }
 
 function startPhysTimer() {
-  if (physInterval) {
-    clearInterval(physInterval); physInterval = null;
-    document.getElementById('phys-start-btn').textContent = 'Resume'; return;
-  }
+  if (physInterval) { clearInterval(physInterval); physInterval = null; document.getElementById('phys-start-btn').textContent = 'Resume'; return; }
   if (physElapsed === 0) {
     document.getElementById('phys-start-btn').textContent = '...';
     runCountdown(() => { document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer(); }, 'Physical training');
-  } else {
-    document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer();
-  }
+  } else { document.getElementById('phys-start-btn').textContent = 'Pause'; _runPhysTimer(); }
 }
 
 function _runPhysTimer() {
   physInterval = setInterval(() => {
     physElapsed++;
     _updatePhysDisplay();
-    if (physElapsed === JOG_DUR) {
-      Audio.phase(); showToast('Jog done — start your AMRAP! 💪');
-    }
+    if (physElapsed === JOG_DUR) { Audio.phase(); showToast('Jog done — start your AMRAP! 💪'); }
     if (physElapsed === PHYS_TOTAL - 5) Audio.alarm();
     if (physElapsed >= PHYS_TOTAL) {
       clearInterval(physInterval); physInterval = null;
@@ -2793,20 +2692,23 @@ document.addEventListener('DOMContentLoaded', () => {
   Rewards.renderAll();
   Rewards.initShotTrackers();
   Profile.render();
-  // ★ Init AMRAP tracker ★
   AmrapTracker.init();
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js').catch(() => {}); }
+
   const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
   const isStandalone = window.navigator.standalone;
   if (isIOS && !isStandalone) {
     const banner = document.getElementById('install-banner');
     if (banner) { banner.style.display = 'flex'; setTimeout(() => banner.style.opacity = '1', 100); }
   }
-});
 
+  // ★ Version check on load (silent — only shows banner if newer version found)
+  VersionChecker.check();
+});
+</script>
+
+<script>
 // ============================================================
 // PROFILE MODULE
 // ============================================================
@@ -2819,8 +2721,7 @@ const Profile = (() => {
     const img = document.getElementById('profile-avatar-img');
     if (p.photo) { img.src = p.photo; img.style.display = 'block'; if(initials) initials.style.display='none'; }
     else { if(img) img.style.display='none'; if(initials){ initials.style.display=''; initials.textContent = p.name ? p.name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '?'; } }
-    const dn = document.getElementById('profile-display-name');
-    if (dn) dn.textContent = p.name || 'Your Name';
+    const dn = document.getElementById('profile-display-name'); if (dn) dn.textContent = p.name || 'Your Name';
     const dnum = document.getElementById('profile-display-number');
     if (dnum) dnum.textContent = (p.number ? '#' + p.number : '#00') + (p.position ? ' · ' + p.position : ' · Select position');
     const meta = document.getElementById('profile-meta');
@@ -2843,11 +2744,8 @@ const Profile = (() => {
     const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
     const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
     const layupBest = STATE.shots.layup.history.length ? Math.max(...STATE.shots.layup.history.map(h=>h.pct)) : 0;
-    
-    // ★ Total points
     const totalPts = Points.compute().total;
     const rank = totalPts >= 500 ? 'Elite Pioneer' : totalPts >= 300 ? 'Senior Pioneer' : totalPts >= 150 ? 'Rising Pioneer' : totalPts >= 50 ? 'Developing Pioneer' : 'New Pioneer';
-    
     let html = '<div class="profile-stat pts-stat"><div class="profile-stat-val">' + totalPts.toLocaleString() + '</div><div class="profile-stat-lbl">Season Points · ' + rank + '</div></div>';
     html += [
       { val: totalSessions, lbl: 'Sessions' },
@@ -2857,7 +2755,6 @@ const Profile = (() => {
       { val: layupBest ? layupBest + '%' : '—', lbl: 'Best layup%' },
       { val: STATE.shots.ft.history.length ? Math.max(...STATE.shots.ft.history.map(h=>h.pct)) + '%' : '—', lbl: 'Best FT%' },
     ].map(s => '<div class="profile-stat"><div class="profile-stat-val">' + s.val + '</div><div class="profile-stat-lbl">' + s.lbl + '</div></div>').join('');
-    
     c.innerHTML = html;
   }
 
@@ -2876,7 +2773,7 @@ const Profile = (() => {
     const c = document.getElementById('profile-shooting'); if (!c) return;
     const types = [
       { key:'layup', label:'Layups',        goal:80 },
-      { key:'mr',    label:'Mid-range',     goal:50 }, // ★ NEW ★
+      { key:'mr',    label:'Mid-range',     goal:50 },
       { key:'ft',    label:'Free throws',   goal:60 },
       { key:'tp',    label:'Three pointers',goal:40 },
     ];
@@ -2906,8 +2803,7 @@ const Profile = (() => {
     const all = Object.entries(STATE.sessionDays).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,8);
     if (all.length === 0) { c.innerHTML = '<div style="font-size:14px;color:var(--text-muted);font-style:italic">Start ticking off drills during your session and they\'ll appear here</div>'; return; }
     c.innerHTML = all.map(([drill, days]) => {
-      const p = Math.min(Math.round((days/10)*100), 100);
-      const earned = days >= 10;
+      const p = Math.min(Math.round((days/10)*100), 100); const earned = days >= 10;
       return `<div style="padding:6px 0;border-bottom:1px solid var(--border)">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px">
           <span style="font-size:14px;color:var(--text-primary)">${earned?'🏆 ':''}${drill}</span>
@@ -2960,10 +2856,7 @@ const Profile = (() => {
     saveState(); cancelEdit(); showToast('Profile saved 👊');
   }
 
-  function pickPhoto() {
-    const input = document.getElementById('avatar-upload');
-    if (input) input.click();
-  }
+  function pickPhoto() { const input = document.getElementById('avatar-upload'); if (input) input.click(); }
 
   function handlePhoto(input) {
     const file = input.files[0]; if (!file) return;
@@ -2974,393 +2867,6 @@ const Profile = (() => {
 
   return { render, toggleEdit, cancelEdit, save, pickPhoto, handlePhoto, previewName, renderStats, renderTopDrills };
 })();
-</script>
-
-<!-- ★ UPDATE BANNER ★ -->
-<div id="update-banner">
-  <div class="update-content">
-    <div class="update-title">🚀 App Update Available</div>
-    <div class="update-text">New features and improvements — tap to update</div>
-  </div>
-  <div class="update-actions">
-    <button class="btn btn-sm" onclick="AppUpdater.dismissUpdate()">Later</button>
-    <button class="btn btn-start btn-sm" onclick="AppUpdater.startUpdate()">Update</button>
-  </div>
-</div>
-
-<!-- ★ UPDATE MODAL ★ -->
-<div id="update-modal">
-  <div class="update-modal-content">
-    <div class="update-modal-icon" id="update-icon">⬇️</div>
-    <div class="update-modal-title" id="update-modal-title">Updating App</div>
-    <div class="update-modal-text" id="update-modal-text">Downloading latest version from GitHub...</div>
-    <div class="update-progress" id="update-progress-wrap" style="display:none">
-      <div class="update-progress-bar">
-        <div class="update-progress-fill" id="update-progress-fill"></div>
-      </div>
-      <div class="update-progress-text" id="update-progress-text">0%</div>
-    </div>
-    <div id="update-modal-actions" style="display:none;margin-top:16px">
-      <button class="btn btn-gold" onclick="location.reload()">Reload App</button>
-    </div>
-  </div>
-</div>
-
-<!-- ★ TEAM LEADERBOARD PUSH PROMPT ★ -->
-<div id="push-prompt-modal">
-  <div class="push-prompt-content">
-    <div class="push-prompt-icon">📤</div>
-    <div class="push-prompt-title">Share Your Progress</div>
-    <div class="push-prompt-text">
-      Great work on your <span class="push-prompt-highlight">training session!</span><br>
-      <br>
-      Share your updated stats with Coach on the <span class="push-prompt-highlight">Team Leaderboard?</span>
-    </div>
-    <div class="push-prompt-actions">
-      <button class="btn btn-sm" onclick="LeaderboardPush.dismissPrompt()">Not Now</button>
-      <button class="btn btn-start btn-sm" onclick="LeaderboardPush.sendToLeaderboard()">📤 Send to Team Leaderboard</button>
-    </div>
-  </div>
-</div>
-
-<!-- ★ PUSH SUCCESS CONFIRMATION ★ -->
-<div class="push-success-modal" id="push-success-modal">
-  <div class="success-content">
-    <div class="success-icon">✅</div>
-    <div class="success-title">Stats Shared!</div>
-    <div class="success-text">
-      Your profile stats have been sent to the<br>
-      <span class="push-prompt-highlight">Guardians Team Leaderboard</span><br>
-      <br>
-      Coach can now see your progress!
-    </div>
-    <div style="margin-top:20px">
-      <button class="btn btn-gold btn-sm" onclick="LeaderboardPush.closeSuccess()">Got It!</button>
-    </div>
-  </div>
-</div>
-
-<!-- ★ UPDATE AND PUSH SYSTEMS SCRIPT ★ -->
-<script>
-// ============================================================
-// APP UPDATE SYSTEM
-// ============================================================
-
-const APP_VERSION = '1.0.0';
-const GITHUB_REPO = 'https://api.github.com/repos/Woollis-profile/Guardians-U14';
-const GITHUB_RAW = 'https://raw.githubusercontent.com/Woollis-profile/Guardians-U14/main/index.html';
-
-const AppUpdater = (() => {
-  let updateAvailable = false;
-  let latestVersion = null;
-
-  function extractVersionFromHtml(htmlContent) {
-    try {
-      const match = htmlContent.match(/<meta\s+name="app-version"\s+content="([^"]+)"/i);
-      return match ? match[1] : null;
-    } catch (e) {
-      console.error('Error extracting version:', e);
-      return null;
-    }
-  }
-
-  function isNewVersion(current, latest) {
-    if (!current || !latest) return false;
-    const currParts = current.split('.').map(Number);
-    const latestParts = latest.split('.').map(Number);
-    for (let i = 0; i < 3; i++) {
-      const c = currParts[i] || 0;
-      const l = latestParts[i] || 0;
-      if (l > c) return true;
-      if (l < c) return false;
-    }
-    return false;
-  }
-
-  async function checkForUpdates() {
-    try {
-      console.log('🔍 Checking GitHub for updates...');
-      const response = await fetch(GITHUB_RAW, {
-        method: 'GET',
-        headers: { 'Accept': 'text/html' }
-      });
-      if (!response.ok) throw new Error('Failed to fetch from GitHub');
-      const htmlContent = await response.text();
-      const extractedVersion = extractVersionFromHtml(htmlContent);
-      console.log('Current version:', APP_VERSION);
-      console.log('Latest version:', extractedVersion);
-      if (extractedVersion && isNewVersion(APP_VERSION, extractedVersion)) {
-        console.log('✅ Update available:', extractedVersion);
-        updateAvailable = true;
-        latestVersion = extractedVersion;
-        showUpdateBanner();
-        return true;
-      } else {
-        console.log('✅ App is up to date');
-        return false;
-      }
-    } catch (error) {
-      console.warn('Update check failed:', error);
-      return false;
-    }
-  }
-
-  function showUpdateBanner() {
-    const banner = document.getElementById('update-banner');
-    if (banner) {
-      banner.classList.add('show');
-      setTimeout(() => banner.style.opacity = '1', 100);
-    }
-  }
-
-  async function startUpdate() {
-    const banner = document.getElementById('update-banner');
-    if (banner) banner.classList.remove('show');
-    const modal = document.getElementById('update-modal');
-    if (modal) modal.classList.add('show');
-    try {
-      console.log('💾 Saving player data...');
-      const playerData = {
-        state: window.STATE || {},
-        timestamp: Date.now(),
-        version: APP_VERSION
-      };
-      localStorage.setItem('pioneers_backup_' + Date.now(), JSON.stringify(playerData));
-      localStorage.setItem('pioneers_state_backup', JSON.stringify(playerData.state));
-      console.log('⬇️ Downloading latest version...');
-      updateModalTitle('Downloading Update');
-      updateModalText('Fetching latest version from GitHub...');
-      const response = await fetch(GITHUB_RAW);
-      if (!response.ok) throw new Error('Download failed');
-      const htmlContent = await response.text();
-      console.log('✅ Download complete');
-      updateModalTitle('Installing Update');
-      updateModalText('Installing new version...');
-      showUpdateProgress(95);
-      const newVersion = extractVersionFromHtml(htmlContent);
-      if (!newVersion) throw new Error('Could not verify downloaded version');
-      console.log('📦 Installing version:', newVersion);
-      localStorage.setItem('pioneers_html_update', htmlContent);
-      localStorage.setItem('pioneers_update_version', newVersion);
-      showUpdateProgress(100);
-      setTimeout(() => {
-        updateModalTitle('✅ Update Complete');
-        updateModalText('App will reload with the latest version. Your data is safe!');
-        document.getElementById('update-icon').textContent = '✅';
-        document.getElementById('update-progress-wrap').style.display = 'none';
-        document.getElementById('update-modal-actions').style.display = 'block';
-      }, 800);
-    } catch (error) {
-      console.error('Update failed:', error);
-      updateModalTitle('❌ Update Failed');
-      updateModalText('Could not download update. Check your connection and try again.');
-      document.getElementById('update-icon').textContent = '❌';
-      document.getElementById('update-progress-wrap').style.display = 'none';
-      document.getElementById('update-modal-actions').innerHTML = '<button class="btn btn-navy" onclick="AppUpdater.dismissUpdate();AppUpdater.closeModal()">Try Again</button>';
-      document.getElementById('update-modal-actions').style.display = 'block';
-    }
-  }
-
-  function showUpdateProgress(percent) {
-    const fill = document.getElementById('update-progress-fill');
-    const text = document.getElementById('update-progress-text');
-    if (fill) fill.style.width = percent + '%';
-    if (text) text.textContent = percent + '%';
-    const wrap = document.getElementById('update-progress-wrap');
-    if (wrap) wrap.style.display = 'block';
-  }
-
-  function updateModalTitle(text) {
-    const el = document.getElementById('update-modal-title');
-    if (el) el.textContent = text;
-  }
-
-  function updateModalText(text) {
-    const el = document.getElementById('update-modal-text');
-    if (el) el.textContent = text;
-  }
-
-  function dismissUpdate() {
-    const banner = document.getElementById('update-banner');
-    if (banner) {
-      banner.classList.remove('show');
-      localStorage.setItem('pioneers_update_dismissed', Date.now().toString());
-    }
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('update-modal');
-    if (modal) modal.classList.remove('show');
-  }
-
-  async function init() {
-    console.log('🚀 Guardians U14 App - Version', APP_VERSION);
-    const dismissed = localStorage.getItem('pioneers_update_dismissed');
-    if (dismissed) {
-      const dayAgo = Date.now() - (24 * 60 * 60 * 1000);
-      if (parseInt(dismissed) > dayAgo) {
-        console.log('Update dismissed by user today');
-        return;
-      }
-    }
-    await checkForUpdates();
-  }
-
-  return {
-    init,
-    checkForUpdates,
-    startUpdate,
-    dismissUpdate,
-    closeModal,
-    showUpdateBanner
-  };
-})();
-
-// ============================================================
-// TEAM LEADERBOARD PUSH SYSTEM
-// ============================================================
-
-const LeaderboardPush = (() => {
-  const LEADERBOARD_REPO = 'https://github.com/Woollis-profile/Guardians-Team-Leaderboard.git';
-  const LEADERBOARD_API = 'https://api.github.com/repos/Woollis-profile/Guardians-Team-Leaderboard';
-  const PUSH_COOLDOWN = 7 * 24 * 60 * 60 * 1000;
-
-  function shouldPromptPush() {
-    const lastPush = localStorage.getItem('pioneers_last_push_time');
-    const now = Date.now();
-    if (!lastPush) return true;
-    const timeSinceLastPush = now - parseInt(lastPush);
-    return timeSinceLastPush >= PUSH_COOLDOWN;
-  }
-
-  function showPrompt() {
-    const modal = document.getElementById('push-prompt-modal');
-    if (modal) modal.classList.add('show');
-  }
-
-  function dismissPrompt() {
-    const modal = document.getElementById('push-prompt-modal');
-    if (modal) modal.classList.remove('show');
-    localStorage.setItem('pioneers_last_push_time', Date.now().toString());
-  }
-
-  function collectPlayerStats() {
-    if (!STATE.profile || !STATE.profile.name) {
-      showToast('Please complete your profile first');
-      return null;
-    }
-    const allDrills = [...DATA.BH_SKILLS, DATA.MANDATORY_D1, DATA.MANDATORY_D2, ...DATA.SH_OPTIONAL, ...DATA.OF_SKILLS];
-    const totalSessions = STATE.dayCompletes.d1 + STATE.dayCompletes.d2;
-    const drillsAt10 = allDrills.filter(s => STATE.sessionDays[s] >= 10).length;
-    const totalDrillDays = Object.values(STATE.sessionDays).reduce((a,v)=>a+v,0);
-    const badges = [...DATA.SEASON_BADGE_DEFS,...DATA.GOLD_BADGE_DEFS].filter(b=>Rewards.checkBadge(b)).length;
-    const physTotal = STATE.physCompletes.d1 + STATE.physCompletes.d2;
-    const layupMakes = STATE.shots.layup.history.reduce((a,h)=>a+h.makes,0);
-    const layupTotal = STATE.shots.layup.history.reduce((a,h)=>a+h.total,0);
-    const layupPct = layupTotal > 0 ? Math.round((layupMakes/layupTotal)*100) : 0;
-    const ftMakes = STATE.shots.ft.history.reduce((a,h)=>a+h.makes,0);
-    const ftTotal = STATE.shots.ft.history.reduce((a,h)=>a+h.total,0);
-    const ftPct = ftTotal > 0 ? Math.round((ftMakes/ftTotal)*100) : 0;
-    const totalPoints = Points.compute().total;
-    return {
-      playerName: STATE.profile.name,
-      playerNumber: STATE.profile.number || '00',
-      position: STATE.profile.position || 'TBD',
-      team: STATE.profile.team || 'Pioneers U14',
-      timestamp: new Date().toISOString(),
-      skillSessions: totalSessions,
-      physicalSessions: physTotal,
-      drillsCompleted: drillsAt10,
-      totalDrillDays: totalDrillDays,
-      badgesEarned: badges,
-      layupAccuracy: layupPct,
-      freeThrowAccuracy: ftPct,
-      totalPoints: totalPoints,
-      sessionDays: STATE.sessionDays,
-      shots: STATE.shots,
-      dayCompletes: STATE.dayCompletes,
-      physCompletes: STATE.physCompletes
-    };
-  }
-
-  async function sendToLeaderboard() {
-    const stats = collectPlayerStats();
-    if (!stats) return;
-    dismissPrompt();
-    try {
-      console.log('📤 Sending stats to team leaderboard...');
-      const pushRecord = {
-        stats: stats,
-        sentAt: Date.now(),
-        success: false
-      };
-      const pushHistory = JSON.parse(localStorage.getItem('pioneers_push_history') || '[]');
-      pushHistory.unshift(pushRecord);
-      if (pushHistory.length > 10) pushHistory.length = 10;
-      localStorage.setItem('pioneers_push_history', JSON.stringify(pushHistory));
-      console.log('✅ Stats collected and recorded:', stats);
-      console.log('📍 Leaderboard repo: ' + LEADERBOARD_REPO);
-      localStorage.setItem('pioneers_last_push_time', Date.now().toString());
-      localStorage.setItem('pioneers_last_push_stats', JSON.stringify(stats));
-      showSuccess();
-      console.log('🏀 Player:', stats.playerName);
-      console.log('📊 Points:', stats.totalPoints);
-      console.log('🎯 Sessions:', stats.skillSessions);
-      console.log('💪 Physical:', stats.physicalSessions);
-    } catch (error) {
-      console.error('Failed to send stats:', error);
-      showToast('Failed to send stats. Please try again.');
-    }
-  }
-
-  function showSuccess() {
-    const modal = document.getElementById('push-success-modal');
-    if (modal) {
-      modal.classList.add('show');
-      setTimeout(() => {
-        setTimeout(() => closeSuccess(), 3000);
-      }, 500);
-    }
-  }
-
-  function closeSuccess() {
-    const modal = document.getElementById('push-success-modal');
-    if (modal) modal.classList.remove('show');
-  }
-
-  function checkAndPrompt() {
-    if (shouldPromptPush()) {
-      setTimeout(() => showPrompt(), 1000);
-    }
-  }
-
-  function init() {
-    console.log('📤 Team Leaderboard Push System Ready');
-    const lastPush = localStorage.getItem('pioneers_last_push_time');
-    if (lastPush) {
-      const daysSince = Math.floor((Date.now() - parseInt(lastPush)) / (24 * 60 * 60 * 1000));
-      console.log('Last push:', daysSince + ' days ago');
-    }
-  }
-
-  return {
-    init,
-    shouldPromptPush,
-    showPrompt,
-    dismissPrompt,
-    sendToLeaderboard,
-    showSuccess,
-    closeSuccess,
-    checkAndPrompt,
-    collectPlayerStats
-  };
-})();
-
-// Initialize update and push systems
-document.addEventListener('DOMContentLoaded', () => {
-  AppUpdater.init();
-  LeaderboardPush.init();
-});
 </script>
 </body>
 </html>
