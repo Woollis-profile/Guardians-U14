@@ -1170,6 +1170,9 @@ body{font-family:var(--font-body);background:var(--navy);color:var(--text-primar
       <button class="btn btn-start btn-sm" id="push-send-btn" onclick="PushManager.send()">📤 Send Stats</button>
     </div>
     <div class="push-status" id="push-status"></div>
+    <div id="push-return-btn" style="display:none;margin-top:16px">
+      <button class="btn btn-gold btn-block" onclick="PushManager.returnToProfile()">← Return to Profile</button>
+    </div>
   </div>
 </div>
 
@@ -1447,6 +1450,13 @@ const PushManager = (() => {
   function closeModal() {
     const modal = document.getElementById('push-modal');
     if (modal) modal.classList.remove('show');
+    const returnBtn = document.getElementById('push-return-btn');
+    if (returnBtn) returnBtn.style.display = 'none';
+  }
+
+  function returnToProfile() {
+    closeModal();
+    showTab('profile', document.querySelector('.nav-btn:nth-child(5)'));
   }
 
   function buildPayload() {
@@ -1531,6 +1541,8 @@ const PushManager = (() => {
 
       setStatus('✅ Sent! Coach can see your stats now.', 'ok');
       if (sendBtn) sendBtn.textContent = '✅ Sent';
+      const returnBtn = document.getElementById('push-return-btn');
+      if (returnBtn) returnBtn.style.display = 'block';
       showToast('📤 Stats pushed to coach! 🏆');
     } catch(err) {
       console.error('Push failed:', err);
@@ -1539,7 +1551,7 @@ const PushManager = (() => {
     }
   }
 
-  return { openModal, closeModal, send };
+  return { openModal, closeModal, send, returnToProfile };
 })();
 </script>
 
